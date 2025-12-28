@@ -1,0 +1,12 @@
+business_type: ecommerce
+entities:
+  - customers
+  - orders
+  - products
+  - order_details
+goals:
+  - revenue_reporting
+  - inventory_tracking
+  - customer_analysis
+temporal: historical
+grain: transaction

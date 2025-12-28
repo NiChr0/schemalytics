@@ -1,0 +1,27 @@
+# Test artifacts
+schema.json
+plan.yaml
+test_project/
+e2e_project/
+northwind.sql
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+.venv/
+schemalytics/bin/
+schemalytics/lib/
+schemalytics/include/
+schemalytics/pyvenv.cfg
+
+# IDE
+.vscode/
+.idea/
+*.swp
