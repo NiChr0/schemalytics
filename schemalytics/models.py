@@ -54,7 +54,25 @@ class FactPlan(BaseModel):
     date_column: str
 
 
+class MetricDefinition(BaseModel):
+    name: str
+    aggregation: str  # SUM, COUNT, AVG, etc.
+    column: str
+    description: str
+
+
+class GoldPlan(BaseModel):
+    name: str
+    source_fact: str  # which fact table to aggregate
+    grain: str  # "daily", "monthly", "yearly"
+    dimensions: list[str]  # group by dimensions
+    metrics: list[MetricDefinition]  # aggregated measures
+    date_column: str
+    description: str
+
+
 class ModelingPlan(BaseModel):
     bronze: list[str]  # table names for passthrough
     dimensions: list[DimensionPlan]
     facts: list[FactPlan]
+    gold: list[GoldPlan] = []
