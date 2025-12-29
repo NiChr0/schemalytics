@@ -5,11 +5,31 @@ sources:
     schema: public
     tables:
       
-      - name: Orders
+      - name: territories
       
-      - name: Customers
+      - name: order_details
       
-      - name: Products
+      - name: employee_territories
       
-      - name: OrderDetails
+      - name: us_states
+      
+      - name: customers
+      
+      - name: orders
+      
+      - name: employees
+      
+      - name: shippers
+      
+      - name: products
+      
+      - name: categories
+      
+      - name: suppliers
+      
+      - name: region
+      
+      - name: customer_demographics
+      
+      - name: customer_customer_demo
       

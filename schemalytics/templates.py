@@ -187,7 +187,6 @@ query_guidelines:
   - Use Gold layer models for pre-aggregated metrics
   - Join Silver facts/dimensions for detailed analysis
   - Bronze layer is for raw data exploration only
-  - All dates are in the {{ gold.date_column }} format
   - Metrics are pre-calculated in Gold models
 
 # Common Query Patterns
