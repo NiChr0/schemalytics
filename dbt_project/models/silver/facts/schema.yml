@@ -1,0 +1,183 @@
+version: 2
+
+models:
+
+  - name: fct_order_details
+    description: "One row per order_detail"
+    meta:
+      layer: silver
+      type: fact
+      grain: transaction
+    columns:
+      - name: fct_order_details_sk
+        description: "Surrogate key for this fact (system-generated)"
+        tests:
+          - unique
+          - not_null
+      
+
+      - name: order_id
+        description: "Foreign key to order dimension"
+        tests:
+          - not_null
+
+      - name: product_id
+        description: "Foreign key to product dimension"
+        tests:
+          - not_null
+
+      
+      - name: created_at
+        description: "Primary date/time for this transaction"
+        tests:
+          - not_null
+      
+
+      - name: unit_price
+        description: "Unit Price - numeric measure"
+
+      - name: discount
+        description: "Discount - numeric measure"
+
+
+  - name: fct_employee_territories
+    description: "One row per employee_territorie"
+    meta:
+      layer: silver
+      type: fact
+      grain: transaction
+    columns:
+      - name: fct_employee_territories_sk
+        description: "Surrogate key for this fact (system-generated)"
+        tests:
+          - unique
+          - not_null
+      
+
+      - name: employee_id
+        description: "Foreign key to employee dimension"
+        tests:
+          - not_null
+
+      - name: territory_id
+        description: "Foreign key to territory dimension"
+        tests:
+          - not_null
+
+      
+      - name: created_at
+        description: "Primary date/time for this transaction"
+        tests:
+          - not_null
+      
+
+
+  - name: fct_orders
+    description: "One row per order"
+    meta:
+      layer: silver
+      type: fact
+      grain: transaction
+    columns:
+      - name: fct_orders_sk
+        description: "Surrogate key for this fact (system-generated)"
+        tests:
+          - unique
+          - not_null
+      
+
+      - name: customer_id
+        description: "Foreign key to customer dimension"
+        tests:
+          - not_null
+
+      - name: employee_id
+        description: "Foreign key to employee dimension"
+        tests:
+          - not_null
+
+      - name: ship_via
+        description: "Foreign key to ship_via dimension"
+        tests:
+          - not_null
+
+      
+      - name: order_date
+        description: "Primary date/time for this transaction"
+        tests:
+          - not_null
+      
+
+      - name: freight
+        description: "Freight - numeric measure"
+
+
+  - name: fct_products
+    description: "One row per product"
+    meta:
+      layer: silver
+      type: fact
+      grain: transaction
+    columns:
+      - name: fct_products_sk
+        description: "Surrogate key for this fact (system-generated)"
+        tests:
+          - unique
+          - not_null
+      
+
+      - name: category_id
+        description: "Foreign key to category dimension"
+        tests:
+          - not_null
+
+      - name: supplier_id
+        description: "Foreign key to supplier dimension"
+        tests:
+          - not_null
+
+      
+      - name: created_at
+        description: "Primary date/time for this transaction"
+        tests:
+          - not_null
+      
+
+      - name: unit_price
+        description: "Unit Price - numeric measure"
+
+      - name: discontinued
+        description: "Discontinued - numeric measure"
+
+
+  - name: fct_customer_customer_demo
+    description: "One row per customer_customer_demo"
+    meta:
+      layer: silver
+      type: fact
+      grain: transaction
+    columns:
+      - name: fct_customer_customer_demo_sk
+        description: "Surrogate key for this fact (system-generated)"
+        tests:
+          - unique
+          - not_null
+      
+
+      - name: customer_type_id
+        description: "Foreign key to customer_type dimension"
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: "Foreign key to customer dimension"
+        tests:
+          - not_null
+
+      
+      - name: created_at
+        description: "Primary date/time for this transaction"
+        tests:
+          - not_null
+      
+

@@ -1,0 +1,363 @@
+version: 2
+
+models:
+
+  - name: dim_territories
+    description: "One row per territorie"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_territories_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: territory_id
+        description: "Territory Id"
+
+      - name: territory_description
+        description: "Territory Description"
+
+      - name: region_id
+        description: "Region Id"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_us_states
+    description: "One row per us_state"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_us_states_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: state_id
+        description: "State Id"
+
+      - name: state_name
+        description: "State Name"
+
+      - name: state_abbr
+        description: "State Abbr"
+
+      - name: state_region
+        description: "State Region"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_customers
+    description: "One row per customer"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_customers_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: customer_id
+        description: "Customer Id"
+
+      - name: company_name
+        description: "Company Name"
+
+      - name: contact_name
+        description: "Contact Name"
+
+      - name: contact_title
+        description: "Contact Title"
+
+      - name: address
+        description: "Address"
+
+      - name: city
+        description: "City"
+
+      - name: region
+        description: "Region"
+
+      - name: postal_code
+        description: "Postal Code"
+
+      - name: country
+        description: "Country"
+
+      - name: phone
+        description: "Phone"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_employees
+    description: "One row per employee"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_employees_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: employee_id
+        description: "Employee Id"
+
+      - name: last_name
+        description: "Last Name"
+
+      - name: first_name
+        description: "First Name"
+
+      - name: title
+        description: "Title"
+
+      - name: title_of_courtesy
+        description: "Title Of Courtesy"
+
+      - name: birth_date
+        description: "Birth Date"
+
+      - name: hire_date
+        description: "Hire Date"
+
+      - name: address
+        description: "Address"
+
+      - name: city
+        description: "City"
+
+      - name: region
+        description: "Region"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_shippers
+    description: "One row per shipper"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_shippers_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: shipper_id
+        description: "Shipper Id"
+
+      - name: company_name
+        description: "Company Name"
+
+      - name: phone
+        description: "Phone"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_categories
+    description: "One row per categorie"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_categories_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: category_id
+        description: "Category Id"
+
+      - name: category_name
+        description: "Category Name"
+
+      - name: description
+        description: "Description"
+
+      - name: picture
+        description: "Picture"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_suppliers
+    description: "One row per supplier"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_suppliers_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: supplier_id
+        description: "Supplier Id"
+
+      - name: company_name
+        description: "Company Name"
+
+      - name: contact_name
+        description: "Contact Name"
+
+      - name: contact_title
+        description: "Contact Title"
+
+      - name: address
+        description: "Address"
+
+      - name: city
+        description: "City"
+
+      - name: region
+        description: "Region"
+
+      - name: postal_code
+        description: "Postal Code"
+
+      - name: country
+        description: "Country"
+
+      - name: phone
+        description: "Phone"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_region
+    description: "One row per region"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_region_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: region_id
+        description: "Region Id"
+
+      - name: region_description
+        description: "Region Description"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+
+
+  - name: dim_customer_demographics
+    description: "One row per customer_demographic"
+    meta:
+      layer: silver
+      type: dimension
+      scd_type: 2
+    columns:
+
+      - name: dim_customer_demographics_sk
+        description: "Surrogate key for this dimension (system-generated)"
+        tests:
+          - unique
+          - not_null
+
+
+      - name: customer_type_id
+        description: "Customer Type Id"
+
+      - name: customer_desc
+        description: "Customer Desc"
+
+
+      - name: valid_from
+        description: "Start date/time when this record version became active"
+      - name: valid_to
+        description: "End date/time when this record version became inactive (NULL if current)"
+      - name: is_current
+        description: "Flag indicating if this is the current active record"
+

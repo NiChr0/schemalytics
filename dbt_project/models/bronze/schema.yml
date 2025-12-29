@@ -1,0 +1,441 @@
+version: 2
+
+models:
+
+  - name: bronze_territories
+    description: "Raw passthrough from territories source table"
+    columns:
+
+      - name: territory_id
+        description: "Column from source system"
+        data_type: VARCHAR(20)
+
+      - name: territory_description
+        description: "Column from source system"
+        data_type: VARCHAR(60)
+
+      - name: region_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+
+  - name: bronze_order_details
+    description: "Raw passthrough from order_details source table"
+    columns:
+
+      - name: order_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: product_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: unit_price
+        description: "Column from source system"
+        data_type: REAL
+
+      - name: quantity
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: discount
+        description: "Column from source system"
+        data_type: REAL
+
+
+  - name: bronze_employee_territories
+    description: "Raw passthrough from employee_territories source table"
+    columns:
+
+      - name: employee_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: territory_id
+        description: "Column from source system"
+        data_type: VARCHAR(20)
+
+
+  - name: bronze_us_states
+    description: "Raw passthrough from us_states source table"
+    columns:
+
+      - name: state_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: state_name
+        description: "Column from source system"
+        data_type: VARCHAR(100)
+
+      - name: state_abbr
+        description: "Column from source system"
+        data_type: VARCHAR(2)
+
+      - name: state_region
+        description: "Column from source system"
+        data_type: VARCHAR(50)
+
+
+  - name: bronze_customers
+    description: "Raw passthrough from customers source table"
+    columns:
+
+      - name: customer_id
+        description: "Column from source system"
+        data_type: VARCHAR(5)
+
+      - name: company_name
+        description: "Column from source system"
+        data_type: VARCHAR(40)
+
+      - name: contact_name
+        description: "Column from source system"
+        data_type: VARCHAR(30)
+
+      - name: contact_title
+        description: "Column from source system"
+        data_type: VARCHAR(30)
+
+      - name: address
+        description: "Column from source system"
+        data_type: VARCHAR(60)
+
+      - name: city
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: region
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: postal_code
+        description: "Column from source system"
+        data_type: VARCHAR(10)
+
+      - name: country
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: phone
+        description: "Column from source system"
+        data_type: VARCHAR(24)
+
+      - name: fax
+        description: "Column from source system"
+        data_type: VARCHAR(24)
+
+
+  - name: bronze_orders
+    description: "Raw passthrough from orders source table"
+    columns:
+
+      - name: order_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: customer_id
+        description: "Column from source system"
+        data_type: VARCHAR(5)
+
+      - name: employee_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: order_date
+        description: "Column from source system"
+        data_type: DATE
+
+      - name: required_date
+        description: "Column from source system"
+        data_type: DATE
+
+      - name: shipped_date
+        description: "Column from source system"
+        data_type: DATE
+
+      - name: ship_via
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: freight
+        description: "Column from source system"
+        data_type: REAL
+
+      - name: ship_name
+        description: "Column from source system"
+        data_type: VARCHAR(40)
+
+      - name: ship_address
+        description: "Column from source system"
+        data_type: VARCHAR(60)
+
+      - name: ship_city
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: ship_region
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: ship_postal_code
+        description: "Column from source system"
+        data_type: VARCHAR(10)
+
+      - name: ship_country
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+
+  - name: bronze_employees
+    description: "Raw passthrough from employees source table"
+    columns:
+
+      - name: employee_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: last_name
+        description: "Column from source system"
+        data_type: VARCHAR(20)
+
+      - name: first_name
+        description: "Column from source system"
+        data_type: VARCHAR(10)
+
+      - name: title
+        description: "Column from source system"
+        data_type: VARCHAR(30)
+
+      - name: title_of_courtesy
+        description: "Column from source system"
+        data_type: VARCHAR(25)
+
+      - name: birth_date
+        description: "Column from source system"
+        data_type: DATE
+
+      - name: hire_date
+        description: "Column from source system"
+        data_type: DATE
+
+      - name: address
+        description: "Column from source system"
+        data_type: VARCHAR(60)
+
+      - name: city
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: region
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: postal_code
+        description: "Column from source system"
+        data_type: VARCHAR(10)
+
+      - name: country
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: home_phone
+        description: "Column from source system"
+        data_type: VARCHAR(24)
+
+      - name: extension
+        description: "Column from source system"
+        data_type: VARCHAR(4)
+
+      - name: photo
+        description: "Column from source system"
+        data_type: BYTEA
+
+      - name: notes
+        description: "Column from source system"
+        data_type: TEXT
+
+      - name: reports_to
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: photo_path
+        description: "Column from source system"
+        data_type: VARCHAR(255)
+
+
+  - name: bronze_shippers
+    description: "Raw passthrough from shippers source table"
+    columns:
+
+      - name: shipper_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: company_name
+        description: "Column from source system"
+        data_type: VARCHAR(40)
+
+      - name: phone
+        description: "Column from source system"
+        data_type: VARCHAR(24)
+
+
+  - name: bronze_products
+    description: "Raw passthrough from products source table"
+    columns:
+
+      - name: product_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: product_name
+        description: "Column from source system"
+        data_type: VARCHAR(40)
+
+      - name: supplier_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: category_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: quantity_per_unit
+        description: "Column from source system"
+        data_type: VARCHAR(20)
+
+      - name: unit_price
+        description: "Column from source system"
+        data_type: REAL
+
+      - name: units_in_stock
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: units_on_order
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: reorder_level
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: discontinued
+        description: "Column from source system"
+        data_type: INTEGER
+
+
+  - name: bronze_categories
+    description: "Raw passthrough from categories source table"
+    columns:
+
+      - name: category_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: category_name
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: description
+        description: "Column from source system"
+        data_type: TEXT
+
+      - name: picture
+        description: "Column from source system"
+        data_type: BYTEA
+
+
+  - name: bronze_suppliers
+    description: "Raw passthrough from suppliers source table"
+    columns:
+
+      - name: supplier_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: company_name
+        description: "Column from source system"
+        data_type: VARCHAR(40)
+
+      - name: contact_name
+        description: "Column from source system"
+        data_type: VARCHAR(30)
+
+      - name: contact_title
+        description: "Column from source system"
+        data_type: VARCHAR(30)
+
+      - name: address
+        description: "Column from source system"
+        data_type: VARCHAR(60)
+
+      - name: city
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: region
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: postal_code
+        description: "Column from source system"
+        data_type: VARCHAR(10)
+
+      - name: country
+        description: "Column from source system"
+        data_type: VARCHAR(15)
+
+      - name: phone
+        description: "Column from source system"
+        data_type: VARCHAR(24)
+
+      - name: fax
+        description: "Column from source system"
+        data_type: VARCHAR(24)
+
+      - name: homepage
+        description: "Column from source system"
+        data_type: TEXT
+
+
+  - name: bronze_region
+    description: "Raw passthrough from region source table"
+    columns:
+
+      - name: region_id
+        description: "Column from source system"
+        data_type: SMALLINT
+
+      - name: region_description
+        description: "Column from source system"
+        data_type: VARCHAR(60)
+
+
+  - name: bronze_customer_demographics
+    description: "Raw passthrough from customer_demographics source table"
+    columns:
+
+      - name: customer_type_id
+        description: "Column from source system"
+        data_type: VARCHAR(5)
+
+      - name: customer_desc
+        description: "Column from source system"
+        data_type: TEXT
+
+
+  - name: bronze_customer_customer_demo
+    description: "Raw passthrough from customer_customer_demo source table"
+    columns:
+
+      - name: customer_id
+        description: "Column from source system"
+        data_type: VARCHAR(5)
+
+      - name: customer_type_id
+        description: "Column from source system"
+        data_type: VARCHAR(5)
+

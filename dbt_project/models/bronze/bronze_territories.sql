@@ -2,4 +2,4 @@
 {{ config(materialized='view') }}
 
 select *
-from {{ source('raw', 'OrderDetails') }}
+from {{ source('raw', 'territories') }}

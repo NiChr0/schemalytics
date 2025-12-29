@@ -371,7 +371,9 @@ def generate(connection: str, output: str, name: str, context_file: str | None):
     # Generate
     click.echo(f"\nStep 4: Generating dbt project with semantic layer...")
     project_path = generate_dbt_project(
-        schema, modeling_plan, output, name, business_type=context.business_type
+        schema, modeling_plan, output, name, 
+        business_type=context.business_type,
+        context=context
     )
     
     click.echo(f"\nDone! Project: {project_path}")
