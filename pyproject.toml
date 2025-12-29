@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "schemalytics"
 version = "0.1.0"
-description = "Automated dbt project generation from PostgreSQL schemas"
+description = "Automated dbt project generation from PostgreSQL schemas with semantic layer"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}

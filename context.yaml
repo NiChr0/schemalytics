@@ -1,12 +1,18 @@
-business_type: ecommerce
+business_type: ecommerce_retail_b2c
 entities:
-  - customers
-  - orders
-  - products
-  - order_details
+- customers
+- orders
+- products
+- order_items
+- cart
+- reviews
+- inventory
+- categories
 goals:
-  - revenue_reporting
-  - inventory_tracking
-  - customer_analysis
+- revenue_reporting
+- conversion_optimization
+- customer_lifetime_value
+- inventory_tracking
+- product_performance
+grain: daily,weekly,monthly
 temporal: historical
-grain: transaction

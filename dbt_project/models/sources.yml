@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: public
+    tables:
+      
+      - name: Orders
+      
+      - name: Customers
+      
+      - name: Products
+      
+      - name: OrderDetails
+      

@@ -25,3 +25,4 @@ schemalytics/pyvenv.cfg
 .vscode/
 .idea/
 *.swp
+context.yaml
