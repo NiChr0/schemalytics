@@ -26,3 +26,4 @@ schemalytics/pyvenv.cfg
 .idea/
 *.swp
 context.yaml
+dbt_project
