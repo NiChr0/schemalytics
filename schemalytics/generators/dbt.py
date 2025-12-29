@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from jinja2 import Template
-from schemalytics.models import Schema, ModelingPlan
+from schemalytics.models import Schema, ModelingPlan, BusinessContext
 from schemalytics import templates
 
 
@@ -30,6 +30,7 @@ def generate_dbt_project(
     project_name: str = "schemalytics_project",
     source_schema: str = "public",
     business_type: str = "generic",
+    context: BusinessContext = None,
 ) -> Path:
     """Generate complete dbt project structure."""
     base = Path(output_dir)
@@ -56,6 +57,39 @@ def generate_dbt_project(
     (base / "models" / "sources.yml").write_text(
         render(templates.SOURCES_TEMPLATE, schema=source_schema, tables=plan.bronze)
     )
+    
+    # Bronze schema.yml
+    bronze_columns = {}
+    for table_name in plan.bronze:
+        table = next((t for t in schema.tables if t.name == table_name), None)
+        if table:
+            bronze_columns[table_name] = table.columns
+    
+    if bronze_columns:
+        (base / "models" / "bronze" / "schema.yml").write_text(
+            Template(templates.BRONZE_SCHEMA_TEMPLATE).render(
+                tables=plan.bronze,
+                columns=bronze_columns
+            )
+        )
+    
+    # Silver dimensions schema.yml
+    if plan.dimensions:
+        (base / "models" / "silver" / "dimensions" / "schema.yml").write_text(
+            Template(templates.SILVER_DIMENSIONS_SCHEMA_TEMPLATE).render(dimensions=plan.dimensions)
+        )
+    
+    # Silver facts schema.yml
+    if plan.facts:
+        (base / "models" / "silver" / "facts" / "schema.yml").write_text(
+            Template(templates.SILVER_FACTS_SCHEMA_TEMPLATE).render(facts=plan.facts)
+        )
+    
+    # Gold schema.yml
+    if plan.gold:
+        (base / "models" / "gold" / "schema.yml").write_text(
+            Template(templates.GOLD_SCHEMA_TEMPLATE).render(gold_models=plan.gold)
+        )
     
     # Bronze models
     for table in plan.bronze:
@@ -154,6 +188,7 @@ group by 1{', ' + ', '.join(str(i+2) for i in range(len(gold.dimensions))) if go
         gold_models=plan.gold,
         dimensions=plan.dimensions,
         facts=plan.facts,
+        context_goals=context.goals if context else [],
     )
     (base / "semantic_layer.yml").write_text(semantic_content)
     

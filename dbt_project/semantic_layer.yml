@@ -1,0 +1,1407 @@
+# Semantic Layer - LLM Analytics Guide
+# This file provides comprehensive metadata for LLM-powered analytics
+
+version: 2.0
+project: schemalytics_project
+generated_at: 2025-12-29T14:53:56.980892
+database_type: PostgreSQL
+
+# =============================================================================
+# BUSINESS CONTEXT
+# =============================================================================
+business_context:
+  industry: ecommerce_retail_b2c
+  description: Generated dbt project for ecommerce_retail_b2c analytics
+  primary_use_cases:
+
+    - revenue_reporting
+
+    - conversion_optimization
+
+    - customer_lifetime_value
+
+    - inventory_tracking
+
+    - product_performance
+
+
+# =============================================================================
+# DATA MODEL OVERVIEW
+# =============================================================================
+architecture:
+  pattern: Medallion (Bronze → Silver → Gold)
+  approach: Kimball dimensional modeling
+  
+layers:
+  bronze:
+    description: Raw data passthrough from source systems
+    materialization: view
+    purpose: Exact replica of source data for auditing and reprocessing
+    query_usage: Rarely queried directly; use for data exploration only
+    
+  silver:
+    description: Cleaned dimensional models (facts and dimensions)
+    materialization: table
+    purpose: Structured star schema for flexible analytical queries
+    query_usage: Use for detailed analysis requiring granular data
+    
+  gold:
+    description: Pre-aggregated metrics optimized for performance
+    materialization: table
+    purpose: Fast dashboards and common reporting use cases
+    query_usage: Primary layer for analytics - always check Gold first
+
+# =============================================================================
+# METRICS CATALOG
+# =============================================================================
+metrics:
+
+  - name: gold_daily_revenue
+    display_name: "Daily revenue and order metrics"
+    layer: gold
+    grain: daily
+    source_fact: fct_orders
+    refresh_frequency: "Depends on dbt schedule (typically daily)"
+    
+    measures:
+
+      - name: total_revenue
+        aggregation: SUM
+        source_column: amount
+        data_type: "NUMERIC"
+        description: Total daily revenue
+        sql_formula: "SUM(amount)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Track total revenue by daily"
+          - "Calculate revenue growth rates"
+          - "Compare revenue across time periods"
+
+        example_queries:
+          - description: "Get total_revenue for last 30 days"
+            sql: "SELECT daily_date, total_revenue FROM gold_daily_revenue WHERE order_date >= CURRENT_DATE - 30 ORDER BY daily_date"
+          - description: "Compare total_revenue month-over-month"
+            sql: "SELECT daily_date, total_revenue, LAG(total_revenue) OVER (ORDER BY daily_date) as previous_period FROM gold_daily_revenue"
+
+      - name: order_count
+        aggregation: COUNT
+        source_column: *
+        data_type: "INTEGER"
+        description: Number of orders
+        sql_formula: "COUNT(*)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Monitor daily activity volume"
+          - "Track growth in transaction count"
+          - "Calculate conversion rates"
+
+        example_queries:
+          - description: "Get order_count for last 30 days"
+            sql: "SELECT daily_date, order_count FROM gold_daily_revenue WHERE order_date >= CURRENT_DATE - 30 ORDER BY daily_date"
+          - description: "Compare order_count month-over-month"
+            sql: "SELECT daily_date, order_count, LAG(order_count) OVER (ORDER BY daily_date) as previous_period FROM gold_daily_revenue"
+
+    
+    time_column: order_date
+    dimensions:
+
+      - "time (daily)"
+
+    
+    common_filters:
+      - "WHERE daily_date >= CURRENT_DATE - INTERVAL '30 days'"
+      - "WHERE daily_date BETWEEN '[start_date]' AND '[end_date]'"
+      - "WHERE EXTRACT(YEAR FROM daily_date) = EXTRACT(YEAR FROM CURRENT_DATE)"
+    
+
+  - name: gold_monthly_customer_lifetime_value
+    display_name: "Monthly customer lifetime value"
+    layer: gold
+    grain: monthly
+    source_fact: fct_order_details
+    refresh_frequency: "Depends on dbt schedule (typically daily)"
+    
+    measures:
+
+      - name: lifetime_revenue
+        aggregation: SUM
+        source_column: unit_price * quantity - discount
+        data_type: "NUMERIC"
+        description: Total lifetime revenue per customer
+        sql_formula: "SUM(unit_price * quantity - discount)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Track total revenue by monthly"
+          - "Calculate revenue growth rates"
+          - "Compare revenue across time periods"
+
+        example_queries:
+          - description: "Get lifetime_revenue for last 30 days"
+            sql: "SELECT monthly_date, lifetime_revenue FROM gold_monthly_customer_lifetime_value WHERE created_at >= CURRENT_DATE - 30 ORDER BY monthly_date"
+          - description: "Compare lifetime_revenue month-over-month"
+            sql: "SELECT monthly_date, lifetime_revenue, LAG(lifetime_revenue) OVER (ORDER BY monthly_date) as previous_period FROM gold_monthly_customer_lifetime_value"
+
+      - name: order_count
+        aggregation: COUNT
+        source_column: *
+        data_type: "INTEGER"
+        description: Number of orders per customer
+        sql_formula: "COUNT(*)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Monitor monthly activity volume"
+          - "Track growth in transaction count"
+          - "Calculate conversion rates"
+
+        example_queries:
+          - description: "Get order_count for last 30 days"
+            sql: "SELECT monthly_date, order_count FROM gold_monthly_customer_lifetime_value WHERE created_at >= CURRENT_DATE - 30 ORDER BY monthly_date"
+          - description: "Compare order_count month-over-month"
+            sql: "SELECT monthly_date, order_count, LAG(order_count) OVER (ORDER BY monthly_date) as previous_period FROM gold_monthly_customer_lifetime_value"
+
+    
+    time_column: created_at
+    dimensions:
+
+
+      - customer_id
+
+
+    
+    common_filters:
+      - "WHERE monthly_date >= CURRENT_DATE - INTERVAL '30 days'"
+      - "WHERE monthly_date BETWEEN '[start_date]' AND '[end_date]'"
+      - "WHERE EXTRACT(YEAR FROM monthly_date) = EXTRACT(YEAR FROM CURRENT_DATE)"
+    
+
+  - name: gold_yearly_product_performance
+    display_name: "Yearly product performance metrics"
+    layer: gold
+    grain: yearly
+    source_fact: fct_order_details
+    refresh_frequency: "Depends on dbt schedule (typically daily)"
+    
+    measures:
+
+      - name: total_revenue
+        aggregation: SUM
+        source_column: unit_price * quantity - discount
+        data_type: "NUMERIC"
+        description: Total yearly revenue per product
+        sql_formula: "SUM(unit_price * quantity - discount)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Track total revenue by yearly"
+          - "Calculate revenue growth rates"
+          - "Compare revenue across time periods"
+
+        example_queries:
+          - description: "Get total_revenue for last 30 days"
+            sql: "SELECT yearly_date, total_revenue FROM gold_yearly_product_performance WHERE created_at >= CURRENT_DATE - 30 ORDER BY yearly_date"
+          - description: "Compare total_revenue month-over-month"
+            sql: "SELECT yearly_date, total_revenue, LAG(total_revenue) OVER (ORDER BY yearly_date) as previous_period FROM gold_yearly_product_performance"
+
+      - name: order_count
+        aggregation: COUNT
+        source_column: *
+        data_type: "INTEGER"
+        description: Number of orders per product
+        sql_formula: "COUNT(*)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Monitor yearly activity volume"
+          - "Track growth in transaction count"
+          - "Calculate conversion rates"
+
+        example_queries:
+          - description: "Get order_count for last 30 days"
+            sql: "SELECT yearly_date, order_count FROM gold_yearly_product_performance WHERE created_at >= CURRENT_DATE - 30 ORDER BY yearly_date"
+          - description: "Compare order_count month-over-month"
+            sql: "SELECT yearly_date, order_count, LAG(order_count) OVER (ORDER BY yearly_date) as previous_period FROM gold_yearly_product_performance"
+
+    
+    time_column: created_at
+    dimensions:
+
+
+      - product_id
+
+
+    
+    common_filters:
+      - "WHERE yearly_date >= CURRENT_DATE - INTERVAL '30 days'"
+      - "WHERE yearly_date BETWEEN '[start_date]' AND '[end_date]'"
+      - "WHERE EXTRACT(YEAR FROM yearly_date) = EXTRACT(YEAR FROM CURRENT_DATE)"
+    
+
+  - name: gold_daily_inventory_tracking
+    display_name: "Daily inventory tracking and sales metrics"
+    layer: gold
+    grain: daily
+    source_fact: fct_order_details
+    refresh_frequency: "Depends on dbt schedule (typically daily)"
+    
+    measures:
+
+      - name: total_units_sold
+        aggregation: SUM
+        source_column: quantity
+        data_type: "NUMERIC"
+        description: Total units sold daily
+        sql_formula: "SUM(quantity)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Analyze total_units_sold trends"
+          - "Compare across time periods"
+
+        example_queries:
+          - description: "Get total_units_sold for last 30 days"
+            sql: "SELECT daily_date, total_units_sold FROM gold_daily_inventory_tracking WHERE created_at >= CURRENT_DATE - 30 ORDER BY daily_date"
+          - description: "Compare total_units_sold month-over-month"
+            sql: "SELECT daily_date, total_units_sold, LAG(total_units_sold) OVER (ORDER BY daily_date) as previous_period FROM gold_daily_inventory_tracking"
+
+      - name: total_revenue
+        aggregation: SUM
+        source_column: unit_price * quantity - discount
+        data_type: "NUMERIC"
+        description: Total revenue generated daily
+        sql_formula: "SUM(unit_price * quantity - discount)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Track total revenue by daily"
+          - "Calculate revenue growth rates"
+          - "Compare revenue across time periods"
+
+        example_queries:
+          - description: "Get total_revenue for last 30 days"
+            sql: "SELECT daily_date, total_revenue FROM gold_daily_inventory_tracking WHERE created_at >= CURRENT_DATE - 30 ORDER BY daily_date"
+          - description: "Compare total_revenue month-over-month"
+            sql: "SELECT daily_date, total_revenue, LAG(total_revenue) OVER (ORDER BY daily_date) as previous_period FROM gold_daily_inventory_tracking"
+
+    
+    time_column: created_at
+    dimensions:
+
+
+      - product_id
+
+
+    
+    common_filters:
+      - "WHERE daily_date >= CURRENT_DATE - INTERVAL '30 days'"
+      - "WHERE daily_date BETWEEN '[start_date]' AND '[end_date]'"
+      - "WHERE EXTRACT(YEAR FROM daily_date) = EXTRACT(YEAR FROM CURRENT_DATE)"
+    
+
+  - name: gold_monthly_conversion_optimization
+    display_name: "Monthly conversion optimization metrics"
+    layer: gold
+    grain: monthly
+    source_fact: fct_orders
+    refresh_frequency: "Depends on dbt schedule (typically daily)"
+    
+    measures:
+
+      - name: conversion_rate
+        aggregation: AVG
+        source_column: (CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END)
+        data_type: "NUMERIC"
+        description: Average conversion rate per customer
+        sql_formula: "AVG((CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END))"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Analyze conversion_rate trends"
+          - "Compare across time periods"
+
+        example_queries:
+          - description: "Get conversion_rate for last 30 days"
+            sql: "SELECT monthly_date, conversion_rate FROM gold_monthly_conversion_optimization WHERE order_date >= CURRENT_DATE - 30 ORDER BY monthly_date"
+          - description: "Compare conversion_rate month-over-month"
+            sql: "SELECT monthly_date, conversion_rate, LAG(conversion_rate) OVER (ORDER BY monthly_date) as previous_period FROM gold_monthly_conversion_optimization"
+
+      - name: average_order_value
+        aggregation: AVG
+        source_column: amount
+        data_type: "NUMERIC"
+        description: Average order value per customer
+        sql_formula: "AVG(amount)"
+        null_handling: "NULLs are excluded from aggregations"
+        use_cases:
+
+          - "Analyze average values by monthly"
+          - "Track changes in average metrics over time"
+          - "Benchmark against targets"
+
+        example_queries:
+          - description: "Get average_order_value for last 30 days"
+            sql: "SELECT monthly_date, average_order_value FROM gold_monthly_conversion_optimization WHERE order_date >= CURRENT_DATE - 30 ORDER BY monthly_date"
+          - description: "Compare average_order_value month-over-month"
+            sql: "SELECT monthly_date, average_order_value, LAG(average_order_value) OVER (ORDER BY monthly_date) as previous_period FROM gold_monthly_conversion_optimization"
+
+    
+    time_column: order_date
+    dimensions:
+
+
+      - customer_id
+
+
+    
+    common_filters:
+      - "WHERE monthly_date >= CURRENT_DATE - INTERVAL '30 days'"
+      - "WHERE monthly_date BETWEEN '[start_date]' AND '[end_date]'"
+      - "WHERE EXTRACT(YEAR FROM monthly_date) = EXTRACT(YEAR FROM CURRENT_DATE)"
+    
+
+
+# =============================================================================
+# DIMENSIONAL MODEL
+# =============================================================================
+
+## Dimensions (Descriptive Attributes)
+dimensions:
+
+  - name: dim_territories
+    display_name: "Territories"
+    source_table: territories
+    type: SCD2
+    grain: One row per territorie
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: territories_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_territories_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - territory_id
+
+      - territory_description
+
+      - region_id
+
+    
+    typical_use_cases:
+      - "Filter data by territories attributes"
+      - "Group metrics by territories categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_us_states
+    display_name: "Us_states"
+    source_table: us_states
+    type: SCD2
+    grain: One row per us_state
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: us_states_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_us_states_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - state_id
+
+      - state_name
+
+      - state_abbr
+
+      - state_region
+
+    
+    typical_use_cases:
+      - "Filter data by us_states attributes"
+      - "Group metrics by us_states categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_customers
+    display_name: "Customers"
+    source_table: customers
+    type: SCD2
+    grain: One row per customer
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: customers_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_customers_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - customer_id
+
+      - company_name
+
+      - contact_name
+
+      - contact_title
+
+      - address
+
+    
+    typical_use_cases:
+      - "Filter data by customers attributes"
+      - "Group metrics by customers categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_employees
+    display_name: "Employees"
+    source_table: employees
+    type: SCD2
+    grain: One row per employee
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: employees_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_employees_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - employee_id
+
+      - last_name
+
+      - first_name
+
+      - title
+
+      - title_of_courtesy
+
+    
+    typical_use_cases:
+      - "Filter data by employees attributes"
+      - "Group metrics by employees categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_shippers
+    display_name: "Shippers"
+    source_table: shippers
+    type: SCD2
+    grain: One row per shipper
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: shippers_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_shippers_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - shipper_id
+
+      - company_name
+
+      - phone
+
+    
+    typical_use_cases:
+      - "Filter data by shippers attributes"
+      - "Group metrics by shippers categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_categories
+    display_name: "Categories"
+    source_table: categories
+    type: SCD2
+    grain: One row per categorie
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: categories_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_categories_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - category_id
+
+      - category_name
+
+      - description
+
+      - picture
+
+    
+    typical_use_cases:
+      - "Filter data by categories attributes"
+      - "Group metrics by categories categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_suppliers
+    display_name: "Suppliers"
+    source_table: suppliers
+    type: SCD2
+    grain: One row per supplier
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: suppliers_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_suppliers_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - supplier_id
+
+      - company_name
+
+      - contact_name
+
+      - contact_title
+
+      - address
+
+    
+    typical_use_cases:
+      - "Filter data by suppliers attributes"
+      - "Group metrics by suppliers categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_region
+    display_name: "Region"
+    source_table: region
+    type: SCD2
+    grain: One row per region
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: region_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_region_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - region_id
+
+      - region_description
+
+    
+    typical_use_cases:
+      - "Filter data by region attributes"
+      - "Group metrics by region categories"
+      - "Join to facts for detailed analysis"
+    
+
+  - name: dim_customer_demographics
+    display_name: "Customer_demographics"
+    source_table: customer_demographics
+    type: SCD2
+    grain: One row per customer_demographic
+    description: Historical tracking enabled - captures changes over time
+    role: "Provides context and attributes for filtering and grouping"
+    
+    key_column: customer_demographics_id
+    
+
+    scd_columns:
+      - valid_from: "Start date of this record version"
+      - valid_to: "End date of this record version (NULL if current)"
+      - is_current: "Boolean flag indicating current record"
+    
+    usage_notes:
+      - "Always filter on is_current = TRUE for point-in-time queries"
+      - "Join on surrogate key (dim_customer_demographics_sk) not natural key"
+      - "For historical analysis, use valid_from/valid_to range"
+
+    
+    common_attributes:
+
+      - customer_type_id
+
+      - customer_desc
+
+    
+    typical_use_cases:
+      - "Filter data by customer_demographics attributes"
+      - "Group metrics by customer_demographics categories"
+      - "Join to facts for detailed analysis"
+    
+
+
+## Facts (Measurable Events)
+facts:
+
+  - name: fct_order_details
+    display_name: "Order_details"
+    source_table: order_details
+    grain: One row per order_detail
+    description: "Transactional data capturing measurable events"
+    
+    date_column: created_at
+    date_description: "Primary date for time-based analysis"
+    
+    measures:
+
+      - name: unit_price
+        type: "Numeric - can be aggregated"
+        typical_aggregations: [SUM, AVG, MIN, MAX, COUNT]
+
+      - name: discount
+        type: "Numeric - can be aggregated"
+        typical_aggregations: [SUM, AVG, MIN, MAX, COUNT]
+
+    
+    dimension_keys:
+
+      - order_id
+
+      - product_id
+
+    
+    relationships:
+
+      - foreign_key: order_id
+        references: "dim_order"
+        cardinality: "many-to-one"
+        description: "Each order_details record links to one order"
+
+      - foreign_key: product_id
+        references: "dim_product"
+        cardinality: "many-to-one"
+        description: "Each order_details record links to one product"
+
+    
+    typical_use_cases:
+      - "Detailed transaction-level analysis"
+      - "Calculate custom metrics not available in Gold"
+      - "Drill down from Gold aggregates"
+    
+    join_pattern: |
+      SELECT 
+        f.*,
+
+        d_1.attribute_name
+
+        d_2.attribute_name
+
+      FROM fct_order_details f
+
+      LEFT JOIN dim_order d_1 
+        ON f.order_id = d_1.order_id
+
+      LEFT JOIN dim_product d_2 
+        ON f.product_id = d_2.product_id
+
+      WHERE f.created_at >= CURRENT_DATE - 30
+    
+
+  - name: fct_employee_territories
+    display_name: "Employee_territories"
+    source_table: employee_territories
+    grain: One row per employee_territorie
+    description: "Transactional data capturing measurable events"
+    
+    date_column: created_at
+    date_description: "Primary date for time-based analysis"
+    
+    measures:
+
+    
+    dimension_keys:
+
+      - employee_id
+
+      - territory_id
+
+    
+    relationships:
+
+      - foreign_key: employee_id
+        references: "dim_employee"
+        cardinality: "many-to-one"
+        description: "Each employee_territories record links to one employee"
+
+      - foreign_key: territory_id
+        references: "dim_territory"
+        cardinality: "many-to-one"
+        description: "Each employee_territories record links to one territory"
+
+    
+    typical_use_cases:
+      - "Detailed transaction-level analysis"
+      - "Calculate custom metrics not available in Gold"
+      - "Drill down from Gold aggregates"
+    
+    join_pattern: |
+      SELECT 
+        f.*,
+
+        d_1.attribute_name
+
+        d_2.attribute_name
+
+      FROM fct_employee_territories f
+
+      LEFT JOIN dim_employee d_1 
+        ON f.employee_id = d_1.employee_id
+
+      LEFT JOIN dim_territory d_2 
+        ON f.territory_id = d_2.territory_id
+
+      WHERE f.created_at >= CURRENT_DATE - 30
+    
+
+  - name: fct_orders
+    display_name: "Orders"
+    source_table: orders
+    grain: One row per order
+    description: "Transactional data capturing measurable events"
+    
+    date_column: order_date
+    date_description: "Primary date for time-based analysis"
+    
+    measures:
+
+      - name: freight
+        type: "Numeric - can be aggregated"
+        typical_aggregations: [SUM, AVG, MIN, MAX, COUNT]
+
+    
+    dimension_keys:
+
+      - customer_id
+
+      - employee_id
+
+      - ship_via
+
+    
+    relationships:
+
+      - foreign_key: customer_id
+        references: "dim_customer"
+        cardinality: "many-to-one"
+        description: "Each orders record links to one customer"
+
+      - foreign_key: employee_id
+        references: "dim_employee"
+        cardinality: "many-to-one"
+        description: "Each orders record links to one employee"
+
+      - foreign_key: ship_via
+        references: "dim_ship_via"
+        cardinality: "many-to-one"
+        description: "Each orders record links to one ship_via"
+
+    
+    typical_use_cases:
+      - "Detailed transaction-level analysis"
+      - "Calculate custom metrics not available in Gold"
+      - "Drill down from Gold aggregates"
+    
+    join_pattern: |
+      SELECT 
+        f.*,
+
+        d_1.attribute_name
+
+        d_2.attribute_name
+
+        d_3.attribute_name
+
+      FROM fct_orders f
+
+      LEFT JOIN dim_customer d_1 
+        ON f.customer_id = d_1.customer_id
+
+      LEFT JOIN dim_employee d_2 
+        ON f.employee_id = d_2.employee_id
+
+      LEFT JOIN dim_ship_via d_3 
+        ON f.ship_via = d_3.ship_via
+
+      WHERE f.order_date >= CURRENT_DATE - 30
+    
+
+  - name: fct_products
+    display_name: "Products"
+    source_table: products
+    grain: One row per product
+    description: "Transactional data capturing measurable events"
+    
+    date_column: created_at
+    date_description: "Primary date for time-based analysis"
+    
+    measures:
+
+      - name: unit_price
+        type: "Numeric - can be aggregated"
+        typical_aggregations: [SUM, AVG, MIN, MAX, COUNT]
+
+      - name: discontinued
+        type: "Numeric - can be aggregated"
+        typical_aggregations: [SUM, AVG, MIN, MAX, COUNT]
+
+    
+    dimension_keys:
+
+      - category_id
+
+      - supplier_id
+
+    
+    relationships:
+
+      - foreign_key: category_id
+        references: "dim_category"
+        cardinality: "many-to-one"
+        description: "Each products record links to one category"
+
+      - foreign_key: supplier_id
+        references: "dim_supplier"
+        cardinality: "many-to-one"
+        description: "Each products record links to one supplier"
+
+    
+    typical_use_cases:
+      - "Detailed transaction-level analysis"
+      - "Calculate custom metrics not available in Gold"
+      - "Drill down from Gold aggregates"
+    
+    join_pattern: |
+      SELECT 
+        f.*,
+
+        d_1.attribute_name
+
+        d_2.attribute_name
+
+      FROM fct_products f
+
+      LEFT JOIN dim_category d_1 
+        ON f.category_id = d_1.category_id
+
+      LEFT JOIN dim_supplier d_2 
+        ON f.supplier_id = d_2.supplier_id
+
+      WHERE f.created_at >= CURRENT_DATE - 30
+    
+
+  - name: fct_customer_customer_demo
+    display_name: "Customer_customer_demo"
+    source_table: customer_customer_demo
+    grain: One row per customer_customer_demo
+    description: "Transactional data capturing measurable events"
+    
+    date_column: created_at
+    date_description: "Primary date for time-based analysis"
+    
+    measures:
+
+    
+    dimension_keys:
+
+      - customer_type_id
+
+      - customer_id
+
+    
+    relationships:
+
+      - foreign_key: customer_type_id
+        references: "dim_customer_type"
+        cardinality: "many-to-one"
+        description: "Each customer_customer_demo record links to one customer_type"
+
+      - foreign_key: customer_id
+        references: "dim_customer"
+        cardinality: "many-to-one"
+        description: "Each customer_customer_demo record links to one customer"
+
+    
+    typical_use_cases:
+      - "Detailed transaction-level analysis"
+      - "Calculate custom metrics not available in Gold"
+      - "Drill down from Gold aggregates"
+    
+    join_pattern: |
+      SELECT 
+        f.*,
+
+        d_1.attribute_name
+
+        d_2.attribute_name
+
+      FROM fct_customer_customer_demo f
+
+      LEFT JOIN dim_customer_type d_1 
+        ON f.customer_type_id = d_1.customer_type_id
+
+      LEFT JOIN dim_customer d_2 
+        ON f.customer_id = d_2.customer_id
+
+      WHERE f.created_at >= CURRENT_DATE - 30
+    
+
+
+# =============================================================================
+# RELATIONSHIPS & JOIN PATHS
+# =============================================================================
+relationships:
+
+
+  - from_table: fct_order_details
+    to_table: dim_order
+    relationship_type: many-to-one
+    join_condition: "fct_order_details.order_id = dim_order.order_id"
+    description: "Multiple order_details records can reference the same order"
+
+  - from_table: fct_order_details
+    to_table: dim_product
+    relationship_type: many-to-one
+    join_condition: "fct_order_details.product_id = dim_product.product_id"
+    description: "Multiple order_details records can reference the same product"
+
+
+
+  - from_table: fct_employee_territories
+    to_table: dim_employee
+    relationship_type: many-to-one
+    join_condition: "fct_employee_territories.employee_id = dim_employee.employee_id"
+    description: "Multiple employee_territories records can reference the same employee"
+
+  - from_table: fct_employee_territories
+    to_table: dim_territory
+    relationship_type: many-to-one
+    join_condition: "fct_employee_territories.territory_id = dim_territory.territory_id"
+    description: "Multiple employee_territories records can reference the same territory"
+
+
+
+  - from_table: fct_orders
+    to_table: dim_customer
+    relationship_type: many-to-one
+    join_condition: "fct_orders.customer_id = dim_customer.customer_id"
+    description: "Multiple orders records can reference the same customer"
+
+  - from_table: fct_orders
+    to_table: dim_employee
+    relationship_type: many-to-one
+    join_condition: "fct_orders.employee_id = dim_employee.employee_id"
+    description: "Multiple orders records can reference the same employee"
+
+  - from_table: fct_orders
+    to_table: dim_ship_via
+    relationship_type: many-to-one
+    join_condition: "fct_orders.ship_via = dim_ship_via.ship_via"
+    description: "Multiple orders records can reference the same ship_via"
+
+
+
+  - from_table: fct_products
+    to_table: dim_category
+    relationship_type: many-to-one
+    join_condition: "fct_products.category_id = dim_category.category_id"
+    description: "Multiple products records can reference the same category"
+
+  - from_table: fct_products
+    to_table: dim_supplier
+    relationship_type: many-to-one
+    join_condition: "fct_products.supplier_id = dim_supplier.supplier_id"
+    description: "Multiple products records can reference the same supplier"
+
+
+
+  - from_table: fct_customer_customer_demo
+    to_table: dim_customer_type
+    relationship_type: many-to-one
+    join_condition: "fct_customer_customer_demo.customer_type_id = dim_customer_type.customer_type_id"
+    description: "Multiple customer_customer_demo records can reference the same customer_type"
+
+  - from_table: fct_customer_customer_demo
+    to_table: dim_customer
+    relationship_type: many-to-one
+    join_condition: "fct_customer_customer_demo.customer_id = dim_customer.customer_id"
+    description: "Multiple customer_customer_demo records can reference the same customer"
+
+
+
+join_paths:
+  - path_name: "fact_to_all_dimensions"
+    description: "Standard star schema join pattern"
+    example: |
+      SELECT 
+        f.*,
+        d1.*,
+        d2.*
+      FROM fct_order_details f
+      LEFT JOIN dim_table1 d1 ON f.key1 = d1.key1
+      LEFT JOIN dim_table2 d2 ON f.key2 = d2.key2
+
+# =============================================================================
+# BUSINESS GLOSSARY
+# =============================================================================
+glossary:
+
+  created_at: "Primary timestamp for order_details - use for time-based filtering and grouping"
+
+  created_at: "Primary timestamp for employee_territories - use for time-based filtering and grouping"
+
+  order_date: "Primary timestamp for orders - use for time-based filtering and grouping"
+
+  created_at: "Primary timestamp for products - use for time-based filtering and grouping"
+
+  created_at: "Primary timestamp for customer_customer_demo - use for time-based filtering and grouping"
+
+
+  daily_grain: "Data aggregated at daily level - one row per daily"
+
+  monthly_grain: "Data aggregated at monthly level - one row per monthly"
+
+  yearly_grain: "Data aggregated at yearly level - one row per yearly"
+
+  daily_grain: "Data aggregated at daily level - one row per daily"
+
+  monthly_grain: "Data aggregated at monthly level - one row per monthly"
+
+  
+common_terms:
+  grain: "The level of detail - daily grain means one row per day"
+  fact: "A measurable business event (orders, transactions, clicks)"
+  dimension: "Descriptive attributes (customer name, product category)"
+  measure: "Numeric value that can be aggregated (quantity, amount)"
+  surrogate_key: "System-generated unique identifier (ends in _sk)"
+  natural_key: "Business identifier (ends in _id)"
+
+# =============================================================================
+# QUERY GUIDELINES FOR LLMs
+# =============================================================================
+llm_query_guidelines:
+  
+  query_strategy:
+    - "ALWAYS start with Gold layer if the metric exists"
+    - "Use Silver (facts + dimensions) only when Gold doesn't have the metric"
+    - "Avoid Bronze layer unless exploring raw source data"
+    - "Gold is 10-100x faster than Silver for common queries"
+  
+  performance_tips:
+    - "Filter on date columns first (indexed)"
+    - "Use Gold models for dashboards and reporting"
+    - "Join facts to dimensions, never dimension to dimension"
+    - "Limit result sets with TOP/LIMIT when exploring"
+  
+  common_mistakes:
+    - mistake: "Querying Bronze for analytics"
+      solution: "Use Silver or Gold instead"
+    - mistake: "Joining dimensions to each other"
+      solution: "Always join through a fact table"
+    - mistake: "Not filtering by date on large fact tables"
+      solution: "Always include date filter on time-series data"
+    - mistake: "Using SELECT * on fact tables"
+      solution: "Specify only needed columns"
+  
+  date_handling:
+    - "All date columns are in YYYY-MM-DD format"
+    - "Use CURRENT_DATE for today"
+    - "Use date_trunc('month', date_column) for monthly aggregations"
+    - "Use INTERVAL '30 days' for relative date math"
+  
+  null_handling:
+    - "LEFT JOIN preserves all fact records even if dimension is missing"
+    - "Aggregations (SUM, AVG, COUNT) ignore NULL values"
+    - "Use COALESCE(column, 0) to convert NULL to zero"
+
+# =============================================================================
+# QUERY LIBRARY (Common Analytical Questions)
+# =============================================================================
+query_library:
+
+  
+  - category: "Daily Analysis"
+    queries:
+      - question: "What is the total_revenue for the last 30 days?"
+        sql: |
+          SELECT 
+            daily_date,
+            total_revenue
+          FROM gold_daily_revenue
+          WHERE daily_date >= CURRENT_DATE - 30
+          ORDER BY daily_date DESC
+        
+      - question: "How does daily performance compare to previous period?"
+        sql: |
+          SELECT 
+            daily_date,
+            total_revenue,
+            LAG(total_revenue) OVER (
+              ORDER BY daily_date
+            ) as previous_daily,
+            total_revenue - LAG(total_revenue) OVER (
+              ORDER BY daily_date
+            ) as change
+          FROM gold_daily_revenue
+          WHERE daily_date >= CURRENT_DATE - 60
+          ORDER BY daily_date DESC
+
+  
+  - category: "Monthly Analysis"
+    queries:
+      - question: "What is the lifetime_revenue for the last 30 days?"
+        sql: |
+          SELECT 
+            monthly_date,
+            lifetime_revenue
+          FROM gold_monthly_customer_lifetime_value
+          WHERE monthly_date >= CURRENT_DATE - 30
+          ORDER BY monthly_date DESC
+        
+      - question: "How does monthly performance compare to previous period?"
+        sql: |
+          SELECT 
+            monthly_date,
+            lifetime_revenue,
+            LAG(lifetime_revenue) OVER (
+              ORDER BY monthly_date
+            ) as previous_monthly,
+            lifetime_revenue - LAG(lifetime_revenue) OVER (
+              ORDER BY monthly_date
+            ) as change
+          FROM gold_monthly_customer_lifetime_value
+          WHERE monthly_date >= CURRENT_DATE - 60
+          ORDER BY monthly_date DESC
+
+  
+  - category: "Yearly Analysis"
+    queries:
+      - question: "What is the total_revenue for the last 30 days?"
+        sql: |
+          SELECT 
+            yearly_date,
+            total_revenue
+          FROM gold_yearly_product_performance
+          WHERE yearly_date >= CURRENT_DATE - 30
+          ORDER BY yearly_date DESC
+        
+      - question: "How does yearly performance compare to previous period?"
+        sql: |
+          SELECT 
+            yearly_date,
+            total_revenue,
+            LAG(total_revenue) OVER (
+              ORDER BY yearly_date
+            ) as previous_yearly,
+            total_revenue - LAG(total_revenue) OVER (
+              ORDER BY yearly_date
+            ) as change
+          FROM gold_yearly_product_performance
+          WHERE yearly_date >= CURRENT_DATE - 60
+          ORDER BY yearly_date DESC
+
+  
+  - category: "Daily Analysis"
+    queries:
+      - question: "What is the total_units_sold for the last 30 days?"
+        sql: |
+          SELECT 
+            daily_date,
+            total_units_sold
+          FROM gold_daily_inventory_tracking
+          WHERE daily_date >= CURRENT_DATE - 30
+          ORDER BY daily_date DESC
+        
+      - question: "How does daily performance compare to previous period?"
+        sql: |
+          SELECT 
+            daily_date,
+            total_units_sold,
+            LAG(total_units_sold) OVER (
+              ORDER BY daily_date
+            ) as previous_daily,
+            total_units_sold - LAG(total_units_sold) OVER (
+              ORDER BY daily_date
+            ) as change
+          FROM gold_daily_inventory_tracking
+          WHERE daily_date >= CURRENT_DATE - 60
+          ORDER BY daily_date DESC
+
+  
+  - category: "Monthly Analysis"
+    queries:
+      - question: "What is the conversion_rate for the last 30 days?"
+        sql: |
+          SELECT 
+            monthly_date,
+            conversion_rate
+          FROM gold_monthly_conversion_optimization
+          WHERE monthly_date >= CURRENT_DATE - 30
+          ORDER BY monthly_date DESC
+        
+      - question: "How does monthly performance compare to previous period?"
+        sql: |
+          SELECT 
+            monthly_date,
+            conversion_rate,
+            LAG(conversion_rate) OVER (
+              ORDER BY monthly_date
+            ) as previous_monthly,
+            conversion_rate - LAG(conversion_rate) OVER (
+              ORDER BY monthly_date
+            ) as change
+          FROM gold_monthly_conversion_optimization
+          WHERE monthly_date >= CURRENT_DATE - 60
+          ORDER BY monthly_date DESC
+
+
+  - category: "Cross-Fact Analysis"
+    queries:
+      - question: "Combine multiple facts for comprehensive analysis"
+        sql: |
+          -- Example: Join multiple fact tables through shared dimensions
+          SELECT 
+            d.dimension_attribute,
+            f1.measure1,
+            f2.measure2
+          FROM fct_order_details f1
+          INNER JOIN dim_territories d 
+            ON f1.order_id = d.order_id
+          LEFT JOIN fct_employee_territories f2 
+            ON d.order_id = f2.order_id
+
+# =============================================================================
+# DATA QUALITY & LIMITATIONS
+# =============================================================================
+data_quality:
+  refresh_schedule: "Typically daily via dbt runs"
+  
+  known_limitations:
+    - "Historical data only available from 2025-12-29"
+    - "SCD Type 2 dimensions track changes, but not all dimensions are slowly changing"
+    - "Gold layer aggregations are pre-computed and may not reflect real-time data"
+  
+  null_handling_rules:
+    - "Foreign keys may be NULL if dimension record doesn't exist"
+    - "Measures are NULL if not applicable to the record"
+    - "Date columns should never be NULL in fact tables"
+  
+  best_practices:
+    - "Always filter fact tables by date to improve performance"
+    - "Use Gold layer for standard reporting metrics"
+    - "Use Silver layer when custom calculations are needed"
+    - "Validate results by checking row counts and aggregations"
+
+# =============================================================================
+# QUICK REFERENCE
+# =============================================================================
+quick_reference:
+  
+  table_naming:
+    bronze: "bronze_[source_table]"
+    silver_facts: "fct_[entity]"
+    silver_dimensions: "dim_[entity]"
+    gold: "gold_[grain]_[metric_type]"
+  
+  column_naming:
+    surrogate_keys: "[table]_sk (system-generated unique ID)"
+    natural_keys: "[entity]_id (business identifier)"
+    date_columns: "[event]_date or [grain]_date"
+    measures: "Descriptive names like total_amount, quantity, etc."
+  
+  typical_workflow:
+    1: "Identify the business question"
+    2: "Check if Gold layer has the metric → use Gold"
+    3: "If not in Gold, query Silver facts + dimensions"
+    4: "Filter by date range to limit data"
+    5: "Join dimensions only as needed"
+    6: "Validate results make business sense"
+
+---
+# End of Semantic Layer
+# For questions or issues, refer to dbt project documentation
