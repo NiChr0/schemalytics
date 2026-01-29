@@ -14,5 +14,5 @@ goals:
 - customer_lifetime_value
 - inventory_tracking
 - product_performance
-grain: daily,weekly,monthly
+grain: daily,yearly
 temporal: historical

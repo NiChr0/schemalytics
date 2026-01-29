@@ -1,541 +1,463 @@
-"""Generate modeling plan from schema and context."""
+"""Enhanced planner with interactive refinement loop."""
 from schemalytics.models import (
     Schema, BusinessContext, ModelingPlan,
-    DimensionPlan, FactPlan, Table, GoldPlan, MetricDefinition
+    DimensionPlan, FactPlan, GoldPlan, MetricDefinition, Table
 )
 from schemalytics import llm
-
-DATE_COLUMNS = {"created_at", "updated_at", "order_date", "date", "timestamp", "created", "modified"}
-MEASURE_TYPES = {"INTEGER", "NUMERIC", "DECIMAL", "FLOAT", "DOUBLE", "MONEY", "REAL", "BIGINT"}
+from typing import Any
 
 
 class TableClassification:
     """Classification result for a single table."""
     def __init__(self, table: Table, role: str, confidence: str, reason: str):
         self.table = table
-        self.role = role  # "fact", "dimension", "bridge", "skip"
-        self.confidence = confidence  # "high", "medium", "low"
+        self.role = role
+        self.confidence = confidence
         self.reason = reason
 
 
-def build_fk_graph(schema: Schema) -> dict:
-    """Build FK relationship graph."""
-    graph = {t.name: {"outgoing": [], "incoming": []} for t in schema.tables}
+def llm_generate_detailed_plan(
+    schema: Schema,
+    context: BusinessContext,
+    heuristic_classifications: list[TableClassification]
+) -> dict:
+    """Generate detailed concrete plan with exact table names, types, grains, FKs, measures."""
     
-    for table in schema.tables:
-        for fk in table.foreign_keys:
-            graph[table.name]["outgoing"].append(fk.references_table)
-            if fk.references_table in graph:
-                graph[fk.references_table]["incoming"].append(table.name)
-    
-    return graph
-
-
-def classify_by_fk_graph(schema: Schema) -> list[TableClassification]:
-    """Classify tables using FK graph analysis."""
-    graph = build_fk_graph(schema)
-    classifications = []
-    
-    for table in schema.tables:
-        outgoing = len(graph[table.name]["outgoing"])
-        incoming = len(graph[table.name]["incoming"])
-        
-        if outgoing >= 2 and incoming <= 1:
-            role, conf = "fact", "high"
-            reason = f"References {outgoing} tables, referenced by {incoming}"
-        elif incoming >= 2 and outgoing <= 1:
-            role, conf = "dimension", "high"
-            reason = f"Referenced by {incoming} tables, references {outgoing}"
-        elif outgoing >= 2 and incoming >= 2:
-            role, conf = "bridge", "medium"
-            reason = f"Many-to-many junction: {outgoing} out, {incoming} in"
-        elif outgoing == 1 and incoming == 0:
-            has_date = find_date_column(table.columns) is not None
-            if has_date or find_measures(table.columns):
-                role, conf = "fact", "medium"
-                reason = "Single FK with date/measures"
-            else:
-                role, conf = "dimension", "low"
-                reason = "Single FK, no date/measures"
-        elif outgoing == 0 and incoming == 0:
-            role, conf = "dimension", "low"
-            reason = "No FK relationships"
-        else:
-            role, conf = "dimension", "low"
-            reason = f"Ambiguous: {outgoing} out, {incoming} in"
-        
-        classifications.append(TableClassification(table, role, conf, reason))
-    
-    return classifications
-
-
-def find_date_column(columns: list) -> str | None:
-    """Find most likely date column."""
-    for col in columns:
-        if col.name.lower() in DATE_COLUMNS:
-            return col.name
-    for col in columns:
-        if "date" in col.data_type.lower() or "timestamp" in col.data_type.lower():
-            return col.name
-    return None
-
-
-def find_measures(columns: list) -> list[str]:
-    """Find numeric columns likely to be measures."""
-    return [
-        col.name for col in columns
-        if any(t in col.data_type.upper() for t in MEASURE_TYPES)
-        and not col.name.endswith("_id") and col.name != "id"
-    ]
-
-
-def _infer_metric_type(column_name: str, data_type: str) -> str:
-    """Infer aggregation type from column name and data type."""
-    col_lower = column_name.lower()
-    
-    # Revenue/amount/price → SUM
-    if any(word in col_lower for word in ["revenue", "amount", "price", "total", "sales", "cost"]):
-        return "SUM"
-    
-    # Count/quantity → SUM (for totals) or COUNT
-    if any(word in col_lower for word in ["quantity", "count", "units"]):
-        return "SUM"
-    
-    # Rate/percentage → AVG
-    if any(word in col_lower for word in ["rate", "percent", "ratio", "avg", "average"]):
-        return "AVG"
-    
-    # Default numeric → SUM
-    return "SUM"
-
-
-def _create_time_aggregates(
-    fact: FactPlan,
-    grain: str,
-    context: BusinessContext
-) -> list[GoldPlan]:
-    """Generate time-grain aggregates for a fact table."""
-    aggregates = []
-    
-    # Determine grain function
-    grain_func_map = {
-        "daily": "day",
-        "weekly": "week",
-        "monthly": "month",
-        "yearly": "year"
-    }
-    grain_func = grain_func_map.get(grain, "day")
-    
-    # Create metrics from fact measures
-    metrics = []
-    for measure in fact.measures:
-        agg_type = _infer_metric_type(measure, "NUMERIC")
-        metrics.append(MetricDefinition(
-            name=f"{agg_type.lower()}_{measure}",
-            aggregation=agg_type,
-            column=measure,
-            description=f"{agg_type} of {measure} by {grain}"
-        ))
-    
-    # Add record count
-    metrics.append(MetricDefinition(
-        name="record_count",
-        aggregation="COUNT",
-        column="*",
-        description=f"Count of records by {grain}"
-    ))
-    
-    aggregates.append(GoldPlan(
-        name=f"gold_{grain}_{fact.source_table}",
-        source_fact=fact.name,
-        grain=grain,
-        dimensions=[],  # Time only for now
-        metrics=metrics,
-        date_column=fact.date_column,
-        description=f"{grain.capitalize()} aggregation of {fact.name}"
-    ))
-    
-    return aggregates
-
-
-def _ecommerce_aggregates(
-    fact: FactPlan,
-    dimensions: list[DimensionPlan]
-) -> list[GoldPlan]:
-    """Generate ecommerce-specific aggregates."""
-    aggregates = []
-    
-    # Revenue metrics by product/customer
-    if "product" in fact.source_table.lower() or "order" in fact.source_table.lower():
-        revenue_cols = [m for m in fact.measures if "amount" in m.lower() or "price" in m.lower()]
-        
-        if revenue_cols:
-            metrics = [
-                MetricDefinition(
-                    name="total_revenue",
-                    aggregation="SUM",
-                    column=revenue_cols[0],
-                    description="Total revenue"
-                ),
-                MetricDefinition(
-                    name="order_count",
-                    aggregation="COUNT",
-                    column="*",
-                    description="Number of orders"
-                ),
-                MetricDefinition(
-                    name="avg_order_value",
-                    aggregation="AVG",
-                    column=revenue_cols[0],
-                    description="Average order value"
-                )
+    schema_summary = []
+    for t in schema.tables:
+        schema_summary.append({
+            "table": t.name,
+            "columns": [{"name": c.name, "type": c.data_type} for c in t.columns],
+            "primary_key": t.primary_key,
+            "foreign_keys": [
+                {"column": fk.column, "references": fk.references_table, "ref_column": fk.references_column}
+                for fk in t.foreign_keys
             ]
-            
-            aggregates.append(GoldPlan(
-                name="gold_daily_sales_summary",
-                source_fact=fact.name,
-                grain="daily",
-                dimensions=[],
-                metrics=metrics,
-                date_column=fact.date_column,
-                description="Daily sales performance metrics"
-            ))
+        })
     
-    return aggregates
-
-
-def _saas_aggregates(
-    fact: FactPlan,
-    dimensions: list[DimensionPlan]
-) -> list[GoldPlan]:
-    """Generate SaaS-specific aggregates."""
-    aggregates = []
-    
-    # User activity metrics
-    if "user" in fact.source_table.lower() or "event" in fact.source_table.lower():
-        user_key = next((k for k in fact.dimension_keys if "user" in k.lower()), None)
-        
-        if user_key:
-            metrics = [
-                MetricDefinition(
-                    name="active_users",
-                    aggregation="COUNT_DISTINCT",
-                    column=user_key,
-                    description="Number of active users"
-                ),
-                MetricDefinition(
-                    name="total_events",
-                    aggregation="COUNT",
-                    column="*",
-                    description="Total event count"
-                )
-            ]
-            
-            aggregates.append(GoldPlan(
-                name="gold_daily_user_activity",
-                source_fact=fact.name,
-                grain="daily",
-                dimensions=[],
-                metrics=metrics,
-                date_column=fact.date_column,
-                description="Daily active users and activity"
-            ))
-    
-    return aggregates
-
-
-def llm_suggest_gold_models(
-    facts: list[FactPlan],
-    dimensions: list[DimensionPlan],
-    context: BusinessContext
-) -> list[dict]:
-    """Use LLM to suggest Gold models based on facts and business context."""
-    facts_summary = [
-        {
-            "name": f.name,
-            "source": f.source_table,
-            "grain": f.grain,
-            "measures": f.measures,
-            "dimensions": f.dimension_keys,
-            "date_column": f.date_column
-        }
-        for f in facts
+    heuristic_plan = [
+        {"table": c.table.name, "role": c.role, "reason": c.reason}
+        for c in heuristic_classifications
     ]
     
-    dims_summary = [
-        {"name": d.name, "source": d.source_table}
-        for d in dimensions
-    ]
-    
-    prompt = f"""You are a data modeling expert. Suggest Gold layer aggregate models for this dimensional model.
+    prompt = f"""You are a data modeling expert. Generate a CONCRETE, DETAILED data modeling plan.
 
-Business Context:
-- Type: {context.business_type}
-- Goals: {', '.join(context.goals)}
+Database schema:
+{schema_summary}
+
+Initial classifications:
+{heuristic_plan}
+
+Business context:
+- Industry: {context.business_type}
+- Entities: {context.entities}
+- Goals: {context.goals}
 - Temporal: {context.temporal}
+- Time grains: {context.grain}
 
-Available Facts:
-{facts_summary}
+Your task: Create a DETAILED plan with EXACT specifications:
 
-Available Dimensions:
-{dims_summary}
-
-Your task:
-1. Suggest 3-5 Gold aggregate models that would be useful for analytics
-2. Focus on common reporting patterns for {context.business_type}
-3. Each should aggregate at least one fact table by time grain (daily/monthly/yearly)
-4. Include appropriate metrics (SUM, COUNT, AVG, etc.)
+1. Bronze layer: List all source tables (passthrough views)
+2. Silver dimensions: For each dimension specify:
+   - Exact table name (dim_<entity>)
+   - SCD type (1 or 2 based on temporal={context.temporal})
+   - Grain (e.g., "one row per customer")
+   - Key columns (primary key, natural key)
+   - All attribute columns to include
+   
+3. Silver facts: For each fact specify:
+   - Exact table name (fct_<entity>)
+   - Grain (e.g., "one row per order line")
+   - Date column (which column to use for time)
+   - Foreign keys with EXACT references (e.g., "customer_id -> dim_customers")
+   - Measure columns (numeric columns to aggregate)
+   
+4. Gold aggregates: For each time grain ({context.grain}) specify:
+   - Exact table name (gold_<grain>_<metric>)
+   - Source fact table
+   - Time grain (daily/weekly/monthly/yearly)
+   - Metrics with aggregation type (SUM/COUNT/AVG)
+   - Description
 
 Respond ONLY with JSON:
 {{
-  "gold_models": [
+  "bronze": ["table1", "table2", ...],
+  "silver": {{
+    "dimensions": [
+      {{
+        "name": "dim_customers",
+        "source_table": "customers",
+        "scd_type": 2,
+        "grain": "one row per customer per valid period",
+        "primary_key": "customer_id",
+        "columns": ["customer_id", "name", "email", "segment"]
+      }}
+    ],
+    "facts": [
+      {{
+        "name": "fct_orders",
+        "source_table": "orders",
+        "grain": "one row per order",
+        "date_column": "order_date",
+        "foreign_keys": [
+          {{"column": "customer_id", "references": "dim_customers"}},
+          {{"column": "store_id", "references": "dim_stores"}}
+        ],
+        "measures": ["total_amount", "discount_amount", "tax_amount"]
+      }}
+    ]
+  }},
+  "gold": [
     {{
       "name": "gold_daily_revenue",
       "source_fact": "fct_orders",
       "grain": "daily",
-      "dimensions": [],
-      "metrics": [
-        {{"name": "total_revenue", "aggregation": "SUM", "column": "amount", "description": "Total daily revenue"}},
-        {{"name": "order_count", "aggregation": "COUNT", "column": "*", "description": "Number of orders"}}
-      ],
       "date_column": "order_date",
-      "description": "Daily revenue and order metrics"
+      "metrics": [
+        {{"name": "total_revenue", "aggregation": "SUM", "column": "total_amount"}},
+        {{"name": "order_count", "aggregation": "COUNT", "column": "*"}}
+      ],
+      "description": "Daily revenue and order volume metrics"
     }}
   ]
 }}"""
 
     try:
-        print("  🤖 Generating Gold models with LLM...")
+        print("\n  🤖 Generating detailed plan with LLM...")
         response = llm.query_json(prompt)
-        print("  ✓ LLM Gold suggestions received")
-        return response.get("gold_models", [])
+        print("  ✓ Detailed plan generated")
+        return response
     except Exception as e:
-        print(f"  ⚠️  LLM Gold generation failed: {e}")
-        print("  ℹ️  Will use heuristic fallback")
-        return []
+        print(f"  ⚠️  LLM detailed plan failed: {e}")
+        raise
 
 
-def generate_gold_models(
-    facts: list[FactPlan],
-    dimensions: list[DimensionPlan],
-    context: BusinessContext
-) -> list[GoldPlan]:
-    """Generate Gold aggregate models using LLM suggestions."""
-    # Get LLM suggestions
-    llm_suggestions = llm_suggest_gold_models(facts, dimensions, context)
+def display_concrete_plan(plan_dict: dict) -> None:
+    """Display concrete plan with exact table names, types, grains, FKs."""
     
-    # Convert to GoldPlan objects
-    gold_models = []
-    for suggestion in llm_suggestions:
-        try:
-            metrics = [
-                MetricDefinition(**m) for m in suggestion.get("metrics", [])
-            ]
-            gold_models.append(GoldPlan(
-                name=suggestion["name"],
-                source_fact=suggestion["source_fact"],
-                grain=suggestion["grain"],
-                dimensions=suggestion.get("dimensions", []),
-                metrics=metrics,
-                date_column=suggestion["date_column"],
-                description=suggestion.get("description", "")
-            ))
-        except Exception as e:
-            print(f"  ⚠️  Skipping invalid Gold model: {e}")
-            continue
+    print("\n" + "=" * 80)
+    print("CONCRETE DATA MODEL PLAN")
+    print("=" * 80)
     
-    # Fallback: Generate heuristic-based aggregates if LLM fails or returns too few
-    if len(gold_models) < 2:
-        print(f"  ℹ️  Using heuristic fallback for Gold models (got {len(gold_models)} from LLM)...")
-        
-        # Parse selected grains from context
-        selected_grains = context.grain.split(",") if context.grain else ["daily", "monthly", "yearly"]
-        
-        for fact in facts:
-            # Time aggregates - only generate user-selected grains
-            for grain in selected_grains:
-                gold_models.extend(_create_time_aggregates(fact, grain.strip(), context))
-            
-            # Business-specific aggregates
-            if context.business_type.startswith("ecommerce"):
-                gold_models.extend(_ecommerce_aggregates(fact, dimensions))
-            elif context.business_type.startswith("saas"):
-                gold_models.extend(_saas_aggregates(fact, dimensions))
-        print(f"  ✓ Generated {len(gold_models)} Gold models using heuristics")
-    else:
-        print(f"  ✓ Generated {len(gold_models)} Gold models")
+    # Bronze
+    print("\n📦 BRONZE LAYER (Raw passthrough)")
+    print("-" * 80)
+    bronze = plan_dict.get("bronze", [])
+    for table in bronze:
+        print(f"  • bronze_{table}")
+    print(f"\nTotal: {len(bronze)} tables (materialized as views)")
     
-    return gold_models
+    # Silver - Dimensions
+    print("\n" + "=" * 80)
+    print("🔷 SILVER LAYER - DIMENSIONS")
+    print("=" * 80)
+    dimensions = plan_dict.get("silver", {}).get("dimensions", [])
+    for dim in dimensions:
+        print(f"\n{dim['name']} (SCD Type {dim['scd_type']})")
+        print(f"  Source: {dim['source_table']}")
+        print(f"  Grain: {dim['grain']}")
+        print(f"  Columns: {', '.join(dim.get('columns', [])[:8])}")
+        if len(dim.get('columns', [])) > 8:
+            print(f"           ... and {len(dim['columns']) - 8} more")
+    print(f"\nTotal: {len(dimensions)} dimension tables")
+    
+    # Silver - Facts
+    print("\n" + "=" * 80)
+    print("📊 SILVER LAYER - FACTS")
+    print("=" * 80)
+    facts = plan_dict.get("silver", {}).get("facts", [])
+    for fact in facts:
+        print(f"\n{fact['name']}")
+        print(f"  Source: {fact['source_table']}")
+        print(f"  Grain: {fact['grain']}")
+        print(f"  Date: {fact['date_column']}")
+        print(f"  Foreign Keys:")
+        for fk in fact.get('foreign_keys', []):
+            print(f"    → {fk['column']} → {fk['references']}")
+        print(f"  Measures: {', '.join(fact.get('measures', []))}")
+    print(f"\nTotal: {len(facts)} fact tables")
+    
+    # Gold
+    print("\n" + "=" * 80)
+    print("🥇 GOLD LAYER - PRE-AGGREGATED METRICS")
+    print("=" * 80)
+    gold = plan_dict.get("gold", [])
+    
+    # Group by grain
+    by_grain = {}
+    for g in gold:
+        grain = g['grain']
+        if grain not in by_grain:
+            by_grain[grain] = []
+        by_grain[grain].append(g)
+    
+    for grain, models in sorted(by_grain.items()):
+        print(f"\n{grain.upper()} AGGREGATES ({len(models)} tables):")
+        for g in models:
+            print(f"\n  {g['name']}")
+            print(f"    Source: {g['source_fact']}")
+            print(f"    Description: {g['description']}")
+            print(f"    Metrics:")
+            for m in g.get('metrics', []):
+                print(f"      • {m['name']} = {m['aggregation']}({m['column']})")
+    
+    print("\n" + "=" * 80)
 
 
-def llm_validate_and_finalize(
+def llm_refine_plan(
+    current_plan: dict,
+    feedback: str,
     schema: Schema,
-    classifications: list[TableClassification]
-) -> list[dict]:
-    """LLM reviews heuristic classifications and returns final validated plan."""
-    schema_summary = [
-        {
+    context: BusinessContext
+) -> dict:
+    """LLM interprets natural language feedback and amends the plan."""
+    
+    schema_summary = []
+    for t in schema.tables:
+        schema_summary.append({
             "table": t.name,
             "columns": [c.name for c in t.columns],
-            "fks": [f"{fk.column} -> {fk.references_table}" for fk in t.foreign_keys]
-        }
-        for t in schema.tables
-    ]
+            "foreign_keys": [
+                {"column": fk.column, "references": fk.references_table}
+                for fk in t.foreign_keys
+            ]
+        })
     
-    heuristic_plan = [
-        {"table": c.table.name, "role": c.role, "confidence": c.confidence, "reason": c.reason}
-        for c in classifications
-    ]
-    
-    prompt = f"""You are a data modeling expert. Review these table classifications for building a dimensional model (star schema).
+    prompt = f"""You are a data modeling expert. Interpret user feedback and amend the data model plan.
 
-Database schema:
+Current plan:
+{current_plan}
+
+Database schema (for reference):
 {schema_summary}
 
-Heuristic classifications (from FK graph analysis):
-{heuristic_plan}
+Business context:
+- Industry: {context.business_type}
+- Entities: {context.entities}
+- Goals: {context.goals}
+
+User feedback: "{feedback}"
 
 Your task:
-1. Review each classification
-2. Confirm or correct the role (fact/dimension/bridge/skip)
-3. Provide clear reasoning
+1. Interpret the feedback (even if informal/vague)
+2. Validate if the change makes sense
+3. If it doesn't make sense, suggest alternatives
+4. Output the COMPLETE amended plan (not just changes)
 
-Respond ONLY with JSON:
+Examples of feedback interpretation:
+- "make orders weekly" → Change gold_daily_orders to gold_weekly_orders
+- "split customers by type" → Create dim_customers_b2b and dim_customers_b2c
+- "add customer lifetime value" → Add gold metric with CLV calculation
+- "remove product dimension" → Remove dim_products, update facts accordingly
+
+If the feedback is unclear or impossible, add a "validation" field explaining the issue.
+
+Respond ONLY with JSON in the SAME format as current plan:
 {{
-  "tables": [
-    {{"table": "name", "role": "fact|dimension|bridge|skip", "reason": "brief explanation"}}
-  ]
+  "validation": "OK" or "explanation of issue",
+  "bronze": [...],
+  "silver": {{
+    "dimensions": [...],
+    "facts": [...]
+  }},
+  "gold": [...]
 }}"""
 
     try:
-        print("  🤖 Validating with LLM...")
+        print("\n  🤖 Interpreting feedback and refining plan...")
         response = llm.query_json(prompt)
-        print("  ✓ LLM validation complete")
-        return response.get("tables", [])
+        
+        # Check validation
+        if response.get("validation") != "OK":
+            print(f"\n  ⚠️  Validation issue: {response.get('validation')}")
+            print("  Please clarify your feedback or type 'skip' to keep current plan.")
+            return current_plan
+        
+        print("  ✓ Plan refined")
+        return response
+    
     except Exception as e:
-        # If LLM fails, return heuristic results as-is
-        print(f"  ⚠️  LLM validation failed: {e}")
-        print("  ℹ️  Using heuristic classifications")
-        return [{"table": c.table.name, "role": c.role, "reason": c.reason} for c in classifications]
+        print(f"  ⚠️  LLM refinement failed: {e}")
+        return current_plan
 
 
-def format_plan_for_review(
-    heuristic: list[TableClassification],
-    llm_final: list[dict],
-    gold_models: list[GoldPlan] = None
-) -> str:
-    """Format plan for user review."""
-    lines = [
-        "",
-        "=" * 60,
-        "PROPOSED DATA MODEL",
-        "=" * 60,
-        "",
-        f"{'Table':<25} {'Role':<12} {'Reason'}",
-        "-" * 60,
-    ]
+def show_diff(old_plan: dict, new_plan: dict) -> None:
+    """Show what changed between two plans."""
     
-    for item in llm_final:
-        role = item["role"].upper()
-        lines.append(f"{item['table']:<25} {role:<12} {item['reason']}")
+    print("\n" + "=" * 80)
+    print("CHANGES IN THIS ITERATION")
+    print("=" * 80)
     
-    if gold_models:
-        lines.extend([
-            "",
-            "=" * 60,
-            "GOLD LAYER AGGREGATES",
-            "=" * 60,
-            "",
-        ])
-        for gold in gold_models:
-            lines.append(f"- {gold.name} ({gold.grain})")
-            lines.append(f"  Source: {gold.source_fact}")
-            lines.append(f"  Metrics: {', '.join(m.name for m in gold.metrics)}")
-            lines.append("")
+    changes = []
     
-    lines.append("")
-    return "\n".join(lines)
+    # Check bronze changes
+    old_bronze = set(old_plan.get("bronze", []))
+    new_bronze = set(new_plan.get("bronze", []))
+    
+    for table in new_bronze - old_bronze:
+        changes.append(f"  ✓ Added bronze table: {table}")
+    for table in old_bronze - new_bronze:
+        changes.append(f"  ✗ Removed bronze table: {table}")
+    
+    # Check dimension changes
+    old_dims = {d['name']: d for d in old_plan.get("silver", {}).get("dimensions", [])}
+    new_dims = {d['name']: d for d in new_plan.get("silver", {}).get("dimensions", [])}
+    
+    for name in set(new_dims.keys()) - set(old_dims.keys()):
+        changes.append(f"  ✓ Added dimension: {name}")
+    for name in set(old_dims.keys()) - set(new_dims.keys()):
+        changes.append(f"  ✗ Removed dimension: {name}")
+    for name in set(old_dims.keys()) & set(new_dims.keys()):
+        if old_dims[name] != new_dims[name]:
+            changes.append(f"  ⟳ Modified dimension: {name}")
+    
+    # Check fact changes
+    old_facts = {f['name']: f for f in old_plan.get("silver", {}).get("facts", [])}
+    new_facts = {f['name']: f for f in new_plan.get("silver", {}).get("facts", [])}
+    
+    for name in set(new_facts.keys()) - set(old_facts.keys()):
+        changes.append(f"  ✓ Added fact: {name}")
+    for name in set(old_facts.keys()) - set(new_facts.keys()):
+        changes.append(f"  ✗ Removed fact: {name}")
+    for name in set(old_facts.keys()) & set(new_facts.keys()):
+        if old_facts[name] != new_facts[name]:
+            changes.append(f"  ⟳ Modified fact: {name}")
+    
+    # Check gold changes
+    old_gold = {g['name']: g for g in old_plan.get("gold", [])}
+    new_gold = {g['name']: g for g in new_plan.get("gold", [])}
+    
+    for name in set(new_gold.keys()) - set(old_gold.keys()):
+        changes.append(f"  ✓ Added gold aggregate: {name}")
+    for name in set(old_gold.keys()) - set(new_gold.keys()):
+        changes.append(f"  ✗ Removed gold aggregate: {name}")
+    for name in set(old_gold.keys()) & set(new_gold.keys()):
+        if old_gold[name] != new_gold[name]:
+            changes.append(f"  ⟳ Modified gold aggregate: {name}")
+    
+    if not changes:
+        print("\n  (No changes detected)")
+    else:
+        print()
+        for change in changes:
+            print(change)
+    
+    print("\n" + "=" * 80)
 
 
-def build_plan_from_llm_output(
-    schema: Schema,
-    llm_output: list[dict],
-    context: BusinessContext
-) -> ModelingPlan:
-    """Convert LLM's final classifications to ModelingPlan."""
-    table_lookup = {t.name: t for t in schema.tables}
-    role_map = {item["table"]: item["role"] for item in llm_output}
+def convert_plan_dict_to_modeling_plan(plan_dict: dict) -> ModelingPlan:
+    """Convert LLM JSON plan to ModelingPlan Pydantic object."""
     
-    bronze = list(role_map.keys())
+    # Convert dimensions
     dimensions = []
+    for dim in plan_dict.get("silver", {}).get("dimensions", []):
+        dimensions.append(DimensionPlan(
+            name=dim["name"],
+            source_table=dim["source_table"],
+            scd_type=dim["scd_type"],
+            grain=dim["grain"],
+            columns=dim.get("columns", [])
+        ))
+    
+    # Convert facts
     facts = []
-    
-    print(f"\n  Building plan from {len(role_map)} tables...")
-    
-    for table_name, role in role_map.items():
-        if role == "skip":
-            continue
-            
-        table = table_lookup.get(table_name)
-        if not table:
-            continue
+    for fact in plan_dict.get("silver", {}).get("facts", []):
+        # Extract FK column names
+        fk_columns = [fk["column"] for fk in fact.get("foreign_keys", [])]
         
-        if role == "dimension":
-            dimensions.append(DimensionPlan(
-                name=f"dim_{table_name}",
-                source_table=table_name,
-                scd_type=2 if context.temporal == "historical" else 1,
-                grain=f"One row per {table_name.rstrip('s')}",
-                columns=[col.name for col in table.columns],
+        facts.append(FactPlan(
+            name=fact["name"],
+            source_table=fact["source_table"],
+            grain=fact["grain"],
+            dimension_keys=fk_columns,
+            measures=fact.get("measures", []),
+            date_column=fact["date_column"]
+        ))
+    
+    # Convert gold
+    gold_models = []
+    for gold in plan_dict.get("gold", []):
+        metrics = []
+        for m in gold.get("metrics", []):
+            metrics.append(MetricDefinition(
+                name=m["name"],
+                aggregation=m["aggregation"],
+                column=m["column"],
+                description=m.get("description", f"{m['aggregation']} of {m['column']}")
             ))
         
-        elif role in ("fact", "bridge"):
-            date_col = find_date_column(table.columns)
-            measures = find_measures(table.columns)
-            dim_keys = [fk.column for fk in table.foreign_keys]
-            
-            facts.append(FactPlan(
-                name=f"fct_{table_name}",
-                source_table=table_name,
-                grain=f"One row per {table_name.rstrip('s')}",
-                dimension_keys=dim_keys,
-                measures=measures,
-                date_column=date_col or "created_at",
-            ))
+        gold_models.append(GoldPlan(
+            name=gold["name"],
+            source_fact=gold["source_fact"],
+            grain=gold["grain"],
+            dimensions=gold.get("dimensions", []),
+            metrics=metrics,
+            date_column=gold["date_column"],
+            description=gold["description"]
+        ))
     
-    print(f"  ✓ Classified: {len(dimensions)} dimensions, {len(facts)} facts")
-    
-    # Generate Gold models
-    gold_models = generate_gold_models(facts, dimensions, context)
-    
-    return ModelingPlan(bronze=bronze, dimensions=dimensions, facts=facts, gold=gold_models)
+    return ModelingPlan(
+        bronze=plan_dict.get("bronze", []),
+        dimensions=dimensions,
+        facts=facts,
+        gold=gold_models
+    )
 
 
-def generate_plan(schema: Schema, context: BusinessContext) -> ModelingPlan:
-    """Generate plan using heuristics only (no LLM)."""
-    classifications = classify_by_fk_graph(schema)
-    llm_output = [{"table": c.table.name, "role": c.role, "reason": c.reason} for c in classifications]
-    return build_plan_from_llm_output(schema, llm_output, context)
-
-
-def generate_plan_with_validation(
+def interactive_refinement_loop(
     schema: Schema,
-    context: BusinessContext
-) -> tuple[ModelingPlan, list[TableClassification], list[dict], str]:
-    """
-    Full pipeline: heuristics → LLM validation → Gold generation → formatted review.
-    Returns (plan, heuristic_classifications, llm_output, review_text)
-    """
-    # Step 1: Heuristic classification
-    heuristic = classify_by_fk_graph(schema)
+    context: BusinessContext,
+    heuristic_classifications: list[TableClassification]
+) -> ModelingPlan | None:
+    """Interactive loop: generate detailed plan → show → refine based on NL feedback → repeat until approved."""
     
-    # Step 2: LLM validates and finalizes
-    llm_output = llm_validate_and_finalize(schema, heuristic)
+    # Generate initial detailed plan
+    plan_dict = llm_generate_detailed_plan(schema, context, heuristic_classifications)
     
-    # Step 3: Build plan from LLM output (includes Gold generation)
-    plan = build_plan_from_llm_output(schema, llm_output, context)
+    iteration = 1
     
-    # Step 4: Format for user review (include Gold models)
-    review_text = format_plan_for_review(heuristic, llm_output, plan.gold)
-    
-    return plan, heuristic, llm_output, review_text
+    while True:
+        print(f"\n{'='*80}")
+        print(f"ITERATION {iteration}")
+        print(f"{'='*80}")
+        
+        # Display concrete plan
+        display_concrete_plan(plan_dict)
+        
+        # Get user feedback
+        print("\n" + "=" * 80)
+        print("FEEDBACK OPTIONS")
+        print("=" * 80)
+        print("  • Type natural language feedback to refine the plan")
+        print("  • Examples:")
+        print("    - 'make orders weekly instead of daily'")
+        print("    - 'split customers into B2B and B2C dimensions'")
+        print("    - 'add a metric for customer lifetime value'")
+        print("    - 'remove the product dimension'")
+        print("  • Type 'approve' or 'done' to accept the plan")
+        print("  • Type 'reject' or 'cancel' to abort")
+        print("=" * 80)
+        
+        feedback = input("\nYour feedback: ").strip()
+        
+        # Check for approval/rejection
+        if feedback.lower() in ['approve', 'done', 'looks good', 'accept', 'yes']:
+            print("\n✓ Plan approved! Generating dbt project...")
+            return convert_plan_dict_to_modeling_plan(plan_dict)
+        
+        if feedback.lower() in ['reject', 'cancel', 'abort', 'quit', 'exit']:
+            print("\n✗ Plan rejected. Aborting.")
+            return None
+        
+        if not feedback:
+            print("\n⚠️  Empty feedback. Please provide feedback or type 'approve'/'reject'.")
+            continue
+        
+        # Refine plan based on feedback
+        old_plan = plan_dict.copy()
+        plan_dict = llm_refine_plan(plan_dict, feedback, schema, context)
+        
+        # Show diff
+        show_diff(old_plan, plan_dict)
+        
+        iteration += 1
