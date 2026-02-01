@@ -66,12 +66,19 @@ def generate_dbt_project(
             bronze_columns[table_name] = table.columns
     
     if bronze_columns:
-        (base / "models" / "bronze" / "schema.yml").write_text(
-            Template(templates.BRONZE_SCHEMA_TEMPLATE).render(
-                tables=plan.bronze,
-                columns=bronze_columns
-            )
-        )
+        # Update template to use stg_ prefix
+        bronze_schema_yml = "version: 2\n\nmodels:\n"
+        for table_name in plan.bronze:
+            bronze_schema_yml += f"  - name: stg_{source_schema}_{table_name}\n"
+            bronze_schema_yml += f"    description: \"Raw passthrough from {table_name} source table\"\n"
+            if table_name in bronze_columns:
+                bronze_schema_yml += "    columns:\n"
+                for col in bronze_columns[table_name]:
+                    bronze_schema_yml += f"      - name: {col.name}\n"
+                    bronze_schema_yml += f"        description: \"{col.description or 'Column from source system'}\"\n"
+                    bronze_schema_yml += f"        data_type: {col.data_type}\n"
+        
+        (base / "models" / "bronze" / "schema.yml").write_text(bronze_schema_yml)
     
     # Silver dimensions schema.yml
     if plan.dimensions:
@@ -99,7 +106,7 @@ def generate_dbt_project(
 select *
 from {{{{ source('raw', '{table}') }}}}
 """
-        (base / "models" / "bronze" / f"bronze_{table}.sql").write_text(sql)
+        (base / "models" / "bronze" / f"stg_{source_schema}_{table}.sql").write_text(sql)
     
     # Dimension models
     for dim in plan.dimensions:
@@ -110,7 +117,7 @@ from {{{{ source('raw', '{table}') }}}}
 
 select
 {cols}
-from {{{{ ref('bronze_{dim.source_table}') }}}}
+from {{{{ ref('stg_{source_schema}_{dim.source_table}') }}}}
 """
         else:
             pk = dim.columns[0] if dim.columns else "id"
@@ -124,7 +131,7 @@ select
     current_timestamp as valid_from,
     null::timestamp as valid_to,
     true as is_current
-from {{{{ ref('bronze_{dim.source_table}') }}}}
+from {{{{ ref('stg_{source_schema}_{dim.source_table}') }}}}
 """
         (base / "models" / "silver" / "dimensions" / f"{dim.name}.sql").write_text(sql)
     
@@ -139,7 +146,7 @@ from {{{{ ref('bronze_{dim.source_table}') }}}}
 select
     {{{{ dbt_utils.generate_surrogate_key(['{pk}']) }}}} as {fact.name}_sk,
 {cols}
-from {{{{ ref('bronze_{fact.source_table}') }}}}
+from {{{{ ref('stg_{source_schema}_{fact.source_table}') }}}}
 """
         (base / "models" / "silver" / "facts" / f"{fact.name}.sql").write_text(sql)
     
