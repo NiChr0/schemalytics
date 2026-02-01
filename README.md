@@ -37,20 +37,6 @@ schemalytics generate \
 - You refine with natural language ("make revenue weekly", "add customer LTV")
 - Approve when ready
 
-**4. Use for self-service analytics**
-```bash
-cd dbt_project
-
-# Configure your database connection
-# See: https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml
-
-# Build models
-dbt run
-
-# Your semantic layer is in semantic_layer.yml
-# LLMs can now understand your data model and generate accurate queries
-```
-
 ## What You Get
 
 - **Semantic layer** (`semantic_layer.yml`) - Complete metadata for LLM-powered analytics
