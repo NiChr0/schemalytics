@@ -18,6 +18,7 @@ class TableClassification:
 
 def gather_context_interactively(schema: Schema) -> BusinessContext:
     """Gather business context through interactive prompts."""
+    from schemalytics.industry_taxonomy import INDUSTRY_TAXONOMY
     
     print("\n" + "=" * 80)
     print("BUSINESS CONTEXT GATHERING")
@@ -25,39 +26,69 @@ def gather_context_interactively(schema: Schema) -> BusinessContext:
     
     # Industry selection
     print("\n📊 SELECT YOUR INDUSTRY:")
-    print("1. E-commerce & Retail")
-    print("2. SaaS & Software")
-    print("3. Finance & Fintech")
-    print("4. Healthcare")
-    print("5. Media & Entertainment")
-    print("6. Other")
+    industries = [(key, data["name"]) for key, data in INDUSTRY_TAXONOMY.items()]
     
-    industry_choice = input("\nEnter number (1-6): ").strip()
-    industry_map = {
-        "1": "ecommerce_retail_b2c",
-        "2": "saas_software_b2b",
-        "3": "finance_fintech_banking",
-        "4": "healthcare_provider",
-        "5": "media_entertainment_streaming",
-        "6": "other_generic"
-    }
-    business_type = industry_map.get(industry_choice, "other_generic")
+    for i, (key, name) in enumerate(industries, 1):
+        print(f"{i}. {name}")
+    
+    industry_choice = input(f"\nEnter number (1-{len(industries)}): ").strip()
+    try:
+        industry_idx = int(industry_choice) - 1
+        if 0 <= industry_idx < len(industries):
+            industry_key, industry_name = industries[industry_idx]
+        else:
+            industry_key = "other"
+            industry_name = "Other/Custom"
+    except ValueError:
+        industry_key = "other"
+        industry_name = "Other/Custom"
+    
+    # Sub-industry selection
+    print(f"\n📋 SELECT SUB-INDUSTRY FOR {industry_name.upper()}:")
+    
+    sub_industries_data = INDUSTRY_TAXONOMY[industry_key]["sub_industries"]
+    sub_industries = [(key, data["name"]) for key, data in sub_industries_data.items()]
+    
+    for i, (key, name) in enumerate(sub_industries, 1):
+        print(f"{i}. {name}")
+    
+    sub_choice = input(f"\nEnter number (1-{len(sub_industries)}, default 1): ").strip() or "1"
+    try:
+        sub_idx = int(sub_choice) - 1
+        if 0 <= sub_idx < len(sub_industries):
+            sub_key, sub_name = sub_industries[sub_idx]
+        else:
+            sub_key, sub_name = sub_industries[0]
+    except ValueError:
+        sub_key, sub_name = sub_industries[0]
+    
+    business_type = f"{industry_key}_{sub_key}"
+    
+    # Get suggested entities and goals from taxonomy
+    sub_data = sub_industries_data[sub_key]
+    suggested_entities = sub_data.get("entities", [])
+    suggested_goals = sub_data.get("goals", [])
     
     # Entities
     print("\n📋 KEY ENTITIES (comma-separated):")
+    print(f"Suggested for {sub_name}: {', '.join(suggested_entities[:5])}")
     print(f"Detected tables: {', '.join([t.name for t in schema.tables[:5]])}")
-    entities_input = input("Enter entities (or press Enter to use detected tables): ").strip()
+    entities_input = input("Enter entities (or press Enter to use suggestions): ").strip()
     if entities_input:
         entities = [e.strip() for e in entities_input.split(",")]
+    elif suggested_entities:
+        entities = suggested_entities
     else:
         entities = [t.name for t in schema.tables]
     
     # Goals
     print("\n🎯 ANALYTICAL GOALS:")
-    print("Examples: revenue_reporting, customer_lifetime_value, inventory_tracking")
-    goals_input = input("Enter goals (comma-separated): ").strip()
+    print(f"Suggested for {sub_name}: {', '.join(suggested_goals[:3])}")
+    goals_input = input("Enter goals (comma-separated, or press Enter to use suggestions): ").strip()
     if goals_input:
         goals = [g.strip() for g in goals_input.split(",")]
+    elif suggested_goals:
+        goals = suggested_goals
     else:
         goals = ["reporting", "analytics"]
     
@@ -75,6 +106,9 @@ def gather_context_interactively(schema: Schema) -> BusinessContext:
     grain = grain_input if grain_input else "daily,monthly"
     
     print("\n✓ Context gathered successfully")
+    print(f"  Industry: {business_type}")
+    print(f"  Entities: {', '.join(entities[:3])}...")
+    print(f"  Goals: {', '.join(goals[:3])}...")
     
     return BusinessContext(
         business_type=business_type,
@@ -423,6 +457,12 @@ Your task:
 3. If it doesn't make sense, suggest alternatives
 4. Output the COMPLETE amended plan (not just changes)
 5. ENSURE the bronze array includes ALL source tables: {all_source_tables}
+6. SELF-CHECK before responding:
+   - If feedback asks to "change X to Y": verify X is removed AND Y is added
+   - If feedback asks to "delete X": verify X is completely removed
+   - If feedback asks to "add X": verify X exists in the new plan
+   - If feedback asks to "move X from A to B": verify X removed from A and added to B
+   - Compare the current plan to your new plan and confirm changes match the feedback
 
 Examples of feedback interpretation:
 - "make orders weekly" → Change agg_daily_orders to agg_weekly_orders (remove daily, add weekly)
@@ -430,24 +470,38 @@ Examples of feedback interpretation:
 - "add customer lifetime value" → Add new gold metric with CLV calculation (name: agg_customer_ltv)
 - "remove product dimension" → Remove dim_products completely, update all facts that reference it
 - "change X to Y" → REMOVE X completely from plan, ADD Y as replacement, update all FK references to point to Y
+- "change dim_orders to fct_orders" → REMOVE dim_orders from dimensions, ADD fct_orders to facts with appropriate grain/measures
+- "delete dim_orders and create fct_orders" → REMOVE dim_orders from dimensions, ADD fct_orders to facts
+- "delete X" → REMOVE X completely from the appropriate section (dimensions/facts/gold)
 
-CRITICAL: When user says "change X to Y" or "convert X to Y":
-Step 1: Identify X in the current plan (is it in dimensions or facts?)
-Step 2: REMOVE X completely from that section
-Step 3: ADD Y to the appropriate section (dimensions or facts based on the name)
-Step 4: UPDATE all foreign key references from X to Y
-Step 5: Verify X does NOT appear anywhere in the final plan
-Step 6: Verify Y DOES appear in the final plan
+CRITICAL PRINCIPLES FOR MODIFICATIONS:
 
-EXAMPLE: "change fct_employee_territories to dim_employee_territories"
-  Step 1: Found fct_employee_territories in facts section
-  Step 2: Remove fct_employee_territories from facts array
-  Step 3: Add dim_employee_territories to dimensions array with appropriate columns
-  Step 4: Update any FKs that reference fct_employee_territories
-  Step 5: Verify fct_employee_territories is gone from facts
-  Step 6: Verify dim_employee_territories exists in dimensions
-  
-Do NOT just remove without adding the replacement!
+1. **CHANGE operations** ("change X to Y", "convert X to Y", "make X a Y"):
+   - REMOVE the original (X) completely from its current section
+   - ADD the replacement (Y) to the appropriate section
+   - Verify: X should NOT exist in final plan, Y SHOULD exist
+   
+2. **DELETE operations** ("delete X", "remove X", "drop X"):
+   - REMOVE the item completely from all sections
+   - Update any references to the deleted item
+   - Verify: X should NOT exist anywhere in final plan
+   
+3. **ADD operations** ("add X", "create X", "include X"):
+   - ADD the new item to the appropriate section
+   - Verify: X SHOULD exist in final plan
+   
+4. **COMBINED operations** ("delete X and create Y", "remove X, add Y"):
+   - Execute BOTH operations: remove X AND add Y
+   - Verify: X should NOT exist, Y SHOULD exist
+
+5. **MOVE operations** ("X should be a fact not dimension"):
+   - Identify where X currently is (dimensions/facts/gold)
+   - REMOVE from current location
+   - ADD to target location with appropriate structure
+   - Verify: X exists in new location, not in old location
+
+ALWAYS output the COMPLETE plan with ALL modifications applied.
+Do NOT return a partial plan or just the changes.
 
 NAMING CONVENTIONS:
 - Bronze models: stg_<schema>_<table> (e.g., stg_public_customers)
@@ -494,6 +548,27 @@ Respond ONLY with JSON in the SAME format as current plan:
         if missing_bronze:
             print(f"  ⚠️  Warning: Adding missing bronze tables: {', '.join(missing_bronze)}")
             response["bronze"] = list(bronze_tables.union(missing_bronze))
+        
+        # Dynamic validation: Check if plan actually changed
+        def plan_changed(old_plan, new_plan):
+            """Check if any meaningful changes were made."""
+            old_dims = set(d['name'] for d in old_plan.get('silver', {}).get('dimensions', []))
+            new_dims = set(d['name'] for d in new_plan.get('silver', {}).get('dimensions', []))
+            
+            old_facts = set(f['name'] for f in old_plan.get('silver', {}).get('facts', []))
+            new_facts = set(f['name'] for f in new_plan.get('silver', {}).get('facts', []))
+            
+            old_gold = set(g['name'] for g in old_plan.get('gold', []))
+            new_gold = set(g['name'] for g in new_plan.get('gold', []))
+            
+            return (old_dims != new_dims or 
+                    old_facts != new_facts or 
+                    old_gold != new_gold or
+                    old_plan.get('bronze') != new_plan.get('bronze'))
+        
+        if not plan_changed(current_plan, response):
+            print(f"  ⚠️  Warning: No changes detected in plan after feedback: '{feedback}'")
+            print(f"  The LLM may not have understood the request. Try rephrasing.")
         
         print("  ✓ Plan refined")
         return response
