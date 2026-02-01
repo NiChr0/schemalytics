@@ -16,7 +16,7 @@ from schemalytics.planner import (
 
 
 @click.group()
-@click.version_option(version="0.1.1")
+@click.version_option(version="0.1.2")
 def cli():
     """Schemalytics - Automated dbt project generation with interactive refinement."""
     pass
