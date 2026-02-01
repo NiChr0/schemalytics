@@ -2,6 +2,14 @@
 
 Automated dbt project generation from PostgreSQL using local LLMs.
 
+Schemalytics analyzes your database schema and generates a complete dbt project with medallion architecture (Bronze → Silver → Gold). It uses local AI models to intelligently classify tables as facts or dimensions, then creates production-ready SQL models following dimensional modeling best practices. The interactive refinement loop lets you perfect your data model through natural language feedback before generating code.
+
+**Key features:**
+- Local-first (runs on Ollama, no data leaves your machine)
+- Interactive refinement with natural language
+- Industry-specific templates (e-commerce, SaaS, fintech, etc.)
+- Generates semantic layer for LLM-powered analytics
+
 ## Quick Start
 
 **1. Install prerequisites**
