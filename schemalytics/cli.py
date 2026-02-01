@@ -8,10 +8,10 @@ from schemalytics.extractors.postgres import extract_schema
 from schemalytics.generators.dbt import generate_dbt_project
 
 # Import new functions
-from planner_enhanced import (
+from schemalytics.planner import (
     interactive_refinement_loop,
     classify_by_fk_graph,
-    gather_context_interactively  # You'll need to move this from old cli.py
+    gather_context_interactively,
 )
 
 

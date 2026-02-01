@@ -16,6 +16,149 @@ class TableClassification:
         self.reason = reason
 
 
+def gather_context_interactively(schema: Schema) -> BusinessContext:
+    """Gather business context through interactive prompts."""
+    
+    print("\n" + "=" * 80)
+    print("BUSINESS CONTEXT GATHERING")
+    print("=" * 80)
+    
+    # Industry selection
+    print("\n📊 SELECT YOUR INDUSTRY:")
+    print("1. E-commerce & Retail")
+    print("2. SaaS & Software")
+    print("3. Finance & Fintech")
+    print("4. Healthcare")
+    print("5. Media & Entertainment")
+    print("6. Other")
+    
+    industry_choice = input("\nEnter number (1-6): ").strip()
+    industry_map = {
+        "1": "ecommerce_retail_b2c",
+        "2": "saas_software_b2b",
+        "3": "finance_fintech_banking",
+        "4": "healthcare_provider",
+        "5": "media_entertainment_streaming",
+        "6": "other_generic"
+    }
+    business_type = industry_map.get(industry_choice, "other_generic")
+    
+    # Entities
+    print("\n📋 KEY ENTITIES (comma-separated):")
+    print(f"Detected tables: {', '.join([t.name for t in schema.tables[:5]])}")
+    entities_input = input("Enter entities (or press Enter to use detected tables): ").strip()
+    if entities_input:
+        entities = [e.strip() for e in entities_input.split(",")]
+    else:
+        entities = [t.name for t in schema.tables]
+    
+    # Goals
+    print("\n🎯 ANALYTICAL GOALS:")
+    print("Examples: revenue_reporting, customer_lifetime_value, inventory_tracking")
+    goals_input = input("Enter goals (comma-separated): ").strip()
+    if goals_input:
+        goals = [g.strip() for g in goals_input.split(",")]
+    else:
+        goals = ["reporting", "analytics"]
+    
+    # Temporal
+    print("\n⏰ HISTORICAL TRACKING:")
+    print("1. Snapshot (current state only)")
+    print("2. Historical (track changes over time)")
+    temporal_choice = input("Enter number (1-2, default 2): ").strip() or "2"
+    temporal = "snapshot" if temporal_choice == "1" else "historical"
+    
+    # Time grains
+    print("\n📅 TIME GRAINS FOR AGGREGATIONS:")
+    print("Options: daily, weekly, monthly, yearly")
+    grain_input = input("Enter grains (comma-separated, default: daily,monthly): ").strip()
+    grain = grain_input if grain_input else "daily,monthly"
+    
+    print("\n✓ Context gathered successfully")
+    
+    return BusinessContext(
+        business_type=business_type,
+        entities=entities,
+        goals=goals,
+        temporal=temporal,
+        grain=grain
+    )
+
+
+def classify_by_fk_graph(schema: Schema) -> list[TableClassification]:
+    """Classify tables as fact/dimension/bridge using FK graph analysis."""
+    
+    classifications = []
+    
+    # Build FK graph
+    incoming_fks = {}  # table -> count of tables referencing it
+    outgoing_fks = {}  # table -> count of tables it references
+    
+    for table in schema.tables:
+        table_name = table.name
+        outgoing_fks[table_name] = len(table.foreign_keys)
+        
+        # Count incoming FKs
+        if table_name not in incoming_fks:
+            incoming_fks[table_name] = 0
+        
+        for fk in table.foreign_keys:
+            ref_table = fk.references_table
+            incoming_fks[ref_table] = incoming_fks.get(ref_table, 0) + 1
+    
+    # Classify based on FK patterns
+    for table in schema.tables:
+        name = table.name
+        incoming = incoming_fks.get(name, 0)
+        outgoing = outgoing_fks.get(name, 0)
+        
+        # Heuristics
+        if outgoing >= 2 and incoming == 0:
+            # Many outgoing, no incoming -> likely FACT
+            role = "fact"
+            confidence = "high"
+            reason = f"Has {outgoing} outgoing FKs, no incoming FKs (references dimensions)"
+        elif incoming >= 2 and outgoing == 0:
+            # Many incoming, no outgoing -> likely DIMENSION
+            role = "dimension"
+            confidence = "high"
+            reason = f"Has {incoming} incoming FKs, no outgoing FKs (referenced by facts)"
+        elif outgoing >= 1 and incoming >= 1:
+            # Both incoming and outgoing -> could be BRIDGE or FACT
+            if outgoing > incoming:
+                role = "fact"
+                confidence = "medium"
+                reason = f"Has {outgoing} outgoing and {incoming} incoming FKs (likely fact)"
+            else:
+                role = "bridge"
+                confidence = "medium"
+                reason = f"Has {outgoing} outgoing and {incoming} incoming FKs (likely bridge table)"
+        elif outgoing == 1 and incoming == 0:
+            # Single FK, no incoming -> could be DIMENSION or FACT
+            role = "dimension"
+            confidence = "low"
+            reason = f"Has 1 outgoing FK, no incoming (ambiguous - assuming dimension)"
+        elif outgoing == 0 and incoming == 1:
+            # No outgoing, single incoming -> likely DIMENSION
+            role = "dimension"
+            confidence = "medium"
+            reason = f"No outgoing FKs, 1 incoming FK (likely dimension)"
+        else:
+            # No FKs at all -> likely DIMENSION (standalone lookup table)
+            role = "dimension"
+            confidence = "low"
+            reason = "No foreign keys (standalone table - assuming dimension)"
+        
+        classifications.append(TableClassification(
+            table=table,
+            role=role,
+            confidence=confidence,
+            reason=reason
+        ))
+    
+    return classifications
+
+
 def llm_generate_detailed_plan(
     schema: Schema,
     context: BusinessContext,
@@ -40,6 +183,9 @@ def llm_generate_detailed_plan(
         for c in heuristic_classifications
     ]
     
+    # Get all source table names for bronze layer
+    all_source_tables = [t.name for t in schema.tables]
+    
     prompt = f"""You are a data modeling expert. Generate a CONCRETE, DETAILED data modeling plan.
 
 Database schema:
@@ -55,9 +201,19 @@ Business context:
 - Temporal: {context.temporal}
 - Time grains: {context.grain}
 
+CRITICAL: The bronze array MUST include ALL source tables from the database.
+All source tables: {all_source_tables}
+Do NOT skip any tables. Every table in the database needs a bronze staging model.
+
 Your task: Create a DETAILED plan with EXACT specifications:
 
 1. Bronze layer: List all source tables (passthrough views)
+   - In the "bronze" array, provide ONLY the base table names (e.g., "customers", "orders")
+   - Do NOT include the "stg_" prefix in the bronze array
+   - The schema name goes in "bronze_schema" field
+   - Example: {{"bronze": ["customers", "orders"], "bronze_schema": "public"}}
+   - These will be displayed as: stg_public_customers, stg_public_orders
+   
 2. Silver dimensions: For each dimension specify:
    - Exact table name (dim_<entity>)
    - SCD type (1 or 2 based on temporal={context.temporal})
@@ -73,15 +229,19 @@ Your task: Create a DETAILED plan with EXACT specifications:
    - Measure columns (numeric columns to aggregate)
    
 4. Gold aggregates: For each time grain ({context.grain}) specify:
-   - Exact table name (gold_<grain>_<metric>)
+   - Exact table name (agg_<grain>_<metric>)
    - Source fact table
    - Time grain (daily/weekly/monthly/yearly)
    - Metrics with aggregation type (SUM/COUNT/AVG)
    - Description
 
+CRITICAL: Ensure every "source_table" referenced in dimensions or facts exists in the "bronze" array.
+For example, if you create fct_order_details with source_table="order_details", then "order_details" must be in the bronze array.
+
 Respond ONLY with JSON:
 {{
-  "bronze": ["table1", "table2", ...],
+  "bronze": ["customers", "orders", ...],
+  "bronze_schema": "public",
   "silver": {{
     "dimensions": [
       {{
@@ -109,7 +269,7 @@ Respond ONLY with JSON:
   }},
   "gold": [
     {{
-      "name": "gold_daily_revenue",
+      "name": "agg_daily_revenue",
       "source_fact": "fct_orders",
       "grain": "daily",
       "date_column": "order_date",
@@ -126,6 +286,15 @@ Respond ONLY with JSON:
         print("\n  🤖 Generating detailed plan with LLM...")
         response = llm.query_json(prompt)
         print("  ✓ Detailed plan generated")
+        
+        # Validate bronze coverage
+        bronze_tables = set(response.get("bronze", []))
+        missing_bronze = set(all_source_tables) - bronze_tables
+        
+        if missing_bronze:
+            print(f"  ⚠️  Warning: Adding missing bronze tables: {', '.join(missing_bronze)}")
+            response["bronze"] = list(bronze_tables.union(missing_bronze))
+        
         return response
     except Exception as e:
         print(f"  ⚠️  LLM detailed plan failed: {e}")
@@ -143,8 +312,13 @@ def display_concrete_plan(plan_dict: dict) -> None:
     print("\n📦 BRONZE LAYER (Raw passthrough)")
     print("-" * 80)
     bronze = plan_dict.get("bronze", [])
+    bronze_schema = plan_dict.get("bronze_schema", "public")
     for table in bronze:
-        print(f"  • bronze_{table}")
+        # Check if table already has stg_ prefix (LLM might include it)
+        if table.startswith("stg_"):
+            print(f"  • {table}")
+        else:
+            print(f"  • stg_{bronze_schema}_{table}")
     print(f"\nTotal: {len(bronze)} tables (materialized as views)")
     
     # Silver - Dimensions
@@ -223,6 +397,9 @@ def llm_refine_plan(
             ]
         })
     
+    # Get all source table names for validation
+    all_source_tables = [t.name for t in schema.tables]
+    
     prompt = f"""You are a data modeling expert. Interpret user feedback and amend the data model plan.
 
 Current plan:
@@ -230,6 +407,8 @@ Current plan:
 
 Database schema (for reference):
 {schema_summary}
+
+All source tables that MUST be in bronze: {all_source_tables}
 
 Business context:
 - Industry: {context.business_type}
@@ -243,12 +422,47 @@ Your task:
 2. Validate if the change makes sense
 3. If it doesn't make sense, suggest alternatives
 4. Output the COMPLETE amended plan (not just changes)
+5. ENSURE the bronze array includes ALL source tables: {all_source_tables}
 
 Examples of feedback interpretation:
-- "make orders weekly" → Change gold_daily_orders to gold_weekly_orders
-- "split customers by type" → Create dim_customers_b2b and dim_customers_b2c
-- "add customer lifetime value" → Add gold metric with CLV calculation
-- "remove product dimension" → Remove dim_products, update facts accordingly
+- "make orders weekly" → Change agg_daily_orders to agg_weekly_orders (remove daily, add weekly)
+- "split customers by type" → Create dim_customers_b2b and dim_customers_b2c (remove dim_customers)
+- "add customer lifetime value" → Add new gold metric with CLV calculation (name: agg_customer_ltv)
+- "remove product dimension" → Remove dim_products completely, update all facts that reference it
+- "change X to Y" → REMOVE X completely from plan, ADD Y as replacement, update all FK references to point to Y
+
+CRITICAL: When user says "change X to Y" or "convert X to Y":
+Step 1: Identify X in the current plan (is it in dimensions or facts?)
+Step 2: REMOVE X completely from that section
+Step 3: ADD Y to the appropriate section (dimensions or facts based on the name)
+Step 4: UPDATE all foreign key references from X to Y
+Step 5: Verify X does NOT appear anywhere in the final plan
+Step 6: Verify Y DOES appear in the final plan
+
+EXAMPLE: "change fct_employee_territories to dim_employee_territories"
+  Step 1: Found fct_employee_territories in facts section
+  Step 2: Remove fct_employee_territories from facts array
+  Step 3: Add dim_employee_territories to dimensions array with appropriate columns
+  Step 4: Update any FKs that reference fct_employee_territories
+  Step 5: Verify fct_employee_territories is gone from facts
+  Step 6: Verify dim_employee_territories exists in dimensions
+  
+Do NOT just remove without adding the replacement!
+
+NAMING CONVENTIONS:
+- Bronze models: stg_<schema>_<table> (e.g., stg_public_customers)
+- Silver dimensions: dim_<entity> (e.g., dim_customers)
+- Silver facts: fct_<entity> (e.g., fct_orders)
+- Gold aggregates: agg_<grain>_<metric> (e.g., agg_daily_revenue)
+
+CRITICAL VALIDATION RULE:
+Every table referenced as "source_table" in dimensions or facts MUST exist in the "bronze" array.
+Example: If fct_order_details has "source_table": "order_details", then "order_details" MUST be in the bronze array.
+If user says "you're missing stg_X model", add the base table name (X without stg_schema_ prefix) to the bronze array.
+
+EXAMPLE: "you are missing a stg_order_details model"
+  → Add "order_details" to bronze array
+  → Result: bronze array includes "order_details"
 
 If the feedback is unclear or impossible, add a "validation" field explaining the issue.
 
@@ -272,6 +486,14 @@ Respond ONLY with JSON in the SAME format as current plan:
             print(f"\n  ⚠️  Validation issue: {response.get('validation')}")
             print("  Please clarify your feedback or type 'skip' to keep current plan.")
             return current_plan
+        
+        # Validate bronze coverage
+        bronze_tables = set(response.get("bronze", []))
+        missing_bronze = set(all_source_tables) - bronze_tables
+        
+        if missing_bronze:
+            print(f"  ⚠️  Warning: Adding missing bronze tables: {', '.join(missing_bronze)}")
+            response["bronze"] = list(bronze_tables.union(missing_bronze))
         
         print("  ✓ Plan refined")
         return response
