@@ -22,7 +22,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 ollama pull qwen2.5-coder:7b
 
 # Install Schemalytics  
-pip install git+https://github.com/NiChr0/schemalytics.git
+pip install schemalytics
 ```
 
 **2. Generate semantic layer + dbt project**
