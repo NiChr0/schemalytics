@@ -25,5 +25,8 @@ schemalytics/pyvenv.cfg
 .vscode/
 .idea/
 *.swp
+
+# LLM tool-specific context files (kept local, not committed)
+CLAUDE.md
 context.yaml
 dbt_project
