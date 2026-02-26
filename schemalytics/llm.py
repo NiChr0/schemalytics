@@ -15,7 +15,7 @@ def check_ollama_available() -> bool:
     try:
         resp = httpx.get("http://localhost:11434/api/tags", timeout=2.0)
         return resp.status_code == 200
-    except:
+    except Exception:
         return False
 
 
