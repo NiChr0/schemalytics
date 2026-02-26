@@ -3,7 +3,7 @@ import click
 import yaml
 from pathlib import Path
 
-from schemalytics.models import Schema, BusinessContext, ModelingPlan
+from schemalytics.models import BusinessContext
 from schemalytics.extractors.postgres import extract_schema
 from schemalytics.generators.dbt import generate_dbt_project
 
@@ -94,17 +94,17 @@ def generate(connection: str, output: str, name: str, context_file: str | None):
     print("✅ SUCCESS!")
     print(f"{'='*80}")
     print(f"\nProject created at: {project_path}")
-    print(f"\nContents:")
+    print("\nContents:")
     print(f"  • {len(modeling_plan.bronze)} bronze models (raw passthrough)")
     print(f"  • {len(modeling_plan.dimensions)} silver dimensions")
     print(f"  • {len(modeling_plan.facts)} silver facts")
     print(f"  • {len(modeling_plan.gold)} gold aggregates")
     print(f"\nSemantic layer: {project_path}/semantic_layer.yml")
-    print(f"\nNext steps:")
+    print("\nNext steps:")
     print(f"  1. cd {project_path}")
-    print(f"  2. Configure profiles.yml with your database connection")
-    print(f"  3. dbt deps  # Install dependencies")
-    print(f"  4. dbt run   # Build all models")
+    print("  2. Configure profiles.yml with your database connection")
+    print("  3. dbt deps  # Install dependencies")
+    print("  4. dbt run   # Build all models")
     print(f"\n{'='*80}")
 
 

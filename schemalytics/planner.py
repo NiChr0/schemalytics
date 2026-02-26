@@ -4,7 +4,6 @@ from schemalytics.models import (
     DimensionPlan, FactPlan, GoldPlan, MetricDefinition, Table
 )
 from schemalytics import llm
-from typing import Any
 
 
 class TableClassification:
@@ -171,12 +170,12 @@ def classify_by_fk_graph(schema: Schema) -> list[TableClassification]:
             # Single FK, no incoming -> could be DIMENSION or FACT
             role = "dimension"
             confidence = "low"
-            reason = f"Has 1 outgoing FK, no incoming (ambiguous - assuming dimension)"
+            reason = "Has 1 outgoing FK, no incoming (ambiguous - assuming dimension)"
         elif outgoing == 0 and incoming == 1:
             # No outgoing, single incoming -> likely DIMENSION
             role = "dimension"
             confidence = "medium"
-            reason = f"No outgoing FKs, 1 incoming FK (likely dimension)"
+            reason = "No outgoing FKs, 1 incoming FK (likely dimension)"
         else:
             # No FKs at all -> likely DIMENSION (standalone lookup table)
             role = "dimension"
@@ -379,7 +378,7 @@ def display_concrete_plan(plan_dict: dict) -> None:
         print(f"  Source: {fact['source_table']}")
         print(f"  Grain: {fact['grain']}")
         print(f"  Date: {fact['date_column']}")
-        print(f"  Foreign Keys:")
+        print("  Foreign Keys:")
         for fk in fact.get('foreign_keys', []):
             print(f"    → {fk['column']} → {fk['references']}")
         print(f"  Measures: {', '.join(fact.get('measures', []))}")
@@ -405,7 +404,7 @@ def display_concrete_plan(plan_dict: dict) -> None:
             print(f"\n  {g['name']}")
             print(f"    Source: {g['source_fact']}")
             print(f"    Description: {g['description']}")
-            print(f"    Metrics:")
+            print("    Metrics:")
             for m in g.get('metrics', []):
                 print(f"      • {m['name']} = {m['aggregation']}({m['column']})")
     
@@ -568,7 +567,7 @@ Respond ONLY with JSON in the SAME format as current plan:
         
         if not plan_changed(current_plan, response):
             print(f"  ⚠️  Warning: No changes detected in plan after feedback: '{feedback}'")
-            print(f"  The LLM may not have understood the request. Try rephrasing.")
+            print("  The LLM may not have understood the request. Try rephrasing.")
         
         print("  ✓ Plan refined")
         return response
