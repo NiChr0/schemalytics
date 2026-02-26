@@ -28,5 +28,9 @@ schemalytics/pyvenv.cfg
 
 # LLM tool-specific context files (kept local, not committed)
 CLAUDE.md
+AGENTS.md
+dev.md
+testing.md
+release.md
 context.yaml
 dbt_project
