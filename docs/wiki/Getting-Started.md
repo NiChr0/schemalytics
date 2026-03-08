@@ -23,50 +23,47 @@ docker run -d \
 
 ```bash
 schemalytics generate \
-  -c postgresql://postgres:postgres@localhost:5432/northwind \
+  -c postgresql://postgres:mypassword@localhost:5432/northwind \
   -o ./northwind_dbt \
   -n northwind
 ```
 
 ---
 
-## Step 3: Answer the context prompts
+## Step 3: Watch the agents work
 
-Schemalytics will ask about your business context interactively:
+Schemalytics runs five agents automatically, showing their reasoning as they go:
 
 ```
-Select industry:
-  1. E-commerce & Retail
-  2. SaaS & Software
-  3. Finance & Fintech
-  ...
-> 1
+[Agent 1] Inferring industry...
+  → Industry: Retail / Wholesale Distribution (confidence: 3)
 
-Key business entities (comma-separated):
-> customers, orders, products
+[Agent 2] Suggesting metrics...
+  → Metrics: total_revenue, order_count, avg_order_value, ...
 
-Analytical goals (comma-separated):
-> revenue tracking, customer analysis, product performance
+[Agent 3] Classifying 13 tables...
+  → orders: fact (confidence: 3)
+  → customers: dimension (confidence: 3)
+  → products: dimension (confidence: 3)
+  → ...
 
-Temporal tracking strategy:
-  1. historical_tracking (SCD Type 2 — keeps full history)
-  2. current_only (SCD Type 1 — overwrites)
-> 1
+──────────────────────────── PIPELINE SUMMARY ────────────────────────────
+Industry:    Retail — Wholesale Distribution
+Metrics:     total_revenue, order_count, avg_order_value
+Goals:       revenue_reporting, customer_analysis, product_performance
+Grain:       order_line
+Table roles: facts=[orders, order_details]  dims=[customers, products, ...]
 
-Primary time grain:
-  1. transaction_level
-  2. daily
-  3. weekly
-> 1
+Press Enter to continue, or describe any corrections:
 ```
 
-**Tip:** You can skip interactive prompts by passing a context file with `-x`. See [Configuration](Configuration).
+Review the summary and press Enter to proceed, or type corrections in plain English.
 
 ---
 
 ## Step 4: Review and refine the plan
 
-Schemalytics generates an initial plan and displays it:
+Agent 4 generates the modeling plan and displays it:
 
 ```
 ================================================================================
@@ -81,44 +78,39 @@ ITERATION 1
   ...
 
 🔷 SILVER LAYER - DIMENSIONS
-  dim_customers (SCD Type 2)
+  dim_customers (SCD Type 1)
     Source: customers
-    Grain: one row per customer per valid period
-    Columns: customer_id, company_name, contact_name, city, country
+    Grain: one row per customer
 
-  dim_products (SCD Type 2)
+  dim_products (SCD Type 1)
     Source: products
-    Grain: one row per product per valid period
-    Columns: product_id, product_name, category_id, unit_price
+    Grain: one row per product
 
 📊 SILVER LAYER - FACTS
-  fct_orders
-    Source: orders
-    Grain: one row per order
+  fct_order_details
+    Source: order_details
+    Grain: one row per order line
     Date: order_date
-    Foreign Keys:
-      → customer_id → dim_customers
-    Measures: freight
+    Measures: unit_price, quantity, discount
+    Derived: line_total = unitprice * quantity * (1 - discount)
 
 🥇 GOLD LAYER - PRE-AGGREGATED METRICS
-  agg_daily_revenue
-    Metrics: total_revenue = SUM(freight), order_count = COUNT(*)
+  agg_monthly_revenue
+    Metrics: total_revenue = SUM(line_total), order_count = COUNT(*)
 
 ================================================================================
-Your feedback:
+Your feedback (or press Enter to approve):
 ```
 
-Type your feedback or `approve`:
+Type feedback or press Enter to approve:
 
 ```
-Your feedback: make revenue monthly instead of daily, and add order item metrics
+Your feedback: make freight a measure on fct_orders too
 
 Changes:
-  ✗ Removed gold aggregate: agg_daily_revenue
-  ✓ Added gold aggregate: agg_monthly_revenue
-  ✓ Added fact: fct_order_details
+  ~ Modified fct_orders (added freight to measures)
 
-Your feedback: approve
+Your feedback:   ← (press Enter to approve)
 ```
 
 ---
@@ -130,10 +122,10 @@ Your feedback: approve
 
   ✓ Created dbt_project.yml
   ✓ Created sources.yml
-  ✓ Generated 8 bronze models
+  ✓ Generated 13 bronze models
   ✓ Generated 4 silver dimension models
   ✓ Generated 2 silver fact models
-  ✓ Generated 3 gold aggregate models
+  ✓ Generated 2 gold aggregate models
   ✓ Created semantic layer
   ✓ Generated documentation
 
@@ -150,6 +142,7 @@ cd northwind_dbt
 # Configure your database connection
 # Edit profiles.yml or set DBT_PROFILES_DIR
 
+dbt deps   # install dbt-utils
 dbt run
 dbt test
 ```
@@ -161,24 +154,22 @@ dbt test
 ```
 northwind_dbt/
 ├── dbt_project.yml
+├── packages.yml                ← dbt-utils dependency
 ├── semantic_layer.yml          ← LLM-ready metadata
 ├── README.md
 └── models/
     ├── sources.yml
-    ├── bronze/                 ← Raw views
+    ├── bronze/                 ← Raw views (stg_*)
     ├── silver/
-    │   ├── dimensions/         ← dim_* tables
-    │   └── facts/              ← fct_* tables
+    │   ├── dimensions/         ← dim_* tables (SCD1 or SCD2)
+    │   └── facts/              ← fct_* tables (incremental)
     └── gold/                   ← agg_* aggregates
 ```
-
-See [Output Structure](Output-Structure) for full details.
 
 ---
 
 ## Next Steps
 
-- [Interactive Refinement](Interactive-Refinement) — Master the refinement loop
 - [CLI Reference](CLI-Reference) — All options and flags
-- [Configuration](Configuration) — Skip interactive prompts with a context file
-- [Semantic Layer](Semantic-Layer) — Use the generated metadata for LLM-assisted analytics
+- [Architecture](Architecture) — How the pipeline works internally
+- [Troubleshooting](Troubleshooting) — Common issues and fixes
