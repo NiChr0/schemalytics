@@ -1,67 +1,100 @@
-"""Ollama LLM client."""
-import json
-import httpx
-from typing import Any
-from datetime import datetime
+"""LLM client abstraction supporting Ollama and Anthropic via instructor."""
+from __future__ import annotations
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
-DEFAULT_MODEL = "qwen-data:latest"
-FALLBACK_MODEL = "qwen2.5-coder:7b"
-LLM_TIMEOUT = 900.0  # 15 minutes for local models
+import os
+from typing import TypeVar, Type
 
+from pydantic import BaseModel
 
-def check_ollama_available() -> bool:
-    """Check if Ollama is running and available."""
-    try:
-        resp = httpx.get("http://localhost:11434/api/tags", timeout=2.0)
-        return resp.status_code == 200
-    except Exception:
-        return False
+T = TypeVar("T", bound=BaseModel)
+
+OLLAMA_DEFAULT_MODEL = "gemma3-data"
+ANTHROPIC_DEFAULT_MODEL = "claude-sonnet-4-20250514"
+MAX_RETRIES = 3
+
+# Singleton Ollama client — created once, reused across all calls.
+_ollama_client: object | None = None
 
 
-def query(prompt: str, model: str = DEFAULT_MODEL, json_mode: bool = False) -> str:
-    """Send prompt to Ollama, return response text."""
-    start_time = datetime.now()
-    print(f"  ⏰ Started: {start_time.strftime('%I:%M:%S %p')}")
-    
-    payload = {
-        "model": model,
-        "prompt": prompt,
-        "stream": False,
-    }
-    if json_mode:
-        payload["format"] = "json"
-    
-    try:
-        resp = httpx.post(OLLAMA_URL, json=payload, timeout=LLM_TIMEOUT)
-        resp.raise_for_status()
-        
-        elapsed = (datetime.now() - start_time).total_seconds()
-        print(f"  ✓ Completed in {elapsed:.1f}s")
-        
-        return resp.json()["response"]
-    except httpx.TimeoutException:
-        elapsed = (datetime.now() - start_time).total_seconds()
-        print(f"  ⚠️  LLM timeout after {elapsed:.1f}s (model: {model})")
-        if model != FALLBACK_MODEL:
-            print(f"  ⚠️  Trying fallback model: {FALLBACK_MODEL}")
-            return query(prompt, model=FALLBACK_MODEL, json_mode=json_mode)
-        raise
-    except httpx.HTTPError as e:
-        elapsed = (datetime.now() - start_time).total_seconds()
-        print(f"  ⚠️  LLM error after {elapsed:.1f}s: {e}")
-        if model != FALLBACK_MODEL:
-            print(f"  ⚠️  Trying fallback model: {FALLBACK_MODEL}")
-            return query(prompt, model=FALLBACK_MODEL, json_mode=json_mode)
-        raise
+def get_provider() -> str:
+    """Return the active LLM provider from env var (default: ollama)."""
+    return os.environ.get("SCHEMALYTICS_LLM_PROVIDER", "ollama").lower()
 
 
-def query_json(prompt: str, model: str = DEFAULT_MODEL) -> dict[str, Any]:
-    """Query LLM and parse JSON response."""
-    response = query(prompt, model=model, json_mode=True)
-    try:
-        return json.loads(response)
-    except json.JSONDecodeError as e:
-        print(f"  ⚠️  Failed to parse LLM JSON response: {e}")
-        print(f"  Raw response: {response[:200]}...")
-        raise
+def _get_ollama_client() -> object:
+    """Return (and lazily initialise) the shared Ollama instructor client."""
+    global _ollama_client
+    if _ollama_client is None:
+        from openai import OpenAI
+        import instructor
+
+        # timeout=600: a 12B model at 15 tok/s needs ~200s for 3000 tokens.
+        # 120s (old value) caused instructor to time-out and retry 3× per call.
+        _ollama_client = instructor.from_openai(
+            OpenAI(base_url="http://localhost:11434/v1", api_key="ollama", timeout=600),
+            mode=instructor.Mode.JSON,
+        )
+    return _ollama_client
+
+
+def query_structured(
+    system: str,
+    user: str,
+    response_model: Type[T],
+    model: str | None = None,
+    max_tokens: int = 4096,
+) -> T:
+    """Query the LLM and return a structured Pydantic model response via instructor.
+
+    Provider is selected via the SCHEMALYTICS_LLM_PROVIDER env var:
+      - "ollama"    (default) — local Ollama at localhost:11434
+      - "anthropic" — Anthropic API, requires ANTHROPIC_API_KEY
+
+    Pass a per-agent max_tokens to avoid over-generating. A 12B model at
+    15 tok/s burns ~9 min at 8192 tokens; right-sizing this is the single
+    largest performance lever for local inference.
+    """
+    provider = get_provider()
+
+    if model is None:
+        model = ANTHROPIC_DEFAULT_MODEL if provider == "anthropic" else OLLAMA_DEFAULT_MODEL
+
+    messages = [
+        {"role": "system", "content": system},
+        {"role": "user", "content": user},
+    ]
+
+    if provider == "anthropic":
+        import anthropic
+        import instructor
+
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise ValueError(
+                "ANTHROPIC_API_KEY env var is required when SCHEMALYTICS_LLM_PROVIDER=anthropic"
+            )
+
+        client = instructor.from_anthropic(anthropic.Anthropic(api_key=api_key))
+        return client.messages.create(
+            model=model,
+            max_tokens=max_tokens,
+            messages=messages,
+            response_model=response_model,
+            max_retries=MAX_RETRIES,
+        )
+
+    else:  # ollama
+        client = _get_ollama_client()
+        return client.chat.completions.create(
+            model=model,
+            messages=messages,
+            response_model=response_model,
+            max_retries=MAX_RETRIES,
+            temperature=0,
+            max_tokens=max_tokens,
+            # num_ctx: ensure KV cache covers the full prompt (fixed across all
+            # calls — changing num_ctx triggers a full model reload in Ollama).
+            # num_predict: explicitly set generation limit so it overrides any
+            # Modelfile default (which can silently ignore max_tokens otherwise).
+            extra_body={"num_ctx": 12288, "num_predict": max_tokens},
+        )
