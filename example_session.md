@@ -1,486 +1,230 @@
-# Interactive Refinement - Example Session
+# Example Session
 
-This document shows a complete example session using the new interactive refinement feature.
+A complete walkthrough of `schemalytics generate` against the Northwind database.
 
-## Session: E-commerce Data Model Refinement
-
-### Setup
 ```bash
-$ schemalytics generate \
-    --connection postgresql://localhost/ecommerce_db \
-    --output ./ecommerce_dbt
+schemalytics generate \
+  -c postgresql://postgres:mypassword@localhost/northwind \
+  -o ./northwind_dbt
 ```
 
 ---
 
-## Iteration 1: Initial AI-Generated Plan
+## Step 1 — Schema extraction
 
 ```
-================================================================================
-ITERATION 1
-================================================================================
+SCHEMALYTICS — AGENTIC DATA MODEL GENERATION
+================================================================
 
-📦 BRONZE LAYER (Raw passthrough)
---------------------------------------------------------------------------------
-  • bronze_customers
-  • bronze_orders
-  • bronze_order_items
-  • bronze_products
-  • bronze_categories
-  • bronze_stores
-  • bronze_employees
-  • bronze_inventory
-  • bronze_suppliers
-  • bronze_shipments
-  • bronze_reviews
-  • bronze_carts
-  • bronze_cart_items
-  • bronze_payment_methods
-
-Total: 14 tables (materialized as views)
-
-================================================================================
-🔷 SILVER LAYER - DIMENSIONS
-================================================================================
-
-dim_customers (SCD Type 2)
-  Source: customers
-  Grain: one row per customer per valid period
-  Columns: customer_id, name, email, phone, address, city, state, 
-           country, segment, status
-
-dim_products (SCD Type 2)
-  Source: products
-  Grain: one row per product per valid period
-  Columns: product_id, name, description, category_id, price, cost,
-           stock_quantity, supplier_id
-
-dim_categories (SCD Type 1)
-  Source: categories
-  Grain: one row per category
-  Columns: category_id, name, parent_category_id, level
-
-dim_stores (SCD Type 1)
-  Source: stores
-  Grain: one row per store
-  Columns: store_id, name, address, city, state, country, manager_id
-
-dim_employees (SCD Type 2)
-  Source: employees
-  Grain: one row per employee per valid period
-  Columns: employee_id, name, email, position, department, hire_date,
-           manager_id, store_id
-
-dim_suppliers (SCD Type 1)
-  Source: suppliers
-  Grain: one row per supplier
-  Columns: supplier_id, name, contact_name, email, phone, address
-
-dim_payment_methods (SCD Type 1)
-  Source: payment_methods
-  Grain: one row per payment method
-  Columns: payment_method_id, name, type, fee_percentage
-
-Total: 7 dimension tables
-
-================================================================================
-📊 SILVER LAYER - FACTS
-================================================================================
-
-fct_orders
-  Source: orders
-  Grain: one row per order
-  Date: order_date
-  Foreign Keys:
-    → customer_id → dim_customers
-    → store_id → dim_stores
-    → employee_id → dim_employees
-  Measures: subtotal, tax_amount, shipping_cost, discount_amount, total_amount
-
-fct_order_items
-  Source: order_items
-  Grain: one row per order line item
-  Date: order_date
-  Foreign Keys:
-    → order_id → fct_orders
-    → product_id → dim_products
-  Measures: quantity, unit_price, line_total, discount
-
-fct_reviews
-  Source: reviews
-  Grain: one row per product review
-  Date: review_date
-  Foreign Keys:
-    → customer_id → dim_customers
-    → product_id → dim_products
-  Measures: rating, helpful_count
-
-fct_shipments
-  Source: shipments
-  Grain: one row per shipment
-  Date: ship_date
-  Foreign Keys:
-    → order_id → fct_orders
-    → store_id → dim_stores
-  Measures: shipping_cost, weight
-
-Total: 4 fact tables
-
-================================================================================
-🥇 GOLD LAYER - PRE-AGGREGATED METRICS
-================================================================================
-
-DAILY AGGREGATES (4 tables):
-
-  gold_daily_revenue
-    Source: fct_orders
-    Description: Daily revenue and order volume metrics
-    Metrics:
-      • total_revenue = SUM(total_amount)
-      • order_count = COUNT(*)
-      • avg_order_value = AVG(total_amount)
-      • total_tax = SUM(tax_amount)
-
-  gold_daily_product_sales
-    Source: fct_order_items
-    Description: Daily product sales performance
-    Metrics:
-      • units_sold = SUM(quantity)
-      • revenue = SUM(line_total)
-      • avg_unit_price = AVG(unit_price)
-
-  gold_daily_customer_activity
-    Source: fct_orders
-    Description: Daily customer engagement metrics
-    Metrics:
-      • unique_customers = COUNT_DISTINCT(customer_id)
-      • new_customers = COUNT_DISTINCT(CASE WHEN first_order THEN customer_id END)
-      • repeat_customers = COUNT_DISTINCT(CASE WHEN NOT first_order THEN customer_id END)
-
-  gold_daily_inventory_movement
-    Source: fct_order_items
-    Description: Daily inventory turnover
-    Metrics:
-      • items_sold = SUM(quantity)
-      • revenue = SUM(line_total)
-
-MONTHLY AGGREGATES (2 tables):
-
-  gold_monthly_revenue
-    Source: fct_orders
-    Description: Monthly revenue trends and growth
-    Metrics:
-      • total_revenue = SUM(total_amount)
-      • order_count = COUNT(*)
-      • unique_customers = COUNT_DISTINCT(customer_id)
-      • avg_order_value = AVG(total_amount)
-
-  gold_monthly_product_performance
-    Source: fct_order_items
-    Description: Monthly product sales and trends
-    Metrics:
-      • units_sold = SUM(quantity)
-      • revenue = SUM(line_total)
-      • unique_products = COUNT_DISTINCT(product_id)
-
-YEARLY AGGREGATES (1 table):
-
-  gold_yearly_summary
-    Source: fct_orders
-    Description: Annual business performance summary
-    Metrics:
-      • total_revenue = SUM(total_amount)
-      • order_count = COUNT(*)
-      • unique_customers = COUNT_DISTINCT(customer_id)
-
-================================================================================
-
-================================================================================
-FEEDBACK OPTIONS
-================================================================================
-  • Type natural language feedback to refine the plan
-  • Examples:
-    - 'make orders weekly instead of daily'
-    - 'split customers into B2B and B2C dimensions'
-    - 'add a metric for customer lifetime value'
-    - 'remove the product dimension'
-  • Type 'approve' or 'done' to accept the plan
-  • Type 'reject' or 'cancel' to abort
-================================================================================
-
-Your feedback: _
+Extracting database schema...
+  Found 13 tables
 ```
 
 ---
 
-## Iteration 2: User Refines Time Grains
+## Step 2 — Agent 1: Industry inference
 
-**User Input:**
 ```
-Your feedback: weekly aggregates are more useful than daily for our reporting
-```
-
-**LLM Processing:**
-```
-  🤖 Interpreting feedback and refining plan...
-  ✓ Plan refined
+Agent 1 — Inferring industry and domain...
+  Detected: retail (wholesale_distribution)
+  Reasoning: Schema has customers, orders, order_details, products, suppliers,
+             and employees tables — a classic wholesale distribution pattern.
 ```
 
-**Changes Shown:**
+Confidence 3 → auto-proceeds.
+
+---
+
+## Step 3 — Agent 2: Metrics + goals
+
 ```
-================================================================================
-CHANGES IN THIS ITERATION
-================================================================================
-
-  ✗ Removed gold aggregate: gold_daily_revenue
-  ✗ Removed gold aggregate: gold_daily_product_sales
-  ✗ Removed gold aggregate: gold_daily_customer_activity
-  ✗ Removed gold aggregate: gold_daily_inventory_movement
-  ✓ Added gold aggregate: gold_weekly_revenue
-  ✓ Added gold aggregate: gold_weekly_product_sales
-  ✓ Added gold aggregate: gold_weekly_customer_activity
-  ✓ Added gold aggregate: gold_weekly_inventory_movement
-
-================================================================================
+Agent 2 — Suggesting metrics and goals...
+  Detected: metrics=['total_revenue', 'order_count', 'avg_order_value',
+            'units_sold', 'freight_cost'] grain=order_line
+  Reasoning: orders.freight and order_details.unit_price/quantity/discount
+             enable revenue and volume metrics at order-line grain.
 ```
 
-**New Plan Excerpt:**
-```
-🥇 GOLD LAYER - PRE-AGGREGATED METRICS
+Confidence 3 → auto-proceeds.
 
-WEEKLY AGGREGATES (4 tables):
+---
 
-  gold_weekly_revenue
-    Source: fct_orders
-    Description: Weekly revenue and order volume metrics
-    Metrics:
-      • total_revenue = SUM(total_amount)
-      • order_count = COUNT(*)
-      • avg_order_value = AVG(total_amount)
-```
+## Step 4 — Agent 3: Table classification
 
-**Next Prompt:**
 ```
-Your feedback: _
+Agent 3 — Classifying tables...
+  The following tables have uncertain classifications:
+    territories: dimension (confidence=1) — No FKs in or out; purpose unclear from name alone.
+
+  Correct any table roles in plain English (or press Enter to accept): territories is a lookup table for sales regions, treat it as reference
+  Re-running Agent 3 with your corrections...
+  All table classifications are high-confidence.
 ```
 
 ---
 
-## Iteration 3: Split Customer Dimension
+## Step 5 — Summary gate (always runs)
 
-**User Input:**
 ```
-Your feedback: we need to separate B2B and B2C customers into different dimensions
-```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INFERRED CONTEXT — please review
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Industry:     retail (wholesale_distribution)
+Key metrics:  total_revenue, order_count, avg_order_value, units_sold, freight_cost
+Goals:        revenue_reporting, supplier_performance, customer_order_analysis
+Grain:        order_line
 
-**Changes Shown:**
-```
-================================================================================
-CHANGES IN THIS ITERATION
-================================================================================
+Table roles:
+  facts:       order_details, orders
+  dimensions:  customers, employees, products, categories, suppliers, shippers
+  bridge:      employee_territories
+  reference:   territories, region
 
-  ✗ Removed dimension: dim_customers
-  ✓ Added dimension: dim_customers_b2b
-  ✓ Added dimension: dim_customers_b2c
-  ⟳ Modified fact: fct_orders (FK now points to both customer types)
-  ⟳ Modified fact: fct_reviews (FK now points to both customer types)
-  ⟳ Modified gold aggregate: gold_weekly_customer_activity (updated source)
-
-================================================================================
+Anything wrong? Enter corrections or press Enter to continue:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-**New Dimensions:**
-```
-dim_customers_b2b (SCD Type 2)
-  Source: customers (WHERE customer_type = 'B2B')
-  Grain: one row per B2B customer per valid period
-  Columns: customer_id, company_name, contact_name, email, phone, address,
-           account_manager_id, credit_limit, payment_terms
+User presses Enter → proceeds.
 
-dim_customers_b2c (SCD Type 2)
-  Source: customers (WHERE customer_type = 'B2C')
-  Grain: one row per B2C customer per valid period
-  Columns: customer_id, first_name, last_name, email, phone, address,
-           loyalty_tier, birth_date
-```
+---
 
-**Next Prompt:**
+## Step 6 — Agent 4: Modeling plan
+
 ```
-Your feedback: _
+Agent 4 — Generating modeling plan...
+
+================================================================
+MODELING PLAN
+================================================================
+
+Bronze (13 tables):
+  stg_public_categories
+  stg_public_customers
+  stg_public_employee_territories
+  stg_public_employees
+  stg_public_order_details
+  stg_public_orders
+  stg_public_products
+  stg_public_region
+  stg_public_shippers
+  stg_public_suppliers
+  stg_public_territories
+  stg_public_us_states
+  stg_public_customer_customer_demo
+
+Silver Dimensions (6):
+  dim_customers  [SCD2]  source=customers  grain=one row per customer per version
+  dim_employees  [SCD2]  source=employees  grain=one row per employee per version
+  dim_products   [SCD2]  source=products   grain=one row per product per version
+  dim_categories [SCD1]  source=categories grain=one row per category
+  dim_suppliers  [SCD1]  source=suppliers  grain=one row per supplier
+  dim_shippers   [SCD1]  source=shippers   grain=one row per shipper
+
+Silver Facts (2):
+  fct_orders       source=orders        grain=one row per order       date=order_date  measures=[freight]
+  fct_order_lines  source=order_details grain=one row per order line  date=order_date  measures=[unit_price, quantity, discount]
+
+Gold (3):
+  agg_daily_revenue    [daily]   source=fct_order_lines  metrics=[total_revenue, order_count, units_sold]
+  agg_monthly_revenue  [monthly] source=fct_order_lines  metrics=[total_revenue, avg_order_value]
+  agg_supplier_sales   [monthly] source=fct_order_lines  metrics=[total_revenue, units_sold]
+================================================================
+
+Type natural language feedback to refine the plan, or press Enter to approve.
+Feedback: _
 ```
 
 ---
 
-## Iteration 4: Add Custom Metric
+## Step 7 — Refinement (Agent 5)
 
-**User Input:**
-```
-Your feedback: add a gold table for customer lifetime value calculation
-```
+**User:** `add a gold table for freight cost by shipper, daily`
 
-**Changes Shown:**
 ```
-================================================================================
-CHANGES IN THIS ITERATION
-================================================================================
+  Agent 5 — Applying feedback...
 
-  ✓ Added gold aggregate: gold_customer_lifetime_value
+Changes:
+  + Added agg_daily_freight_by_shipper
 
-================================================================================
-```
+================================================================
+MODELING PLAN
+...
+Gold (4):
+  agg_daily_revenue          [daily]   ...
+  agg_monthly_revenue        [monthly] ...
+  agg_supplier_sales         [monthly] ...
+  agg_daily_freight_by_shipper [daily] source=fct_orders  metrics=[total_freight, shipment_count]
+================================================================
 
-**New Gold Table:**
-```
-gold_customer_lifetime_value
-  Source: fct_orders
-  Description: Customer lifetime value metrics
-  Metrics:
-    • lifetime_revenue = SUM(total_amount)
-    • order_count = COUNT(*)
-    • first_order_date = MIN(order_date)
-    • last_order_date = MAX(order_date)
-    • customer_tenure_days = DATEDIFF(MAX(order_date), MIN(order_date))
-    • avg_order_value = AVG(total_amount)
+Feedback: _
 ```
 
-**Next Prompt:**
+**User:** *(presses Enter)*
+
 ```
-Your feedback: _
+Plan approved. Proceeding to generation...
 ```
 
 ---
 
-## Iteration 5: Remove Unnecessary Table
+## Step 8 — dbt project generation
 
-**User Input:**
 ```
-Your feedback: we don't track shipments separately, remove that fact table
-```
+Generating dbt project...
 
-**Changes Shown:**
-```
-================================================================================
-CHANGES IN THIS ITERATION
-================================================================================
+================================================================
+SUCCESS
+================================================================
 
-  ✗ Removed fact: fct_shipments
-  ✗ Removed bronze table: bronze_shipments
-
-================================================================================
-```
-
-**Next Prompt:**
-```
-Your feedback: _
-```
-
----
-
-## Iteration 6: Final Approval
-
-**User Input:**
-```
-Your feedback: approve
-```
-
-**Output:**
-```
-✓ Plan approved! Generating dbt project...
-
-🏗️  STEP 5: GENERATING DBT PROJECT
---------------------------------------------------------------------------------
-  ✓ Created dbt_project.yml
-  ✓ Created sources.yml
-  ✓ Generated 13 bronze models
-  ✓ Generated 8 silver dimension models
-  ✓ Generated 3 silver fact models
-  ✓ Generated 8 gold aggregate models
-  ✓ Created semantic layer (542 lines)
-  ✓ Generated comprehensive documentation
-
-================================================================================
-✅ SUCCESS!
-================================================================================
-
-Project created at: ./ecommerce_dbt
-
-Contents:
-  • 13 bronze models (raw passthrough)
-  • 8 silver dimensions
-  • 3 silver facts
-  • 8 gold aggregates
-
-Semantic layer: ./ecommerce_dbt/semantic_layer.yml
+Project created at: ./northwind_dbt
+  13 bronze models
+  6 silver dimensions
+  2 silver facts
+  4 gold aggregates
 
 Next steps:
-  1. cd ./ecommerce_dbt
-  2. Configure profiles.yml with your database connection
-  3. dbt deps  # Install dependencies
-  4. dbt run   # Build all models
-
-================================================================================
+  cd ./northwind_dbt
+  dbt deps
+  dbt run
 ```
 
 ---
 
-## Summary of Changes Through Iterations
+## Refinement feedback examples
 
-| Iteration | User Feedback | Changes |
-|-----------|--------------|---------|
-| 1 | Initial plan | 14 bronze, 7 dims, 4 facts, 7 gold |
-| 2 | "weekly aggregates more useful" | Changed 4 daily → weekly |
-| 3 | "separate B2B and B2C customers" | Split 1 dim → 2 dims |
-| 4 | "add customer lifetime value" | Added 1 gold table |
-| 5 | "remove shipments" | Removed 1 fact, 1 bronze |
-| 6 | "approve" | Final: 13 bronze, 8 dims, 3 facts, 8 gold |
-
-## Key Features Demonstrated
-
-1. ✅ **Concrete Specifications** - Exact table names, columns, FKs visible
-2. ✅ **Natural Language** - Casual phrasing works ("more useful", "we need")
-3. ✅ **Iterative Refinement** - Multiple rounds of feedback
-4. ✅ **Change Tracking** - Clear diff after each iteration
-5. ✅ **Complex Changes** - Splitting dimensions, adding metrics, removing tables
-6. ✅ **No Limit** - Unlimited iterations until user approves
-
-## Alternative Feedback Examples
-
-### More Ways to Express Changes
-
-**Change grain:**
-- "make it daily"
-- "weekly is better"
-- "aggregate by month"
-- "change revenue to monthly grain"
-
-**Add tables:**
-- "add a metric for churn rate"
-- "we need inventory forecasting"
-- "create a gold table for cohort analysis"
-
-**Remove tables:**
-- "drop the reviews dimension"
-- "we don't need employee tracking"
-- "remove all yearly aggregates"
-
-**Modify structure:**
-- "orders should track refunds as a measure"
-- "add supplier info to products"
-- "change customers to SCD Type 1"
-
-**Validation failures:**
+### Change grain
 ```
-Your feedback: make products a fact table
-
-  ⚠️  Validation issue: Products cannot be a fact table because they have 
-      multiple incoming foreign keys (referenced by order_items, reviews, 
-      inventory). Facts typically reference dimensions, not vice versa.
-      
-      Would you like to:
-      1. Keep dim_products as a dimension
-      2. Create a separate fct_product_events table for product-level transactions
-      
-  Please clarify your feedback or type 'skip' to keep current plan.
+"aggregate orders monthly, not daily"
+"weekly is better for our reporting cadence"
 ```
 
-The validation ensures users understand why certain changes don't make sense, and suggests alternatives.
+### Add tables / metrics
+```
+"add customer lifetime value as a gold aggregate"
+"we need a fact table for order returns"
+"add units_returned as a measure to fct_order_lines"
+```
+
+### Remove tables
+```
+"drop the agg_supplier_sales table, we don't need it"
+"remove us_states from bronze — it's not used"
+```
+
+### Reclassify
+```
+"employee_territories should be a bridge table, not dimension"
+"region is a dimension, not reference"
+```
+
+### Complex changes
+```
+"split dim_customers into dim_customers_us and dim_customers_international based on country"
+"change fct_orders to SCD2"
+"move freight from fct_orders to fct_order_lines"
+```
+
+### Cancel
+```
+cancel
+```

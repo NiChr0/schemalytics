@@ -5,6 +5,11 @@ test_project/
 e2e_project/
 northwind.sql
 
+# Generated dbt output — any folder name ending in _dbt or _project
+dbt_project/
+*_dbt/
+*_project/
+
 # Python
 __pycache__/
 *.pyc
@@ -26,6 +31,9 @@ schemalytics/pyvenv.cfg
 .idea/
 *.swp
 
+# Evaluation audit files (local only)
+evaluation_audit*.md
+
 # LLM tool-specific context files (kept local, not committed)
 CLAUDE.md
 AGENTS.md
@@ -33,4 +41,5 @@ dev.md
 testing.md
 release.md
 context.yaml
-dbt_project
+Chinook_PostgreSql.sql
+install.sql
