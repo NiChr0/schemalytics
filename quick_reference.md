@@ -1,217 +1,148 @@
-# Quick Reference: Interactive Refinement
+# Quick Reference: Schemalytics Generate
 
-## 🎯 What It Does
-
-Refine your data model through **natural language conversation** with AI until it's exactly right.
-
----
-
-## 🚀 Quick Start
+## Command
 
 ```bash
-schemalytics generate -c postgresql://localhost/mydb
+schemalytics generate -c postgresql://user:pass@host/dbname -o ./dbt_project
 ```
 
-You'll see a detailed plan → give feedback → AI refines → repeat until you approve.
+Optional flags: `-n <project_name>`
 
 ---
 
-## 💬 Example Feedback
+## Pipeline Overview
 
-### Change Time Grains
 ```
-"make revenue weekly instead of daily"
-"change to monthly aggregates"
-"weekly is better for our reporting"
-```
-
-### Add Tables/Metrics
-```
-"add customer lifetime value"
-"we need a churn rate metric"
-"create a table for cohort analysis"
-```
-
-### Remove Tables
-```
-"drop the shipments table"
-"we don't need inventory tracking"
-"remove all yearly aggregates"
-```
-
-### Split/Combine
-```
-"split customers into B2B and B2C"
-"combine products and inventory"
-"separate by customer segment"
-```
-
-### Modify Attributes
-```
-"add discount as a measure to orders"
-"include shipping in revenue"
-"track tax separately"
+1. Schema extraction      — reads tables, columns, PKs, FKs
+2. Agent 1                — infers industry and business type
+3. Agent 2                — suggests metrics, goals, grain
+4. Agent 3                — classifies tables (fact/dimension/bridge/reference)
+5. Summary gate           — always runs; review and correct context
+6. Agent 4                — generates Bronze/Silver/Gold modeling plan
+7. Agent 5 (loop)         — refine plan with natural language feedback
+8. dbt project generation — writes SQL files, schema.yml, README
 ```
 
 ---
 
-## 📋 Commands
+## Confidence Rule (Agents 1-3)
+
+| Confidence | Behavior |
+|-----------|----------|
+| 3 | Auto-proceeds, prints notification |
+| 2 | Asks for confirmation or correction |
+| 1 | Asks and explains why it's uncertain |
+
+---
+
+## Summary Gate
+
+Always shown after Agent 3. Displays:
+
+```
+Industry / business type
+Key metrics and goals
+Grain
+Table roles (facts, dimensions, bridge, reference)
+```
+
+Press **Enter** to accept. Type corrections in plain English to re-run Agents 1-3 with your input.
+
+---
+
+## Refinement Loop (Agent 5)
+
+After Agent 4 shows the modeling plan, you can refine it with natural language:
+
+### Change grain
+```
+"aggregate orders monthly, not daily"
+"weekly is better for our reporting cadence"
+```
+
+### Add tables / metrics
+```
+"add customer lifetime value as a gold aggregate"
+"we need a fact table for order returns"
+"add units_returned as a measure to fct_order_lines"
+```
+
+### Remove tables
+```
+"drop the agg_supplier_sales table, we don't need it"
+"remove us_states from bronze — it's not used"
+```
+
+### Reclassify
+```
+"employee_territories should be a bridge table, not dimension"
+"region is a dimension, not reference"
+```
+
+### Complex changes
+```
+"split dim_customers into US and international based on country"
+"change fct_orders to SCD2"
+"move freight from fct_orders to fct_order_lines"
+```
+
+---
+
+## Refinement Controls
 
 | Input | Action |
 |-------|--------|
-| Natural language | Refine the plan |
-| `approve` | Accept plan → generate project |
-| `done` | Same as approve |
-| `reject` | Cancel generation |
-| `cancel` | Same as reject |
+| Natural language | Refine the plan (Agent 5 applies changes, shows diff) |
+| Enter (blank) | Approve plan — proceed to generation |
+| `cancel` | Abort — no project is generated |
 
 ---
 
-## 📊 What You'll See
+## After Each Refinement
 
-### Initial Plan
-```
-🔷 SILVER LAYER - DIMENSIONS
-dim_customers (SCD Type 2)
-  Source: customers
-  Grain: one row per customer per valid period
-  Foreign Keys:
-    → customer_id → referenced by fct_orders
-  Columns: customer_id, name, email, segment
+Schemalytics prints a diff:
 
-📊 SILVER LAYER - FACTS  
-fct_orders
-  Source: orders
-  Grain: one row per order
-  Date: order_date
-  Foreign Keys:
-    → customer_id → dim_customers
-    → store_id → dim_stores
-  Measures: total_amount, discount, tax
 ```
-
-### After Feedback
-```
-CHANGES:
-  ✓ Added: dim_customers_b2b
-  ✓ Added: dim_customers_b2c
-  ✗ Removed: dim_customers
-  ⟳ Modified: fct_orders (updated FKs)
+Changes:
+  + Added agg_daily_freight_by_shipper
+  - Removed agg_supplier_sales
+  ~ Modified fct_orders (updated measures)
 ```
 
 ---
 
-## ⚡ Pro Tips
+## LLM Providers
 
-1. **Be Casual** - "weekly is better" works just as well as "change grain to weekly"
+```bash
+# Default: local Ollama (no key needed)
+schemalytics generate -c postgresql://...
 
-2. **Be Specific** - "add revenue metric" is vague, "add daily revenue by product" is clear
-
-3. **Ask Questions** - AI will explain if something doesn't make sense
-
-4. **Iterate Freely** - No limit on refinements, take your time
-
-5. **Preview Everything** - You see EXACT tables/columns before approval
-
----
-
-## 🎨 Feedback Patterns
-
-### ✅ Good Feedback
-- "make orders weekly"
-- "split customers by type"  
-- "add lifetime value calculation"
-- "remove shipping dimension"
-
-### ⚠️ Vague Feedback
-- "make it better" (what should improve?)
-- "add more metrics" (which metrics?)
-- "fix the customers" (what's wrong?)
-
-### 💡 AI Will Help
-If feedback is unclear, AI suggests:
-```
-Your feedback: "fix customers"
-
-⚠️ What specifically should change about dim_customers?
-Options:
-- Change SCD type (1 vs 2)
-- Add/remove columns
-- Split into multiple dimensions
-- Change grain
+# Anthropic Claude
+SCHEMALYTICS_LLM_PROVIDER=anthropic \
+ANTHROPIC_API_KEY=sk-ant-... \
+schemalytics generate -c postgresql://...
 ```
 
 ---
 
-## 🔄 Typical Session Flow
+## Output Structure
 
 ```
-1. Review initial plan (30 seconds)
-   ↓
-2. "make revenue weekly" (5 seconds)
-   ↓
-3. See changes, review (15 seconds)
-   ↓
-4. "add customer segments" (5 seconds)
-   ↓
-5. See changes, review (15 seconds)
-   ↓
-6. "looks good!" (5 seconds)
-   ↓
-7. dbt project generated ✅
+./dbt_project/
+  dbt_project.yml
+  sources.yml
+  models/
+    bronze/          stg_<schema>_<table>.sql  (views)
+    silver/
+      dimensions/    dim_*.sql                 (SCD1 or SCD2)
+      facts/         fct_*.sql
+    gold/            agg_*.sql
+  semantic_layer.yml
+  README.md
 ```
 
-**Total: ~2 minutes**
-
 ---
 
-## 📖 Full Example
+## Full Walkthrough
 
-See `EXAMPLE_SESSION.md` for a complete 6-iteration refinement session.
-
----
-
-## 🆘 Troubleshooting
-
-### "I don't see my changes"
-- Changes show in DIFF section after each feedback
-- Check that feedback was specific enough
-
-### "AI didn't understand"
-- Rephrase or be more specific
-- AI will ask clarifying questions if confused
-
-### "How do I undo?"
-- Just give opposite feedback: "add back the revenue table"
-- Future: dedicated undo command
-
-### "Want to start over?"
-- Type `reject` then re-run `schemalytics generate`
-
----
-
-## 🎓 Learning Path
-
-1. **First Try:** Just approve initial plan (see what AI generates)
-2. **Second Try:** Make 1-2 simple changes (time grains)
-3. **Third Try:** Complex changes (split dimensions, add metrics)
-4. **Expert:** Iterative refinement (5+ rounds)
-
----
-
-## 📚 More Resources
-
-- **INTEGRATION_GUIDE.md** - Technical details
-- **EXAMPLE_SESSION.md** - Full walkthrough
-- **README.md** - Complete documentation
-
----
-
-## ✨ Bottom Line
-
-1. AI shows you **exactly** what will be created
-2. You refine with **natural language**
-3. Iterate until **perfect**
-4. Approve and **done!**
-
-**No JSON editing. No manual configs. Just conversation.**
+See `example_session.md` for a complete run against the Northwind database.

@@ -8,14 +8,14 @@ schemalytics [OPTIONS] COMMAND [ARGS]
 
 | Command | Description |
 |---------|-------------|
-| `generate` | Full pipeline — extract schema, refine plan, generate dbt project |
+| `generate` | Full pipeline — extract schema, AI planning, refinement loop, generate dbt project |
 | `extract` | Schema extraction only — outputs JSON |
 
 ---
 
 ## `schemalytics generate`
 
-Run the full pipeline: extract schema → interactive context → AI planning → refinement loop → generate dbt project.
+Run the full pipeline: extract schema → 5-agent AI pipeline → refinement loop → generate dbt project.
 
 ```bash
 schemalytics generate [OPTIONS]
@@ -28,7 +28,6 @@ schemalytics generate [OPTIONS]
 | `--connection` | `-c` | Yes | PostgreSQL connection string |
 | `--output` | `-o` | Yes | Output directory for the dbt project |
 | `--name` | `-n` | No | dbt project name (default: `my_dbt_project`) |
-| `--context-file` | `-x` | No | Path to a `context.yaml` file (skips interactive prompts) |
 
 ### Examples
 
@@ -44,18 +43,12 @@ schemalytics generate \
   -o ./dbt_project \
   -n my_project_name
 
-# Non-interactive using context file
+# Using Anthropic instead of local Ollama
+SCHEMALYTICS_LLM_PROVIDER=anthropic \
+ANTHROPIC_API_KEY=sk-ant-... \
 schemalytics generate \
   -c postgresql://user:pass@localhost/mydb \
-  -o ./dbt_project \
-  -x context.yaml
-
-# Full example
-schemalytics generate \
-  -c postgresql://postgres:postgres@localhost:5432/northwind \
-  -o ./northwind_dbt \
-  -n northwind \
-  -x context.yaml
+  -o ./dbt_project
 ```
 
 ---
@@ -90,13 +83,13 @@ schemalytics extract \
   "tables": [
     {
       "name": "orders",
-      "schema": "public",
+      "schema_name": "public",
       "columns": [
-        {"name": "order_id", "type": "integer", "nullable": false},
-        {"name": "customer_id", "type": "integer", "nullable": true},
-        {"name": "order_date", "type": "date", "nullable": true}
+        {"name": "order_id", "data_type": "integer", "nullable": false},
+        {"name": "customer_id", "data_type": "integer", "nullable": true},
+        {"name": "order_date", "data_type": "date", "nullable": true}
       ],
-      "primary_keys": ["order_id"],
+      "primary_key": ["order_id"],
       "foreign_keys": [
         {
           "column": "customer_id",
@@ -122,7 +115,7 @@ postgresql://[user]:[password]@[host]:[port]/[database]
 Examples:
 ```bash
 # Local default
-postgresql://postgres:postgres@localhost:5432/mydb
+postgresql://user:password@localhost:5432/mydb
 
 # Remote with non-standard port
 postgresql://admin:secret@db.example.com:5433/analytics
@@ -133,15 +126,18 @@ postgresql://user:p%40ssword@localhost/mydb
 
 ---
 
-## Environment Variables
-
-You can set the connection string as an environment variable to avoid passing it on the command line:
+## LLM Provider Environment Variables
 
 ```bash
-export SCHEMALYTICS_CONNECTION="postgresql://user:pass@localhost/mydb"
-```
+# Ollama (default) — requires Ollama running at localhost:11434
+# Model: gemma3-data
+SCHEMALYTICS_LLM_PROVIDER=ollama   # or omit
 
-> Note: Environment variable support depends on your shell configuration. The `-c` flag always takes precedence.
+# Anthropic Claude — requires API key
+# Model: claude-sonnet-4-20250514
+SCHEMALYTICS_LLM_PROVIDER=anthropic
+ANTHROPIC_API_KEY=sk-ant-...
+```
 
 ---
 
@@ -152,15 +148,31 @@ Schemalytics can also be used programmatically:
 ```python
 from schemalytics import (
     Schema,
-    BusinessContext,
     ModelingPlan,
+    PipelineContext,
     extract_schema,
     generate_dbt_project,
 )
+from schemalytics.planner import run_pipeline
 
 # Extract schema
 schema = extract_schema("postgresql://user:pass@localhost/mydb")
 
-# Generate dbt project from an approved ModelingPlan
-generate_dbt_project(plan, output_path="./dbt_project", project_name="my_project")
+# Run full interactive pipeline
+result = run_pipeline(schema)
+if result is None:
+    # User cancelled
+    exit()
+
+modeling_plan, pipeline_ctx = result
+
+# Generate dbt project
+generate_dbt_project(
+    schema=schema,
+    plan=modeling_plan,
+    output_dir="./dbt_project",
+    project_name="my_project",
+    business_type=pipeline_ctx.business_type,
+    context=pipeline_ctx,
+)
 ```
