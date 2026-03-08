@@ -27,7 +27,7 @@ Schemalytics only reads the schema — it never modifies your database.
 curl -fsSL https://ollama.com/install.sh | sh
 
 # Pull the required model
-ollama pull qwen2.5-coder:7b
+ollama pull gemma3-data
 
 # Verify Ollama is running
 curl http://localhost:11434/api/tags
@@ -87,7 +87,7 @@ docker run -d \
   ghcr.io/nichr0/northwind-postgres:latest
 ```
 
-Connection string: `postgresql://postgres:postgres@localhost:5432/northwind`
+Connection string: `postgresql://postgres:mypassword@localhost:5432/northwind`
 
 ---
 
@@ -96,7 +96,7 @@ Connection string: `postgresql://postgres:postgres@localhost:5432/northwind`
 - [ ] Python 3.10+ installed
 - [ ] `pip install schemalytics` complete
 - [ ] `ollama serve` running
-- [ ] `ollama list` shows `qwen2.5-coder:7b` or `qwen-data:latest`
+- [ ] `ollama list` shows `gemma3-data`
 - [ ] PostgreSQL database accessible
 
 Once all checked, proceed to [Getting Started](Getting-Started).
