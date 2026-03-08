@@ -1,13 +1,14 @@
 """Schemalytics - Automated dbt project generation."""
-from schemalytics.models import Schema, BusinessContext, ModelingPlan
+from schemalytics.models import Schema, BusinessContext, ModelingPlan, PipelineContext
 from schemalytics.extractors.postgres import extract_schema
 from schemalytics.generators.dbt import generate_dbt_project
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __all__ = [
     "Schema",
-    "BusinessContext", 
+    "BusinessContext",
     "ModelingPlan",
+    "PipelineContext",
     "extract_schema",
     "generate_dbt_project",
 ]

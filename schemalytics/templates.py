@@ -69,11 +69,11 @@ group by 1{% for i in range(dimensions|length) %}, {{ i + 2 }}{% endfor %}
 
 DBT_PROJECT_TEMPLATE = """name: '{{ project_name }}'
 version: '1.0.0'
-config-version: 2
 
 profile: '{{ project_name }}'
 
 model-paths: ["models"]
+snapshot-paths: ["snapshots"]
 test-paths: ["tests"]
 macro-paths: ["macros"]
 
@@ -98,9 +98,9 @@ sources:
   - name: raw
     schema: {{ schema }}
     tables:
-      {% for table in tables %}
+{%- for table in tables %}
       - name: {{ table }}
-      {% endfor %}
+{%- endfor %}
 """
 
 BRONZE_SCHEMA_TEMPLATE = """version: 2
@@ -129,13 +129,11 @@ models:
       type: dimension
       scd_type: {{ dim.scd_type }}
     columns:
-{% if dim.scd_type == 2 %}
       - name: {{ dim.name }}_sk
         description: "Surrogate key for this dimension (system-generated)"
         tests:
           - unique
           - not_null
-{% endif %}
 {% for col in dim.columns[:10] %}
       - name: {{ col }}
         description: "{{ col.replace('_', ' ').title() }}"
@@ -160,7 +158,7 @@ models:
     meta:
       layer: silver
       type: fact
-      grain: transaction
+      grain: {{ fact.grain }}
     columns:
       - name: {{ fact.name }}_sk
         description: "Surrogate key for this fact (system-generated)"
@@ -168,21 +166,38 @@ models:
           - unique
           - not_null
       
-{% for dk in fact.dimension_keys %}
+{% for dk in fact.dimension_keys if dk != fact.date_column %}
+{% set dim_ref = 'dim_' + dk.replace('_id', '') %}
+{% set _is_nullable = dk in nullable_cols[fact.name] %}
       - name: {{ dk }}
         description: "Foreign key to {{ dk.replace('_id', '') }} dimension"
+{% if not _is_nullable or dim_ref in dim_names %}
         tests:
+{% if not _is_nullable %}
           - not_null
+{% endif %}
+{% if dim_ref in dim_names %}
+          - relationships:
+              to: "ref('{{ dim_ref }}')"
+              field: {{ dk }}
+{% endif %}
+{% endif %}
 {% endfor %}
-      
+{% if fact.date_column %}
       - name: {{ fact.date_column }}
         description: "Primary date/time for this transaction"
+{% if fact.date_column not in nullable_cols[fact.name] %}
         tests:
           - not_null
-      
-{% for measure in fact.measures %}
+{% endif %}
+{% endif %}
+{% for measure in fact.measures if measure != fact.date_column and '*' not in measure and ' ' not in measure and measure not in fact.dimension_keys %}
       - name: {{ measure }}
         description: "{{ measure.replace('_', ' ').title() }} - numeric measure"
+{% endfor %}
+{% for dm in fact.derived_measures %}
+      - name: {{ dm.name }}
+        description: "Derived: {{ dm.expression }}"
 {% endfor %}
 {% endfor %}
 """
@@ -198,12 +213,14 @@ models:
       grain: {{ gold.grain }}
       refresh: daily
     columns:
+{% set effective_date = gold.date_column or fact_effective_dates.get(gold.source_fact, "") %}
+{% if effective_date %}
       - name: {{ gold.grain }}_date
         description: "Date at {{ gold.grain }} grain"
         tests:
           - unique
           - not_null
-      
+{% endif %}
 {% for metric in gold.metrics %}
       - name: {{ metric.name }}
         description: "{{ metric.description }}"
