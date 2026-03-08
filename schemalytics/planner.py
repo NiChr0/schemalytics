@@ -3,12 +3,9 @@ from __future__ import annotations
 
 from datetime import datetime
 
+import re as _re
+
 from schemalytics import llm
-
-
-def _ts() -> str:
-    """Current wall-clock time as HH:MM:SS for inline progress stamps."""
-    return datetime.now().strftime('%H:%M:%S')
 from schemalytics.models import (
     DerivedMeasure,
     DimensionPlan,
@@ -22,6 +19,11 @@ from schemalytics.models import (
     Table,
     TableClassificationResult,
 )
+
+
+def _ts() -> str:
+    """Current wall-clock time as HH:MM:SS for inline progress stamps."""
+    return datetime.now().strftime('%H:%M:%S')
 
 
 # ── FK Graph Heuristics ────────────────────────────────────────────────────────
@@ -610,8 +612,6 @@ def _is_sql_expression(s: str) -> bool:
     """Return True if s looks like a SQL expression rather than a bare column name."""
     return any(ch in s for ch in ("*", "+", "-", "/", " ", "(", ")"))
 
-
-import re as _re
 
 _SQL_KEYWORDS = {
     "sum", "count", "avg", "min", "max", "distinct", "as", "and", "or", "not",
