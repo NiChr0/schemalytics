@@ -1,0 +1,20 @@
+Loading configuration file finetune/mlx/config.yaml
+Loading pretrained model
+Loading datasets
+Training
+Trainable parameters: 0.151% (11.534M/7615.617M)
+Starting training..., iters: 200
+Calculating loss...:   0%|          | 0/1 [00:00<?, ?it/s]Calculating loss...: 100%|██████████| 1/1 [00:23<00:00, 23.05s/it]Calculating loss...: 100%|██████████| 1/1 [00:23<00:00, 23.05s/it]
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 2382 will be truncated to 2048. Consider pre-splitting your data to save memory.
+Iter 1: Val loss 1.386, Val took 23.072s
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 3148 will be truncated to 2048. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 2362 will be truncated to 2048. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 3061 will be truncated to 2048. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 2214 will be truncated to 2048. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 5585 will be truncated to 2048. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 5559 will be truncated to 2048. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 2362 will be truncated to 2048. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 2048 tokens. The longest sentence 5585 will be truncated to 2048. Consider pre-splitting your data to save memory.
+Iter 10: Train loss 1.279, Learning Rate 3.600e-06, It/sec 0.012, Tokens/sec 45.496, Trained Tokens 38330, Peak mem 10.952 GB
+/opt/homebrew/Cellar/python@3.11/3.11.14_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

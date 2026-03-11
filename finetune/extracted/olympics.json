@@ -1,0 +1,366 @@
+{
+  "tables": [
+    {
+      "name": "sport",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sport_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "event",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sport_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "event_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "sport_id",
+          "references_table": "sport",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "city",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "city_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "games_city",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "games_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "city_id",
+          "references_table": "city",
+          "references_column": "id"
+        },
+        {
+          "column": "games_id",
+          "references_table": "games",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "games",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "games_year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "games_name",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "season",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "competitor_event",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "event_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "competitor_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "medal_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "competitor_id",
+          "references_table": "games_competitor",
+          "references_column": "id"
+        },
+        {
+          "column": "event_id",
+          "references_table": "event",
+          "references_column": "id"
+        },
+        {
+          "column": "medal_id",
+          "references_table": "medal",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "person",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "full_name",
+          "data_type": "VARCHAR(500)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "weight",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "person_region",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "person_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "person_id",
+          "references_table": "person",
+          "references_column": "id"
+        },
+        {
+          "column": "region_id",
+          "references_table": "noc_region",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "noc_region",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "noc",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "games_competitor",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "games_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "person_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "games_id",
+          "references_table": "games",
+          "references_column": "id"
+        },
+        {
+          "column": "person_id",
+          "references_table": "person",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "medal",
+      "schema_name": "olympics",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "medal_name",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

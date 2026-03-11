@@ -1,0 +1,194 @@
+{
+  "tables": [
+    {
+      "name": "city",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "countrycode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "district",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "code",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "continent",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "surfacearea",
+          "data_type": "REAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "indepyear",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lifeexpectancy",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gnp",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gnpold",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "localname",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "governmentform",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "headofstate",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "capital",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "code2",
+          "data_type": "CHAR(2)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "code"
+      ],
+      "foreign_keys": [
+        {
+          "column": "capital",
+          "references_table": "city",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "countrylanguage",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "countrycode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "isofficial",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "percentage",
+          "data_type": "REAL",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "countrycode",
+        "language"
+      ],
+      "foreign_keys": [
+        {
+          "column": "countrycode",
+          "references_table": "country",
+          "references_column": "code"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

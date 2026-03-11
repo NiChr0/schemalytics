@@ -1,0 +1,4009 @@
+{
+  "tables": [
+    {
+      "name": "employee",
+      "schema_name": "humanresources",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "nationalidnumber",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "loginid",
+          "data_type": "VARCHAR(256)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "jobtitle",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "birthdate",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "maritalstatus",
+          "data_type": "CHAR(1)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "CHAR(1)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hiredate",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salariedflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "vacationhours",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sickleavehours",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currentflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "organizationnode",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "person.person",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "department",
+      "schema_name": "humanresources",
+      "columns": [
+        {
+          "name": "departmentid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "groupname",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "departmentid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employeedepartmenthistory",
+      "schema_name": "humanresources",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "departmentid",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shiftid",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "startdate",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "enddate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "startdate",
+        "departmentid",
+        "shiftid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "departmentid",
+          "references_table": "department",
+          "references_column": "departmentid"
+        },
+        {
+          "column": "businessentityid",
+          "references_table": "employee",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "shiftid",
+          "references_table": "shift",
+          "references_column": "shiftid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "employeepayhistory",
+      "schema_name": "humanresources",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ratechangedate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rate",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payfrequency",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "ratechangedate"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "employee",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "shift",
+      "schema_name": "humanresources",
+      "columns": [
+        {
+          "name": "shiftid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "starttime",
+          "data_type": "TIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endtime",
+          "data_type": "TIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "shiftid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "jobcandidate",
+      "schema_name": "humanresources",
+      "columns": [
+        {
+          "name": "jobcandidateid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "resume",
+          "data_type": "NULL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "jobcandidateid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "employee",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "address",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "addressid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "addressline1",
+          "data_type": "VARCHAR(60)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "addressline2",
+          "data_type": "VARCHAR(60)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "stateprovinceid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "postalcode",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "spatiallocation",
+          "data_type": "BYTEA",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "addressid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "stateprovinceid",
+          "references_table": "stateprovince",
+          "references_column": "stateprovinceid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "stateprovince",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "stateprovinceid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "stateprovincecode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "countryregioncode",
+          "data_type": "VARCHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "isonlystateprovinceflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "territoryid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "stateprovinceid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "countryregioncode",
+          "references_table": "countryregion",
+          "references_column": "countryregioncode"
+        },
+        {
+          "column": "territoryid",
+          "references_table": "sales.salesterritory",
+          "references_column": "territoryid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "businessentityaddress",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "addressid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "addresstypeid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "addressid",
+        "addresstypeid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "addresstypeid",
+          "references_table": "addresstype",
+          "references_column": "addresstypeid"
+        },
+        {
+          "column": "addressid",
+          "references_table": "address",
+          "references_column": "addressid"
+        },
+        {
+          "column": "businessentityid",
+          "references_table": "businessentity",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "addresstype",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "addresstypeid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "addresstypeid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "businessentity",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "person",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "persontype",
+          "data_type": "CHAR(2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "namestyle",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "firstname",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "middlename",
+          "data_type": "DOMAIN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lastname",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "suffix",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "emailpromotion",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "additionalcontactinfo",
+          "data_type": "NULL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "demographics",
+          "data_type": "NULL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "businessentity",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "businessentitycontact",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "personid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contacttypeid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "personid",
+        "contacttypeid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "businessentity",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "contacttypeid",
+          "references_table": "contacttype",
+          "references_column": "contacttypeid"
+        },
+        {
+          "column": "personid",
+          "references_table": "person",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "contacttype",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "contacttypeid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "contacttypeid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "emailaddress",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "emailaddressid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "emailaddress",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "emailaddressid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "person",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "password",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "passwordhash",
+          "data_type": "VARCHAR(128)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "passwordsalt",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "person",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "phonenumbertype",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "phonenumbertypeid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "phonenumbertypeid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "countryregion",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "countryregioncode",
+          "data_type": "VARCHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "countryregioncode"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "personphone",
+      "schema_name": "person",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "phonenumber",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "phonenumbertypeid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "phonenumber",
+        "phonenumbertypeid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "person",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "phonenumbertypeid",
+          "references_table": "phonenumbertype",
+          "references_column": "phonenumbertypeid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "document",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "title",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "owner",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "folderflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filename",
+          "data_type": "VARCHAR(400)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "fileextension",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "revision",
+          "data_type": "CHAR(5)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "changenumber",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "documentsummary",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "document",
+          "data_type": "BYTEA",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "documentnode",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "documentnode"
+      ],
+      "foreign_keys": [
+        {
+          "column": "owner",
+          "references_table": "humanresources.employee",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productmodel",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productmodelid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "catalogdescription",
+          "data_type": "NULL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "instructions",
+          "data_type": "NULL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productmodelid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "billofmaterials",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "billofmaterialsid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productassemblyid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "componentid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "startdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "enddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unitmeasurecode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bomlevel",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "perassemblyqty",
+          "data_type": "NUMERIC(8, 2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "billofmaterialsid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "componentid",
+          "references_table": "product",
+          "references_column": "productid"
+        },
+        {
+          "column": "productassemblyid",
+          "references_table": "product",
+          "references_column": "productid"
+        },
+        {
+          "column": "unitmeasurecode",
+          "references_table": "unitmeasure",
+          "references_column": "unitmeasurecode"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productsubcategory",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productsubcategoryid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productcategoryid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productsubcategoryid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productcategoryid",
+          "references_table": "productcategory",
+          "references_column": "productcategoryid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "culture",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "cultureid",
+          "data_type": "CHAR(6)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "cultureid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "productcategory",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productcategoryid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productcategoryid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productnumber",
+          "data_type": "VARCHAR(25)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "makeflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "finishedgoodsflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "color",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "safetystocklevel",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reorderpoint",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "standardcost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "listprice",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sizeunitmeasurecode",
+          "data_type": "CHAR(3)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "weightunitmeasurecode",
+          "data_type": "CHAR(3)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "weight",
+          "data_type": "NUMERIC(8, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "daystomanufacture",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productline",
+          "data_type": "CHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "class",
+          "data_type": "CHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "style",
+          "data_type": "CHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "productsubcategoryid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "productmodelid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sellstartdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sellenddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "discontinueddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productmodelid",
+          "references_table": "productmodel",
+          "references_column": "productmodelid"
+        },
+        {
+          "column": "productsubcategoryid",
+          "references_table": "productsubcategory",
+          "references_column": "productsubcategoryid"
+        },
+        {
+          "column": "sizeunitmeasurecode",
+          "references_table": "unitmeasure",
+          "references_column": "unitmeasurecode"
+        },
+        {
+          "column": "weightunitmeasurecode",
+          "references_table": "unitmeasure",
+          "references_column": "unitmeasurecode"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productcosthistory",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "startdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "enddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "standardcost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productid",
+        "startdate"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "product",
+          "references_column": "productid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productdocument",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "documentnode",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productid",
+        "documentnode"
+      ],
+      "foreign_keys": [
+        {
+          "column": "documentnode",
+          "references_table": "document",
+          "references_column": "documentnode"
+        },
+        {
+          "column": "productid",
+          "references_table": "product",
+          "references_column": "productid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "location",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "locationid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "costrate",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "availability",
+          "data_type": "NUMERIC(8, 2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "locationid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "productinventory",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "locationid",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shelf",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bin",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productid",
+        "locationid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "locationid",
+          "references_table": "location",
+          "references_column": "locationid"
+        },
+        {
+          "column": "productid",
+          "references_table": "product",
+          "references_column": "productid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productdescription",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productdescriptionid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "VARCHAR(400)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productdescriptionid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "illustration",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "illustrationid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "diagram",
+          "data_type": "NULL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "illustrationid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "productreview",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productreviewid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reviewername",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reviewdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "emailaddress",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comments",
+          "data_type": "VARCHAR(3850)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productreviewid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "productmodelillustration",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productmodelid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "illustrationid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productmodelid",
+        "illustrationid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "illustrationid",
+          "references_table": "illustration",
+          "references_column": "illustrationid"
+        },
+        {
+          "column": "productmodelid",
+          "references_table": "productmodel",
+          "references_column": "productmodelid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productmodelproductdescriptionculture",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productmodelid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productdescriptionid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cultureid",
+          "data_type": "CHAR(6)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productmodelid",
+        "productdescriptionid",
+        "cultureid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "cultureid",
+          "references_table": "culture",
+          "references_column": "cultureid"
+        },
+        {
+          "column": "productdescriptionid",
+          "references_table": "productdescription",
+          "references_column": "productdescriptionid"
+        },
+        {
+          "column": "productmodelid",
+          "references_table": "productmodel",
+          "references_column": "productmodelid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productproductphoto",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productphotoid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "primary",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productid",
+        "productphotoid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productphotoid",
+          "references_table": "productphoto",
+          "references_column": "productphotoid"
+        },
+        {
+          "column": "productid",
+          "references_table": "product",
+          "references_column": "productid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productphoto",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productphotoid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "thumbnailphoto",
+          "data_type": "BYTEA",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "thumbnailphotofilename",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "largephoto",
+          "data_type": "BYTEA",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "largephotofilename",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productphotoid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "scrapreason",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "scrapreasonid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "scrapreasonid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "transactionhistory",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "transactionid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "referenceorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "referenceorderlineid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "transactiondate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "transactiontype",
+          "data_type": "CHAR(1)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "actualcost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "transactionid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "product",
+          "references_column": "productid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "unitmeasure",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "unitmeasurecode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "unitmeasurecode"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "transactionhistoryarchive",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "transactionid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "referenceorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "referenceorderlineid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "transactiondate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "transactiontype",
+          "data_type": "CHAR(1)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "actualcost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "transactionid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "workorder",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "workorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "orderqty",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scrappedqty",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "startdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "enddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duedate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scrapreasonid",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "workorderid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "product",
+          "references_column": "productid"
+        },
+        {
+          "column": "scrapreasonid",
+          "references_table": "scrapreason",
+          "references_column": "scrapreasonid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "workorderrouting",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "workorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "operationsequence",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "locationid",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scheduledstartdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scheduledenddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "actualstartdate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "actualenddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "actualresourcehrs",
+          "data_type": "NUMERIC(9, 4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "plannedcost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "actualcost",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "workorderid",
+        "productid",
+        "operationsequence"
+      ],
+      "foreign_keys": [
+        {
+          "column": "locationid",
+          "references_table": "location",
+          "references_column": "locationid"
+        },
+        {
+          "column": "workorderid",
+          "references_table": "workorder",
+          "references_column": "workorderid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productlistpricehistory",
+      "schema_name": "production",
+      "columns": [
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "startdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "enddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "listprice",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productid",
+        "startdate"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "product",
+          "references_column": "productid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "productvendor",
+      "schema_name": "purchasing",
+      "columns": [
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "averageleadtime",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "standardprice",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lastreceiptcost",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lastreceiptdate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "minorderqty",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "maxorderqty",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "onorderqty",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unitmeasurecode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "productid",
+        "businessentityid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "production.product",
+          "references_column": "productid"
+        },
+        {
+          "column": "unitmeasurecode",
+          "references_table": "production.unitmeasure",
+          "references_column": "unitmeasurecode"
+        },
+        {
+          "column": "businessentityid",
+          "references_table": "vendor",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "vendor",
+      "schema_name": "purchasing",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "accountnumber",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "creditrating",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "preferredvendorstatus",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "activeflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "purchasingwebserviceurl",
+          "data_type": "VARCHAR(1024)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "person.businessentity",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "purchaseorderdetail",
+      "schema_name": "purchasing",
+      "columns": [
+        {
+          "name": "purchaseorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "purchaseorderdetailid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "duedate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "orderqty",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unitprice",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "receivedqty",
+          "data_type": "NUMERIC(8, 2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rejectedqty",
+          "data_type": "NUMERIC(8, 2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "purchaseorderid",
+        "purchaseorderdetailid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "production.product",
+          "references_column": "productid"
+        },
+        {
+          "column": "purchaseorderid",
+          "references_table": "purchaseorderheader",
+          "references_column": "purchaseorderid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "purchaseorderheader",
+      "schema_name": "purchasing",
+      "columns": [
+        {
+          "name": "purchaseorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "revisionnumber",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "employeeid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "vendorid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipmethodid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "orderdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipdate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subtotal",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "taxamt",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "freight",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "purchaseorderid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "employeeid",
+          "references_table": "humanresources.employee",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "shipmethodid",
+          "references_table": "shipmethod",
+          "references_column": "shipmethodid"
+        },
+        {
+          "column": "vendorid",
+          "references_table": "vendor",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "shipmethod",
+      "schema_name": "purchasing",
+      "columns": [
+        {
+          "name": "shipmethodid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipbase",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shiprate",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "shipmethodid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "countryregioncurrency",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "countryregioncode",
+          "data_type": "VARCHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currencycode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "countryregioncode",
+        "currencycode"
+      ],
+      "foreign_keys": [
+        {
+          "column": "countryregioncode",
+          "references_table": "person.countryregion",
+          "references_column": "countryregioncode"
+        },
+        {
+          "column": "currencycode",
+          "references_table": "currency",
+          "references_column": "currencycode"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "currency",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "currencycode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "currencycode"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "currencyrate",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "currencyrateid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currencyratedate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "fromcurrencycode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tocurrencycode",
+          "data_type": "CHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "averagerate",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endofdayrate",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "currencyrateid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "fromcurrencycode",
+          "references_table": "currency",
+          "references_column": "currencycode"
+        },
+        {
+          "column": "tocurrencycode",
+          "references_table": "currency",
+          "references_column": "currencycode"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "creditcard",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "creditcardid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cardtype",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cardnumber",
+          "data_type": "VARCHAR(25)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expmonth",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expyear",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "creditcardid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "salesreason",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "salesreasonid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reasontype",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "salesreasonid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "salesorderheadersalesreason",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "salesorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salesreasonid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "salesorderid",
+        "salesreasonid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "salesorderid",
+          "references_table": "salesorderheader",
+          "references_column": "salesorderid"
+        },
+        {
+          "column": "salesreasonid",
+          "references_table": "salesreason",
+          "references_column": "salesreasonid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "customer",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "customerid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "personid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "storeid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "territoryid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customerid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "personid",
+          "references_table": "person.person",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "territoryid",
+          "references_table": "salesterritory",
+          "references_column": "territoryid"
+        },
+        {
+          "column": "storeid",
+          "references_table": "store",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salesterritory",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "territoryid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "countryregioncode",
+          "data_type": "VARCHAR(3)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "group",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salesytd",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "saleslastyear",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "costytd",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "costlastyear",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "territoryid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "countryregioncode",
+          "references_table": "person.countryregion",
+          "references_column": "countryregioncode"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "personcreditcard",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "creditcardid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "creditcardid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "creditcardid",
+          "references_table": "creditcard",
+          "references_column": "creditcardid"
+        },
+        {
+          "column": "businessentityid",
+          "references_table": "person.person",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salesorderheader",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "salesorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "revisionnumber",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "orderdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "duedate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipdate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "onlineorderflag",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "purchaseordernumber",
+          "data_type": "DOMAIN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "accountnumber",
+          "data_type": "DOMAIN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customerid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salespersonid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "territoryid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billtoaddressid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shiptoaddressid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipmethodid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "creditcardid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "creditcardapprovalcode",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "currencyrateid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subtotal",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "taxamt",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "freight",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "totaldue",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "VARCHAR(128)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "salesorderid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "billtoaddressid",
+          "references_table": "person.address",
+          "references_column": "addressid"
+        },
+        {
+          "column": "shiptoaddressid",
+          "references_table": "person.address",
+          "references_column": "addressid"
+        },
+        {
+          "column": "creditcardid",
+          "references_table": "creditcard",
+          "references_column": "creditcardid"
+        },
+        {
+          "column": "currencyrateid",
+          "references_table": "currencyrate",
+          "references_column": "currencyrateid"
+        },
+        {
+          "column": "customerid",
+          "references_table": "customer",
+          "references_column": "customerid"
+        },
+        {
+          "column": "salespersonid",
+          "references_table": "salesperson",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "territoryid",
+          "references_table": "salesterritory",
+          "references_column": "territoryid"
+        },
+        {
+          "column": "shipmethodid",
+          "references_table": "purchasing.shipmethod",
+          "references_column": "shipmethodid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salesorderdetail",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "salesorderid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salesorderdetailid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "carriertrackingnumber",
+          "data_type": "VARCHAR(25)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "orderqty",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "specialofferid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unitprice",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unitpricediscount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "salesorderid",
+        "salesorderdetailid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "salesorderid",
+          "references_table": "salesorderheader",
+          "references_column": "salesorderid"
+        },
+        {
+          "column": "specialofferid",
+          "references_table": "specialofferproduct",
+          "references_column": "specialofferid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salesperson",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "territoryid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salesquota",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "bonus",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "commissionpct",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salesytd",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "saleslastyear",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "humanresources.employee",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "territoryid",
+          "references_table": "salesterritory",
+          "references_column": "territoryid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salespersonquotahistory",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quotadate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salesquota",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "quotadate"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "salesperson",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salestaxrate",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "salestaxrateid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "stateprovinceid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "taxtype",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "taxrate",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "salestaxrateid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "stateprovinceid",
+          "references_table": "person.stateprovince",
+          "references_column": "stateprovinceid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salesterritoryhistory",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "territoryid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "startdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "enddate",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid",
+        "startdate",
+        "territoryid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "salesperson",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "territoryid",
+          "references_table": "salesterritory",
+          "references_column": "territoryid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "store",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "businessentityid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "DOMAIN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salespersonid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "demographics",
+          "data_type": "NULL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "businessentityid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "businessentityid",
+          "references_table": "person.businessentity",
+          "references_column": "businessentityid"
+        },
+        {
+          "column": "salespersonid",
+          "references_table": "salesperson",
+          "references_column": "businessentityid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "specialofferproduct",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "specialofferid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "specialofferid",
+        "productid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "production.product",
+          "references_column": "productid"
+        },
+        {
+          "column": "specialofferid",
+          "references_table": "specialoffer",
+          "references_column": "specialofferid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "shoppingcartitem",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "shoppingcartitemid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shoppingcartid",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "productid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "datecreated",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "shoppingcartitemid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "productid",
+          "references_table": "production.product",
+          "references_column": "productid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "specialoffer",
+      "schema_name": "sales",
+      "columns": [
+        {
+          "name": "specialofferid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discountpct",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "startdate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "enddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "minqty",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "maxqty",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rowguid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "modifieddate",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "specialofferid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}
