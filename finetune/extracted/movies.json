@@ -1,0 +1,587 @@
+{
+  "tables": [
+    {
+      "name": "production_country",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "country_id",
+          "references_table": "country",
+          "references_column": "country_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "department",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "department_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "department_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "department_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "gender",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "gender_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "gender_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "movie_cast",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "person_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "character_name",
+          "data_type": "VARCHAR(400)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cast_order",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "gender_id",
+          "references_table": "gender",
+          "references_column": "gender_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        },
+        {
+          "column": "person_id",
+          "references_table": "person",
+          "references_column": "person_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "movie",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(1000)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "budget",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "homepage",
+          "data_type": "VARCHAR(1000)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "overview",
+          "data_type": "VARCHAR(1000)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "popularity",
+          "data_type": "NUMERIC(12, 6)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "release_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "revenue",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "runtime",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movie_status",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "tagline",
+          "data_type": "VARCHAR(1000)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vote_average",
+          "data_type": "NUMERIC(4, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vote_count",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "movie_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "person",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "person_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "person_name",
+          "data_type": "VARCHAR(500)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "person_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "production_company",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "company_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "movie_company",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "company_id",
+          "references_table": "production_company",
+          "references_column": "company_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "movie_crew",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "person_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "job",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "department_id",
+          "references_table": "department",
+          "references_column": "department_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        },
+        {
+          "column": "person_id",
+          "references_table": "person",
+          "references_column": "person_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "genre",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "genre_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "genre_name",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "genre_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "movie_genres",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "genre_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "genre_id",
+          "references_table": "genre",
+          "references_column": "genre_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "keyword",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "keyword_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "keyword_name",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "keyword_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "movie_keywords",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "keyword_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "keyword_id",
+          "references_table": "keyword",
+          "references_column": "keyword_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "language",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "language_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "language_name",
+          "data_type": "VARCHAR(500)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "movie_languages",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "language_role_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "language_id",
+          "references_table": "language",
+          "references_column": "language_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        },
+        {
+          "column": "language_role_id",
+          "references_table": "language_role",
+          "references_column": "role_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "language_role",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "role_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_role",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "role_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "country",
+      "schema_name": "movies",
+      "columns": [
+        {
+          "name": "country_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_iso_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "country_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

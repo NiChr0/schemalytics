@@ -1,0 +1,141 @@
+{
+  "tables": [
+    {
+      "name": "passenger",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "passengerid",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "survived",
+          "data_type": "DOUBLE PRECISION",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pclass",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sex",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "DOUBLE PRECISION",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sibsp",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "parch",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ticket",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "fare",
+          "data_type": "DOUBLE PRECISION",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cabin",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "embarked",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wikiid",
+          "data_type": "DOUBLE PRECISION",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name_wiki",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age_wiki",
+          "data_type": "DOUBLE PRECISION",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hometown",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "boarded",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "destination",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lifeboat",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "body",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "class",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "passengerid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "tables": [
+    {
+      "name": "ranking_system",
+      "schema_name": "universities",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "system_name",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ranking_criteria",
+      "schema_name": "universities",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ranking_system_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "criteria_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "ranking_system_id",
+          "references_table": "ranking_system",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "country",
+      "schema_name": "universities",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_name",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "university",
+      "schema_name": "universities",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "university_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "country_id",
+          "references_table": "country",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "university_year",
+      "schema_name": "universities",
+      "columns": [
+        {
+          "name": "university_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_students",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "student_staff_ratio",
+          "data_type": "NUMERIC(6, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pct_international_students",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pct_female_students",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "university_id",
+          "references_table": "university",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "university_ranking_year",
+      "schema_name": "universities",
+      "columns": [
+        {
+          "name": "university_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ranking_criteria_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "score",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "ranking_criteria_id",
+          "references_table": "ranking_criteria",
+          "references_column": "id"
+        },
+        {
+          "column": "university_id",
+          "references_table": "university",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,572 @@
+{
+  "tables": [
+    {
+      "name": "artist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(120)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "artist_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "album",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "album_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(160)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "album_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "artist_id",
+          "references_table": "artist",
+          "references_column": "artist_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "employee",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "employee_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reports_to",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "birth_date",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR(70)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "fax",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR(60)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "employee_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "reports_to",
+          "references_table": "employee",
+          "references_column": "employee_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "customer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR(70)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "fax",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR(60)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "support_rep_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "support_rep_id",
+          "references_table": "employee",
+          "references_column": "employee_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "invoice",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "invoice_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "invoice_date",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billing_address",
+          "data_type": "VARCHAR(70)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_city",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_state",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_country",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "invoice_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "customer_id",
+          "references_table": "customer",
+          "references_column": "customer_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "invoice_line",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "invoice_line_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "invoice_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "track_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "invoice_line_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "invoice_id",
+          "references_table": "invoice",
+          "references_column": "invoice_id"
+        },
+        {
+          "column": "track_id",
+          "references_table": "track",
+          "references_column": "track_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "track",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "track_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(200)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "album_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "media_type_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "genre_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "composer",
+          "data_type": "VARCHAR(220)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "milliseconds",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bytes",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "track_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "album_id",
+          "references_table": "album",
+          "references_column": "album_id"
+        },
+        {
+          "column": "genre_id",
+          "references_table": "genre",
+          "references_column": "genre_id"
+        },
+        {
+          "column": "media_type_id",
+          "references_table": "media_type",
+          "references_column": "media_type_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "playlist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "playlist_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(120)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "playlist_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "playlist_track",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "playlist_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "track_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "playlist_id",
+        "track_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "playlist_id",
+          "references_table": "playlist",
+          "references_column": "playlist_id"
+        },
+        {
+          "column": "track_id",
+          "references_table": "track",
+          "references_column": "track_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "genre",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "genre_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(120)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "genre_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "media_type",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "media_type_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(120)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "media_type_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+# LoRA config for Qwen2.5-Coder-7B-Instruct on M3 24GB
+model: "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit"
+train: true
+data: "finetune/dataset"
+seed: 42
+
+# LoRA settings — conservative for 24GB Air (avoids OOM + thermals)
+lora_layers: 8
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+
+# Training
+batch_size: 2
+iters: 200
+val_batches: 25
+learning_rate: 2e-5
+lr_schedule:
+  name: cosine_decay
+  warmup: 50
+  arguments: [2e-5, 200]
+grad_checkpoint: true   # critical for memory
+
+# Logging
+steps_per_report: 10
+steps_per_eval: 100
+save_every: 200
+adapter_path: "finetune/mlx/adapters"
