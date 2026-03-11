@@ -1,0 +1,255 @@
+{
+  "tables": [
+    {
+      "name": "genre",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "genre_name",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "game",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "genre_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "game_name",
+          "data_type": "VARCHAR(200)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "genre_id",
+          "references_table": "genre",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "game_publisher",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "game_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "publisher_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "game_id",
+          "references_table": "game",
+          "references_column": "id"
+        },
+        {
+          "column": "publisher_id",
+          "references_table": "publisher",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "publisher",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "publisher_name",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "game_platform",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "game_publisher_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "platform_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "release_year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "game_publisher_id",
+          "references_table": "game_publisher",
+          "references_column": "id"
+        },
+        {
+          "column": "platform_id",
+          "references_table": "platform",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "platform",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "platform_name",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "region_sales",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "region_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "game_platform_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_sales",
+          "data_type": "NUMERIC(5, 2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "game_platform_id",
+          "references_table": "game_platform",
+          "references_column": "id"
+        },
+        {
+          "column": "region_id",
+          "references_table": "region",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "region",
+      "schema_name": "video_games",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "region_name",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

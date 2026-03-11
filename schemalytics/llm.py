@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 T = TypeVar("T", bound=BaseModel)
 
-OLLAMA_DEFAULT_MODEL = "gemma3-data"
+OLLAMA_DEFAULT_MODEL = "qwen3-30b-data"
 ANTHROPIC_DEFAULT_MODEL = "claude-sonnet-4-20250514"
 MAX_RETRIES = 3
 

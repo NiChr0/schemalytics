@@ -1,0 +1,785 @@
+{
+  "tables": [
+    {
+      "name": "territories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "territory_id",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "territory_description",
+          "data_type": "VARCHAR(60)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "region_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "territory_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "region_id",
+          "references_table": "region",
+          "references_column": "region_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "order_details",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "REAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount",
+          "data_type": "REAL",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_id",
+        "product_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "order_id",
+          "references_table": "orders",
+          "references_column": "order_id"
+        },
+        {
+          "column": "product_id",
+          "references_table": "products",
+          "references_column": "product_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "employee_territories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "employee_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "territory_id",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "employee_id",
+        "territory_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "employee_id",
+          "references_table": "employees",
+          "references_column": "employee_id"
+        },
+        {
+          "column": "territory_id",
+          "references_table": "territories",
+          "references_column": "territory_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "us_states",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "state_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "state_name",
+          "data_type": "VARCHAR(100)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state_abbr",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state_region",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "state_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "VARCHAR(5)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contact_name",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "contact_title",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR(60)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "fax",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "orders",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "order_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "required_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipped_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ship_via",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "freight",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ship_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ship_address",
+          "data_type": "VARCHAR(60)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ship_city",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ship_region",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ship_postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ship_country",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "customer_id",
+          "references_table": "customers",
+          "references_column": "customer_id"
+        },
+        {
+          "column": "employee_id",
+          "references_table": "employees",
+          "references_column": "employee_id"
+        },
+        {
+          "column": "ship_via",
+          "references_table": "shippers",
+          "references_column": "shipper_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "employee_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title_of_courtesy",
+          "data_type": "VARCHAR(25)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "birth_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR(60)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "home_phone",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "extension",
+          "data_type": "VARCHAR(4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "photo",
+          "data_type": "BYTEA",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notes",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reports_to",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "photo_path",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "employee_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "reports_to",
+          "references_table": "employees",
+          "references_column": "employee_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "shippers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "shipper_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "shipper_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "supplier_id",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quantity_per_unit",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units_in_stock",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units_on_order",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reorder_level",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "discontinued",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "category_id",
+          "references_table": "categories",
+          "references_column": "category_id"
+        },
+        {
+          "column": "supplier_id",
+          "references_table": "suppliers",
+          "references_column": "supplier_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "category_name",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "picture",
+          "data_type": "BYTEA",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "suppliers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "supplier_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contact_name",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "contact_title",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR(60)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "fax",
+          "data_type": "VARCHAR(24)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "homepage",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "supplier_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "region",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "region_description",
+          "data_type": "VARCHAR(60)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "region_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "customer_demographics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_type_id",
+          "data_type": "VARCHAR(5)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_desc",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_type_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "customer_customer_demo",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "VARCHAR(5)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_type_id",
+          "data_type": "VARCHAR(5)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id",
+        "customer_type_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "customer_type_id",
+          "references_table": "customer_demographics",
+          "references_column": "customer_type_id"
+        },
+        {
+          "column": "customer_id",
+          "references_table": "customers",
+          "references_column": "customer_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

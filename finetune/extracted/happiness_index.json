@@ -1,0 +1,69 @@
+{
+  "tables": [
+    {
+      "name": "2019",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "overall_rank",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_or_region",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "score",
+          "data_type": "NUMERIC(5, 2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "gdp_per_capita",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "social_support",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "healthy_life_expectancy",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "freedom_to_make_life_choices",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "generosity",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "perceptions_of_corruption",
+          "data_type": "NUMERIC(10, 2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "overall_rank"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}
