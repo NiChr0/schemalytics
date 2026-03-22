@@ -39,7 +39,8 @@ PostgreSQL DB  →  5-Agent AI Pipeline  →  dbt Project + Semantic Layer
 ```bash
 # 1. Install prerequisites
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull gemma3-data
+ollama pull qwen3-30b-data
+ollama pull nichr0/schemalytics-classification-agent
 pip install schemalytics
 
 # 2. Run
@@ -56,9 +57,10 @@ dbt run
 
 ## Key Facts
 
-- **Version:** 0.1.3
+- **Version:** 0.2.0
 - **License:** Apache 2.0
 - **Python:** 3.10+
 - **LLM:** Local Ollama (default) or Anthropic Claude (via env var)
+- **Classification Agent:** `schemalytics-classification-agent` (fine-tuned Qwen3.5-4B, 2.6 GB)
 - **GitHub:** https://github.com/NiChr0/schemalytics
 - **PyPI:** https://pypi.org/project/schemalytics/

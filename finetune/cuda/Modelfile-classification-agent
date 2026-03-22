@@ -1,0 +1,12 @@
+FROM D:/Schemalytics/schemalytics-main/schemalytics-main/finetune/cuda/schemalytics-v6-Q4_K_M.gguf
+PARAMETER temperature 0
+PARAMETER num_ctx 12288
+PARAMETER num_predict 2048
+
+# schemalytics-classification-agent
+# Fine-tuned for database table classification (fact / dimension / bridge / reference).
+# Used as Agent 3 in the Schemalytics agentic pipeline.
+#
+# Base model: Qwen3.5-4B by Alibaba Cloud (https://huggingface.co/Qwen/Qwen3.5-4B)
+# License: Qwen License (https://huggingface.co/Qwen/Qwen3.5-4B/blob/main/LICENSE)
+# Fine-tune by: NiChr0 (https://github.com/NiChr0/schemalytics)

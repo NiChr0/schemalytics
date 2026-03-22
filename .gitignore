@@ -34,6 +34,28 @@ schemalytics/pyvenv.cfg
 # Evaluation audit files (local only)
 evaluation_audit*.md
 
+# Fine-tune — large binary artifacts (do not commit)
+finetune/cuda/*.gguf
+finetune/cuda/*.bin
+finetune/cuda/adapters-*/
+finetune/cuda/schemalytics-agent3-qwen3.5-4b/
+finetune/cuda/merged-*/
+unsloth_compiled_cache/
+
+# Fine-tune — intermediate labeled/extracted data (reproducible via scripts)
+finetune/labeled/
+finetune/labeled_batched/
+finetune/labeled_complex/
+finetune/labeled_spider/
+finetune/extracted_complex/
+finetune/extracted_spider/
+
+# Fine-tune — training logs
+finetune/cuda/*.log
+
+# Fine-tune — raw Spider dataset (third-party, download on demand)
+finetune/spider/
+
 # LLM tool-specific context files (kept local, not committed)
 CLAUDE.md
 AGENTS.md
