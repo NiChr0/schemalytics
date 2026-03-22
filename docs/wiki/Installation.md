@@ -26,14 +26,22 @@ Schemalytics only reads the schema — it never modifies your database.
 # Install Ollama
 curl -fsSL https://ollama.com/install.sh | sh
 
-# Pull the required model
-ollama pull gemma3-data
+# Pull the main pipeline model (Agents 1, 2, 4, 5)
+ollama pull qwen3-30b-data
+
+# Pull the fine-tuned classification model (Agent 3)
+ollama pull nichr0/schemalytics-classification-agent
 
 # Verify Ollama is running
 curl http://localhost:11434/api/tags
 ```
 
 Ollama must be running on `localhost:11434` when you use Schemalytics.
+
+`schemalytics-classification-agent` is a 2.6 GB QLoRA fine-tuned model specialized for
+table classification (fact / dimension / bridge / reference). It is used by Agent 3 when
+`SCHEMALYTICS_OLLAMA_MODEL=schemalytics-classification-agent` is set. Without this env var,
+Agent 3 falls back to `qwen3-30b-data`.
 
 ---
 
@@ -96,7 +104,8 @@ Connection string: `postgresql://postgres:mypassword@localhost:5432/northwind`
 - [ ] Python 3.10+ installed
 - [ ] `pip install schemalytics` complete
 - [ ] `ollama serve` running
-- [ ] `ollama list` shows `gemma3-data`
+- [ ] `ollama list` shows `qwen3-30b-data`
+- [ ] `ollama list` shows `nichr0/schemalytics-classification-agent` (optional, for Agent 3)
 - [ ] PostgreSQL database accessible
 
 Once all checked, proceed to [Getting Started](Getting-Started).

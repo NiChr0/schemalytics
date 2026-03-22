@@ -1,0 +1,17 @@
+# CUDA training requirements — RTX 3060 Ti (CUDA 12.x, Ampere)
+#
+# Step 1: install PyTorch with CUDA support FIRST
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124
+#
+# Step 2: install Unsloth (detects your CUDA/torch version automatically)
+#   pip install unsloth
+#
+# Step 3: install the rest
+#   pip install -r finetune/cuda/requirements.txt
+
+trl>=0.12.0
+datasets>=2.18.0
+transformers>=4.45.0
+accelerate>=0.34.0
+bitsandbytes>=0.43.0
+peft>=0.12.0
