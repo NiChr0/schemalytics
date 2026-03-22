@@ -95,8 +95,13 @@ All agent calls go through `llm.query_structured()`:
 ```
 SCHEMALYTICS_LLM_PROVIDER=ollama (default)
   └── instructor.from_openai(OpenAI(base_url="http://localhost:11434/v1"))
-      model: gemma3-data  (Ollama OpenAI-compatible endpoint)
+      model: qwen3-30b-data  (Ollama OpenAI-compatible endpoint)
       num_ctx: 12288 (fixed across all calls — changing triggers model reload)
+
+  Agent 3 (classify_tables) can use a dedicated fine-tuned model:
+      SCHEMALYTICS_OLLAMA_MODEL=schemalytics-classification-agent
+      Base: unsloth/Qwen3.5-4B QLoRA, trained on 327 real-world schemas
+      Ollama pull: ollama pull nichr0/schemalytics-classification-agent
 
 SCHEMALYTICS_LLM_PROVIDER=anthropic
   └── instructor.from_anthropic(Anthropic(api_key=...))

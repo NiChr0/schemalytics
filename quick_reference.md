@@ -125,6 +125,23 @@ schemalytics generate -c postgresql://...
 
 ---
 
+## Agent 3 Fine-Tuned Classifier
+
+Agent 3 (table classification) can use a dedicated fine-tuned model trained on real production schemas:
+
+```bash
+# Download (one-time)
+ollama pull nichr0/schemalytics-classification-agent
+
+# Use it
+SCHEMALYTICS_OLLAMA_MODEL=schemalytics-classification-agent \
+schemalytics generate -c postgresql://...
+```
+
+Model: `unsloth/Qwen3.5-4B` QLoRA · 327 training examples · train_loss=0.055 · eval_loss=0.058
+
+---
+
 ## Output Structure
 
 ```
