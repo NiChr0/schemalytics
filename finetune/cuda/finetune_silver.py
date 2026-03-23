@@ -32,8 +32,8 @@ ADAPTER_DIR     = "finetune/cuda/adapters-silver-v2"
 MAX_SEQ_LENGTH  = 4096   # reduced from 8192 — Qwen3.5 linear attn is memory-hungry
 
 LORA = dict(
-    r               = 32,           # up from 8 — more expressive adapters
-    lora_alpha      = 64,           # 2x r as standard practice
+    r               = 8,
+    lora_alpha      = 16,
     lora_dropout    = 0.05,
     target_modules  = [
         "q_proj", "k_proj", "v_proj", "o_proj",
@@ -57,7 +57,7 @@ TRAIN = dict(
     logging_steps               = 10,
     eval_strategy               = "steps",
     eval_steps                  = 100,
-    per_device_eval_batch_size  = 2,
+    per_device_eval_batch_size  = 1,
     save_strategy               = "steps",
     save_steps                  = 600,
     load_best_model_at_end      = False,
