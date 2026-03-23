@@ -1,0 +1,133 @@
+{
+  "tables": [
+    {
+      "name": "driver",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Driver_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Home_city",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Driver_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "school",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "School_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Grade",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "School",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "School_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "school_bus",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "School_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Driver_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Years_Working",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "If_full_time",
+          "data_type": "BOOL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "School_ID",
+        "Driver_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "School_ID",
+          "references_table": "school",
+          "references_column": "School_ID"
+        },
+        {
+          "column": "Driver_ID",
+          "references_table": "driver",
+          "references_column": "Driver_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

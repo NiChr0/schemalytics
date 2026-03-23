@@ -1,0 +1,274 @@
+{
+  "tables": [
+    {
+      "name": "Roles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "role_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "role_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Users",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "role_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "user_login",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "password",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Document_Structures",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_structure_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "parent_document_structure_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "document_structure_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Functional_Areas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "functional_area_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "parent_functional_area_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "functional_area_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Images",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "image_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "image_alt_text",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "image_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "image_url",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Documents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "document_structure_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "document_type_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "access_count",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "document_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Document_Functional_Areas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "functional_area_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Document_Sections",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "section_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "document_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "section_sequence",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "section_code",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "section_title",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Document_Sections_Images",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "section_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "section_id",
+        "image_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

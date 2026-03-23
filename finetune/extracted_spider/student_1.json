@@ -1,0 +1,70 @@
+{
+  "tables": [
+    {
+      "name": "list",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "LastName",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "FirstName",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Grade",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Classroom",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "LastName",
+        "FirstName"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "teachers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "LastName",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "FirstName",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Classroom",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "LastName",
+        "FirstName"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

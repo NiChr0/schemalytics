@@ -1,0 +1,121 @@
+{
+  "tables": [
+    {
+      "name": "member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nationality",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Role",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "performance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Performance_ID",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Host",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Attendance",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Performance_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "member_attendance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Performance_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_Pieces",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID",
+        "Performance_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Member_ID",
+          "references_table": "member",
+          "references_column": "Member_ID"
+        },
+        {
+          "column": "Performance_ID",
+          "references_table": "performance",
+          "references_column": "Performance_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "tables": [
+    {
+      "name": "Ref_Characteristic_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "characteristic_type_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "characteristic_type_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Colors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "color_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "color_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Product_Categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_category_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_category_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unit_of_measure",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Characteristics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "characteristic_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "characteristic_type_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "characteristic_data_type",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "characteristic_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_characteristic_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "color_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_category_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "typical_buying_price",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "typical_selling_price",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_product_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product_Characteristics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "characteristic_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_characteristic_value",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

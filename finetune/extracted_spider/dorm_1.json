@@ -1,0 +1,185 @@
+{
+  "tables": [
+    {
+      "name": "Student",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LName",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fname",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sex",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Major",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Advisor",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_code",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Dorm",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dormid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dorm_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "student_capacity",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Dorm_amenity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "amenid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amenity_name",
+          "data_type": "VARCHAR(25)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Has_amenity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dormid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amenid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "dormid",
+          "references_table": "Dorm",
+          "references_column": "dormid"
+        },
+        {
+          "column": "amenid",
+          "references_table": "Dorm_amenity",
+          "references_column": "amenid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Lives_in",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "stuid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dormid",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "room_number",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "stuid",
+          "references_table": "Student",
+          "references_column": "StuID"
+        },
+        {
+          "column": "dormid",
+          "references_table": "Dorm",
+          "references_column": "dormid"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,356 @@
+{
+  "tables": [
+    {
+      "name": "Ref_Document_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Type_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Type_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_Type_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Calendar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Calendar_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Day_Number",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Calendar_Date"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Locations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Location_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Location_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Location_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Location_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Roles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Role_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Role_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Role_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Role_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "All_Documents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_Stored",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Document_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Name",
+          "data_type": "CHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Document_Description",
+          "data_type": "CHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Document_Type_Code",
+          "references_table": "Ref_Document_Types",
+          "references_column": "Document_Type_Code"
+        },
+        {
+          "column": "Date_Stored",
+          "references_table": "Ref_Calendar",
+          "references_column": "Calendar_Date"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Employee_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Role_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Employee_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender_MFU",
+          "data_type": "CHAR(1)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_of_Birth",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Employee_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Role_Code",
+          "references_table": "Roles",
+          "references_column": "Role_Code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Document_Locations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Location_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_in_Location_From",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_in_Locaton_To",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_ID",
+        "Location_Code",
+        "Date_in_Location_From"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Location_Code",
+          "references_table": "Ref_Locations",
+          "references_column": "Location_Code"
+        },
+        {
+          "column": "Date_in_Location_From",
+          "references_table": "Ref_Calendar",
+          "references_column": "Calendar_Date"
+        },
+        {
+          "column": "Date_in_Locaton_To",
+          "references_table": "Ref_Calendar",
+          "references_column": "Calendar_Date"
+        },
+        {
+          "column": "Document_ID",
+          "references_table": "All_Documents",
+          "references_column": "Document_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Documents_to_be_Destroyed",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Destruction_Authorised_by_Employee_ID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Destroyed_by_Employee_ID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Planned_Destruction_Date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Actual_Destruction_Date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Destroyed_by_Employee_ID",
+          "references_table": "Employees",
+          "references_column": "Employee_ID"
+        },
+        {
+          "column": "Destruction_Authorised_by_Employee_ID",
+          "references_table": "Employees",
+          "references_column": "Employee_ID"
+        },
+        {
+          "column": "Planned_Destruction_Date",
+          "references_table": "Ref_Calendar",
+          "references_column": "Calendar_Date"
+        },
+        {
+          "column": "Actual_Destruction_Date",
+          "references_table": "Ref_Calendar",
+          "references_column": "Calendar_Date"
+        },
+        {
+          "column": "Document_ID",
+          "references_table": "All_Documents",
+          "references_column": "Document_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "tables": [
+    {
+      "name": "people",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "People_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nationality",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Graduation_College",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "People_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "company",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Company_ID",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Headquarters",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Industry",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sales_in_Billion",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Profits_in_Billion",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Assets_in_Billion",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Market_Value_in_Billion",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Company_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Company_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "People_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year_working",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Company_ID",
+        "People_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Company_ID",
+          "references_table": "company",
+          "references_column": "Company_ID"
+        },
+        {
+          "column": "People_ID",
+          "references_table": "people",
+          "references_column": "People_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

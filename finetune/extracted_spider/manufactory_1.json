@@ -1,0 +1,86 @@
+{
+  "tables": [
+    {
+      "name": "Manufacturers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Code",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Headquarter",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Founder",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Revenue",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Code",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Manufacturer",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Code"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Manufacturer",
+          "references_table": "Manufacturers",
+          "references_column": "Code"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

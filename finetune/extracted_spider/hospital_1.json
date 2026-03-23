@@ -1,0 +1,572 @@
+{
+  "tables": [
+    {
+      "name": "Physician",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "SSN",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Department",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DepartmentID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Head",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Affiliated_With",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Physician",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PrimaryAffiliation",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Physician",
+        "Department"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Procedures",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Code",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Cost",
+          "data_type": "REAL",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Trained_In",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Physician",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Treatment",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "CertificationDate",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "CertificationExpires",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Physician",
+        "Treatment"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Patient",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SSN",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Phone",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "InsuranceID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PCP",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Nurse",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Registered",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "SSN",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Appointment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "AppointmentID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Patient",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PrepNurse",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Physician",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Start",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "End",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ExaminationRoom",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Medication",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Code",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Brand",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Description",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Prescribes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Physician",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Patient",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Medication",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Appointment",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Dose",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Physician",
+        "Patient",
+        "Medication",
+        "Date"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Block",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "BlockFloor",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "BlockCode",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "BlockFloor",
+        "BlockCode"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Room",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "RoomNumber",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "RoomType",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "BlockFloor",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "BlockCode",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Unavailable",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "On_Call",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Nurse",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "BlockFloor",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "BlockCode",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "OnCallStart",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "OnCallEnd",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Nurse",
+        "BlockFloor",
+        "BlockCode",
+        "OnCallStart",
+        "OnCallEnd"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Stay",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StayID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Patient",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Room",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "StayStart",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "StayEnd",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Undergoes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Patient",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Procedures",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Stay",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "DateUndergoes",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Physician",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "AssistingNurse",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Patient",
+        "Procedures",
+        "Stay",
+        "DateUndergoes"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

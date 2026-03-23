@@ -1,0 +1,174 @@
+{
+  "tables": [
+    {
+      "name": "chip_model",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Model_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Launch_year",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "RAM_MiB",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ROM_MiB",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Slots",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "WiFi",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Bluetooth",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Model_name"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "screen_mode",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Graphics_mode",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Char_cells",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Pixels",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hardware_colours",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "used_kb",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "map",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Graphics_mode"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "phone",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Company_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hardware_Model_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Accreditation_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Accreditation_level",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "chip_model",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "screen_mode",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Hardware_Model_name"
+      ],
+      "foreign_keys": [
+        {
+          "column": "screen_mode",
+          "references_table": "screen_mode",
+          "references_column": "Graphics_mode"
+        },
+        {
+          "column": "chip_model",
+          "references_table": "chip_model",
+          "references_column": "Model_name"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

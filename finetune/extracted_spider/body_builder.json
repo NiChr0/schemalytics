@@ -1,0 +1,98 @@
+{
+  "tables": [
+    {
+      "name": "body_builder",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Body_Builder_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "People_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Snatch",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Clean_Jerk",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Body_Builder_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "People_ID",
+          "references_table": "people",
+          "references_column": "People_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "people",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "People_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Height",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Weight",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Birth_Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Birth_Place",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "People_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

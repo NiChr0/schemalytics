@@ -1,0 +1,109 @@
+{
+  "tables": [
+    {
+      "name": "journal",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Journal_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Theme",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sales",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Journal_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "editor",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Editor_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Editor_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "journal_committee",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Editor_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Journal_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Work_Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Editor_ID",
+        "Journal_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Editor_ID",
+          "references_table": "editor",
+          "references_column": "Editor_ID"
+        },
+        {
+          "column": "Journal_ID",
+          "references_table": "journal",
+          "references_column": "Journal_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

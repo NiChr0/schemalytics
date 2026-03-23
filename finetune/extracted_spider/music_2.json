@@ -1,0 +1,256 @@
+{
+  "tables": [
+    {
+      "name": "Songs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SongId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Albums",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "AId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Label",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Band",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Firstname",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Lastname",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Instruments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SongId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "BandmateId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Instrument",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "SongId",
+        "BandmateId",
+        "Instrument"
+      ],
+      "foreign_keys": [
+        {
+          "column": "SongId",
+          "references_table": "Songs",
+          "references_column": "SongId"
+        },
+        {
+          "column": "BandmateId",
+          "references_table": "Band",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Performance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SongId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Bandmate",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "StagePosition",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "SongId",
+        "Bandmate"
+      ],
+      "foreign_keys": [
+        {
+          "column": "SongId",
+          "references_table": "Songs",
+          "references_column": "SongId"
+        },
+        {
+          "column": "Bandmate",
+          "references_table": "Band",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Tracklists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "AlbumId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SongId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "AlbumId",
+        "Position"
+      ],
+      "foreign_keys": [
+        {
+          "column": "SongId",
+          "references_table": "Songs",
+          "references_column": "SongId"
+        },
+        {
+          "column": "AlbumId",
+          "references_table": "Albums",
+          "references_column": "AId"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Vocals",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SongId",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Bandmate",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "SongId",
+        "Bandmate"
+      ],
+      "foreign_keys": [
+        {
+          "column": "SongId",
+          "references_table": "Songs",
+          "references_column": "SongId"
+        },
+        {
+          "column": "Bandmate",
+          "references_table": "Band",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

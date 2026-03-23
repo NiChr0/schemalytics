@@ -1,0 +1,800 @@
+{
+  "tables": [
+    {
+      "name": "session",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "sess_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expires_at",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "vars",
+          "data_type": "MEDIUMTEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "sess_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "users",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "username",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mail_host",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_login",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "failed_login",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "failed_login_counter",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "language",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preferences",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "user_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cache",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cache_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expires",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "user_id",
+        "cache_key"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cache_shared",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "cache_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expires",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "cache_key"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cache_index",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mailbox",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expires",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "valid",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "user_id",
+        "mailbox"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cache_thread",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mailbox",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expires",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "user_id",
+        "mailbox"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cache_messages",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mailbox",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expires",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flags",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "user_id",
+        "mailbox",
+        "uid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "collected_addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "changed",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "address_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "contacts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "contact_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "changed",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "del",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "surname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "vcard",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "words",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "contact_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "contactgroups",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "contactgroup_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "changed",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "del",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "contactgroup_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "contactgroupmembers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "contactgroup_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contact_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "contactgroup_id",
+        "contact_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "identities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "identity_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "changed",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "del",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "standard",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "organization",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bcc",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "signature",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "html_signature",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "identity_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "responses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "response_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_html",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "changed",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "del",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "response_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dictionary",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "language",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "searches",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "search_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "search_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "filestore",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "file_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "context",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filename",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mtime",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "file_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "uploads",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "upload_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "session_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "group",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "metadata",
+          "data_type": "MEDIUMTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "upload_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "system",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "MEDIUMTEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "name"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

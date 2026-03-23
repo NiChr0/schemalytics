@@ -1,0 +1,121 @@
+{
+  "tables": [
+    {
+      "name": "manufacturer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Manufacturer_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Open_Year",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_Factories",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_Shops",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Manufacturer_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "furniture",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Furniture_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_Component",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Market_Rate",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Furniture_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "furniture_manufacte",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Manufacturer_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Furniture_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price_in_Dollar",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Manufacturer_ID",
+        "Furniture_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Manufacturer_ID",
+          "references_table": "manufacturer",
+          "references_column": "Manufacturer_ID"
+        },
+        {
+          "column": "Furniture_ID",
+          "references_table": "furniture",
+          "references_column": "Furniture_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

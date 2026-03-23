@@ -1,0 +1,133 @@
+{
+  "tables": [
+    {
+      "name": "station",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Station_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Annual_entry_exit",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Annual_interchanges",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total_Passengers",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Main_Services",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Number_of_Platforms",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Station_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "train",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Train_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Time",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Service",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Train_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "train_station",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Train_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Station_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Train_ID",
+        "Station_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Train_ID",
+          "references_table": "train",
+          "references_column": "Train_ID"
+        },
+        {
+          "column": "Station_ID",
+          "references_table": "station",
+          "references_column": "Station_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

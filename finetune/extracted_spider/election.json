@@ -1,0 +1,162 @@
+{
+  "tables": [
+    {
+      "name": "county",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "County_Id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "County_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Population",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Zip_code",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "County_Id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "party",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Party_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Governor",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Lieutenant_Governor",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Comptroller",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Attorney_General",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "US_Senate",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Party_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "election",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Election_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Counties_Represented",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "District",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Delegate",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "First_Elected",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Committee",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Election_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Party",
+          "references_table": "party",
+          "references_column": "Party_ID"
+        },
+        {
+          "column": "District",
+          "references_table": "county",
+          "references_column": "County_Id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

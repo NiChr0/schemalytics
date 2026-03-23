@@ -1,0 +1,246 @@
+{
+  "tables": [
+    {
+      "name": "club",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Club_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Start_year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Club_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "club_rank",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Rank",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Club_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gold",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Silver",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Bronze",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Rank",
+        "Club_ID",
+        "FOREIGN",
+        "KEY",
+        "Club_ID",
+        "REFERENCES",
+        "club",
+        "Club_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "player",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Player_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Club_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Apps",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Tries",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Goals",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Points",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Player_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Club_ID",
+          "references_table": "club",
+          "references_column": "Club_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "competition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Competition_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Competition_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Competition_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "competition_result",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Competition_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Club_ID_1",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Club_ID_2",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Score",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Competition_ID",
+        "Club_ID_1",
+        "Club_ID_2"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Club_ID_1",
+          "references_table": "club",
+          "references_column": "Club_ID"
+        },
+        {
+          "column": "Club_ID_2",
+          "references_table": "club",
+          "references_column": "Club_ID"
+        },
+        {
+          "column": "Competition_ID",
+          "references_table": "competition",
+          "references_column": "Competition_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

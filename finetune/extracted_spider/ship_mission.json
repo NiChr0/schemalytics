@@ -1,0 +1,104 @@
+{
+  "tables": [
+    {
+      "name": "mission",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Mission_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ship_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Code",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Launched_Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Speed_knots",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fate",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Mission_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Ship_ID",
+          "references_table": "ship",
+          "references_column": "Ship_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "ship",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Ship_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nationality",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Tonnage",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Ship_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

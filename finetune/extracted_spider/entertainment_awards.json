@@ -1,0 +1,121 @@
+{
+  "tables": [
+    {
+      "name": "festival_detail",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Festival_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Festival_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Chair_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_Audience",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Festival_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artwork",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Artwork_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Artwork_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "nomination",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Artwork_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Festival_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Result",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Artwork_ID",
+        "Festival_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Artwork_ID",
+          "references_table": "artwork",
+          "references_column": "Artwork_ID"
+        },
+        {
+          "column": "Festival_ID",
+          "references_table": "festival_detail",
+          "references_column": "Festival_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

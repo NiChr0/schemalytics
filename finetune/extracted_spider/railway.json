@@ -1,0 +1,198 @@
+{
+  "tables": [
+    {
+      "name": "railway",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Railway_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Railway",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Builder",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Built",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Wheels",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ObjectNumber",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Railway_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "train",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Train_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Train_Num",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "From",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Arrival",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Railway_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Train_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Railway_ID",
+          "references_table": "railway",
+          "references_column": "Railway_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "manager",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Manager_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Working_year_starts",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Level",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Manager_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "railway_manage",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Railway_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Manager_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "From_Year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Railway_ID",
+        "Manager_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Manager_ID",
+          "references_table": "manager",
+          "references_column": "Manager_ID"
+        },
+        {
+          "column": "Railway_ID",
+          "references_table": "railway",
+          "references_column": "Railway_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,955 @@
+{
+  "tables": [
+    {
+      "name": "be_sessions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ses_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ses_iplock",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ses_userid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ses_tstamp",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ses_data",
+          "data_type": "LONGBLOB",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ses_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "be_users",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "populated",
+          "data_type": "FROM",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "pages",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "perms_groupid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "perms_user",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "perms_group",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "perms_everybody",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "but",
+          "data_type": "RELY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "content_from_pid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mount_pid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_registry",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "entry_namespace",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "entry_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "entry_value",
+          "data_type": "MEDIUMBLOB",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_be_shortcuts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "userid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "route",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "arguments",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sorting",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sc_group",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "group_uuid",
+          "data_type": "UUID",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_be_shortcuts_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uuid",
+          "data_type": "UUID",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "userid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "label",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sorting",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uuid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_file_storage",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "but",
+          "data_type": "IT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_file_processedfile",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tstamp",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "crdate",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "storage",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "original",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "identifier",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TINYTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "processing_url",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "configuration",
+          "data_type": "BLOB",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "configurationsha1",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "originalfilesha1",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "task_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "checksum",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "width",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_file_reference",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "but",
+          "data_type": "RELY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tstamp",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "actiontype",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "usertype",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "userid",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "originaluserid",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "recuid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tablename",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "history_data",
+          "data_type": "MEDIUMTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "workspace",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "correlation_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_lockedrecords",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "userid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tstamp",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "record_table",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "record_uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "record_pid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "username",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "feuserid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_refindex",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "hash",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tablename",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recuid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "field",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hidden",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "starttime",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "t3ver_state",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flexpointer",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "softref_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "softref_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "workspace",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ref_table",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ref_field",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ref_hidden",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ref_starttime",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ref_t3ver_state",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ref_sorting",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ref_string",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "or",
+          "data_type": "CAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "hash"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_log",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tstamp",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "userid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "action",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recuid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tablename",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recpid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "error",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "details",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "channel",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "IP",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "log_data",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "event_pid",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "workspace",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "request_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "time_micro",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "component",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "message",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_category",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "but",
+          "data_type": "RELY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_messenger_messages",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "body",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "headers",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "queue_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "available_at",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "delivered_at",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_http_report",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "uuid",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "changed",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scope",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "request_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta",
+          "data_type": "MEDIUMTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "details",
+          "data_type": "MEDIUMTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "summary",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "uuid"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sys_csp_resolution",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "summary",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scope",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mutation_identifier",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mutation_collection",
+          "data_type": "MEDIUMTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "meta",
+          "data_type": "MEDIUMTEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "summary"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "tables": [
+    {
+      "name": "mountain",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Mountain_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Height",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Prominence",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Range",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Mountain_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "climber",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Climber_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Time",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Points",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Mountain_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Climber_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Mountain_ID",
+          "references_table": "mountain",
+          "references_column": "Mountain_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

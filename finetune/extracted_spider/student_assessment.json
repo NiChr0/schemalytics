@@ -1,0 +1,374 @@
+{
+  "tables": [
+    {
+      "name": "Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "line_1",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "line_2",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "zip_postcode",
+          "data_type": "CHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state_province_county",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "address_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "People",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "person_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "middle_name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cell_mobile_number",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "email_address",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "login_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "password",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "person_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Students",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "student_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "student_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "student_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "student_id",
+          "references_table": "People",
+          "references_column": "person_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Courses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "course_id",
+          "data_type": "VARCHAR(100)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "course_name",
+          "data_type": "VARCHAR(120)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "course_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "course_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "People_Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "person_address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "person_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_from",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_to",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "person_address_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "person_id",
+          "references_table": "People",
+          "references_column": "person_id"
+        },
+        {
+          "column": "address_id",
+          "references_table": "Addresses",
+          "references_column": "address_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Student_Course_Registrations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "student_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "course_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "registration_date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "student_id",
+        "course_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "student_id",
+          "references_table": "Students",
+          "references_column": "student_id"
+        },
+        {
+          "column": "course_id",
+          "references_table": "Courses",
+          "references_column": "course_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Student_Course_Attendance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "student_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "course_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_of_attendance",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "student_id",
+        "course_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Candidates",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "candidate_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "candidate_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "candidate_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "candidate_id",
+          "references_table": "People",
+          "references_column": "person_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Candidate_Assessments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "candidate_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "qualification",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "assessment_date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "asessment_outcome_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "candidate_id",
+        "qualification"
+      ],
+      "foreign_keys": [
+        {
+          "column": "candidate_id",
+          "references_table": "Candidates",
+          "references_column": "candidate_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "tables": [
+    {
+      "name": "genre",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "g_name",
+          "data_type": "VARCHAR2(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "VARCHAR2(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "most_popular_in",
+          "data_type": "VARCHAR2(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "g_name"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR2(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preferred_genre",
+          "data_type": "VARCHAR2(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "preferred_genre",
+          "references_table": "genre",
+          "references_column": "g_name"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "files",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "f_id",
+          "data_type": "NUMBER(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR2(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "file_size",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duration",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "formats",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "f_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "artist_name",
+          "references_table": "artist",
+          "references_column": "artist_name"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "song",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "song_name",
+          "data_type": "VARCHAR2(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR2(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "f_id",
+          "data_type": "NUMBER(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "genre_is",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "NUMBER(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "languages",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "releasedate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "resolution",
+          "data_type": "NUMBER(10)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "artist_name",
+          "references_table": "artist",
+          "references_column": "artist_name"
+        },
+        {
+          "column": "f_id",
+          "references_table": "files",
+          "references_column": "f_id"
+        },
+        {
+          "column": "genre_is",
+          "references_table": "genre",
+          "references_column": "g_name"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

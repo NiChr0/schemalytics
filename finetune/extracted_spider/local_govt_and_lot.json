@@ -1,0 +1,473 @@
+{
+  "tables": [
+    {
+      "name": "Customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "property_type_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "property_address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "property_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Residents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "resident_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_moved_in",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_moved_out",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "other_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "resident_id",
+        "property_id",
+        "date_moved_in"
+      ],
+      "foreign_keys": [
+        {
+          "column": "property_id",
+          "references_table": "Properties",
+          "references_column": "property_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Organizations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "organization_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "parent_organization_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organization_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "organization_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Services",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "service_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "organization_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_type_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "service_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "organization_id",
+          "references_table": "Organizations",
+          "references_column": "organization_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Residents_Services",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "resident_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_moved_in",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_requested",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_provided",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "resident_id",
+        "service_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "service_id",
+          "references_table": "Services",
+          "references_column": "service_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Things",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "thing_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "organization_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Type_of_Thing_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_type_code",
+          "data_type": "CHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "thing_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "organization_id",
+          "references_table": "Organizations",
+          "references_column": "organization_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Customer_Events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Customer_Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_moved_in",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "resident_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "thing_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Customer_Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "thing_id",
+          "references_table": "Things",
+          "references_column": "thing_id"
+        },
+        {
+          "column": "customer_id",
+          "references_table": "Customers",
+          "references_column": "customer_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Customer_Event_Notes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Customer_Event_Note_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_type_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "resident_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_moved_in",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Customer_Event_Note_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Customer_Event_ID",
+          "references_table": "Customer_Events",
+          "references_column": "Customer_Event_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Timed_Status_of_Things",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "thing_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_and_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Status_of_Thing_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "thing_id",
+        "Date_and_Date",
+        "Status_of_Thing_Code"
+      ],
+      "foreign_keys": [
+        {
+          "column": "thing_id",
+          "references_table": "Things",
+          "references_column": "thing_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Timed_Locations_of_Things",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "thing_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_and_Time",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Location_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "thing_id",
+        "Date_and_Time",
+        "Location_Code"
+      ],
+      "foreign_keys": [
+        {
+          "column": "thing_id",
+          "references_table": "Things",
+          "references_column": "thing_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

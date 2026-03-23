@@ -1,0 +1,102 @@
+{
+  "tables": [
+    {
+      "name": "Movie",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "mID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "director",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Reviewer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "rID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Rating",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "rID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "stars",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ratingDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "mID",
+          "references_table": "Movie",
+          "references_column": "mID"
+        },
+        {
+          "column": "rID",
+          "references_table": "Reviewer",
+          "references_column": "rID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "tables": [
+    {
+      "name": "College",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "cName",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "enr",
+          "data_type": "NUMERIC(5,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "cName"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Player",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "pID",
+          "data_type": "NUMERIC(5,0)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "pName",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "yCard",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HS",
+          "data_type": "NUMERIC(5,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "pID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Tryout",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "pID",
+          "data_type": "NUMERIC(5,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cName",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pPos",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "decision",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "pID",
+        "cName"
+      ],
+      "foreign_keys": [
+        {
+          "column": "pID",
+          "references_table": "Player",
+          "references_column": "pID"
+        },
+        {
+          "column": "cName",
+          "references_table": "College",
+          "references_column": "cName"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "tables": [
+    {
+      "name": "region",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Region_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Region_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Label",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Format",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Catalogue",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Region_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "party",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Party_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Minister",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Took_office",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Left_office",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Region_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Party_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Region_ID",
+          "references_table": "region",
+          "references_column": "Region_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Member_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party_ID",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "In_office",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Party_ID",
+          "references_table": "party",
+          "references_column": "Party_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "party_events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Event_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Event_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Member_in_charge_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Party_ID",
+          "references_table": "party",
+          "references_column": "Party_ID"
+        },
+        {
+          "column": "Member_in_charge_ID",
+          "references_table": "member",
+          "references_column": "Member_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

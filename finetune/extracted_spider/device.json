@@ -1,0 +1,133 @@
+{
+  "tables": [
+    {
+      "name": "device",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Device_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Device",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Carrier",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Package_Version",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Applications",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Software_Platform",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Device_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "shop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Shop_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Shop_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Open_Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Open_Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Shop_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "stock",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Shop_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Device_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Quantity",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Shop_ID",
+        "Device_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Shop_ID",
+          "references_table": "shop",
+          "references_column": "Shop_ID"
+        },
+        {
+          "column": "Device_ID",
+          "references_table": "device",
+          "references_column": "Device_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

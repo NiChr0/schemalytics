@@ -1,0 +1,366 @@
+{
+  "tables": [
+    {
+      "name": "CLASS",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CLASS_CODE",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CRS_CODE",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CLASS_SECTION",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CLASS_TIME",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CLASS_ROOM",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PROF_NUM",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "CRS_CODE",
+          "references_table": "COURSE",
+          "references_column": "CRS_CODE"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "COURSE",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CRS_CODE",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DEPT_CODE",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CRS_DESCRIPTION",
+          "data_type": "VARCHAR(35)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CRS_CREDIT",
+          "data_type": "FLOAT(8)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "DEPT_CODE",
+          "references_table": "DEPARTMENT",
+          "references_column": "DEPT_CODE"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "DEPARTMENT",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DEPT_CODE",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DEPT_NAME",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SCHOOL_CODE",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EMP_NUM",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DEPT_ADDRESS",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DEPT_EXTENSION",
+          "data_type": "VARCHAR(4)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "EMP_NUM",
+          "references_table": "EMPLOYEE",
+          "references_column": "EMP_NUM"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "EMPLOYEE",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EMP_NUM",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EMP_LNAME",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EMP_FNAME",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EMP_INITIAL",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EMP_JOBCODE",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EMP_HIREDATE",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EMP_DOB",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ENROLL",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CLASS_CODE",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_NUM",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ENROLL_GRADE",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "CLASS_CODE",
+          "references_table": "CLASS",
+          "references_column": "CLASS_CODE"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "PROFESSOR",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EMP_NUM",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DEPT_CODE",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PROF_OFFICE",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PROF_EXTENSION",
+          "data_type": "VARCHAR(4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PROF_HIGH_DEGREE",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "EMP_NUM",
+          "references_table": "EMPLOYEE",
+          "references_column": "EMP_NUM"
+        },
+        {
+          "column": "DEPT_CODE",
+          "references_table": "DEPARTMENT",
+          "references_column": "DEPT_CODE"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "STUDENT",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "STU_NUM",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_LNAME",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_FNAME",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_INIT",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_DOB",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_HRS",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_CLASS",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_GPA",
+          "data_type": "FLOAT(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_TRANSFER",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DEPT_CODE",
+          "data_type": "VARCHAR(18)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "STU_PHONE",
+          "data_type": "VARCHAR(4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PROF_NUM",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "DEPT_CODE",
+          "references_table": "DEPARTMENT",
+          "references_column": "DEPT_CODE"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

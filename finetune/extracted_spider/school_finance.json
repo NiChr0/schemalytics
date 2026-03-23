@@ -1,0 +1,164 @@
+{
+  "tables": [
+    {
+      "name": "School",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "School_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "School_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Mascot",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Enrollment",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "IHSAA_Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "IHSAA_Football_Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "County",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "School_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "budget",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "School_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Budgeted",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_budget_percent_budgeted",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Invested",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_budget_percent_invested",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Budget_invested_percent",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "School_id",
+        "YEAR"
+      ],
+      "foreign_keys": [
+        {
+          "column": "School_id",
+          "references_table": "School",
+          "references_column": "School_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "endowment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "endowment_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "School_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "donator_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "endowment_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "School_id",
+          "references_table": "School",
+          "references_column": "School_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

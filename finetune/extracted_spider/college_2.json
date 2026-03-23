@@ -1,0 +1,475 @@
+{
+  "tables": [
+    {
+      "name": "classroom",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "building",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "room_number",
+          "data_type": "VARCHAR(7)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "capacity",
+          "data_type": "NUMERIC(4,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "building",
+        "room_number"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "department",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dept_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "budget",
+          "data_type": "NUMERIC(12,2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "dept_name"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "course",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "course_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dept_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "credits",
+          "data_type": "NUMERIC(2,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "course_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "dept_name",
+          "references_table": "department",
+          "references_column": "dept_name"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "instructor",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "dept_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "NUMERIC(8,2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "dept_name",
+          "references_table": "department",
+          "references_column": "dept_name"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "section",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "course_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sec_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "semester",
+          "data_type": "VARCHAR(6)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "NUMERIC(4,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "room_number",
+          "data_type": "VARCHAR(7)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "time_slot_id",
+          "data_type": "VARCHAR(4)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "course_id",
+        "sec_id",
+        "semester",
+        "year"
+      ],
+      "foreign_keys": [
+        {
+          "column": "course_id",
+          "references_table": "course",
+          "references_column": "course_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "teaches",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "course_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sec_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "semester",
+          "data_type": "VARCHAR(6)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "NUMERIC(4,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ID",
+        "course_id",
+        "sec_id",
+        "semester",
+        "year"
+      ],
+      "foreign_keys": [
+        {
+          "column": "ID",
+          "references_table": "instructor",
+          "references_column": "ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "student",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "dept_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "tot_cred",
+          "data_type": "NUMERIC(3,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "dept_name",
+          "references_table": "department",
+          "references_column": "dept_name"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "takes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "course_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sec_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "semester",
+          "data_type": "VARCHAR(6)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "NUMERIC(4,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "grade",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ID",
+        "course_id",
+        "sec_id",
+        "semester",
+        "year"
+      ],
+      "foreign_keys": [
+        {
+          "column": "ID",
+          "references_table": "student",
+          "references_column": "ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "advisor",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "s_ID",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "i_ID",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "s_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "i_ID",
+          "references_table": "instructor",
+          "references_column": "ID"
+        },
+        {
+          "column": "s_ID",
+          "references_table": "student",
+          "references_column": "ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "time_slot",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "time_slot_id",
+          "data_type": "VARCHAR(4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "day",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_hr",
+          "data_type": "NUMERIC(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_min",
+          "data_type": "NUMERIC(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_hr",
+          "data_type": "NUMERIC(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_min",
+          "data_type": "NUMERIC(2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "time_slot_id",
+        "day",
+        "start_hr",
+        "start_min"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "prereq",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "course_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "prereq_id",
+          "data_type": "VARCHAR(8)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "course_id",
+        "prereq_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "course_id",
+          "references_table": "course",
+          "references_column": "course_id"
+        },
+        {
+          "column": "prereq_id",
+          "references_table": "course",
+          "references_column": "course_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

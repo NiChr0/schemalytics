@@ -1,0 +1,223 @@
+{
+  "tables": [
+    {
+      "name": "school",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "School_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "School",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Enrollment",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Founded",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Denomination",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Boys_or_Girls",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Day_or_Boarding",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year_Entered_Competition",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "School_Colors",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "School_Id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "school_details",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "School_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nickname",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Colors",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "League",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Division",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "School_Id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "School_ID",
+          "references_table": "school",
+          "references_column": "School_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "school_performance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "School_Id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "School_Year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Class_A",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Class_AA",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "School_Id",
+        "School_Year"
+      ],
+      "foreign_keys": [
+        {
+          "column": "School_ID",
+          "references_table": "school",
+          "references_column": "School_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "player",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Player_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Player",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Team",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "School_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Player_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "School_ID",
+          "references_table": "school",
+          "references_column": "School_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

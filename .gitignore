@@ -37,21 +37,15 @@ evaluation_audit*.md
 # Fine-tune — large binary artifacts (do not commit)
 finetune/cuda/*.gguf
 finetune/cuda/*.bin
-finetune/cuda/adapters-*/
-finetune/cuda/schemalytics-agent3-qwen3.5-4b/
 finetune/cuda/merged-*/
+finetune/cuda/schemalytics-agent3-qwen3.5-4b/
 unsloth_compiled_cache/
 
-# Fine-tune — intermediate labeled/extracted data (reproducible via scripts)
-finetune/labeled/
-finetune/labeled_batched/
-finetune/labeled_complex/
-finetune/labeled_spider/
-finetune/extracted_complex/
-finetune/extracted_spider/
-
-# Fine-tune — training logs
+# Fine-tune — training logs (local only)
 finetune/cuda/*.log
+
+# Virtual environments (platform-specific, too large)
+finetune/cuda/.venv/
 
 # Fine-tune — raw Spider dataset (third-party, download on demand)
 finetune/spider/

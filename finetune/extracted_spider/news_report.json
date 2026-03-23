@@ -1,0 +1,127 @@
+{
+  "tables": [
+    {
+      "name": "event",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Event_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Venue",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Event_Attendance",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Event_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "journalist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "journalist_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nationality",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Years_working",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "journalist_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "news_report",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "journalist_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Event_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Work_Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "journalist_ID",
+        "Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "journalist_ID",
+          "references_table": "journalist",
+          "references_column": "journalist_ID"
+        },
+        {
+          "column": "Event_ID",
+          "references_table": "event",
+          "references_column": "Event_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

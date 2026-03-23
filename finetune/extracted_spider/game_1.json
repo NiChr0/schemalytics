@@ -1,0 +1,171 @@
+{
+  "tables": [
+    {
+      "name": "Student",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LName",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fname",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sex",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Major",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Advisor",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_code",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Video_Games",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "GameID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "GName",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "GType",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Plays_Games",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "GameID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hours_Played",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "GameID",
+          "references_table": "Video_Games",
+          "references_column": "GameID"
+        },
+        {
+          "column": "StuID",
+          "references_table": "Student",
+          "references_column": "StuID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "SportsInfo",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SportName",
+          "data_type": "VARCHAR(32)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HoursPerWeek",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "GamesPlayed",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "OnScholarship",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "StuID",
+          "references_table": "Student",
+          "references_column": "StuID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

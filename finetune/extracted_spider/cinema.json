@@ -1,0 +1,151 @@
+{
+  "tables": [
+    {
+      "name": "film",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Film_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank_in_series",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Number_in_season",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Directed_by",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Original_air_date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Production_code",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Film_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cinema",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Cinema_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Openning_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Capacity",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Cinema_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "schedule",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Cinema_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Film_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Show_times_per_day",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Cinema_ID",
+        "Film_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Film_ID",
+          "references_table": "film",
+          "references_column": "Film_ID"
+        },
+        {
+          "column": "Cinema_ID",
+          "references_table": "cinema",
+          "references_column": "Cinema_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

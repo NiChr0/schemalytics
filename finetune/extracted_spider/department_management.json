@@ -1,0 +1,127 @@
+{
+  "tables": [
+    {
+      "name": "department",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Department_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Creation",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ranking",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Budget_in_Billions",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_Employees",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Department_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "head",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "head_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "born_state",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "head_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "management",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "department_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "head_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temporary_acting",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Department_ID",
+        "head_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Department_ID",
+          "references_table": "department",
+          "references_column": "Department_ID"
+        },
+        {
+          "column": "head_ID",
+          "references_table": "head",
+          "references_column": "head_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "tables": [
+    {
+      "name": "company",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Company_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Company",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Headquarters",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Main_Industry",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sales_billion",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Profits_billion",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Assets_billion",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Market_Value",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Company_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "gas_station",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Station_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Open_Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Manager_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Vice_Manager_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Representative_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Station_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "station_company",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Station_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Company_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank_of_the_Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Station_ID",
+        "Company_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Station_ID",
+          "references_table": "gas_station",
+          "references_column": "Station_ID"
+        },
+        {
+          "column": "Company_ID",
+          "references_table": "company",
+          "references_column": "Company_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}
