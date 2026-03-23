@@ -29,7 +29,7 @@ from pathlib import Path
 
 MODEL_ID        = "unsloth/Qwen3.5-4B"
 ADAPTER_DIR     = "finetune/cuda/adapters-silver-v2"
-MAX_SEQ_LENGTH  = 8192   # 3090 24GB — covers all schema sizes including 100+ table schemas
+MAX_SEQ_LENGTH  = 4096   # reduced from 8192 — Qwen3.5 linear attn is memory-hungry
 
 LORA = dict(
     r               = 32,           # up from 8 — more expressive adapters
@@ -46,8 +46,8 @@ LORA = dict(
 
 TRAIN = dict(
     output_dir                  = ADAPTER_DIR,
-    per_device_train_batch_size = 4,            # up from 1 — 3090 has headroom
-    gradient_accumulation_steps = 2,            # effective batch = 8
+    per_device_train_batch_size = 1,
+    gradient_accumulation_steps = 8,            # effective batch = 8
     max_steps                   = 600,          # more data needs more steps
     learning_rate               = 2e-5,         # slightly lower for larger batch
     lr_scheduler_type           = "cosine",
