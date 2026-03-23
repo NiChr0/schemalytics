@@ -1,0 +1,253 @@
+{
+  "tables": [
+    {
+      "name": "employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "emp_no",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "birth_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "ENUM",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "emp_no"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "departments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dept_no",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "dept_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "dept_no"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dept_manager",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "emp_no",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "dept_no",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "emp_no",
+        "dept_no"
+      ],
+      "foreign_keys": [
+        {
+          "column": "emp_no",
+          "references_table": "employees",
+          "references_column": "emp_no"
+        },
+        {
+          "column": "dept_no",
+          "references_table": "departments",
+          "references_column": "dept_no"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "dept_emp",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "emp_no",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "dept_no",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "emp_no",
+        "dept_no"
+      ],
+      "foreign_keys": [
+        {
+          "column": "emp_no",
+          "references_table": "employees",
+          "references_column": "emp_no"
+        },
+        {
+          "column": "dept_no",
+          "references_table": "departments",
+          "references_column": "dept_no"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "titles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "emp_no",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "emp_no",
+        "title",
+        "from_date"
+      ],
+      "foreign_keys": [
+        {
+          "column": "emp_no",
+          "references_table": "employees",
+          "references_column": "emp_no"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "salaries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "emp_no",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "emp_no",
+        "from_date"
+      ],
+      "foreign_keys": [
+        {
+          "column": "emp_no",
+          "references_table": "employees",
+          "references_column": "emp_no"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

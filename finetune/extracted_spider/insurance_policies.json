@@ -1,0 +1,233 @@
+{
+  "tables": [
+    {
+      "name": "Customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Customer_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Customer_Policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Policy_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Start_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "End_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Policy_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Customer_ID",
+          "references_table": "Customers",
+          "references_column": "Customer_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Claims",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Claim_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_Claim_Made",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date_Claim_Settled",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount_Claimed",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount_Settled",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Claim_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Policy_ID",
+          "references_table": "Customer_Policies",
+          "references_column": "Policy_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Settlements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Settlement_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_Claim_Made",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date_Claim_Settled",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount_Claimed",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount_Settled",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Settlement_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Claim_ID",
+          "references_table": "Claims",
+          "references_column": "Claim_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Payments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Payment_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Settlement_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Payment_Method_Code",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date_Payment_Made",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount_Payment",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Payment_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Settlement_ID",
+          "references_table": "Settlements",
+          "references_column": "Settlement_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "tables": [
+    {
+      "name": "player",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Player_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sponsor_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Player_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Residence",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Occupation",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Votes",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Player_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "club",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Club_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Club_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Start_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Club_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coach",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Coach_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Coach_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Club_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Coach_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Club_ID",
+          "references_table": "club",
+          "references_column": "Club_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "player_coach",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Player_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Coach_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Starting_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Player_ID",
+        "Coach_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Player_ID",
+          "references_table": "player",
+          "references_column": "Player_ID"
+        },
+        {
+          "column": "Coach_ID",
+          "references_table": "coach",
+          "references_column": "Coach_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "match_result",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Rank",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Club_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gold",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Big_Silver",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Small_Silver",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Bronze",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Points",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Rank",
+        "Club_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Club_ID",
+          "references_table": "club",
+          "references_column": "Club_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

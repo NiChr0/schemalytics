@@ -1,0 +1,359 @@
+{
+  "tables": [
+    {
+      "name": "Student",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LName",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fname",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sex",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Major",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Advisor",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_code",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Faculty",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "FacID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Lname",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fname",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sex",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Phone",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Room",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Building",
+          "data_type": "VARCHAR(13)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Department",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DNO",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Division",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DName",
+          "data_type": "VARCHAR(25)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Room",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Building",
+          "data_type": "VARCHAR(13)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DPhone",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Member_of",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "FacID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DNO",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Appt_Type",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "FacID",
+          "references_table": "Faculty",
+          "references_column": "FacID"
+        },
+        {
+          "column": "DNO",
+          "references_table": "Department",
+          "references_column": "DNO"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Course",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CID",
+          "data_type": "VARCHAR(7)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CName",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Credits",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Instructor",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Days",
+          "data_type": "VARCHAR(5)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hours",
+          "data_type": "VARCHAR(11)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DNO",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "Instructor",
+          "references_table": "Faculty",
+          "references_column": "FacID"
+        },
+        {
+          "column": "DNO",
+          "references_table": "Department",
+          "references_column": "DNO"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Minor_in",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DNO",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "StuID",
+          "references_table": "Student",
+          "references_column": "StuID"
+        },
+        {
+          "column": "DNO",
+          "references_table": "Department",
+          "references_column": "DNO"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Enrolled_in",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CID",
+          "data_type": "VARCHAR(7)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Grade",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "StuID",
+          "references_table": "Student",
+          "references_column": "StuID"
+        },
+        {
+          "column": "CID",
+          "references_table": "Course",
+          "references_column": "CID"
+        },
+        {
+          "column": "Grade",
+          "references_table": "Gradeconversion",
+          "references_column": "lettergrade"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Gradeconversion",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "lettergrade",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gradepoint",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

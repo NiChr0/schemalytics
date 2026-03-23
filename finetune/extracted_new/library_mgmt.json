@@ -1,0 +1,204 @@
+{
+  "tables": [
+    {
+      "name": "BOOK",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ISBN",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "AUTHORS",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Author_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Fullname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Author_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "BOOK_AUTHORS",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ISBN",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "AUTHOR_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ISBN",
+        "AUTHOR_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "ISBN",
+          "references_table": "BOOK",
+          "references_column": "ISBN"
+        },
+        {
+          "column": "AUTHOR_ID",
+          "references_table": "AUTHORS",
+          "references_column": "AUTHOR_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "BORROWERS",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Card_no",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "SSN",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Fname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Lname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Phone",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Card_no"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "BOOK_LOANS",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Loan_Id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ISBN",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Card_no",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_out",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Due_date",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date_in",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Loan_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "FINES",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Loan_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "fine_amt",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "paid",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

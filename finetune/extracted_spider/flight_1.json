@@ -1,0 +1,156 @@
+{
+  "tables": [
+    {
+      "name": "flight",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "flno",
+          "data_type": "NUMBER(4,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "origin",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "destination",
+          "data_type": "VARCHAR2(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "distance",
+          "data_type": "NUMBER(6,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "departure_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "arrival_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "NUMBER(7,2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "aid",
+          "data_type": "NUMBER(9,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "aid",
+          "references_table": "aircraft",
+          "references_column": "aid"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "aircraft",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "aid",
+          "data_type": "NUMBER(9,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR2(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "distance",
+          "data_type": "NUMBER(6,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "eid",
+          "data_type": "NUMBER(9,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR2(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "NUMBER(10,2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "certificate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "eid",
+          "data_type": "NUMBER(9,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "aid",
+          "data_type": "NUMBER(9,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "eid",
+        "aid"
+      ],
+      "foreign_keys": [
+        {
+          "column": "eid",
+          "references_table": "employee",
+          "references_column": "eid"
+        },
+        {
+          "column": "aid",
+          "references_table": "aircraft",
+          "references_column": "aid"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,1690 @@
+{
+  "tables": [
+    {
+      "name": "subscribers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "phone_number",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_of_birth",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "national_id",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address_line1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address_line2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subscriber_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "kyc_verified",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "accounts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subscriber_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "account_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "account_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billing_cycle_day",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "credit_limit",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "outstanding_balance",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "auto_pay_enabled",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "closed_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "subscriber_id",
+          "references_table": "subscribers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "plans",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "plan_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "plan_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "plan_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billing_cycle",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "base_price",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data_allowance_mb",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "voice_minutes",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sms_allowance",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "overage_data_rate_per_mb",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "overage_voice_rate_per_min",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "overage_sms_rate",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_unlimited_data",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_unlimited_voice",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_unlimited_sms",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contract_length_months",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "plan_features",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "plan_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "feature_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "feature_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "feature_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "monthly_cost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "plan_id",
+          "references_table": "plans",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "devices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "imei",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "make",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "model",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "device_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "os_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "os_version",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hardware_version",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "purchase_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "warranty_expiry_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subscriber_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "subscriber_id",
+          "references_table": "subscribers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "sim_cards",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "iccid",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "msisdn",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "imsi",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sim_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subscriber_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "device_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "activation_date",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "deactivation_date",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pin1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "puk1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "subscriber_id",
+          "references_table": "subscribers",
+          "references_column": "id"
+        },
+        {
+          "column": "device_id",
+          "references_table": "devices",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "subscriptions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subscription_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subscriber_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "account_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "plan_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sim_card_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "device_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "contract_expiry_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "suspension_reason",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cancellation_reason",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "monthly_cost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "subscriber_id",
+          "references_table": "subscribers",
+          "references_column": "id"
+        },
+        {
+          "column": "account_id",
+          "references_table": "accounts",
+          "references_column": "id"
+        },
+        {
+          "column": "plan_id",
+          "references_table": "plans",
+          "references_column": "id"
+        },
+        {
+          "column": "sim_card_id",
+          "references_table": "sim_cards",
+          "references_column": "id"
+        },
+        {
+          "column": "device_id",
+          "references_table": "devices",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "towers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "tower_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tower_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "latitude",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "longitude",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "altitude_meters",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "technology_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "operator",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "commissioned_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "decommissioned_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coverage_areas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "tower_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "area_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "technology_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "radius_km",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "signal_strength_dbm",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "frequency_band",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_download_mbps",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_upload_mbps",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_indoor_coverage",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "tower_id",
+          "references_table": "towers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "call_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subscription_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sim_card_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tower_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "call_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "caller_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "callee_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "call_start_time",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "call_end_time",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duration_seconds",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billable_duration_seconds",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "call_cost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_roaming",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "roaming_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "termination_reason",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "subscription_id",
+          "references_table": "subscriptions",
+          "references_column": "id"
+        },
+        {
+          "column": "sim_card_id",
+          "references_table": "sim_cards",
+          "references_column": "id"
+        },
+        {
+          "column": "tower_id",
+          "references_table": "towers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "sms_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subscription_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sim_card_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tower_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sms_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sender_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recipient_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sent_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "delivered_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "message_parts",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sms_cost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_roaming",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "roaming_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "delivery_status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "subscription_id",
+          "references_table": "subscriptions",
+          "references_column": "id"
+        },
+        {
+          "column": "sim_card_id",
+          "references_table": "sim_cards",
+          "references_column": "id"
+        },
+        {
+          "column": "tower_id",
+          "references_table": "towers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "data_usage",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subscription_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sim_card_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tower_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "session_start",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "session_end",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "bytes_downloaded",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bytes_uploaded",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total_bytes",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "technology_used",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "apn",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_roaming",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "roaming_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "session_cost",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "subscription_id",
+          "references_table": "subscriptions",
+          "references_column": "id"
+        },
+        {
+          "column": "sim_card_id",
+          "references_table": "sim_cards",
+          "references_column": "id"
+        },
+        {
+          "column": "tower_id",
+          "references_table": "towers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "invoices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "invoice_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "account_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subscriber_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billing_period_start",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billing_period_end",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "issue_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "due_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subtotal",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount_paid",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount_due",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notes",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "account_id",
+          "references_table": "accounts",
+          "references_column": "id"
+        },
+        {
+          "column": "subscriber_id",
+          "references_table": "subscribers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "invoice_items",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "invoice_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subscription_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "item_type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "line_total",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_rate",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reference_period_start",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reference_period_end",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "invoice_id",
+          "references_table": "invoices",
+          "references_column": "id"
+        },
+        {
+          "column": "subscription_id",
+          "references_table": "subscriptions",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "payments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "payment_reference",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "invoice_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "account_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subscriber_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_method",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_gateway",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gateway_transaction_id",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_date",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "failure_reason",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "refund_amount",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "refunded_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "invoice_id",
+          "references_table": "invoices",
+          "references_column": "id"
+        },
+        {
+          "column": "account_id",
+          "references_table": "accounts",
+          "references_column": "id"
+        },
+        {
+          "column": "subscriber_id",
+          "references_table": "subscribers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

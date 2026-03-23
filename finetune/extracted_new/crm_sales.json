@@ -1,0 +1,2072 @@
+{
+  "tables": [
+    {
+      "name": "companies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "industry",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "website",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_street",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "annual_revenue",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_count",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "territory_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "territories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sales_reps",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "manager_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "territory_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quota",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "manager_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        },
+        {
+          "column": "territory_id",
+          "references_table": "territories",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "contacts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mobile",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reports_to_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mailing_street",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mailing_city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mailing_state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mailing_postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "mailing_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lead_source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_primary_contact",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "opted_out_of_email",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        },
+        {
+          "column": "reports_to_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "leads",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lead_source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "industry",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "annual_revenue",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_count",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "assigned_to_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "converted_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "converted_contact_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "converted_company_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "assigned_to_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        },
+        {
+          "column": "converted_contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        },
+        {
+          "column": "converted_company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "opportunity_stages",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "probability",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_closed",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_won",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "opportunities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "primary_contact_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "stage_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "assigned_to_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "expected_revenue",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "close_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lead_source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "probability",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "next_step",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "campaign_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "territory_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lost_reason",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        },
+        {
+          "column": "primary_contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        },
+        {
+          "column": "stage_id",
+          "references_table": "opportunity_stages",
+          "references_column": "id"
+        },
+        {
+          "column": "assigned_to_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        },
+        {
+          "column": "territory_id",
+          "references_table": "territories",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "opportunity_contacts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "opportunity_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contact_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "role",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_primary",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "opportunity_id",
+          "references_table": "opportunities",
+          "references_column": "id"
+        },
+        {
+          "column": "contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "activity_types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "icon",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "activities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "activity_type_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subject",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "activity_date",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "duration_minutes",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "outcome",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "assigned_to_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "contact_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "opportunity_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lead_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "activity_type_id",
+          "references_table": "activity_types",
+          "references_column": "id"
+        },
+        {
+          "column": "assigned_to_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        },
+        {
+          "column": "company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        },
+        {
+          "column": "contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        },
+        {
+          "column": "opportunity_id",
+          "references_table": "opportunities",
+          "references_column": "id"
+        },
+        {
+          "column": "lead_id",
+          "references_table": "leads",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "tasks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subject",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "due_date",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "priority",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "assigned_to_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_by_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "contact_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "opportunity_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lead_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "completed_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "assigned_to_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        },
+        {
+          "column": "created_by_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        },
+        {
+          "column": "company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        },
+        {
+          "column": "contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        },
+        {
+          "column": "opportunity_id",
+          "references_table": "opportunities",
+          "references_column": "id"
+        },
+        {
+          "column": "lead_id",
+          "references_table": "leads",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "notes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "body",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_by_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "contact_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "opportunity_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lead_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_private",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "created_by_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        },
+        {
+          "column": "company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        },
+        {
+          "column": "contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        },
+        {
+          "column": "opportunity_id",
+          "references_table": "opportunities",
+          "references_column": "id"
+        },
+        {
+          "column": "lead_id",
+          "references_table": "leads",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "product_categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "parent_category_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "parent_category_id",
+          "references_table": "product_categories",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sku",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cost",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "currency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit_of_measure",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "taxable",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "category_id",
+          "references_table": "product_categories",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "quotes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quote_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "opportunity_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contact_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "assigned_to_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "valid_until",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "currency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subtotal",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billing_street",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_street",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "terms_and_conditions",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notes",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sent_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "accepted_at",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "opportunity_id",
+          "references_table": "opportunities",
+          "references_column": "id"
+        },
+        {
+          "column": "company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        },
+        {
+          "column": "contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        },
+        {
+          "column": "assigned_to_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "quote_items",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quote_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount_percent",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_percent",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "line_total",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "quote_id",
+          "references_table": "quotes",
+          "references_column": "id"
+        },
+        {
+          "column": "product_id",
+          "references_table": "products",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "orders",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "order_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quote_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "opportunity_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "company_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "contact_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "assigned_to_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_date",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expected_ship_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "actual_ship_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "currency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subtotal",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total_amount",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "billing_street",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "billing_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_street",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shipping_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "payment_terms",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notes",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "quote_id",
+          "references_table": "quotes",
+          "references_column": "id"
+        },
+        {
+          "column": "opportunity_id",
+          "references_table": "opportunities",
+          "references_column": "id"
+        },
+        {
+          "column": "company_id",
+          "references_table": "companies",
+          "references_column": "id"
+        },
+        {
+          "column": "contact_id",
+          "references_table": "contacts",
+          "references_column": "id"
+        },
+        {
+          "column": "assigned_to_id",
+          "references_table": "sales_reps",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "order_items",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit_price",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount_percent",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_percent",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "line_total",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "order_id",
+          "references_table": "orders",
+          "references_column": "id"
+        },
+        {
+          "column": "product_id",
+          "references_table": "products",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

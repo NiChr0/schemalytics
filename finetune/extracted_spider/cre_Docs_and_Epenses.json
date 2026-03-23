@@ -1,0 +1,247 @@
+{
+  "tables": [
+    {
+      "name": "Ref_Document_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Type_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Type_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_Type_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Budget_Codes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Budget_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Budget_Type_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Budget_Type_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Projects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Project_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Project_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Project_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Documents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Project_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Document_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Document_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Document_Type_Code",
+          "references_table": "Ref_Document_Types",
+          "references_column": "Document_Type_Code"
+        },
+        {
+          "column": "Project_ID",
+          "references_table": "Projects",
+          "references_column": "Project_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Statements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Statement_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Statement_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Statement_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Statement_ID",
+          "references_table": "Documents",
+          "references_column": "Document_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Documents_with_Expenses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Budget_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Budget_Type_Code",
+          "references_table": "Ref_Budget_Codes",
+          "references_column": "Budget_Type_Code"
+        },
+        {
+          "column": "Document_ID",
+          "references_table": "Documents",
+          "references_column": "Document_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Accounts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Account_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Statement_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Account_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Account_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Statement_ID",
+          "references_table": "Statements",
+          "references_column": "Statement_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

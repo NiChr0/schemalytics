@@ -1,0 +1,6551 @@
+{
+  "tables": [
+    {
+      "name": "oc_address",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lastname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_1",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_2",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "postcode",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "custom_field",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "address_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_googleshopping_target",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "advertise_google_target_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "campaign_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "budget",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "feeds",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "ENUM",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "roas",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "advertise_google_target_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_api",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "api_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "username",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "key",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "api_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_api_ip",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "api_ip_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "api_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "api_ip_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_api_session",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "api_session_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "api_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "session_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "api_session_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_attribute",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "attribute_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "attribute_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "attribute_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_attribute_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "attribute_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "attribute_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_attribute_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "attribute_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "attribute_group_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_attribute_group_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "attribute_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "attribute_group_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_banner",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "banner_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "banner_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_banner_image",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "banner_image_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "banner_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "link",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "banner_image_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_cart",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "cart_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "api_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "session_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "option",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "cart_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_category",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "parent_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "top",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "column",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_category_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_keyword",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_category_filter",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filter_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id",
+        "filter_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_category_path",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "path_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id",
+        "path_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_googleshopping_category",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "google_product_category",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "google_product_category",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_category_to_layout",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "layout_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_category_to_store",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "iso_code_2",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "iso_code_3",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_format",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "postcode_required",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "country_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_coupon",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "coupon_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "discount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "logged",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_start",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_end",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "uses_total",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "uses_customer",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "coupon_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_coupon_category",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "coupon_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "coupon_id",
+        "category_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_coupon_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "coupon_history_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "coupon_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "coupon_history_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_coupon_product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "coupon_product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "coupon_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "coupon_product_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_currency",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "currency_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "symbol_left",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "symbol_right",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "decimal_place",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DOUBLE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "currency_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lastname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "telephone",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "fax",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "password",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salt",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cart",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wishlist",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "newsletter",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "custom_field",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "safe",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "token",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_activity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_activity_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_activity_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_affiliate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "company",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "website",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tracking",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "commission",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cheque",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "paypal",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bank_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bank_branch_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bank_swift_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bank_account_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bank_account_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "custom_field",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_approval",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_approval_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_approval_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "approval",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_group_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_group_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_group_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_history_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_history_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_login",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_login_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_login_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_ip",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_ip_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_ip_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_online",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "url",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "referer",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ip"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_reward",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_reward_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "points",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_reward_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_transaction",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_transaction_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_transaction_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_search",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_search_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "keyword",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sub_category",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "products",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_search_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_customer_wishlist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id",
+        "product_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_custom_field",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "custom_field_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "validation",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "custom_field_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_custom_field_customer_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "custom_field_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "required",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "custom_field_id",
+        "customer_group_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_custom_field_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "custom_field_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "custom_field_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_custom_field_value",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "custom_field_value_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "custom_field_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "custom_field_value_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_custom_field_value_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "custom_field_value_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "custom_field_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "custom_field_value_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_download",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "download_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filename",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mask",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "download_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_download_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "download_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "download_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_event",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "event_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trigger",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "action",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "event_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_extension",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "extension_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "extension_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_extension_install",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "extension_install_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "extension_download_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filename",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "extension_install_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_extension_path",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "extension_path_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "extension_install_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "path",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "extension_path_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_filter",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "filter_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filter_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "filter_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_filter_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "filter_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filter_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "filter_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_filter_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "filter_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "filter_group_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_filter_group_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "filter_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "filter_group_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_geo_zone",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "geo_zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "geo_zone_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_information",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "information_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "bottom",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "information_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_information_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "information_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "MEDIUMTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_keyword",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "information_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_information_to_layout",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "information_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "layout_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "information_id",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_information_to_store",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "information_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "information_id",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_language",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "locale",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "directory",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_layout",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "layout_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "layout_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_layout_module",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "layout_module_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "layout_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "position",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "layout_module_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_layout_route",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "layout_route_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "layout_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "route",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "layout_route_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_length_class",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "length_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "length_class_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_length_class_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "length_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "length_class_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_location",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "telephone",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "fax",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "geocode",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "open",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "location_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_manufacturer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "manufacturer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "manufacturer_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_manufacturer_to_store",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "manufacturer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "manufacturer_id",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_marketing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "marketing_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "clicks",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "marketing_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_modification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "modification_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "extension_install_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "version",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "link",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "xml",
+          "data_type": "MEDIUMTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "modification_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_module",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "module_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "setting",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "module_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_option",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "option_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_option_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "option_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_option_value",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "option_value_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "option_value_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_option_value_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "option_value_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "option_value_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "invoice_no",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "invoice_prefix",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_url",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lastname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "telephone",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "fax",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "custom_field",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_lastname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_company",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_address_1",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_address_2",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_city",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_postcode",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_country",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_country_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_zone",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_address_format",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_custom_field",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_method",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_lastname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_company",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_address_1",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_address_2",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_city",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_postcode",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_country",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_country_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_zone",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_address_format",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_custom_field",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_method",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "affiliate_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "commission",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "marketing_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tracking",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currency_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currency_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "currency_value",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "forwarded_ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_agent",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "accept_language",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_history_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notify",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_history_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_option",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_option_value_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_option_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "model",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reward",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_product_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_recurring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_recurring_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reference",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_quantity",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_frequency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_cycle",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_duration",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_frequency",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_cycle",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_duration",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_recurring_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_recurring_transaction",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_recurring_transaction_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_recurring_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reference",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_recurring_transaction_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_shipment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_shipment_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_courier_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tracking_number",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_shipment_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_shipping_courier",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "shipping_courier_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_courier_code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_courier_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "shipping_courier_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_status_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_total",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_total_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_total_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_order_voucher",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_voucher_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "voucher_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "voucher_theme_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "message",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "order_voucher_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "model",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sku",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "upc",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ean",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "jan",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "isbn",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mpn",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "stock_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "manufacturer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "points",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_available",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "weight",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "weight_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "length",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "width",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "length_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subtract",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "minimum",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "viewed",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_googleshopping_product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_advertise_google_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "has_issues",
+          "data_type": "TINYINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "destination_status",
+          "data_type": "ENUM",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "impressions",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "clicks",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "conversions",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cost",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "conversion_value",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "google_product_category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "condition",
+          "data_type": "ENUM",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "adult",
+          "data_type": "TINYINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "multipack",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_bundle",
+          "data_type": "TINYINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age_group",
+          "data_type": "ENUM",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "color",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "ENUM",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size_type",
+          "data_type": "ENUM('REGULAR','PETITE','PLUS','BIG",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size_system",
+          "data_type": "ENUM",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_modified",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_advertise_google_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_googleshopping_product_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_variation_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "destination_statuses",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data_quality_issues",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "item_level_issues",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "google_expiration_date",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "store_id",
+        "product_variation_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_googleshopping_product_target",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "advertise_google_target_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "advertise_google_target_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_attribute",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "attribute_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "text",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "attribute_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tag",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "meta_keyword",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_discount",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_discount_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "priority",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_start",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_end",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_discount_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_filter",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filter_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "filter_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_image",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_image_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_image_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_option",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "required",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_option_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_option_value",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_option_value_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "option_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "option_value_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "subtract",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "price_prefix",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "points",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "points_prefix",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "weight",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "weight_prefix",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_option_value_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_recurring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "recurring_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "recurring_id",
+        "customer_group_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_related",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "related_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "related_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_reward",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_reward_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "points",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_reward_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_special",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_special_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "priority",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_start",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_end",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_special_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_to_category",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "category_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_to_download",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "download_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "download_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_to_layout",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "layout_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_product_to_store",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_recurring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "recurring_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "frequency",
+          "data_type": "ENUM",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "duration",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cycle",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_price",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_frequency",
+          "data_type": "ENUM",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_duration",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trial_cycle",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "sort_order",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "recurring_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_recurring_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "recurring_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "recurring_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_return",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "return_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lastname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "telephone",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "model",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "opened",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "return_reason_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "return_action_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "return_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_ordered",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "return_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_return_action",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "return_action_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "return_action_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_return_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "return_history_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "return_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "return_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notify",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "return_history_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_return_reason",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "return_reason_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "return_reason_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_return_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "return_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "return_status_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_review",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "review_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "text",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "review_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_statistics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "statistics_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "statistics_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_session",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "session_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "data",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expire",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "session_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_setting",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "setting_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "serialized",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "setting_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_stock_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "stock_status_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "stock_status_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_store",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "url",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ssl",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "store_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_tax_class",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "tax_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "tax_class_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_tax_rate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "tax_rate_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "geo_zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rate",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "tax_rate_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_tax_rate_to_customer_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "tax_rate_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "tax_rate_id",
+        "customer_group_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_tax_rule",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "tax_rule_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "tax_rate_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "based",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "priority",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "tax_rule_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_theme",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "theme_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "theme",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "route",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "MEDIUMTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "theme_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_translation",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "translation_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "route",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "translation_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_upload",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "upload_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "filename",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "upload_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_seo_url",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "seo_url_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "query",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "keyword",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "seo_url_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_user",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "username",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "password",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "salt",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "firstname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lastname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ip",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "user_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_user_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_group_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "permission",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "user_group_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_voucher",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "voucher_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "voucher_theme_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "message",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "voucher_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_voucher_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "voucher_history_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "voucher_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "voucher_history_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_voucher_theme",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "voucher_theme_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "voucher_theme_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_voucher_theme_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "voucher_theme_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "voucher_theme_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_weight_class",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "weight_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "weight_class_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_weight_class_description",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "weight_class_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "unit",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "weight_class_id",
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_zone",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "code",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "zone_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oc_zone_to_geo_zone",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "zone_to_geo_zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "geo_zone_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_added",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_modified",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "zone_to_geo_zone_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

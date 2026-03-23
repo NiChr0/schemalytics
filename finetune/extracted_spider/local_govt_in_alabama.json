@@ -1,0 +1,126 @@
+{
+  "tables": [
+    {
+      "name": "Services",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Service_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Service_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Service_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Participants",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Participant_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Participant_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Participant_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Participant_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Service_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Event_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Service_ID",
+          "references_table": "Services",
+          "references_column": "Service_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Participants_in_Events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Participant_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Event_ID",
+        "Participant_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Participant_ID",
+          "references_table": "Participants",
+          "references_column": "Participant_ID"
+        },
+        {
+          "column": "Event_ID",
+          "references_table": "Events",
+          "references_column": "Event_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

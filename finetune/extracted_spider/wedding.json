@@ -1,0 +1,139 @@
+{
+  "tables": [
+    {
+      "name": "people",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "People_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Is_Male",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "People_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "church",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Church_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Organized_by",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Open_Date",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Continuation_of",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Church_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "wedding",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Church_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Male_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Female_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Church_ID",
+        "Male_ID",
+        "Female_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Church_ID",
+          "references_table": "church",
+          "references_column": "Church_ID"
+        },
+        {
+          "column": "Male_ID",
+          "references_table": "people",
+          "references_column": "People_ID"
+        },
+        {
+          "column": "Female_ID",
+          "references_table": "people",
+          "references_column": "People_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

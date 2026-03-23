@@ -1,0 +1,236 @@
+{
+  "tables": [
+    {
+      "name": "Customer_Master_Index",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "master_customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cmi_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "master_customer_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CMI_Cross_References",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "cmi_cross_ref_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "master_customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "source_system_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "cmi_cross_ref_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "master_customer_id",
+          "references_table": "Customer_Master_Index",
+          "references_column": "master_customer_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Council_Tax",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "council_tax_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cmi_cross_ref_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "council_tax_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "cmi_cross_ref_id",
+          "references_table": "CMI_Cross_References",
+          "references_column": "cmi_cross_ref_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Business_Rates",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "business_rates_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cmi_cross_ref_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "business_rates_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "cmi_cross_ref_id",
+          "references_table": "CMI_Cross_References",
+          "references_column": "cmi_cross_ref_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Benefits_Overpayments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "council_tax_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cmi_cross_ref_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "council_tax_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "cmi_cross_ref_id",
+          "references_table": "CMI_Cross_References",
+          "references_column": "cmi_cross_ref_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Parking_Fines",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "council_tax_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cmi_cross_ref_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "council_tax_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "cmi_cross_ref_id",
+          "references_table": "CMI_Cross_References",
+          "references_column": "cmi_cross_ref_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Rent_Arrears",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "council_tax_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cmi_cross_ref_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "council_tax_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "cmi_cross_ref_id",
+          "references_table": "CMI_Cross_References",
+          "references_column": "cmi_cross_ref_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Electoral_Register",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "electoral_register_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cmi_cross_ref_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "electoral_register_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "cmi_cross_ref_id",
+          "references_table": "CMI_Cross_References",
+          "references_column": "cmi_cross_ref_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

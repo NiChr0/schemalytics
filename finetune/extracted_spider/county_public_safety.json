@@ -1,0 +1,140 @@
+{
+  "tables": [
+    {
+      "name": "county_public_safety",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "County_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Police_officers",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Residents_per_officer",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Case_burden",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Crime_rate",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Police_force",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "County_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "City_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "County_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "White",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Black",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amerindian",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Asian",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Multiracial",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hispanic",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "City_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "County_ID",
+          "references_table": "county_public_safety",
+          "references_column": "County_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "tables": [
+    {
+      "name": "aircraft",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Aircraft_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Order_Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Manufacturer",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Model",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fleet_Series",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Powertrain",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fuel_Propulsion",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Aircraft_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "pilot",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Pilot_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Pilot_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nationality",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Join_Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Team",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Pilot_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "pilot_record",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Record_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Pilot_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Aircraft_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Pilot_ID",
+        "Aircraft_ID",
+        "Date"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Pilot_ID",
+          "references_table": "pilot",
+          "references_column": "Pilot_ID"
+        },
+        {
+          "column": "Aircraft_ID",
+          "references_table": "aircraft",
+          "references_column": "Aircraft_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,926 @@
+{
+  "tables": [
+    {
+      "name": "Ref_Payment_Methods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "payment_method_code",
+          "data_type": "CHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_method_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "payment_method_code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Service_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Service_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Parent_Service_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Service_Type_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Service_Type_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Address_ID",
+          "data_type": "VARCHAR(100)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Line_1",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Line_2",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City_Town",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "State_County",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Address_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Product_ID",
+          "data_type": "VARCHAR(100)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Product_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_Price",
+          "data_type": "DECIMAL(20,4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Product_Service_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Product_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Marketing_Regions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Marketing_Region_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Marketing_Region_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Marketing_Region_Descriptrion",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Marketing_Region_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Clients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Client_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_Email_Address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Phone",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Client_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Address_ID",
+          "references_table": "Addresses",
+          "references_column": "Address_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Drama_Workshop_Groups",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Workshop_Group_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Currency_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Marketing_Region_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Store_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Store_Phone",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Store_Email_Address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Workshop_Group_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Address_ID",
+          "references_table": "Addresses",
+          "references_column": "Address_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Performers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Performer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Phone",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Email_Address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Performer_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Address_ID",
+          "references_table": "Addresses",
+          "references_column": "Address_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Customer_ID",
+          "data_type": "VARCHAR(100)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Phone",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Email_Address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Customer_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Address_ID",
+          "references_table": "Addresses",
+          "references_column": "Address_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Stores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Store_ID",
+          "data_type": "VARCHAR(100)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Marketing_Region_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Store_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Store_Phone",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Store_Email_Address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Store_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Address_ID",
+          "references_table": "Addresses",
+          "references_column": "Address_ID"
+        },
+        {
+          "column": "Marketing_Region_Code",
+          "references_table": "Marketing_Regions",
+          "references_column": "Marketing_Region_Code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Bookings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Booking_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Workshop_Group_ID",
+          "data_type": "VARCHAR(100)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Status_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Store_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Planned_Delivery_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Actual_Delivery_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Order_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Booking_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Customer_ID",
+          "references_table": "Clients",
+          "references_column": "Client_ID"
+        },
+        {
+          "column": "Workshop_Group_ID",
+          "references_table": "Drama_Workshop_Groups",
+          "references_column": "Workshop_Group_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Performers_in_Bookings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Order_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Performer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Order_ID",
+        "Performer_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Performer_ID",
+          "references_table": "Performers",
+          "references_column": "Performer_ID"
+        },
+        {
+          "column": "Order_ID",
+          "references_table": "Bookings",
+          "references_column": "Booking_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Customer_Orders",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Order_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Store_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Planned_Delivery_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Actual_Delivery_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Order_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Order_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Customer_ID",
+          "references_table": "Customers",
+          "references_column": "Customer_ID"
+        },
+        {
+          "column": "Store_ID",
+          "references_table": "Stores",
+          "references_column": "Store_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Order_Items",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Order_Item_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_Quantity",
+          "data_type": "VARCHAR(288)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Item_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Order_Item_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Order_ID",
+          "references_table": "Customer_Orders",
+          "references_column": "Order_ID"
+        },
+        {
+          "column": "Product_ID",
+          "references_table": "Products",
+          "references_column": "Product_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Invoices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Invoice_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_method_code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_Quantity",
+          "data_type": "VARCHAR(288)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Item_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Order_Item_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Invoice_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Order_ID",
+          "references_table": "Customer_Orders",
+          "references_column": "Order_ID"
+        },
+        {
+          "column": "Order_ID",
+          "references_table": "Bookings",
+          "references_column": "Booking_ID"
+        },
+        {
+          "column": "payment_method_code",
+          "references_table": "Ref_Payment_Methods",
+          "references_column": "payment_method_code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Services",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Service_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Service_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Workshop_Group_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Product_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_Price",
+          "data_type": "DECIMAL(20,4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Product_Service_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Service_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Workshop_Group_ID",
+          "references_table": "Drama_Workshop_Groups",
+          "references_column": "Workshop_Group_ID"
+        },
+        {
+          "column": "Service_Type_Code",
+          "references_table": "Ref_Service_Types",
+          "references_column": "Service_Type_Code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Bookings_Services",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Order_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Order_ID",
+        "Product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Order_ID",
+          "references_table": "Bookings",
+          "references_column": "Booking_ID"
+        },
+        {
+          "column": "Product_ID",
+          "references_table": "Services",
+          "references_column": "Service_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Invoice_Items",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Invoice_Item_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Invoice_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_Item_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Order_Quantity",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Item_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Invoice_Item_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Order_Item_ID",
+          "references_table": "Order_Items",
+          "references_column": "Order_Item_ID"
+        },
+        {
+          "column": "Invoice_ID",
+          "references_table": "Invoices",
+          "references_column": "Invoice_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

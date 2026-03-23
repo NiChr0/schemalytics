@@ -1,0 +1,127 @@
+{
+  "tables": [
+    {
+      "name": "phone",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Phone_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Memory_in_G",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Carrier",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Phone_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "market",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Market_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "District",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_employees",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_shops",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ranking",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Market_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "phone_market",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Market_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Phone_ID",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_stock",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Market_ID",
+        "Phone_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Market_ID",
+          "references_table": "market",
+          "references_column": "Market_ID"
+        },
+        {
+          "column": "Phone_ID",
+          "references_table": "phone",
+          "references_column": "Phone_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,385 @@
+{
+  "tables": [
+    {
+      "name": "Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Address_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Address_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Locations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Location_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Location_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Product_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Product_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_Price",
+          "data_type": "DECIMAL(20,4)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Product_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Parties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Party_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Party_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Party_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Assets",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Asset_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Asset_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Channels",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Channel_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Channel_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Finances",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Finance_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Finance_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Address_ID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Channel_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Event_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Finance_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Location_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Location_ID",
+          "references_table": "Locations",
+          "references_column": "Location_ID"
+        },
+        {
+          "column": "Address_ID",
+          "references_table": "Addresses",
+          "references_column": "Address_ID"
+        },
+        {
+          "column": "Finance_ID",
+          "references_table": "Finances",
+          "references_column": "Finance_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Products_in_Events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Product_in_Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Product_in_Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Event_ID",
+          "references_table": "Events",
+          "references_column": "Event_ID"
+        },
+        {
+          "column": "Product_ID",
+          "references_table": "Products",
+          "references_column": "Product_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Parties_in_Events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Party_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Role_Code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Party_ID",
+        "Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Party_ID",
+          "references_table": "Parties",
+          "references_column": "Party_ID"
+        },
+        {
+          "column": "Event_ID",
+          "references_table": "Events",
+          "references_column": "Event_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Agreements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Document_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Document_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Event_ID",
+          "references_table": "Events",
+          "references_column": "Event_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Assets_in_Events",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Asset_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Event_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Asset_ID",
+        "Event_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Event_ID",
+          "references_table": "Events",
+          "references_column": "Event_ID"
+        },
+        {
+          "column": "Event_ID",
+          "references_table": "Events",
+          "references_column": "Event_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

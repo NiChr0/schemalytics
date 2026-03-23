@@ -1,0 +1,92 @@
+{
+  "tables": [
+    {
+      "name": "race",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Race_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Track_ID",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Race_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Track_ID",
+          "references_table": "track",
+          "references_column": "Track_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "track",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Track_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Seating",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year_Opened",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Track_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

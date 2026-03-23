@@ -1,0 +1,180 @@
+{
+  "tables": [
+    {
+      "name": "member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Card_Number",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hometown",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Level",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "branch",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Branch_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Open_year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Address_road",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "membership_amount",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Branch_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "membership_register_branch",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Branch_ID",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Register_Year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Member_ID",
+          "references_table": "member",
+          "references_column": "Member_ID"
+        },
+        {
+          "column": "Branch_ID",
+          "references_table": "branch",
+          "references_column": "Branch_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "purchase",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Branch_ID",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total_pounds",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID",
+        "Branch_ID",
+        "Year"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Member_ID",
+          "references_table": "member",
+          "references_column": "Member_ID"
+        },
+        {
+          "column": "Branch_ID",
+          "references_table": "branch",
+          "references_column": "Branch_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

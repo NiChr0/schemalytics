@@ -1,0 +1,226 @@
+{
+  "tables": [
+    {
+      "name": "Problem_Category_Codes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "problem_category_code",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "problem_category_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Problem_Log",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "problem_log_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "assigned_to_staff_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "problem_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "problem_category_code",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "problem_status_code",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "log_entry_date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "log_entry_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "log_entry_fix",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_log_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Problem_Status_Codes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "problem_status_code",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "problem_status_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Staff",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "staff_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "staff_first_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "staff_last_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_staff_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Problems",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "problem_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "closure_authorised_by_staff_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "reported_by_staff_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_problem_reported",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_problem_closed",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "problem_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_problem_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

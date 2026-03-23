@@ -1,0 +1,387 @@
+{
+  "tables": [
+    {
+      "name": "Ref_Document_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_type_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "document_type_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "document_type_code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Roles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "role_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "role_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "role_code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "address_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Document_Status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_status_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "document_status_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "document_status_code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Shipping_Agents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "shipping_agent_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_agent_name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_agent_description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "shipping_agent_code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Documents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "document_status_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "document_type_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "shipping_agent_code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "receipt_date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "receipt_number",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "document_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "document_type_code",
+          "references_table": "Ref_Document_Types",
+          "references_column": "document_type_code"
+        },
+        {
+          "column": "document_status_code",
+          "references_table": "Ref_Document_Status",
+          "references_column": "document_status_code"
+        },
+        {
+          "column": "shipping_agent_code",
+          "references_table": "Ref_Shipping_Agents",
+          "references_column": "shipping_agent_code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "employee_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "role_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "employee_name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "employee_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "role_code",
+          "references_table": "Roles",
+          "references_column": "role_code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Document_Drafts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "draft_number",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "draft_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "document_id",
+        "draft_number"
+      ],
+      "foreign_keys": [
+        {
+          "column": "document_id",
+          "references_table": "Documents",
+          "references_column": "document_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Draft_Copies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "draft_number",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "copy_number",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "document_id",
+        "draft_number",
+        "copy_number"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Circulation_History",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "draft_number",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "copy_number",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "document_id",
+        "draft_number",
+        "copy_number",
+        "employee_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "employee_id",
+          "references_table": "Employees",
+          "references_column": "employee_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Documents_Mailed",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "document_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mailed_to_address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "mailing_date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "document_id",
+        "mailed_to_address_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "document_id",
+          "references_table": "Documents",
+          "references_column": "document_id"
+        },
+        {
+          "column": "mailed_to_address_id",
+          "references_table": "Addresses",
+          "references_column": "address_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

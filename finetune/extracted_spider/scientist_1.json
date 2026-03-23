@@ -1,0 +1,91 @@
+{
+  "tables": [
+    {
+      "name": "Scientists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SSN",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "CHAR(30)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "SSN"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Projects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Code",
+          "data_type": "CHAR(4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "CHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Hours",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "AssignedTo",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Scientist",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Project",
+          "data_type": "CHAR(4)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Scientist",
+        "Project"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Scientist",
+          "references_table": "Scientists",
+          "references_column": "SSN"
+        },
+        {
+          "column": "Project",
+          "references_table": "Projects",
+          "references_column": "Code"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

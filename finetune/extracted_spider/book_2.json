@@ -1,0 +1,86 @@
+{
+  "tables": [
+    {
+      "name": "publication",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Publication_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Book_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Publisher",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Publication_Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Publication_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Book_ID",
+          "references_table": "book",
+          "references_column": "Book_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "book",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Book_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Issues",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Writer",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Book_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

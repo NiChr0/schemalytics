@@ -1,0 +1,478 @@
+{
+  "tables": [
+    {
+      "name": "Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Staff",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "staff_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "staff_gender",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "staff_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Suppliers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "supplier_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "supplier_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "supplier_phone",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Department_Store_Chain",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dept_store_chain_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dept_store_chain_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "payment_method_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_code",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customer_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customer_address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customer_phone",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customer_email",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_type_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_price",
+          "data_type": "DECIMAL(19,4)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Supplier_Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "supplier_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_from",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_to",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "supplier_id",
+        "address_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Customer_Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_from",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_to",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id",
+        "address_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Customer_Orders",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_status_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "order_date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Department_Stores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dept_store_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dept_store_chain_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "store_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "store_address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "store_phone",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "store_email",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Departments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "department_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dept_store_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "department_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Order_Items",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_item_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "order_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product_Suppliers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "supplier_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_supplied_from",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_supplied_to",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_amount_purchased",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_value_purchased",
+          "data_type": "DECIMAL(19,4)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "supplier_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Staff_Department_Assignments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "staff_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "department_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_assigned_from",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "job_title_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_assigned_to",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "staff_id",
+        "department_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

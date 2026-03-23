@@ -1,0 +1,282 @@
+{
+  "tables": [
+    {
+      "name": "book",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "book_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "book_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "book_authors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "book_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "book_id",
+          "references_table": "book",
+          "references_column": "book_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "library_branch",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "branch_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "branch_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "branch_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "book_copies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "book_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "branch_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "no_of_copies",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "book_id",
+          "references_table": "book",
+          "references_column": "book_id"
+        },
+        {
+          "column": "branch_id",
+          "references_table": "library_branch",
+          "references_column": "branch_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "borrower",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "card_no",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "fname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "card_no"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "book_loans",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "loan_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "book_id",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "branch_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "card_no",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_out",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "due_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_in",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "loan_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "book_id",
+          "references_table": "book",
+          "references_column": "book_id"
+        },
+        {
+          "column": "branch_id",
+          "references_table": "library_branch",
+          "references_column": "branch_id"
+        },
+        {
+          "column": "card_no",
+          "references_table": "borrower",
+          "references_column": "card_no"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "fines",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "loan_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "fine_amt",
+          "data_type": "DECIMAL",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "paid",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "loan_id",
+          "references_table": "book_loans",
+          "references_column": "loan_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

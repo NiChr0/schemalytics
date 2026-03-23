@@ -1,0 +1,132 @@
+{
+  "tables": [
+    {
+      "name": "Student",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LName",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Fname",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sex",
+          "data_type": "VARCHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Major",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Advisor",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_code",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Club",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ClubID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ClubName",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ClubDesc",
+          "data_type": "VARCHAR(1024)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ClubLocation",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Member_of_club",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "StuID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ClubID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "StuID",
+          "references_table": "Student",
+          "references_column": "StuID"
+        },
+        {
+          "column": "ClubID",
+          "references_table": "Club",
+          "references_column": "ClubID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "tables": [
+    {
+      "name": "city",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "City_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Official_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Area_km_2",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Population",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Census_Ranking",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "City_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "farm",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Farm_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total_Horses",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Working_Horses",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total_Cattle",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Oxen",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Bulls",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Cows",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Pigs",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sheep_and_Goats",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Farm_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "farm_competition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Competition_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Theme",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Host_city_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hosts",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Competition_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Host_city_ID",
+          "references_table": "city",
+          "references_column": "City_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "competition_record",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Competition_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Farm_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Competition_ID",
+        "Farm_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Competition_ID",
+          "references_table": "farm_competition",
+          "references_column": "Competition_ID"
+        },
+        {
+          "column": "Farm_ID",
+          "references_table": "farm",
+          "references_column": "Farm_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

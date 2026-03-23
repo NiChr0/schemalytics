@@ -1,0 +1,122 @@
+{
+  "tables": [
+    {
+      "name": "college",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "College_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Leader_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "College_Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "College_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "College_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "College_ID",
+          "references_table": "college",
+          "references_column": "College_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "round",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Round_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Decoration_Theme",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank_in_Round",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID",
+        "Round_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Member_ID",
+          "references_table": "member",
+          "references_column": "Member_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

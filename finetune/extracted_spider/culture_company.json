@@ -1,0 +1,162 @@
+{
+  "tables": [
+    {
+      "name": "book_club",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "book_club_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Author_or_Editor",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Book_Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Publisher",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Category",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Result",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "book_club_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "movie",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "movie_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Director",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Budget_million",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gross_worldwide",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "movie_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "culture_company",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Company_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Incorporated_in",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Group_Equity_Shareholding",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "book_club_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movie_id",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Company_name"
+      ],
+      "foreign_keys": [
+        {
+          "column": "book_club_id",
+          "references_table": "book_club",
+          "references_column": "book_club_id"
+        },
+        {
+          "column": "movie_id",
+          "references_table": "movie",
+          "references_column": "movie_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

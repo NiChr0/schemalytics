@@ -1,0 +1,4536 @@
+{
+  "tables": [
+    {
+      "name": "host",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address6",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_bin",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address6_bin",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "checkcommand_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "checkcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "max_check_attempts",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_timeperiod_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_timeout",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_interval",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_retry_interval",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total_children",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "active_checks_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "passive_checks_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "event_handler_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notifications_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flapping_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flapping_threshold_low",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flapping_threshold_high",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "perfdata_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "eventcommand_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "eventcommand_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_volatile",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "action_url_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notes_url_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notes",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icon_image_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "icon_image_alt",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "command_endpoint_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "command_endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hostgroup",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hostgroup_member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hostgroup_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "host_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hostgroup_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hostgroup_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "host_state",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "state_type",
+          "data_type": "ENUM('HARD'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "soft_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_soft_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_attempt",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "severity",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "output",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "long_output",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "performance_data",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "normalized_performance_data",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_commandline",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_problem",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_handled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_reachable",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_flapping",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_overdue",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_acknowledged",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_sticky_acknowledgement",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "acknowledgement_comment_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_comment_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "in_downtime",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "affects_children",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "execution_time",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "latency",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_timeout",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_source",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scheduling_source",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_state_change",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "next_check",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "next_update",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "service",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "checkcommand_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "checkcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "max_check_attempts",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_timeperiod_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_timeout",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_interval",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_retry_interval",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "total_children",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "active_checks_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "passive_checks_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "event_handler_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notifications_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flapping_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flapping_threshold_low",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flapping_threshold_high",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "perfdata_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "eventcommand_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "eventcommand_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_volatile",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "action_url_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notes_url_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notes",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icon_image_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "icon_image_alt",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "command_endpoint_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "command_endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "servicegroup",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "servicegroup_member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "servicegroup_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "service_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "servicegroup_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "servicegroup_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "service_state",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "state_type",
+          "data_type": "ENUM('HARD'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "soft_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_soft_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_attempt",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "severity",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "output",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "long_output",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "performance_data",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "normalized_performance_data",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_commandline",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_problem",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_handled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_reachable",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_flapping",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_overdue",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_acknowledged",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_sticky_acknowledgement",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "acknowledgement_comment_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_comment_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "in_downtime",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "affects_children",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "execution_time",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "latency",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_timeout",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "check_source",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scheduling_source",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_state_change",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "next_check",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "next_update",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "endpoint",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "environment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "icingadb_instance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "heartbeat",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "responsible",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_version",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_start_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_notifications_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_active_service_checks_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_active_host_checks_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_event_handlers_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_flap_detection_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icinga2_performance_data_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icingadb_version",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "checkcommand",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "command",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeout",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "checkcommand_argument",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "checkcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "argument_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "argument_value",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "argument_order",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "argument_key_override",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "repeat_key",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "required",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "set_if",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "separator",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "skip_key",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "checkcommand_envvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "checkcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "envvar_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "envvar_value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "checkcommand_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "checkcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eventcommand",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "command",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeout",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eventcommand_argument",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "eventcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "argument_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "argument_value",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "argument_order",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "argument_key_override",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "repeat_key",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "required",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "set_if",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "separator",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "skip_key",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eventcommand_envvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "eventcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "envvar_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "envvar_value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eventcommand_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "eventcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notificationcommand",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "command",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeout",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notificationcommand_argument",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notificationcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "argument_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "argument_value",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "argument_order",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "argument_key_override",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "repeat_key",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "required",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "set_if",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "separator",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "skip_key",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notificationcommand_envvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notificationcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "envvar_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "envvar_value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notificationcommand_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notificationcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "comment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "text",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "entry_type",
+          "data_type": "ENUM",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "entry_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_persistent",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_sticky",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expire_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "downtime",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "triggered_by_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "parent_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "the",
+          "data_type": "ID",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "entry_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scheduled_start_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scheduled_end_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scheduled_duration",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_flexible",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flexible_duration",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_in_effect",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "start_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_time",
+          "data_type": "+",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duration",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "this",
+          "data_type": "IS",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scheduled_by",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notificationcommand_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "times_begin",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "times_end",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notification_interval",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "states",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "types",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notification_user",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notification_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notification_usergroup",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notification_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "usergroup_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notification_recipient",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notification_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "usergroup_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notification_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notification_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "icon_image",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "icon_image",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "action_url",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "action_url",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notes_url",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notes_url",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "timeperiod",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "prefer_includes",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "timeperiod_range",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "range_key",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "range_value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "timeperiod_override_include",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "override_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "timeperiod_override_exclude",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "override_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "timeperiod_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "customvar_flat",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flatname_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flatname",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flatvalue",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "user",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "pager",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notifications_enabled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timeperiod_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "states",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "types",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "usergroup",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "zone_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "usergroup_member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "usergroup_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "user_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "usergroup_customvar",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "usergroup_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customvar_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "zone",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "properties_checksum",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name_ci",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_global",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "parent_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "notification_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notification_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "ENUM('DOWNTIME_START'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "send_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "text",
+          "data_type": "LONGTEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "users_notified",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "user_notification_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "notification_history_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "state_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "event_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "state_type",
+          "data_type": "ENUM('HARD'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "soft_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_soft_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_attempt",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "output",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "long_output",
+          "data_type": "LONGTEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_check_attempts",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "check_source",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scheduling_source",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "downtime_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "downtime_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "triggered_by_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "parent_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "the",
+          "data_type": "ID",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "entry_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cancelled_by",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_flexible",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flexible_duration",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scheduled_start_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "scheduled_end_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "start_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "end_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "start_time",
+          "data_type": "+",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scheduled_by",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "has_been_cancelled",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "trigger_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "cancel_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "downtime_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "comment_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "comment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "entry_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "removed_by",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "entry_type",
+          "data_type": "ENUM",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_persistent",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_sticky",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "expire_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "remove_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "has_been_removed",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "comment_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "flapping_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "end_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "percent_state_change_start",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "percent_state_change_end",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "flapping_threshold_low",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "flapping_threshold_high",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "acknowledgement_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "set_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "clear_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "author",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cleared_by",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "comment",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "expire_time",
+          "data_type": "BIGINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_sticky",
+          "data_type": "ENUM('N'",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_persistent",
+          "data_type": "ENUM('N'",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "notification_history_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state_history_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "downtime_history_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "comment_history_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "flapping_history_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "acknowledgement_history_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "event_type",
+          "data_type": "ENUM('STATE_CHANGE'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "event_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sla_history_state",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "event_time",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "previous_hard_state",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sla_history_downtime",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "endpoint_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "object_type",
+          "data_type": "ENUM('HOST'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "downtime_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "downtime_start",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "downtime_end",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "downtime_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "redundancy_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "redundancy_group_state",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "redundancy_group_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "failed",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "is_reachable",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_state_change",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dependency_node",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "host_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "service_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "redundancy_group_id",
+          "data_type": "BINARY",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dependency_edge_state",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "failed",
+          "data_type": "ENUM('N'",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dependency_edge",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "environment_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "from_node_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "to_node_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "dependency_edge_state_id",
+          "data_type": "BINARY",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "display_name",
+          "data_type": "TEXT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "icingadb_schema",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "version",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "timestamp",
+          "data_type": "BIGINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

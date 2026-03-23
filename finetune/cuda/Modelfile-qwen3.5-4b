@@ -1,0 +1,4 @@
+FROM D:\Schemalytics\schemalytics-main\schemalytics-main\finetune\cuda\schemalytics-agent3-qwen3.5-4b.Q4_K_M.gguf
+PARAMETER temperature 0
+PARAMETER num_ctx 12288
+PARAMETER num_predict 2048

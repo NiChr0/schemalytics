@@ -1,0 +1,128 @@
+{
+  "tables": [
+    {
+      "name": "artist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Artist_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year_Join",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Artist_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "exhibition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Exhibition_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Theme",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Artist_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ticket_Price",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Exhibition_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Artist_ID",
+          "references_table": "artist",
+          "references_column": "Artist_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "exhibition_record",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Exhibition_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Attendance",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Exhibition_ID",
+        "Date"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Exhibition_ID",
+          "references_table": "exhibition",
+          "references_column": "Exhibition_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

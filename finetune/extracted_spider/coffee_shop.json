@@ -1,0 +1,177 @@
+{
+  "tables": [
+    {
+      "name": "shop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Shop_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Address",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_staff",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Score",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Open_Year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Shop_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Membership_card",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Time_of_purchase",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Level_of_membership",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Address",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Member_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "happy_hour",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HH_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Shop_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Month",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_shaff_in_charge",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "HH_ID",
+        "Shop_ID",
+        "Month"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Shop_ID",
+          "references_table": "shop",
+          "references_column": "Shop_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "happy_hour_member",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HH_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Member_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total_amount",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "HH_ID",
+        "Member_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Member_ID",
+          "references_table": "member",
+          "references_column": "Member_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

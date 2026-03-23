@@ -1,0 +1,121 @@
+{
+  "tables": [
+    {
+      "name": "storm",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Storm_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Dates_active",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Max_speed",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Damage_millions_USD",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Number_Deaths",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Storm_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "region",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Region_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Region_code",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Region_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Region_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "affected_region",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Region_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Storm_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Number_city_affected",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Region_id",
+        "Storm_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Region_id",
+          "references_table": "region",
+          "references_column": "Region_id"
+        },
+        {
+          "column": "Storm_ID",
+          "references_table": "storm",
+          "references_column": "Storm_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

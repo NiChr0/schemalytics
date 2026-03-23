@@ -1,0 +1,832 @@
+{
+  "tables": [
+    {
+      "name": "actor",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "actor_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(45)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(45)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "actor_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "address",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address2",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "district",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "city_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone",
+          "data_type": "VARCHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "address_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "city_id",
+          "references_table": "city",
+          "references_column": "city_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "category",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR(25)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "category_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "city_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "country_id",
+          "references_table": "country",
+          "references_column": "country_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(50)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "country_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "customer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(45)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(45)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "create_date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "address_id",
+          "references_table": "address",
+          "references_column": "address_id"
+        },
+        {
+          "column": "store_id",
+          "references_table": "store",
+          "references_column": "store_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "film",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "film_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "release_year",
+          "data_type": "YEAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "language_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "original_language_id",
+          "data_type": "TINYINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rental_duration",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rental_rate",
+          "data_type": "DECIMAL(4,2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "length",
+          "data_type": "SMALLINT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "replacement_cost",
+          "data_type": "DECIMAL(5,2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "DEFAULT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "special_features",
+          "data_type": "DEFAULT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "film_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "language_id",
+          "references_table": "language",
+          "references_column": "language_id"
+        },
+        {
+          "column": "original_language_id",
+          "references_table": "language",
+          "references_column": "language_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "film_actor",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "actor_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "film_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "actor_id",
+        "film_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "actor_id",
+          "references_table": "actor",
+          "references_column": "actor_id"
+        },
+        {
+          "column": "film_id",
+          "references_table": "film",
+          "references_column": "film_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "film_category",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "film_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "film_id",
+        "category_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "film_id",
+          "references_table": "film",
+          "references_column": "film_id"
+        },
+        {
+          "column": "category_id",
+          "references_table": "category",
+          "references_column": "category_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "film_text",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "film_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "film_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inventory",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "inventory_id",
+          "data_type": "MEDIUMINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "film_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "inventory_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "store_id",
+          "references_table": "store",
+          "references_column": "store_id"
+        },
+        {
+          "column": "film_id",
+          "references_table": "film",
+          "references_column": "film_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "language",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "language_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "CHAR(20)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "language_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "payment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "payment_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "staff_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rental_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL(5,2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "payment_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "rental_id",
+          "references_table": "rental",
+          "references_column": "rental_id"
+        },
+        {
+          "column": "customer_id",
+          "references_table": "customer",
+          "references_column": "customer_id"
+        },
+        {
+          "column": "staff_id",
+          "references_table": "staff",
+          "references_column": "staff_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "rental",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "rental_id",
+          "data_type": "INT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "rental_date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "inventory_id",
+          "data_type": "MEDIUMINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "return_date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "staff_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "rental_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "staff_id",
+          "references_table": "staff",
+          "references_column": "staff_id"
+        },
+        {
+          "column": "inventory_id",
+          "references_table": "inventory",
+          "references_column": "inventory_id"
+        },
+        {
+          "column": "customer_id",
+          "references_table": "customer",
+          "references_column": "customer_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "staff",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "staff_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(45)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(45)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "picture",
+          "data_type": "BLOB",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "store_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "active",
+          "data_type": "BOOLEAN",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "username",
+          "data_type": "VARCHAR(16)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "password",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "staff_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "address_id",
+          "references_table": "address",
+          "references_column": "address_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "store",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "store_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "manager_staff_id",
+          "data_type": "TINYINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "address_id",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "last_update",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "store_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "manager_staff_id",
+          "references_table": "staff",
+          "references_column": "staff_id"
+        },
+        {
+          "column": "address_id",
+          "references_table": "address",
+          "references_column": "address_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

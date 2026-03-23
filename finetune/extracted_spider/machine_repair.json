@@ -1,0 +1,180 @@
+{
+  "tables": [
+    {
+      "name": "repair",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "repair_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Launch_Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Notes",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "repair_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "machine",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Machine_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Making_Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Team",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Machine_series",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "value_points",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quality_rank",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Machine_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "technician",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "technician_id",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Team",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Starting_Year",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "technician_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "repair_assignment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "technician_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "repair_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Machine_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "technician_id",
+        "repair_ID",
+        "Machine_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "technician_id",
+          "references_table": "technician",
+          "references_column": "technician_id"
+        },
+        {
+          "column": "repair_ID",
+          "references_table": "repair",
+          "references_column": "repair_ID"
+        },
+        {
+          "column": "Machine_ID",
+          "references_table": "machine",
+          "references_column": "Machine_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

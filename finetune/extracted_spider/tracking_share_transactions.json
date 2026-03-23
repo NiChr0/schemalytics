@@ -1,0 +1,187 @@
+{
+  "tables": [
+    {
+      "name": "Investors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "investor_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Investor_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Lots",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "lot_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "investor_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lot_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Transaction_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "transaction_type_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "transaction_type_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Transactions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "transaction_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "investor_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "transaction_type_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_of_transaction",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount_of_transaction",
+          "data_type": "DECIMAL(19,4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "share_count",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "sales_transaction_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sales_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Purchases",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "purchase_transaction_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "purchase_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Transactions_Lots",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "transaction_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lot_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

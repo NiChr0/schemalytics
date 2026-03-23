@@ -1,0 +1,459 @@
+{
+  "tables": [
+    {
+      "name": "PlaneModel",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ModelNumber",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ManufacturerName",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PlaneRange",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "CruiseSpeed",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Pilot",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PilotID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FirstName",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "LastName",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "DOB",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "HoursFlown",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "PlanePilot",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PlaneModel",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PilotID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "PilotID",
+        "PlaneModel"
+      ],
+      "foreign_keys": [
+        {
+          "column": "PilotID",
+          "references_table": "PlaneModel",
+          "references_column": "ModelNumber"
+        },
+        {
+          "column": "PilotID",
+          "references_table": "Pilot",
+          "references_column": "PilotID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "PlaneDetail",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PlaneID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ModelNumber",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "RegistrationNo",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "BuiltYear",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FirstClassCapacity",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "EcoCapacity",
+          "data_type": "SMALLINT",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "PlaneID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "ModelNumber",
+          "references_table": "PlaneModel",
+          "references_column": "ModelNumber"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CountryName",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "CountryCode",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "CountryCOde"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Airport",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "AirportCode",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "AirportName",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "ContactNo",
+          "data_type": "NUMERIC",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Longitude",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Latitude",
+          "data_type": "FLOAT",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "CountryCode",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "AirportCode"
+      ],
+      "foreign_keys": [
+        {
+          "column": "CountryCode",
+          "references_table": "Country",
+          "references_column": "CountryCode"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Flight",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "FlightNo",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FlightDepartTo",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FlightArriveFrom",
+          "data_type": "CHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Distance",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "FlightNo"
+      ],
+      "foreign_keys": [
+        {
+          "column": "FlightDepartTo",
+          "references_table": "Airport",
+          "references_column": "AirportCode"
+        },
+        {
+          "column": "FlightArriveFrom",
+          "references_table": "Airport",
+          "references_column": "AirportCode"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "FlightAttendant",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "AttendantID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FirstName",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "LastName",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "DOB",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "MentorID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "AttendantID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "MentorID",
+          "references_table": "FlightAttendant",
+          "references_column": "AttendantID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "FlightInstance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "InstanceID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FlightNo",
+          "data_type": "VARCHAR",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PlaneID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PilotAboardID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "CoPilotAboardID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FSM_AttendantID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "DateTimeLeave",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "DateTimeArrive",
+          "data_type": "TIMESTAMP",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "InstanceID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "FlightNo",
+          "references_table": "Flight",
+          "references_column": "FlightNo"
+        },
+        {
+          "column": "PlaneID",
+          "references_table": "PlaneDetail",
+          "references_column": "PlaneID"
+        },
+        {
+          "column": "PilotAboardID",
+          "references_table": "Pilot",
+          "references_column": "PilotID"
+        },
+        {
+          "column": "CoPilotAboardID",
+          "references_table": "Pilot",
+          "references_column": "PilotID"
+        },
+        {
+          "column": "FSM_AttendantID",
+          "references_table": "FlightAttendant",
+          "references_column": "AttendantID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "InstanceAttendant",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "InstanceID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "AttendantID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "InstanceID",
+        "AttendantID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "InstanceID",
+          "references_table": "FlightInstance",
+          "references_column": "InstanceID"
+        },
+        {
+          "column": "AttendantID",
+          "references_table": "FlightAttendant",
+          "references_column": "AttendantID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

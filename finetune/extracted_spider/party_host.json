@@ -1,0 +1,127 @@
+{
+  "tables": [
+    {
+      "name": "party",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Party_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party_Theme",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "First_year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Last_year",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Number_of_hosts",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Party_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "host",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Host_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nationality",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Host_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "party_host",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Party_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Host_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Is_Main_in_Charge",
+          "data_type": "BOOL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Party_ID",
+        "Host_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Host_ID",
+          "references_table": "host",
+          "references_column": "Host_ID"
+        },
+        {
+          "column": "Party_ID",
+          "references_table": "party",
+          "references_column": "Party_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

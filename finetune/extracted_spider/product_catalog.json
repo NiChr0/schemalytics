@@ -1,0 +1,223 @@
+{
+  "tables": [
+    {
+      "name": "Attribute_Definitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "attribute_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "attribute_name",
+          "data_type": "VARCHAR(30)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "attribute_data_type",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Catalogs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "catalog_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "catalog_name",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "catalog_publisher",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_of_publication",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_of_latest_revision",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Catalog_Structure",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "catalog_level_number",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "catalog_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "catalog_level_name",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Catalog_Contents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "catalog_entry_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "catalog_level_number",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "parent_entry_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "previous_entry_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "next_entry_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "catalog_entry_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_stock_number",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_in_dollars",
+          "data_type": "DOUBLE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_in_euros",
+          "data_type": "DOUBLE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_in_pounds",
+          "data_type": "DOUBLE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "capacity",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "length",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "width",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Catalog_Contents_Additional_Attributes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "catalog_entry_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "catalog_level_number",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "attribute_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "attribute_value",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

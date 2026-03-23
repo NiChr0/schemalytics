@@ -1,0 +1,301 @@
+{
+  "tables": [
+    {
+      "name": "Addresses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "address_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "line_1_number_building",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "zip_postcode",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state_province_county",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR(50)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Staff",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "staff_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "staff_address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "nickname",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "middle_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_of_birth",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_joined_staff",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_left_staff",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Vehicles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "vehicle_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vehicle_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customer_address_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "customer_status_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "date_became_customer",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date_of_birth",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "first_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_name",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount_outstanding",
+          "data_type": "DOUBLE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "email_address",
+          "data_type": "VARCHAR(250)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phone_number",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cell_mobile_phone_number",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Customer_Payments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "datetime_payment",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "payment_method_code",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "amount_payment",
+          "data_type": "DOUBLE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "customer_id",
+        "datetime_payment"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Lessons",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "lesson_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "customer_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lesson_status_code",
+          "data_type": "VARCHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "staff_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vehicle_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "lesson_date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lesson_time",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DOUBLE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

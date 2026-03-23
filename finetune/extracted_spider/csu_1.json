@@ -1,0 +1,235 @@
+{
+  "tables": [
+    {
+      "name": "Campuses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Campus",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "County",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "csu_fees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Campus",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CampusFee",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "Campus",
+          "references_table": "Campuses",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "degrees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Campus",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Degrees",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Year",
+        "Campus"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Campus",
+          "references_table": "Campuses",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "discipline_enrollments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Campus",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Discipline",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Undergraduate",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Graduate",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Campus",
+        "Discipline"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Campus",
+          "references_table": "Campuses",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "enrollments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Campus",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TotalEnrollment_AY",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "FTE_AY",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Campus",
+        "Year"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Campus",
+          "references_table": "Campuses",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "faculty",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Campus",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Faculty",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "Campus",
+          "references_table": "Campuses",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

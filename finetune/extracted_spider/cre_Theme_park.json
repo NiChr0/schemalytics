@@ -1,0 +1,574 @@
+{
+  "tables": [
+    {
+      "name": "Ref_Hotel_Star_Ratings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "star_rating_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "star_rating_description",
+          "data_type": "VARCHAR(80)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "star_rating_code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Locations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Location_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Location_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Address",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Location_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ref_Attraction_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Attraction_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Attraction_Type_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Attraction_Type_Code"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Visitors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Tourist_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Tourist_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Tourist_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Features",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Feature_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Feature_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Feature_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Hotels",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "hotel_id",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "star_rating_code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "pets_allowed_yn",
+          "data_type": "CHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_range",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "other_hotel_details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "hotel_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "star_rating_code",
+          "references_table": "Ref_Hotel_Star_Ratings",
+          "references_column": "star_rating_code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Tourist_Attractions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Tourist_Attraction_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Attraction_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Location_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "How_to_Get_There",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Opening_Hours",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Tourist_Attraction_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Location_ID",
+          "references_table": "Locations",
+          "references_column": "Location_ID"
+        },
+        {
+          "column": "Attraction_Type_Code",
+          "references_table": "Ref_Attraction_Types",
+          "references_column": "Attraction_Type_Code"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Street_Markets",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Market_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Market_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Market_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Market_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Shops",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Shop_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Shop_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Shop_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Shop_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Museums",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Museum_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Museum_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Museum_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Museum_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Royal_Family",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Royal_Family_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Royal_Family_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Royal_Family_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Royal_Family_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Theme_Parks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Theme_Park_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Theme_Park_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Theme_Park_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Theme_Park_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Visits",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Visit_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Tourist_Attraction_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Tourist_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Visit_Date",
+          "data_type": "DATETIME",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Visit_Details",
+          "data_type": "VARCHAR(40)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Visit_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Tourist_Attraction_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        },
+        {
+          "column": "Tourist_ID",
+          "references_table": "Visitors",
+          "references_column": "Tourist_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Photos",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Photo_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Tourist_Attraction_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Filename",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Photo_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Tourist_Attraction_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Staff",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Staff_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Tourist_Attraction_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Other_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Staff_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Tourist_Attraction_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Tourist_Attraction_Features",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Tourist_Attraction_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Feature_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Tourist_Attraction_ID",
+        "Feature_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Tourist_Attraction_ID",
+          "references_table": "Tourist_Attractions",
+          "references_column": "Tourist_Attraction_ID"
+        },
+        {
+          "column": "Feature_ID",
+          "references_table": "Features",
+          "references_column": "Feature_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

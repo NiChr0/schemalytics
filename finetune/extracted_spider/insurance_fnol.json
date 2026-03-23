@@ -1,0 +1,243 @@
+{
+  "tables": [
+    {
+      "name": "Customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Customer_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Services",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Service_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Service_name",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Service_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Available_Policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "policy_type_code",
+          "data_type": "CHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Customer_Phone",
+          "data_type": "VARCHAR(255)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Policy_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Customers_Policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_Opened",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date_Closed",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Customer_ID",
+        "Policy_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Customer_ID",
+          "references_table": "Customers",
+          "references_column": "Customer_ID"
+        },
+        {
+          "column": "Policy_ID",
+          "references_table": "Available_Policies",
+          "references_column": "Policy_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "First_Notification_of_Loss",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "FNOL_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Service_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "FNOL_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Service_ID",
+          "references_table": "Services",
+          "references_column": "Service_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Claims",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Claim_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FNOL_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Effective_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Claim_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "FNOL_ID",
+          "references_table": "First_Notification_of_Loss",
+          "references_column": "FNOL_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Settlements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Settlement_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_ID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Effective_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Settlement_Amount",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Settlement_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Claim_ID",
+          "references_table": "Claims",
+          "references_column": "Claim_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

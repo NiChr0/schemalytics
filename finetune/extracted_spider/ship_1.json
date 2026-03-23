@@ -1,0 +1,104 @@
+{
+  "tables": [
+    {
+      "name": "captain",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Captain_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ship_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rank",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Captain_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Ship_ID",
+          "references_table": "Ship",
+          "references_column": "Ship_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Ship",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Ship_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Built_Year",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Flag",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Ship_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

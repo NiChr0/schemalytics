@@ -1,0 +1,133 @@
+{
+  "tables": [
+    {
+      "name": "people",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "People_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "District",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "People_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "debate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Debate_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Venue",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Num_of_Audience",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Debate_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "debate_people",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Debate_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Affirmative",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Negative",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "If_Affirmative_Win",
+          "data_type": "BOOL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Debate_ID",
+        "Affirmative",
+        "Negative"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Debate_ID",
+          "references_table": "debate",
+          "references_column": "Debate_ID"
+        },
+        {
+          "column": "Affirmative",
+          "references_table": "people",
+          "references_column": "People_ID"
+        },
+        {
+          "column": "Negative",
+          "references_table": "people",
+          "references_column": "People_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

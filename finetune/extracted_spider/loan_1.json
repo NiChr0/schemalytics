@@ -1,0 +1,156 @@
+{
+  "tables": [
+    {
+      "name": "bank",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "branch_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "bname",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "no_of_customers",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR(10)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "customer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "cust_ID",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cust_name",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "acc_type",
+          "data_type": "CHAR(1)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "acc_bal",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "no_of_loans",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "credit_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "branch_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "branch_ID",
+          "references_table": "bank",
+          "references_column": "branch_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "loan",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "loan_ID",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "loan_type",
+          "data_type": "VARCHAR(15)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cust_ID",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "branch_ID",
+          "data_type": "VARCHAR(3)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "branch_ID",
+          "references_table": "bank",
+          "references_column": "branch_ID"
+        },
+        {
+          "column": "Cust_ID",
+          "references_table": "customer",
+          "references_column": "Cust_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

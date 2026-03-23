@@ -1,0 +1,115 @@
+{
+  "tables": [
+    {
+      "name": "workshop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Workshop_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Venue",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Workshop_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "submission",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Submission_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Scores",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Author",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "College",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Submission_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Acceptance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Submission_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Workshop_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Result",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Submission_ID",
+        "Workshop_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Submission_ID",
+          "references_table": "submission",
+          "references_column": "Submission_ID"
+        },
+        {
+          "column": "Workshop_ID",
+          "references_table": "workshop",
+          "references_column": "Workshop_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "tables": [
+    {
+      "name": "program",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Program_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Origin",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Launch",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Program_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "channel",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Channel_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Share_in_percent",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rating_in_percent",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Channel_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "broadcast",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Channel_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Program_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Time_of_day",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Channel_ID",
+        "Program_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Channel_ID",
+          "references_table": "channel",
+          "references_column": "Channel_ID"
+        },
+        {
+          "column": "Program_ID",
+          "references_table": "program",
+          "references_column": "Program_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "broadcast_share",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Channel_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Program_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Share_in_percent",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Channel_ID",
+        "Program_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Channel_ID",
+          "references_table": "channel",
+          "references_column": "Channel_ID"
+        },
+        {
+          "column": "Program_ID",
+          "references_table": "program",
+          "references_column": "Program_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

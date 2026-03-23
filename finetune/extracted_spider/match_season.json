@@ -1,0 +1,191 @@
+{
+  "tables": [
+    {
+      "name": "country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Country_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Capital",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Official_native_language",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Country_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "team",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Team_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Team_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "match_season",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Season",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Player",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Team",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Draft_Pick_Number",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Draft_Class",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "College",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Season"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Country",
+          "references_table": "country",
+          "references_column": "Country_id"
+        },
+        {
+          "column": "Team",
+          "references_table": "team",
+          "references_column": "Team_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "player",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Player_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Player",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Years_Played",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Total_WL",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Singles_WL",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Doubles_WL",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Team",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Player_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Team",
+          "references_table": "team",
+          "references_column": "Team_id"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

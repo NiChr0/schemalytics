@@ -1,0 +1,214 @@
+{
+  "tables": [
+    {
+      "name": "product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dimensions",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dpi",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pages_per_minute_color",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_page_size",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "interface",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "store",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Store_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Store_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Area_size",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Number_of_product_category",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ranking",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Store_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "district",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "District_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "District_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Headquartered_City",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City_Population",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City_Area",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "District_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "store_product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Store_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Store_ID",
+        "Product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Store_ID",
+          "references_table": "store",
+          "references_column": "Store_ID"
+        },
+        {
+          "column": "Product_ID",
+          "references_table": "product",
+          "references_column": "Product_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "store_district",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Store_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "District_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Store_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Store_ID",
+          "references_table": "store",
+          "references_column": "Store_ID"
+        },
+        {
+          "column": "District_ID",
+          "references_table": "district",
+          "references_column": "District_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

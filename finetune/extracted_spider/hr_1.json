@@ -1,0 +1,331 @@
+{
+  "tables": [
+    {
+      "name": "regions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "REGION_ID",
+          "data_type": "DECIMAL(5,0)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "REGION_NAME",
+          "data_type": "VARCHAR(25)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "REGION_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "countries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "COUNTRY_ID",
+          "data_type": "VARCHAR(2)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "COUNTRY_NAME",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "REGION_ID",
+          "data_type": "DECIMAL(10,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "COUNTRY_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "REGION_ID",
+          "references_table": "regions",
+          "references_column": "REGION_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "departments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DEPARTMENT_ID",
+          "data_type": "DECIMAL(4,0)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "DEPARTMENT_NAME",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "MANAGER_ID",
+          "data_type": "DECIMAL(6,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LOCATION_ID",
+          "data_type": "DECIMAL(4,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "DEPARTMENT_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "jobs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "JOB_ID",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "JOB_TITLE",
+          "data_type": "VARCHAR(35)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "MIN_SALARY",
+          "data_type": "DECIMAL(6,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MAX_SALARY",
+          "data_type": "DECIMAL(6,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "JOB_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EMPLOYEE_ID",
+          "data_type": "DECIMAL(6,0)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "FIRST_NAME",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LAST_NAME",
+          "data_type": "VARCHAR(25)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "EMAIL",
+          "data_type": "VARCHAR(25)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "PHONE_NUMBER",
+          "data_type": "VARCHAR(20)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HIRE_DATE",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "JOB_ID",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "SALARY",
+          "data_type": "DECIMAL(8,2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "COMMISSION_PCT",
+          "data_type": "DECIMAL(2,2)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MANAGER_ID",
+          "data_type": "DECIMAL(6,0)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DEPARTMENT_ID",
+          "data_type": "DECIMAL(4,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "EMPLOYEE_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "DEPARTMENT_ID",
+          "references_table": "departments",
+          "references_column": "DEPARTMENT_ID"
+        },
+        {
+          "column": "JOB_ID",
+          "references_table": "jobs",
+          "references_column": "JOB_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "job_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EMPLOYEE_ID",
+          "data_type": "DECIMAL(6,0)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "START_DATE",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "END_DATE",
+          "data_type": "DATE",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "JOB_ID",
+          "data_type": "VARCHAR(10)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "DEPARTMENT_ID",
+          "data_type": "DECIMAL(4,0)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "EMPLOYEE_ID",
+        "START_DATE"
+      ],
+      "foreign_keys": [
+        {
+          "column": "EMPLOYEE_ID",
+          "references_table": "employees",
+          "references_column": "EMPLOYEE_ID"
+        },
+        {
+          "column": "DEPARTMENT_ID",
+          "references_table": "departments",
+          "references_column": "DEPARTMENT_ID"
+        },
+        {
+          "column": "JOB_ID",
+          "references_table": "jobs",
+          "references_column": "JOB_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "locations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "LOCATION_ID",
+          "data_type": "DECIMAL(4,0)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "STREET_ADDRESS",
+          "data_type": "VARCHAR(40)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "POSTAL_CODE",
+          "data_type": "VARCHAR(12)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CITY",
+          "data_type": "VARCHAR(30)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "STATE_PROVINCE",
+          "data_type": "VARCHAR(25)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "COUNTRY_ID",
+          "data_type": "VARCHAR(2)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "LOCATION_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "COUNTRY_ID",
+          "references_table": "countries",
+          "references_column": "COUNTRY_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "tables": [
+    {
+      "name": "Customers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Customer_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Staff",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Staff_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Staff_Details",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Staff_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Customer_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Policy_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Start_Date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "End_Date",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Policy_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Customer_ID",
+          "references_table": "Customers",
+          "references_column": "Customer_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Claim_Headers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Claim_Header_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_Status_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Policy_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Date_of_Claim",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date_of_Settlement",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount_Claimed",
+          "data_type": "DECIMAL(20,4)",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount_Piad",
+          "data_type": "DECIMAL(20,4)",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Claim_Header_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Policy_ID",
+          "references_table": "Policies",
+          "references_column": "Policy_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Claims_Documents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Claim_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Document_Type_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Created_by_Staff_ID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Created_Date",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Claim_ID",
+        "Document_Type_Code"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Claim_ID",
+          "references_table": "Claim_Headers",
+          "references_column": "Claim_Header_ID"
+        },
+        {
+          "column": "Created_by_Staff_ID",
+          "references_table": "Staff",
+          "references_column": "Staff_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Claims_Processing_Stages",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Claim_Stage_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Next_Claim_Stage_ID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Claim_Status_Name",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_Status_Description",
+          "data_type": "VARCHAR(255)",
+          "nullable": false,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Claim_Stage_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Claims_Processing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Claim_Processing_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_Outcome_Code",
+          "data_type": "CHAR(15)",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Claim_Stage_ID",
+          "data_type": "INTEGER",
+          "nullable": false,
+          "description": null
+        },
+        {
+          "name": "Staff_ID",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Claim_Processing_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Claim_ID",
+          "references_table": "Claim_Headers",
+          "references_column": "Claim_Header_ID"
+        },
+        {
+          "column": "Staff_ID",
+          "references_table": "Staff",
+          "references_column": "Staff_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

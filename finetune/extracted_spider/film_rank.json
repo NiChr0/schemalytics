@@ -1,0 +1,138 @@
+{
+  "tables": [
+    {
+      "name": "film",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Film_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Studio",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Director",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gross_in_dollar",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Film_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "market",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Market_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Number_cities",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Market_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "film_market_estimation",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Estimation_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Low_Estimate",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "High_Estimate",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Film_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Market_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Estimation_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Film_ID",
+          "references_table": "film",
+          "references_column": "Film_ID"
+        },
+        {
+          "column": "Market_ID",
+          "references_table": "market",
+          "references_column": "Market_ID"
+        }
+      ],
+      "description": null
+    }
+  ]
+}

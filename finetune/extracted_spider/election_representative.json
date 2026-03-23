@@ -1,0 +1,104 @@
+{
+  "tables": [
+    {
+      "name": "election",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Election_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Representative_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Date",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Votes",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Vote_Percent",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Seats",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Place",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Election_ID"
+      ],
+      "foreign_keys": [
+        {
+          "column": "Representative_ID",
+          "references_table": "representative",
+          "references_column": "Representative_ID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "representative",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Representative_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "State",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Party",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Lifespan",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "Representative_ID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}
