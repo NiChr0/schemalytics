@@ -29,7 +29,7 @@ from pathlib import Path
 
 MODEL_ID        = "unsloth/Qwen3.5-4B"
 ADAPTER_DIR     = "finetune/cuda/adapters-silver-v2"
-MAX_SEQ_LENGTH  = 4096   # reduced from 8192 — Qwen3.5 linear attn is memory-hungry
+MAX_SEQ_LENGTH  = 1024   # must match 3060Ti config — linear attn OOMs at higher values
 
 LORA = dict(
     r               = 8,
