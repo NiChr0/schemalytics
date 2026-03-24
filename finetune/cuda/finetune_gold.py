@@ -29,7 +29,7 @@ from pathlib import Path
 
 MODEL_ID        = "unsloth/Qwen3.5-4B"
 ADAPTER_DIR     = "finetune/cuda/adapters-gold-v2"
-MAX_SEQ_LENGTH  = 4096   # Gold I/O is compact; 4096 gives ample headroom on 3090
+MAX_SEQ_LENGTH  = 1024   # reduced from 4096 — gold I/O is compact, matches silver speed
 
 LORA = dict(
     r               = 32,           # up from 8 — more expressive adapters
@@ -62,7 +62,7 @@ TRAIN = dict(
     save_steps                  = 600,
     load_best_model_at_end      = False,
     seed                        = 42,
-    dataloader_num_workers      = 0,
+    dataloader_num_workers      = 4,
     report_to                   = "none",
     dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
