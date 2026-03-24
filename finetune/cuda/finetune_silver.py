@@ -46,8 +46,8 @@ LORA = dict(
 
 TRAIN = dict(
     output_dir                  = ADAPTER_DIR,
-    per_device_train_batch_size = 1,
-    gradient_accumulation_steps = 8,            # effective batch = 8
+    per_device_train_batch_size = 4,
+    gradient_accumulation_steps = 2,            # effective batch = 8
     max_steps                   = 600,          # more data needs more steps
     learning_rate               = 2e-5,         # slightly lower for larger batch
     lr_scheduler_type           = "cosine",
@@ -62,7 +62,7 @@ TRAIN = dict(
     save_steps                  = 600,
     load_best_model_at_end      = False,
     seed                        = 42,
-    dataloader_num_workers      = 0,
+    dataloader_num_workers      = 4,
     report_to                   = "none",
     dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
