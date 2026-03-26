@@ -32,8 +32,8 @@ ADAPTER_DIR     = "finetune/cuda/adapters-gold-v2"
 MAX_SEQ_LENGTH  = 1024   # reduced from 4096 — gold I/O is compact, matches silver speed
 
 LORA = dict(
-    r               = 32,           # up from 8 — more expressive adapters
-    lora_alpha      = 64,           # 2x r as standard practice
+    r               = 8,
+    lora_alpha      = 16,
     lora_dropout    = 0.05,
     target_modules  = [
         "q_proj", "k_proj", "v_proj", "o_proj",
