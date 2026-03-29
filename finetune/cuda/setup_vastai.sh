@@ -46,11 +46,9 @@ echo "[1/4] Installing Python dependencies..."
 
 # Pin torch to 2.1.0+cu121 — compatible with CUDA driver 12.0+ (common on RunPod).
 # Newer torch versions (2.4+) require CUDA driver 12.4+ which many pods don't have.
-# Install unsloth first — it will pull in a compatible torch version automatically.
-# Requires CUDA driver 12.4+ on the pod (use RunPod PyTorch 2.4+ template).
+# Do NOT upgrade torch — use whatever version the pod image provides.
+# Install unsloth on top of it, then remaining deps.
 pip install --quiet "unsloth @ git+https://github.com/unslothai/unsloth.git"
-
-# Install remaining training deps
 pip install --quiet \
     "trl>=0.12.0" \
     "datasets>=2.18.0" \
