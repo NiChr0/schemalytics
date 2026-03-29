@@ -138,6 +138,7 @@ export_and_push() {
     # Install Ollama if not present
     if ! command -v ollama &>/dev/null; then
         echo "Installing Ollama..."
+        apt-get install -y -qq zstd
         curl -fsSL https://ollama.com/install.sh | sh
         # Start Ollama server in background
         ollama serve &>/dev/null &
