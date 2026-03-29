@@ -125,20 +125,28 @@ schemalytics generate -c postgresql://...
 
 ---
 
-## Agent 3 Fine-Tuned Classifier
+## Fine-Tuned Models
 
-Agent 3 (table classification) can use a dedicated fine-tuned model trained on real production schemas:
+Three Qwen3.5-4B models are available on Ollama Hub as drop-in replacements for the default model:
+
+| Model | Agent | Purpose |
+|-------|-------|---------|
+| `nichr0/schemalytics-classification-agent` | Agent 3 | Table classification (fact/dim/bridge/ref) |
+| `nichr0/schemalytics-silver-agent` | Agent 4a | Silver layer plan (dim_*, fct_*) |
+| `nichr0/schemalytics-gold-agent` | Agent 4b | Gold layer plan (agg_*) |
 
 ```bash
-# Download (one-time)
+# Pull (one-time)
 ollama pull nichr0/schemalytics-classification-agent
+ollama pull nichr0/schemalytics-silver-agent
+ollama pull nichr0/schemalytics-gold-agent
 
-# Use it
-SCHEMALYTICS_OLLAMA_MODEL=schemalytics-classification-agent \
+# Use a fine-tuned model (replaces default for all agents)
+SCHEMALYTICS_OLLAMA_MODEL=nichr0/schemalytics-silver-agent \
 schemalytics generate -c postgresql://...
 ```
 
-Model: `unsloth/Qwen3.5-4B` QLoRA · 327 training examples · train_loss=0.055 · eval_loss=0.058
+See `project_finetune.md` for training details and roadmap.
 
 ---
 
