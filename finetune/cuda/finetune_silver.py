@@ -146,15 +146,18 @@ def _export(model=None, tokenizer=None, skip_ollama: bool = False):
             load_in_4bit   = False,
         )
 
+    # Use /workspace for large outputs if available (avoids filling 20G root overlay)
+    workspace = Path("/workspace") if Path("/workspace").exists() else Path("finetune/cuda")
+
     # Step 1: merge LoRA into full HF model (16bit)
-    merged_dir = "finetune/cuda/merged-silver"
+    merged_dir = str(workspace / "merged-silver")
     print(f"Merging LoRA into {merged_dir} ...")
     model.save_pretrained_merged(merged_dir, tokenizer, save_method="merged_16bit")
 
     # Step 2: convert to F16 GGUF using llama.cpp
     llama_cpp = Path("/root/.unsloth/llama.cpp")
     convert_script = llama_cpp / "convert_hf_to_gguf.py"
-    f16_gguf = Path("finetune/cuda/schemalytics-silver-agent-f16.gguf")
+    f16_gguf = workspace / "schemalytics-silver-agent-f16.gguf"
     print(f"Converting to F16 GGUF -> {f16_gguf} ...")
     subprocess.run(
         ["python3", str(convert_script), merged_dir,
@@ -164,13 +167,14 @@ def _export(model=None, tokenizer=None, skip_ollama: bool = False):
 
     # Step 3: quantize to Q4_K_M
     quantize_bin = llama_cpp / "build" / "bin" / "llama-quantize"
-    gguf_path = Path("finetune/cuda/schemalytics-silver-agent-qwen3.5-4b-unsloth.Q4_K_M.gguf")
+    gguf_path = workspace / "schemalytics-silver-agent-Q4_K_M.gguf"
     print(f"Quantizing to Q4_K_M -> {gguf_path} ...")
     subprocess.run(
         [str(quantize_bin), str(f16_gguf), str(gguf_path), "Q4_K_M"],
         check=True,
     )
     f16_gguf.unlink()  # remove intermediate F16 file
+    import shutil; shutil.rmtree(merged_dir)  # remove merged model after quantization
 
     gguf_abs = str(gguf_path.resolve())
     print(f"\nGGUF saved to: {gguf_abs}")

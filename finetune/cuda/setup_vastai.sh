@@ -19,6 +19,19 @@ set -euo pipefail
 
 TARGET="${1:-both}"
 
+# ---------------------------------------------------------------------------
+# Redirect large caches to /workspace to avoid filling the 20G root overlay.
+# /workspace is the persistent network volume on RunPod (70G+).
+# ---------------------------------------------------------------------------
+if [[ -d /workspace ]]; then
+    export PIP_CACHE_DIR=/workspace/.cache/pip
+    export HF_HOME=/workspace/.cache/huggingface
+    export TRANSFORMERS_CACHE=/workspace/.cache/huggingface
+    export UNSLOTH_CACHE=/workspace/.cache/unsloth
+    mkdir -p "$PIP_CACHE_DIR" "$HF_HOME" "$UNSLOTH_CACHE"
+    echo "Using /workspace for pip/HF/unsloth caches."
+fi
+
 echo "============================================================"
 echo " Schemalytics fine-tune — vast.ai setup"
 echo " Target : $TARGET"
@@ -127,8 +140,9 @@ export_and_push() {
     python finetune/cuda/finetune_silver.py --export-only-gguf 2>&1 | tee finetune/cuda/export_silver.log
     python finetune/cuda/finetune_gold.py   --export-only-gguf 2>&1 | tee finetune/cuda/export_gold.log
 
-    SILVER_GGUF="finetune/cuda/schemalytics-silver-agent-qwen3.5-4b-unsloth.Q4_K_M.gguf"
-    GOLD_GGUF="finetune/cuda/schemalytics-gold-agent-qwen3.5-4b-unsloth.Q4_K_M.gguf"
+    WS=/workspace
+    SILVER_GGUF="$WS/schemalytics-silver-agent-Q4_K_M.gguf"
+    GOLD_GGUF="$WS/schemalytics-gold-agent-Q4_K_M.gguf"
 
     # Write Modelfiles with absolute paths
     cat > finetune/cuda/Modelfile-silver-agent << EOF
