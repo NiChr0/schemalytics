@@ -129,7 +129,12 @@ def main(export: bool = False):
 
 
 def _export(model=None, tokenizer=None, skip_ollama: bool = False):
-    """Fuse LoRA adapters and export to GGUF (Q4_K_M), then optionally import into Ollama."""
+    """Fuse LoRA adapters and export to GGUF (Q4_K_M), then optionally import into Ollama.
+
+    Uses manual llama.cpp pipeline instead of save_pretrained_gguf to avoid the
+    newer unsloth bug where Qwen3.5 is incorrectly treated as a VLM.
+    """
+    import subprocess
     from unsloth import FastLanguageModel
 
     if model is None:
@@ -141,11 +146,33 @@ def _export(model=None, tokenizer=None, skip_ollama: bool = False):
             load_in_4bit   = False,
         )
 
-    gguf_prefix = "finetune/cuda/schemalytics-silver-agent-qwen3.5-4b"
-    print(f"Exporting GGUF (Q4_K_M) -> {gguf_prefix}-unsloth.Q4_K_M.gguf ...")
-    model.save_pretrained_gguf(gguf_prefix, tokenizer, quantization_method="q4_k_m")
+    # Step 1: merge LoRA into full HF model (16bit)
+    merged_dir = "finetune/cuda/merged-silver"
+    print(f"Merging LoRA into {merged_dir} ...")
+    model.save_pretrained_merged(merged_dir, tokenizer, save_method="merged_16bit")
 
-    gguf_abs = str(Path(gguf_prefix + "-unsloth.Q4_K_M.gguf").resolve())
+    # Step 2: convert to F16 GGUF using llama.cpp
+    llama_cpp = Path("/root/.unsloth/llama.cpp")
+    convert_script = llama_cpp / "convert_hf_to_gguf.py"
+    f16_gguf = Path("finetune/cuda/schemalytics-silver-agent-f16.gguf")
+    print(f"Converting to F16 GGUF -> {f16_gguf} ...")
+    subprocess.run(
+        ["python3", str(convert_script), merged_dir,
+         "--outfile", str(f16_gguf), "--outtype", "f16"],
+        check=True,
+    )
+
+    # Step 3: quantize to Q4_K_M
+    quantize_bin = llama_cpp / "build" / "bin" / "llama-quantize"
+    gguf_path = Path("finetune/cuda/schemalytics-silver-agent-qwen3.5-4b-unsloth.Q4_K_M.gguf")
+    print(f"Quantizing to Q4_K_M -> {gguf_path} ...")
+    subprocess.run(
+        [str(quantize_bin), str(f16_gguf), str(gguf_path), "Q4_K_M"],
+        check=True,
+    )
+    f16_gguf.unlink()  # remove intermediate F16 file
+
+    gguf_abs = str(gguf_path.resolve())
     print(f"\nGGUF saved to: {gguf_abs}")
 
     if skip_ollama:
