@@ -1,0 +1,4926 @@
+{
+  "tables": [
+    {
+      "name": "Employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobTitle",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_programs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_demographics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeDemographics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_change",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "change_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "job_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "completed_training",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "program_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Department",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DepartmentID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DepartmentName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Trainings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "TrainingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingYear",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Cost",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "salaries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "talent_acquisition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "job_title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "job_location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "number_of_openings",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Training",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "TrainingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Cost",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Gender",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "GenderID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "GenderName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "trainers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "trainings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cost",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeePromotions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PromotionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PromotionDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "JobOpenings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "OpeningID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobCategory",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "OpeningDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CloseDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Recruiters",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Recruiter_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "First_Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Last_Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "departments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "manager",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "TrainingPrograms",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProgramID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProgramName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Completed",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Hires",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HireID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeData",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "JobVacancies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "VacancyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "OpenDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CloseDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "JobApplications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ApplicationID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Month",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "course_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "completed_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "department_changes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "change_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "new_department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Hiring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HireID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "diversity_training",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "completed_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeTimeline",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Applications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ApplicationID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CandidateName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "RaceEthnicity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobTitle",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ApplicationDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Positions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PositionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Position",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "new_employees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeHires",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "diversity_metrics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "metric",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "candidate_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "job_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "interviewed",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeTrainings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Training",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hiring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeHistory",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Departments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Jobs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Job_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Job_Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Candidates",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CandidateID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Community",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Employee_Training",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Employee_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Employee_Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Training_Type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hours_Spent",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_completed",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hours_trained",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "DepartmentTrainings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingProgram",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeCount",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CandidateOffers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CandidateID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Interviewed",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Offered",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_applications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "applicant_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "application_source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "application_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Exits",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExitID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ExitDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "it_hiring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeTraining",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Manager",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Training",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CompletionDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "TalentAcquisition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ApplicantID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobTitle",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ApplicationDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "TrainingCourses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "TrainingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Completed",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_database",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "position",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "position",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Salaries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SalaryID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobTitle",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employment_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeHire",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HireID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_photos",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "photo",
+          "data_type": "BLOB",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "HiringDates",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_titles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hiring_database",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "role",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "applicant_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hr_positions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "position",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeSalaries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_costs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cost",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Employee_Trainings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Employee_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Training_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Training_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_database",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "tenure",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_completed",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "DepartmentScores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "HiringData",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HireID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_details",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_hires",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_openings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "position_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "open_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Genders",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "NegotiationTraining",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "NegotiationTraining",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeSalary",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobTitleID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "EmployeeID",
+          "references_table": "Employee",
+          "references_column": "EmployeeID"
+        },
+        {
+          "column": "JobTitleID",
+          "references_table": "JobTitle",
+          "references_column": "JobTitleID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Applicants",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ApplicantID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "positions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary_range",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Employee",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "FirstName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LastName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobTitle",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LastActivity",
+          "data_type": "DATETIME",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "TrainingData",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Training",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Diversity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Employee_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Race",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeCourses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CourseID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeExperience",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "YearsOfExperience",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "applications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "application_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "submission_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "applicant",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "application_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeSkills",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Skill",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "JobHistory",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobStartDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Training_Programs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Program_Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Trainer",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Start_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "End_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Instructors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Instructor_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "First_Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Last_Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Participation",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Participant_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Program_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Participation_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "MinorityStatus",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Minority",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Interviews",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "InterviewID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "InterviewDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CandidateName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CandidateGender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobCategory",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "TrainingSessions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SessionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SessionName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SessionDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "NumberOfAttendees",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "AttendeeAccessibility",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SalaryData",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "department",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeLocations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Remote",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "diversity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "disability_status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeSalariesHR",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "completed",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "NewHires",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HireID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ethnicity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeHiring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "JobTitle",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "JobTitleID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobTitleName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeTrainings2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Training",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "absences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "absence_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "jobs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "position_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "open_position",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "trainings_completed",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_courses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "course_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "course_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "RecruitmentData",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Position",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hires",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ApplicantData",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ApplicantID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobPosition",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ApplicantType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "recruiters",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "recruiter_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "recruiter_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "interviews",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "interview_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "candidate_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "recruiter_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "interview_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "TrainingScores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Experience",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "YearsOfExperience",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Salary",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "DiversityInitiatives",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "InitiativeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "InitiativeName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Job_Applications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Application_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Applicant_Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Job_Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Application_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Interview_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hired",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "salary",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sales_hiring",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hiring_2022",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_diversity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ethnicity",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_skills",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "skill_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "skill",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "skill_level",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "gender",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeInfo",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Identity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "diversity_quota",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ethnicity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_employees",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_postings_database",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "role",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "posting_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeePrograms",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HiringProgram",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JoinDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "new_hires",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Countries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Continent",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_offers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "offer_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "offer_accepted",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "department_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "terminations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "termination_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Recruitment",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "RecruiterID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "RecruiterName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CandidateSource",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "NewHire",
+          "data_type": "BIT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "DiversityTraining",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Completed",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "candidate_demographics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "candidate_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "race",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "offered_job",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "UnderrepresentedCommunities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CommunityID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CommunityName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeCommunities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CommunityID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "TrainingCategories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "TrainingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "roles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "role_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "role_title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employees_roles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "emp_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "role_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "PositionInterviews",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PositionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CandidateID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "InterviewDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Promotions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PromotionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PromotionDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "JobOffers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "OfferID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "JobCategory",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "OfferDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeTraining2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Manager",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CompletionDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hires",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_attendees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "hr_database",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_completed",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeDiversity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Identity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EmployeeDetails",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "GenderIdentity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DiversityTraining",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "interview_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "interview_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "candidate_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ethnicity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "interview_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "JobOffers2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "OfferID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HiringManager",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CandidateRaceEthnicity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DateOffered",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "completion_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "finance_positions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "position",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "underrepresented_communities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "community",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_sessions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "session_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GenderScores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TrainingType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "DiverseEmployees",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "salaries_q2_2022",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "employee_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salary",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hire_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Talent_Acquisition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Applicant_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Job_Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Hire_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Trainers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Trainer_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Trainer",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Specialization",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "training_operations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "program",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "recruitment_database",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "applicant_race",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "applicant_ethnicity",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "application_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_levels",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "DiversityInclusion",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "EmployeeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ethnicity",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Disability",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Veteran",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "HireDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "job_postings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "posted_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "open_positions",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "employee_roles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "emp_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dept_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "role_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "finance_training",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "department",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "program",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "training_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

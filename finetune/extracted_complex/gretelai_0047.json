@@ -1,0 +1,7931 @@
+{
+  "tables": [
+    {
+      "name": "Inclusive_Housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Property_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Inclusive",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CoOwners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CoOwnerID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "BoroughID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SalePrice",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive_housing_policy",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "person",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EcoHousing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coowner_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units_owned",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Property",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "zip",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owners",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_features",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownerships",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "paris_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_accessible",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_urban_properties_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "City",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_space_percentage",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive_housing",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_urbanism",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "NeighborhoodID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "NeighborhoodName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "InclusiveHousingPolicies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PolicyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PolicyName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ImplementationDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Building",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "AffordableHousing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "UnitID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "OccupancyRate",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rent",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_body",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "sale_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_urban",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "listing_price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year_built",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rent",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "neighborhood_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "neighborhood_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "HousingAffordability",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_community",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "community_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "bay_area_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owned",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size_sqft",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership_program",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owner_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_affordable_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "properties_inclusive_ny",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Tokyo_Housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Green_Certified",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "project",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_urbanism",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "affordable_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "building_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_per_sq_ft",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GreenBuildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_certification",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CoOwnershipProperties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MaintenanceCost",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "PropertyTaxRates",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyTaxRateID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "NeighborhoodID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rate",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seattle_buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "certification",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sqft",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sf_coownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "InclusivePolicies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_owned_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "listing_price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SustainableProperties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_affordability",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "london_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "postal_code",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owned",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "berlin_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_accessible",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "square_footage",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_features",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "zip_codes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "zip_code",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_housing_policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "policy_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_schemes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "scheme_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "scheme_types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "scheme_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scheme_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "InclusiveHousingUnits",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_sizes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "measurement_time",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "boston_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SustainableUrbanismByYear",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "initiative",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "borough",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "borough_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Cities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Affordability",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "affordability_index",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "income_bracket",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "housing_cost_percentage",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "diverse_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_bedrooms",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "square_footage",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "urban_areas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "projects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "budget",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_ownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shares",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "avg_square",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "studio",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "square_footage",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_housing_subdivisions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Neighborhood",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership_density",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CoOwnership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "agreement",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_tax",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "tax",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_co_ownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owner_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "agreement_start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "agreement_end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_suburbs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "houses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "eco_friendly",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "la_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_certification",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "NYC_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Accessibility",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "NYC_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner1Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner2Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_housing_initiatives",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "initiative_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "housing_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_practice",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sustainable_Ratings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "EcoHouses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_green_certified",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Property_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_sqft",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Boroughs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "BoroughID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "BoroughName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "IncomeRestrictedDevelopments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DevelopmentID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DevelopmentName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "RentalUnits",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "UnitID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DevelopmentID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "UnitType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_counts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "community_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "eco_friendly",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "States",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "State",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "InclusiveHousing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "area",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_accessible",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pets_allowed",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "continent",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "vancouver_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Property_Details",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Property_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Underrepresented",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_coowners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coowner",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sf_neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_counts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seoul_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_roof",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Vancouver_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GreenCertified",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "recertification_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive_housing",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rent",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Vancouver_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Inclusive_Housing",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "London_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Green_Space",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "London_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Price",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SustainableUrbanism",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Zip_Codes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "foreign_investors",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "community_co_ownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "building_id",
+          "references_table": "buildings",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "multi_property_owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "historic_buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_landmark",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CoOwnerships",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CoOwnershipID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "NeighborhoodID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "PropertyOwner",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_email",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_phone",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "la_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lease_exp",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city_listings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "listing_price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "owner_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "properties_inclusive",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oakland_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "boston_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quarter",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "affordability",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "austin_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "affordability_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CoOwnedProperties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Borough",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SustainabilityRating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "square_footage",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_features",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Paris_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Affordability",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Paris_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Co_Ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "PropertySizes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CoOwnedBy",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Policy",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership_counts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "portland_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_access",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_management_companies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "company_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city_inclusive_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive_policy",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "housing_affordability_index",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SustainabilityScores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Policy",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "InclusiveCities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "chicago_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seattle_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Property_Owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Owner_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_bedrooms",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "square_footage",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Community",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CommunityName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PropertyId",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "PropertyId",
+          "references_table": "Property",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "inclusive_developments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive_features",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eco_friendly_extended",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "neighborhood_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_affordable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_subsidies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "urban_sustainability",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership_cost",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "LA_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_features",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "has_pool",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "listings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "listing_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "eco_friendly",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sydney_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "studio_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "studio",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "square_footage",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "historic_districts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year_built",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership_agreements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "agreement_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owner_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership_percentage",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_communities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "has_inclusive_policy",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "community_land_trusts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_owners",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_type",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "model",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Urbanism_Policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Property_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Urbanism_Policy",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_location",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership_prices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "PropertyTypes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyTypeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PropertyType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "denver_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "community",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seattle_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_projects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "project_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "project_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "project_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "city_id",
+          "references_table": "cities",
+          "references_column": "city_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "extended_eco_communities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Owner",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "email",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_prices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ny_coownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quarter",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_policies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_apartments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_bedrooms",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "square_footage",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SustainableUrbanismProjects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProjectID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProjectName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Cost",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Property_Size_History",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Property_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Underrepresented",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coowners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "coowner_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coowner_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coowner_contact_details",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_cities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_properties",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_area",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "nyc_neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_affordable_housing",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "tax_rates_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rate",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_homes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "tax",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "urban_villages",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_bedrooms",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_materials",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "material",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "percentage",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "scheme_prices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "scheme_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_urbanism_florida",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "atlanta_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cert",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "austin_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cert",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "denver_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "market_value",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "nyc_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "borough",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_roof",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership_location",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "austin_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quarter",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "affordability",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eco_green_buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "building_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "construction_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_urban_extended",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "area_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "community_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Melbourne_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SquareFootage",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_changes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "neighborhood_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_change",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city_sustainability",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CoLivingProperties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oakland_neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "neighborhood_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "all_sustainable",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "chicago_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_access",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "affordable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "chicago_neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "prop_type",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "philadelphia_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_policy",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "policy_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy_description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Berlin_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Berlin_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Price",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_taxes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "tax_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "tax_amount",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "portland_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lease_exp",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "toronto_buildings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "certification",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sqft",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eco_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "has_solar_panels",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership_property",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_tax",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "neighborhood_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_properties2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "London_Housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Affordable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_housing_developments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "property_type"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Household_Types",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "median_income",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "incl_hsg_policy",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "policy_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SanFrancisco_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Toronto_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "LGBTQ_Friendly",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Toronto_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Size",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "City_Districts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "properties_available",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_building",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "building_categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "building_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "luxury_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "market_value",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "initiatives",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sf_prop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner3",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_owned_prices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "listing_price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "min_prices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PropertyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "OwnerName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "affordable_housing_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_schemes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "scheme_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_buildings2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "city_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "median_home_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "first_time_buyer_friendly",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eco_communities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "green_co_ownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership_cost",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "rental_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rental_price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "accessible",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "price_ranges",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "price_range_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_from",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price_to",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "co_ownership_diversity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shared_cost",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sustainable_communities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "tax_rates",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rate",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "istanbul_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owned",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sf_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_access",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Property_Value",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Property_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Owner_Disability",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Value",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Barcelona_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Green_Space",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Barcelona_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Price",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "prop_listings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "listing_price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "building",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "green_certified",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "community_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_owner_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SustainableCities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ny_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "address",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_access",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "affordable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ny_neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "unit_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "affordable_homes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Property_CoOwners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CoOwner1_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CoOwner1_Race",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CoOwner2_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CoOwner2_Race",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "UrbanPolicies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "policy_text",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sydney_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Co_Ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sydney_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Price",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "denver_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_co_ownership",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "shared_cost",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "community_housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Mortgage",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MortgageStartDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MortgageEndDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PropertyId",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "PropertyId",
+          "references_table": "Property",
+          "references_column": "Id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "co_ownership_states",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_model",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "model",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dubai_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "wheelchair_accessible",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ZipCodes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ZipCodeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Zip",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "PropertyCoop",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coop_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coop_membership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "housing_units",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "vancouver_owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property_co_owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Seattle_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "IsEcoFriendly",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Seoul_Housing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "District",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Affordable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Accessible",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Units",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_housing_policy",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "communities",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "community",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "eco_friendly",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inclusive_policy",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "inclusive_housing_prices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Tokyo_Neighborhoods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Sustainability",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Tokyo_Properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Neighborhood_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Property_Size",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "properties_for_sale",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_for_sale",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "affordability",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sustainable_Building",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "tokyo_real_estate",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "affordable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "bay_area_properties_yearly",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co_ownership",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "prop_owners",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "owner",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "property2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eco_friendly_homes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "tax_rates_3",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "neighborhood",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "state",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "property_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rate",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "urbanism",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "property_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sustainable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

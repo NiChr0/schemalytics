@@ -1,0 +1,5410 @@
+{
+  "tables": [
+    {
+      "name": "product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "purchase",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "purchase_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "purchase_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient_sources",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "ingredient_id",
+          "references_table": "ingredients",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumer_preference",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumer",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_review",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ProductSafety",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "incident_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Certification_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Certification_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Brand_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetic_formula",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "has_parabens",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "canada_cosmetics_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "sale_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_complaints",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "complaint_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "complaint_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_catalog",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetic_sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_volume",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "market",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_info",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_natural",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Product_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ingredient_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Weight",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "india_ingredient_sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organic_ingredients_percentage",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sourcing_frequency",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_preference_score",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SafetyRecord",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SafetyTestDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Result",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "weight",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient_sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sourcing_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "brand_info",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_of_origin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Cosmetics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sourcing_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "sourcing_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "certification_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SaleID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SalesNumber",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Halal",
+          "data_type": "BIT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_safety_ratings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "safety_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Brands",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "BrandID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "BrandName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_rating",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "safety_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "record_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "violation_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "regions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "vegan_products_prices",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "brands",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ratings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "rating_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_rating",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumer_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "units_sold",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "revenue",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CosmeticProducts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ConsumerRating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "IngredientSource",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "supplier_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "safety_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "brand",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "safety_record",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "report_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "report_status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_reviews",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_halal",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "market",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "products_vegan",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "vegan_ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient_suppliers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "supplier_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organic_source",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Brand_Rating",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ingredient_Sources",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Source_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Source_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country_Name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "countries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country_code",
+          "data_type": "CHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_safety",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "launch_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "safety_rating",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "products_ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "natural_ingredient",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product_Info",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_recalls",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "recall_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "recall_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "products_launch",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "launch_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "products_sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_preference",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sourcing_country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ConsumerPreference",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ConsumerPreferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ConsumerID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PreferenceScore",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ProductID",
+        "ConsumerID"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CrueltyFreeCertifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CertificationDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Certifier",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ProductID",
+        "CertificationDate"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Supplier",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SupplierName",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Certified",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "AnimalCrueltyRate",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_details",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_organic_certified",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_rating",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eu_cosmetics_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "suppliers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "supplier_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "supplier_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_sustainable",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ingredient_Source",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ingredient_id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "category_averages",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "category",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_preference",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product_Safety",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Recall",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "revenue",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "mexico_cosmetics_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_ingredients_cf",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "BrandIngredientSource",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "BrandID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "IngredientSourceCountry",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CrueltyFreeCertification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CertificationDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "country_emissions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "emission_index",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Cruelty_Free_Certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Certification_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Certifying_Organization",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_recall",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "recall_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "certification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certified",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ProductRecalls",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "BrandID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "RecallDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetic_products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sales_volume",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "market",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "user_preference",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "finish",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_launches",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "launch_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "launch_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cruelty_free_certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "organic_farms",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "farm_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_safety_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "safety_rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_inspection_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "recalls",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "recall_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_usa_sourced",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient_cost",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cost",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Safety_Inspections",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Inspection_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Brand_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Inspection_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Compliance_Rating",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Suppliers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SupplierName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EstablishedDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Consumer_Preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Consumer_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Preference_Score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Consumers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cruelty_free_certification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certified_by",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "africa_ingredient_sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "incidents",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Consumer_Preference",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_warehouse",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quantity_on_hand",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reorder_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "supplier_information",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "supplier_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "delivery_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "time",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "time_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "eu_products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "argentina_cosmetics_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "safety_incidents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "incident_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "incident_description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "purchases",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "purchase_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "purchase_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "canada_products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "launch_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "brand_safety_rating",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "safety_rating",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredients_sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "has_ingredient_from_CN",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ProductIngredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ingredient",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Label",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "safety_scores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "score_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_safety_score",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_origin",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ingredient",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "productId",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sourceCountry",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "crueltyFree",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ProductIngredient",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "IngredientID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Manufacturing_Process",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cosmetic_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "process",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cost",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "supplier",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sales_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "sale_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_brands",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "organic_ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "products_ext",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "natural_ingredients",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ProductSafetyRecords",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "InspectionDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Result",
+          "data_type": "ENUM('PASS'",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Consumer_Preference_CF",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product_Safety_Records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "inspection_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "result",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Recalls",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "recall_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reason",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "brand_rating",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_preference_rating",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetic_brands",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sources",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "source_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "safety_record",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "skincare",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient_source",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_ingredient",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "product_id",
+          "references_table": "product",
+          "references_column": "id"
+        },
+        {
+          "column": "ingredient_id",
+          "references_table": "ingredient",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "product_ratings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_vegan",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_rating",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "safety_incident",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_purchases",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "IngredientSources",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ingredient",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SourceCountry",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "ProductID",
+        "Ingredient"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cruelty_free_certified",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "country_id",
+          "references_table": "countries",
+          "references_column": "country_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "product_categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "vegan_cruelty_free_products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient_usage",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "source_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "usage_frequency",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product_Launch",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "launch_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumer_complaints",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "complaint_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "complaint",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "complaint_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CrueltyFree",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CertificationDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_rating",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rating",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumer_feedback",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "feedback_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "feedback",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "feedback_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "segments",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "segment",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_products",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_uk",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_preference",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Brand",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "consumer_id",
+          "references_table": "consumers",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "ingredient_certifications",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "certification_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certification_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "certified_by",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "brand_cruelty_rating",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free_rating",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "complaints",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "launch_year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "complaint_count",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumer_info",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free_preference",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "age_group",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "group_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "uk_cosmetics_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artificial_colors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "color_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "color_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "products_organic_country",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_preference",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sourcing_country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_category_catalog",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ingredient_Sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SupplierID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Organic",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "japan_cosmetics_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "vegan_products",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "product_id",
+        "brand_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "product_id",
+          "references_table": "products",
+          "references_column": "product_id"
+        },
+        {
+          "column": "brand_id",
+          "references_table": "brands",
+          "references_column": "brand_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "products_cruelty",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "natural_preservatives",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preservative_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preservative_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ingredient_Source_CF",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sourcing_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "preference",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Safety_Incidents",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Incident_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Incident_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "safety_reports",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "report_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "report_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "india_cosmetics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "consumer_rating",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Cruelty_Free_Certification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Certified",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "brazil_ingredient_sourcing",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organic_ingredients_percentage",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "cosmetics_ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "product_ingredients_lsp",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_source",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "user_preferences",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "user_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ratings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Rating_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Product_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Rating",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "complaints_details",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "complaint_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "complaint_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "launch_year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "consumer_demographics",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "consumer_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "age",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "lipsticks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "ingredient_id",
+          "references_table": "ingredients",
+          "references_column": "ingredient_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "foundation",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "ingredient_id",
+          "references_table": "ingredients",
+          "references_column": "ingredient_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "brand_catalog",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "brand_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "brand_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Consumer_Complaints",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ComplaintID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ComplaintDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "allergens",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "product_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "allergen_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "allergen_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Product_Ingredients",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "product",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ingredient",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "cruelty_free",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CosmeticsProducts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ProductID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ProductName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ingredient_safety",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ingredient_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_safety_score",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

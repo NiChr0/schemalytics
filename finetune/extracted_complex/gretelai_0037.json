@@ -1,0 +1,7051 @@
+{
+  "tables": [
+    {
+      "name": "marine_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "mammals",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "birds",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "whale_sharks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_salinity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hemisphere",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_priority",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_basin",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_temp",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_indian",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_mammals",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_arctic_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "climate_change_impacts_arctic_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "impacts",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_basins",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "basin_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceans",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ocean_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "station_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "atlantic_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanography",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sea_surface_temperature",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coral_reefs",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_protected_areas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_areas",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_pollution",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pollutant_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "whale_sightings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sighted",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seal_population",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seamounts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_trenches",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_temperatures",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ocean",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation_efforts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "project_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_by_region",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seabird_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "pacific_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_surface_temperature",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_observations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "marine_protected_area_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "wave_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "expeditions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "focus",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_trenches",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "fish_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "biomass",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dives",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dive_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "diver_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_facts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "fact",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "temperature_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_floors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "deepest_part",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "habitats",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_acidification_impact",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "impact",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coastlines",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "length",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "basins",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "pacific_ocean_temperature",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "pacific_marine_life",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_research_funding",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "project_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "arctic_marine_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "countries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coral_reef_area",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_conservation",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "project_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "gyres",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_temp",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_population",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "min_population_size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_biomass",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "biomass",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_temperature",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "indian_ocean_marine_life",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "temperature",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "temp_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "diseases",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_acidity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "research_vessels",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "vessel_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "last_visit_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sharks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_depth_scale",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "site",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "site_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seagrass_beds",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_reserves",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "reserve_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reserve_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_code",
+          "data_type": "CHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation_status_scores",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "score",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id",
+        "species_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "species_id",
+          "references_table": "marine_species",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "ocean_regions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_indian_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanography_indian_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "monitoring_stations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "station_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "station_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "operational_cost",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "endangered_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_conservation_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_protected_areas_geo",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "area_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coastal_waters",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation_efforts_indian_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "protected_areas",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_temperature_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "subcategory",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_descriptions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "description",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "mangrove_forests",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area_sqkm",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sightings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_features",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "shark_attacks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "incidents",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanographic_research_stations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "station_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "min_depth",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year_established",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year_decommissioned",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_depths_extended",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "min_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ClimateImpact",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature_change",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sea_level_rise",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_protected_areas_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "marine_protected_area_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanographic_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "sea_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanography_stations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "station_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "mpas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_surface_temperatures",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ocean",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "month",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_turtles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "population",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "biomass",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "acidification_effects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "effect_level",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_pollution",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "quantity",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_info",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "lifespan",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "climate_change_impact",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "impact",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seals",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "arctic_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temp",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "arctic_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_mountains",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_level",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "month",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "nesting_sites",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "site_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Acidification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "rivers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "length",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phosphate_levels",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "continent",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_warming_impact",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "impact_level",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ConservationEfforts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Funding",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "submersible_dives",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "submersible_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dive_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "temperatures",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "researchers",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organization",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "publications",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_region",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "min_ocean_ph",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_ocean_ph",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_biomass",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "biomass",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "reserve_years",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "reserve_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year_established",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "MarineSpecies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_min_depths_southern",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "whale_shark_sightings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "number_of_sightings",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_pacific",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation_efforts_arctic_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "protected_areas",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanography_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "conservation_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "budget",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_pacific_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanography_pacific_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_canyons",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "canyon_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "blue_whale_population",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "corals",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "common_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scientific_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_floor",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_impacts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "impact",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "frequency",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_temperature",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "month",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "deep_sea_features",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "research_projects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "researcher",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "project_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "atlantic_species_by_region",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation_status_vulnerable",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dolphins",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_atlantic",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sharks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_by_population",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_by_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seagrass_meadows",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "biomass_tons",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "indian_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "mangroves",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area_size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_total_depths_southern",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "arctic_marine_life",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_count",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_species",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "habitat_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "habitat_type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "average_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "climate_change",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_temp_celsius",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_temp_fahrenheit",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_info",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scientific_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "class",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_avg_depth",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_areas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "area_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "num_marine_species",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "fish_observations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "reef",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "atlantic_ocean_salinity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_trenches_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "trench_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "minimum_depth",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "temperature_anomaly",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "anomaly",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_acidification",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ocean_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_depth",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "phylum",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_life_depth",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Coral",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Health_Status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "indian_marine_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "shark_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "protection_status",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_mammals",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "indian_marine_life",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "southern_ocean_marine_life",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "whale_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "median_length",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_turtle_nesting",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_populations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coral_bleaching",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "water_temperature_scale",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanic_fish",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "is_marine",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_salinity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_protected_areas_location",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "marine_protected_area_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id",
+        "marine_protected_area_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "marine_protected_area_id",
+          "references_table": "marine_protected_areas",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "coral_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_conservation_initiatives",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "initiative_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "climate_change_funding",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "funding_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "amount",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seal_populations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_mammal",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "mammal_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "salinity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_temps",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_conservation_projects",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "project_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "project_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "fishing_zones",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "temperature_measurements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "measurement_time",
+          "data_type": "TIMESTAMP",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "population_trends",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "trend",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "southern_marine_life",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_threats",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "threat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_oceanic_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "underwater_canyons",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "shark_population",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "endangered_marine_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "country_codes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country_code",
+          "data_type": "CHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "climate_change_impacts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "impact",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "magnitude",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_surface_temperature_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "shark_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "shark",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "min_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_taxonomy",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "class",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_conservation",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seagrasses",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "common_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "scientific_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "SeaLevel",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rise",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_avg_depths_mediterranean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_ocean_basin",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean_basin_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_salinity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_families",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "family_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "family_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oxygen_records",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "temperature_anomalies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean_basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature_anomaly",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_level_rise_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rise",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "continent",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_conservation_organizations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organization",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "budget",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "trenches",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "arctic_observations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanic_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "yearly_temps",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "REAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_orders",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "order_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "order_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seawater_salinity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_avg_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_total_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "deep_sea_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_ph",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "month",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ph",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "conservation_arctic",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "organization",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "project",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_atlantic_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanography_atlantic_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "temperature",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "protected_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "atlantic_protected_areas",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area_size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_protected_areas_antarctic",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "region",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "wave_height",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_count",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_biodiversity",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "conservation_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_mounts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "wave_heights",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "max_wave_height",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "seagrass",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area_size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_ph_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "month",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ph",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "hemisphere",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "coral_cover",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "coral_cover",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "southern_ocean_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "habitat",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_species",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Turtles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_biology_journal",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dissolved_oxygen",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "level",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_properties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "dissolved_oxygen",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_depths_arctic",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "research_stations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "station_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_co2_concentration",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "co2_concentration",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "depth_distribution",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "distribution_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "avg_depth",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_min_depths",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "marine_species_location",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [
+        "id",
+        "species_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "species_id",
+          "references_table": "marine_species",
+          "references_column": "id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Oceanography",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "estuaries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "salinity",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "area_size",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "atlantic_ocean",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ocean_acidity_2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "acidity",
+          "data_type": "NUMERIC",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_level_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sea_level_rise",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "rise",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "oceanographic_studies",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dolphin_population",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "countries_oceans",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "country_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "pacific_station",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "atlantic_station",
+          "data_type": "BOOLEAN",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "tide_height",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "species_distribution",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "species_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ocean_basin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Cephalopods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Species",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Ocean",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Population",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

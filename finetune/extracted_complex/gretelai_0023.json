@@ -1,0 +1,3945 @@
+{
+  "tables": [
+    {
+      "name": "Artists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Nationality",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Exhibitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExhibitionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "StartDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "EndDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtworkCount",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Paintings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PaintingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "YearCreated",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gender",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artwork_styles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "style",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artwork",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "genre",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtPieces",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtPieceID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "YearCreated",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "AverageRating",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Dali",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Galleries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sculpture_sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sculpture_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_pieces",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "style",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year_sold",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "creation_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtWorkSales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "saleDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "revenue",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtSales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "painting_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "painting_style",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ExhibitionsArtworks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExhibitionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Location",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Museums",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "MuseumID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Auctions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "AuctionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "AuctionName",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Region",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Revenue",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "collaborations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist1_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist2_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks_10",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Museum",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Creation_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art_Exhibition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "exhibition_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "museum_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gross_revenue",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Countries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CountryID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "CountryName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Continent",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "moma_exhibitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Exhibits",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExhibitID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Gallery",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ExhibitionTitles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExhibitID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "museums",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "museum_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "opening_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "exhibitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "exhibition_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "museum_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "art_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artist_statements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "statement_length",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "munch_paintings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "painting_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "painting_title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "painting_creation_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtWorks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtWorkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "YearCreated",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "ArtistID",
+          "references_table": "Artists",
+          "references_column": "ArtistID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "art_periods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "art_period",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artworks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "medium",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SaleID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SaleDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Works",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtWork",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_styles",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "style",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtAuctionSales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SaleID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PaintingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SalePrice",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "SaleYear",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "PaintingID",
+          "references_table": "Paintings",
+          "references_column": "PaintingID"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Curators",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artwork_sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_price",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artwork_Timeline",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "creation_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtExhibitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExhibitionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtWorkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ExhibitionDate",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MuseumID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtMuseums",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "MuseumID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MuseumName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Exhibition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "exhibition_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "genre",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Collections",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "InsuranceClaims",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ClaimID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PaintingID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ClaimAmount",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ClaimYear",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks_Movements4",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Famous_Artists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "birth_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "death_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks_Count",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "total_artworks",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GalleryA",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art_Periods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "painting_exhibitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "painting_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "painting_title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_start_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ModernArtGallery",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ContemporaryArtMuseum",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art_Artist",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "art_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_galleries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "founding_year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ExhibitionArtworks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExhibitionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks_5",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Museum",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Artist_Nationality",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Gallery",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "GalleryID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "GalleryName",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtDeco",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ModernArt",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "art_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "journal_entry",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtMovements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "MovementID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtMovementSales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtMovement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtWork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Revenue",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks_Movements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "periods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artwork_periods",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "period_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtworksMedium",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "YearCreated",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TotalSales",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Medium",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "picasso_paintings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "painting_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "painting_title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "painting_creation_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GalleryRevenue",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Gallery",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtWork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Revenue",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artist_exhibitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_continent",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "living_artists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_birth_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_status",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Films",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "director",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "duration",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Gallery_Works",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gallery_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "work_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artist_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "nationality",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Installations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "InstallationID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Theme",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "CulturalImpact",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ImpactScore",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GalleryB",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "paintings",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtworksType",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "YearCreated",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "TotalSales",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Medium",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art_Medium",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "art_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "medium_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "AllGalleriesI",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtGalleries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "galleries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "curators",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GalleryG",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_auctions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "auction_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "work_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "auction_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "auction_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "work_id",
+          "references_table": "works",
+          "references_column": "work_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "AllGalleries",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_ID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artists_Movements2",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artists_Movements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artwork_Exhibition",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "era",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "start_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "end_year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "auctions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "art_piece_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sold_price",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ExhibitedWorks",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "WorkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ExhibitionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Concerts",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "city",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "genre",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Movements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "MovementID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ExhibitionArtists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ExhibitionID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_sales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "art_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_nationality",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Sculptures",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "SculptureID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtistID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art_Categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "art_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artist_origin",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "origin",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artwork_value",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Curations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "CuratorID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Curator",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtworksDecade",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Decade",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtTypes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "TypeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtGalleryNY",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtistsExhibitions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "gallery_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art_Movement",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "movement_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "popularity",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Donors",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DonorID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "City",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Donations",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "DonationID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "DonorID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "MuseumID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Amount",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GallerySales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Gallery",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtWork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Revenue",
+          "data_type": "DECIMAL",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks_Movements3",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "MuseumX",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artwork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Impressionist_Art",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Art_Collaboration",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_1",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_2",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_movements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "movement_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "Artworks_6",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Title",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Museum",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Creation_Date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtThemes",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "ThemeID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtistDetails",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "exhibitions_history",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "exhibition_history_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "work_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "sale_price",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "work_id",
+          "references_table": "works",
+          "references_column": "work_id"
+        },
+        {
+          "column": "exhibition_id",
+          "references_table": "exhibitions",
+          "references_column": "exhibition_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Influential_Artists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "influence_score",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "ArtInsurance",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "PolicyID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "PolicyPrice",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtworkID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtworkType",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "female_artists",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_country",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_birth_date",
+          "data_type": "DATE",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_exhibition_count",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "works",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "work_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "work_title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "artist_id",
+          "references_table": "artists",
+          "references_column": "artist_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "Performances",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "location",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "type",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "exhibition_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "art_movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_categories",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "art_market",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "title",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "category_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "price",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "modern_art_movements",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "name",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "year",
+          "data_type": "INTEGER",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artist_specialties",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "specialty",
+          "data_type": "TEXT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "MovementSales",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "Movement",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "ArtWork",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Year",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "QuantitySold",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "artwork_data",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "art_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artist_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "value",
+          "data_type": "DECIMAL(10",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "dimensions",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "dimension_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "work_id",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "height",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "width",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "depth",
+          "data_type": "FLOAT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [
+        {
+          "column": "work_id",
+          "references_table": "works",
+          "references_column": "work_id"
+        }
+      ],
+      "description": null
+    },
+    {
+      "name": "ArtHistorians",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "HistorianID",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "Specialization",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    },
+    {
+      "name": "GalleryC",
+      "schema_name": "public",
+      "columns": [
+        {
+          "name": "gallery_name",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "artwork_type",
+          "data_type": "VARCHAR",
+          "nullable": true,
+          "description": null
+        },
+        {
+          "name": "exhibition_duration",
+          "data_type": "INT",
+          "nullable": true,
+          "description": null
+        }
+      ],
+      "primary_key": [],
+      "foreign_keys": [],
+      "description": null
+    }
+  ]
+}

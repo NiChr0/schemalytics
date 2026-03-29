@@ -29,11 +29,11 @@ from pathlib import Path
 
 MODEL_ID        = "unsloth/Qwen3.5-4B"
 ADAPTER_DIR     = "finetune/cuda/adapters-silver-v2"
-MAX_SEQ_LENGTH  = 8192   # 3090 24GB — covers all schema sizes including 100+ table schemas
+MAX_SEQ_LENGTH  = 1024   # must match 3060Ti config — linear attn OOMs at higher values
 
 LORA = dict(
-    r               = 32,           # up from 8 — more expressive adapters
-    lora_alpha      = 64,           # 2x r as standard practice
+    r               = 8,
+    lora_alpha      = 16,
     lora_dropout    = 0.05,
     target_modules  = [
         "q_proj", "k_proj", "v_proj", "o_proj",
@@ -46,7 +46,7 @@ LORA = dict(
 
 TRAIN = dict(
     output_dir                  = ADAPTER_DIR,
-    per_device_train_batch_size = 4,            # up from 1 — 3090 has headroom
+    per_device_train_batch_size = 4,
     gradient_accumulation_steps = 2,            # effective batch = 8
     max_steps                   = 600,          # more data needs more steps
     learning_rate               = 2e-5,         # slightly lower for larger batch
@@ -57,12 +57,12 @@ TRAIN = dict(
     logging_steps               = 10,
     eval_strategy               = "steps",
     eval_steps                  = 100,
-    per_device_eval_batch_size  = 2,
+    per_device_eval_batch_size  = 1,
     save_strategy               = "steps",
     save_steps                  = 600,
     load_best_model_at_end      = False,
     seed                        = 42,
-    dataloader_num_workers      = 0,
+    dataloader_num_workers      = 4,
     report_to                   = "none",
     dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
@@ -128,24 +128,63 @@ def main(export: bool = False):
         _export(model, tokenizer)
 
 
-def _export(model=None, tokenizer=None):
-    """Fuse LoRA adapters and export to GGUF (Q4_K_M), then import into Ollama."""
+def _export(model=None, tokenizer=None, skip_ollama: bool = False):
+    """Fuse LoRA adapters and export to GGUF (Q4_K_M), then optionally import into Ollama.
+
+    Uses manual llama.cpp pipeline instead of save_pretrained_gguf to avoid the
+    newer unsloth bug where Qwen3.5 is incorrectly treated as a VLM.
+    """
+    import subprocess
     from unsloth import FastLanguageModel
 
     if model is None:
         print("Loading adapters for export…")
         model, tokenizer = FastLanguageModel.from_pretrained(
-            model_name     = ADAPTER_DIR + "/checkpoint-400",
+            model_name     = ADAPTER_DIR + "/checkpoint-600",
             max_seq_length = MAX_SEQ_LENGTH,
             dtype          = None,
-            load_in_4bit   = True,
+            load_in_4bit   = False,
         )
 
-    gguf_prefix = "finetune/cuda/schemalytics-silver-agent-qwen3.5-4b"
-    print(f"Exporting GGUF (Q4_K_M) -> {gguf_prefix}-unsloth.Q4_K_M.gguf ...")
-    model.save_pretrained_gguf(gguf_prefix, tokenizer, quantization_method="q4_k_m")
+    # Use /workspace for large outputs if available (avoids filling 20G root overlay)
+    workspace = Path("/workspace") if Path("/workspace").exists() else Path("finetune/cuda")
 
-    gguf_abs = str(Path(gguf_prefix + "-unsloth.Q4_K_M.gguf").resolve())
+    # Step 1: merge LoRA into full HF model (16bit)
+    merged_dir = str(workspace / "merged-silver")
+    print(f"Merging LoRA into {merged_dir} ...")
+    model.save_pretrained_merged(merged_dir, tokenizer, save_method="merged_16bit")
+
+    # Step 2: convert to F16 GGUF using llama.cpp
+    llama_cpp = Path("/root/.unsloth/llama.cpp")
+    convert_script = llama_cpp / "convert_hf_to_gguf.py"
+    f16_gguf = workspace / "schemalytics-silver-agent-f16.gguf"
+    print(f"Converting to F16 GGUF -> {f16_gguf} ...")
+    subprocess.run(
+        ["python3", str(convert_script), merged_dir,
+         "--outfile", str(f16_gguf), "--outtype", "f16"],
+        check=True,
+    )
+
+    # Step 3: quantize to Q4_K_M
+    quantize_bin = llama_cpp / "build" / "bin" / "llama-quantize"
+    gguf_path = workspace / "schemalytics-silver-agent-Q4_K_M.gguf"
+    print(f"Quantizing to Q4_K_M -> {gguf_path} ...")
+    subprocess.run(
+        [str(quantize_bin), str(f16_gguf), str(gguf_path), "Q4_K_M"],
+        check=True,
+    )
+    f16_gguf.unlink()  # remove intermediate F16 file
+    import shutil; shutil.rmtree(merged_dir)  # remove merged model after quantization
+
+    gguf_abs = str(gguf_path.resolve())
+    print(f"\nGGUF saved to: {gguf_abs}")
+
+    if skip_ollama:
+        print("Skipping Ollama import (--export-only-gguf).")
+        print("To import locally after rsyncing:")
+        print(f"  ollama create schemalytics-silver-agent -f <Modelfile>")
+        return
+
     modelfile = Path("finetune/cuda/Modelfile-silver-agent")
     modelfile.write_text(
         f"FROM {gguf_abs}\n"
@@ -173,10 +212,14 @@ if __name__ == "__main__":
     parser.add_argument("--export", action="store_true",
                         help="Export to GGUF and import into Ollama after training")
     parser.add_argument("--export-only", action="store_true",
-                        help="Skip training; only export already-saved adapters")
+                        help="Skip training; export adapters and import into Ollama")
+    parser.add_argument("--export-only-gguf", action="store_true",
+                        help="Skip training; export GGUF only (no Ollama import — for pod use)")
     args = parser.parse_args()
 
-    if args.export_only:
+    if args.export_only_gguf:
+        _export(skip_ollama=True)
+    elif args.export_only:
         _export()
     else:
         main(export=args.export)
