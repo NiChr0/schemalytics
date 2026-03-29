@@ -128,14 +128,14 @@ def main(export: bool = False):
         _export(model, tokenizer)
 
 
-def _export(model=None, tokenizer=None):
-    """Fuse LoRA adapters and export to GGUF (Q4_K_M), then import into Ollama."""
+def _export(model=None, tokenizer=None, skip_ollama: bool = False):
+    """Fuse LoRA adapters and export to GGUF (Q4_K_M), then optionally import into Ollama."""
     from unsloth import FastLanguageModel
 
     if model is None:
         print("Loading adapters for export…")
         model, tokenizer = FastLanguageModel.from_pretrained(
-            model_name     = ADAPTER_DIR + "/checkpoint-400",
+            model_name     = ADAPTER_DIR + "/checkpoint-600",
             max_seq_length = MAX_SEQ_LENGTH,
             dtype          = None,
             load_in_4bit   = True,
@@ -146,6 +146,14 @@ def _export(model=None, tokenizer=None):
     model.save_pretrained_gguf(gguf_prefix, tokenizer, quantization_method="q4_k_m")
 
     gguf_abs = str(Path(gguf_prefix + "-unsloth.Q4_K_M.gguf").resolve())
+    print(f"\nGGUF saved to: {gguf_abs}")
+
+    if skip_ollama:
+        print("Skipping Ollama import (--export-only-gguf).")
+        print("To import locally after rsyncing:")
+        print(f"  ollama create schemalytics-silver-agent -f <Modelfile>")
+        return
+
     modelfile = Path("finetune/cuda/Modelfile-silver-agent")
     modelfile.write_text(
         f"FROM {gguf_abs}\n"
@@ -173,10 +181,14 @@ if __name__ == "__main__":
     parser.add_argument("--export", action="store_true",
                         help="Export to GGUF and import into Ollama after training")
     parser.add_argument("--export-only", action="store_true",
-                        help="Skip training; only export already-saved adapters")
+                        help="Skip training; export adapters and import into Ollama")
+    parser.add_argument("--export-only-gguf", action="store_true",
+                        help="Skip training; export GGUF only (no Ollama import — for pod use)")
     args = parser.parse_args()
 
-    if args.export_only:
+    if args.export_only_gguf:
+        _export(skip_ollama=True)
+    elif args.export_only:
         _export()
     else:
         main(export=args.export)

@@ -3,13 +3,16 @@
 # Schemalytics — vast.ai RTX 3090 setup + training script
 #
 # Usage (run from repo root after cloning / rsyncing):
-#   bash finetune/cuda/setup_vastai.sh [silver|gold|both]
+#   bash finetune/cuda/setup_vastai.sh [silver|gold|both|export]
 #
 # Default: both (silver first, then gold)
 #
 # Prereqs on the vast.ai instance:
 #   - PyTorch image with CUDA 12.x (e.g. pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime)
 #   - git + python3 available (they always are on vast.ai base images)
+#
+# For 'export' target — copy your Ollama key to the pod first (from your Mac):
+#   rsync -avz ~/.ollama/id_ed25519 ~/.ollama/id_ed25519.pub root@<instance-ip>:~/.ollama/
 # =============================================================================
 
 set -euo pipefail
@@ -99,12 +102,74 @@ run_gold() {
     echo "Gold training complete. Adapters: finetune/cuda/adapters-gold-v2/"
 }
 
+export_and_push() {
+    echo ""
+    echo "--- Export GGUF + push to Ollama Hub ---"
+
+    # Check Ollama key is present (must be rsynced from Mac before running)
+    if [[ ! -f "$HOME/.ollama/id_ed25519" ]]; then
+        echo "ERROR: Ollama key not found at ~/.ollama/id_ed25519"
+        echo "Copy it from your Mac first:"
+        echo "  rsync -avz ~/.ollama/id_ed25519 ~/.ollama/id_ed25519.pub root@<instance-ip>:~/.ollama/"
+        exit 1
+    fi
+
+    # Install Ollama if not present
+    if ! command -v ollama &>/dev/null; then
+        echo "Installing Ollama..."
+        curl -fsSL https://ollama.com/install.sh | sh
+        # Start Ollama server in background
+        ollama serve &>/dev/null &
+        sleep 5
+    fi
+
+    # Export GGUFs (merge LoRA + quantize)
+    python finetune/cuda/finetune_silver.py --export-only-gguf 2>&1 | tee finetune/cuda/export_silver.log
+    python finetune/cuda/finetune_gold.py   --export-only-gguf 2>&1 | tee finetune/cuda/export_gold.log
+
+    SILVER_GGUF="finetune/cuda/schemalytics-silver-agent-qwen3.5-4b-unsloth.Q4_K_M.gguf"
+    GOLD_GGUF="finetune/cuda/schemalytics-gold-agent-qwen3.5-4b-unsloth.Q4_K_M.gguf"
+
+    # Write Modelfiles with absolute paths
+    cat > finetune/cuda/Modelfile-silver-agent << EOF
+FROM $(realpath "$SILVER_GGUF")
+PARAMETER temperature 0
+PARAMETER num_ctx 12288
+PARAMETER num_predict 4096
+EOF
+
+    cat > finetune/cuda/Modelfile-gold-agent << EOF
+FROM $(realpath "$GOLD_GGUF")
+PARAMETER temperature 0
+PARAMETER num_ctx 8192
+PARAMETER num_predict 2048
+EOF
+
+    # Import into local Ollama
+    echo "Creating Ollama models..."
+    ollama create nichr0/schemalytics-silver-agent -f finetune/cuda/Modelfile-silver-agent
+    ollama create nichr0/schemalytics-gold-agent   -f finetune/cuda/Modelfile-gold-agent
+
+    # Push to Ollama Hub
+    # Requires: ollama login (interactive) or OLLAMA_HOST + credentials already set
+    echo ""
+    echo "Pushing to Ollama Hub..."
+    ollama push nichr0/schemalytics-silver-agent
+    ollama push nichr0/schemalytics-gold-agent
+
+    echo ""
+    echo "Done! Pull on any machine with:"
+    echo "  ollama pull nichr0/schemalytics-silver-agent"
+    echo "  ollama pull nichr0/schemalytics-gold-agent"
+}
+
 case "$TARGET" in
     silver) run_silver ;;
     gold)   run_gold ;;
     both)   run_silver; run_gold ;;
+    export) export_and_push ;;
     *)
-        echo "Unknown target '$TARGET'. Use: silver | gold | both"
+        echo "Unknown target '$TARGET'. Use: silver | gold | both | export"
         exit 1
         ;;
 esac
@@ -112,16 +177,4 @@ esac
 echo ""
 echo "============================================================"
 echo " All done. $(date)"
-echo ""
-echo " Adapter locations:"
-echo "   Silver : finetune/cuda/adapters-silver-v2/"
-echo "   Gold   : finetune/cuda/adapters-gold-v2/"
-echo ""
-echo " To download adapters back to your Mac:"
-echo "   rsync -avz root@<instance-ip>:/root/schemalytics/finetune/cuda/adapters-silver-v2 finetune/cuda/"
-echo "   rsync -avz root@<instance-ip>:/root/schemalytics/finetune/cuda/adapters-gold-v2  finetune/cuda/"
-echo ""
-echo " To export to GGUF after downloading, run locally:"
-echo "   python finetune/cuda/finetune_silver.py --export-only"
-echo "   python finetune/cuda/finetune_gold.py   --export-only"
 echo "============================================================"
