@@ -31,9 +31,9 @@ echo "============================================================"
 echo ""
 echo "[1/4] Installing Python dependencies..."
 
-# PyTorch is pre-installed in the vast.ai pytorch image — skip to avoid
-# version conflicts. Install unsloth first so it can pin compatible versions.
-pip install --quiet "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+# Upgrade torch first, then install unsloth against the upgraded version.
+pip install --quiet --upgrade torch
+pip install --quiet "unsloth @ git+https://github.com/unslothai/unsloth.git"
 
 # Install remaining training deps
 pip install --quiet \
