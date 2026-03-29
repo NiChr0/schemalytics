@@ -44,8 +44,12 @@ echo "============================================================"
 echo ""
 echo "[1/4] Installing Python dependencies..."
 
-# Upgrade torch + torchvision together, then install unsloth against the upgraded version.
-pip install --quiet --upgrade torch torchvision
+# Pin torch to 2.1.0+cu121 — compatible with CUDA driver 12.0+ (common on RunPod).
+# Newer torch versions (2.4+) require CUDA driver 12.4+ which many pods don't have.
+pip install --quiet \
+    "torch==2.1.0+cu121" \
+    "torchvision==0.16.0+cu121" \
+    --index-url https://download.pytorch.org/whl/cu121
 pip install --quiet "unsloth @ git+https://github.com/unslothai/unsloth.git"
 
 # Install remaining training deps
