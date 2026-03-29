@@ -14,6 +14,7 @@ LABELED_DIRS = [
     Path("finetune/labeled_batched"),
     Path("finetune/labeled_spider"),
     Path("finetune/labeled_complex"),
+    Path("finetune/labeled_silver_class"),
     Path("finetune/labeled"),
 ]
 DATASET_DIR = Path("finetune/dataset")
