@@ -138,7 +138,7 @@ def _export(model=None, tokenizer=None, skip_ollama: bool = False):
             model_name     = ADAPTER_DIR + "/checkpoint-600",
             max_seq_length = MAX_SEQ_LENGTH,
             dtype          = None,
-            load_in_4bit   = True,
+            load_in_4bit   = False,
         )
 
     gguf_prefix = "finetune/cuda/schemalytics-silver-agent-qwen3.5-4b"
