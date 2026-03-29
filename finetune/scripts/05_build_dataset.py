@@ -10,7 +10,12 @@ import json
 import random
 from pathlib import Path
 
-LABELED_DIR = Path("finetune/labeled_batched")
+LABELED_DIRS = [
+    Path("finetune/labeled_batched"),
+    Path("finetune/labeled_spider"),
+    Path("finetune/labeled_complex"),
+    Path("finetune/labeled"),
+]
 DATASET_DIR = Path("finetune/dataset")
 TRAIN_PATH = DATASET_DIR / "train.jsonl"
 EVAL_PATH = DATASET_DIR / "eval.jsonl"
@@ -19,17 +24,29 @@ EVAL_FRACTION = 0.15
 
 
 def main() -> None:
-    jsonl_files = sorted(LABELED_DIR.glob("*.jsonl"))
-    if not jsonl_files:
-        print(f"No JSONL files found in {LABELED_DIR}/")
-        return
-
     records = []
-    for path in jsonl_files:
-        for line in path.read_text(encoding="utf-8").splitlines():
-            line = line.strip()
-            if line:
-                records.append(json.loads(line))
+    seen = set()
+    for labeled_dir in LABELED_DIRS:
+        if not labeled_dir.exists():
+            print(f"Skipping missing dir: {labeled_dir}")
+            continue
+        jsonl_files = sorted(labeled_dir.glob("*.jsonl"))
+        for path in jsonl_files:
+            for line in path.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                record = json.loads(line)
+                # deduplicate by full record content
+                key = json.dumps(record, sort_keys=True)
+                if key not in seen:
+                    seen.add(key)
+                    records.append(record)
+        print(f"  {labeled_dir}: {len(jsonl_files)} files")
+
+    if not records:
+        print("No records found.")
+        return
 
     if not records:
         print("No records found.")

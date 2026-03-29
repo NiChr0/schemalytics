@@ -221,50 +221,50 @@ GITHUB_SOURCES = [
 # gretelai/synthetic_text_to_sql — extract diverse multi-table schemas
 # ---------------------------------------------------------------------------
 
-def extract_gretelai(max_schemas: int = 400, min_tables: int = 6):
+def extract_gretelai(max_schemas: int = 1000, min_tables: int = 6):
     if not HF_AVAILABLE:
         return
 
-    print(f'  Streaming gretelai/synthetic_text_to_sql (min_tables={min_tables})...')
+    print(f'  Streaming gretelai/synthetic_text_to_sql (grouping by domain, min_tables={min_tables})...')
     try:
         ds = load_dataset('gretelai/synthetic_text_to_sql', split='train', streaming=True)
     except Exception as e:
         print(f'  ERR  gretelai: {e}')
         return
 
-    seen_contexts = set()
-    schemas = []
+    # Group tables by domain — each row has 1-2 tables; merge all rows for a domain
+    domain_tables: dict[str, dict[str, dict]] = {}  # domain -> {table_name -> table_dict}
 
     for row in ds:
+        domain = row.get('domain', '').strip()
         ctx = row.get('sql_context', '')
-        if not ctx or ctx in seen_contexts:
+        if not domain or not ctx:
             continue
-
         tables = parse_sql_file(ctx)
-        # Only keep schemas with min_tables+ tables (genuinely complex)
+        if not tables:
+            continue
+        if domain not in domain_tables:
+            domain_tables[domain] = {}
+        for t in tables:
+            domain_tables[domain][t['name']] = t
+
+    # Filter to domains with enough tables
+    schemas = []
+    for domain, table_map in sorted(domain_tables.items()):
+        tables = list(table_map.values())
         if len(tables) < min_tables:
             continue
-
-        # Check for at least 2 FKs (real relational complexity)
         fk_count = sum(len(t['foreign_keys']) for t in tables)
         if fk_count < 2:
             continue
-
-        seen_contexts.add(ctx)
-        schemas.append({
-            'db_id': f"gretelai_{len(schemas):04d}",
-            'domain': row.get('domain', ''),
-            'tables': tables,
-        })
-
+        schemas.append({'db_id': f"gretelai_{len(schemas):04d}", 'domain': domain, 'tables': tables})
         if len(schemas) >= max_schemas:
             break
 
     if not schemas:
-        print('  ERR  gretelai: no qualifying multi-table schemas found')
+        print('  ERR  gretelai: no qualifying schemas found after grouping by domain')
         return
 
-    # Skip already-extracted files
     saved = 0
     for s in schemas:
         p = OUTPUT_DIR / f"{s['db_id']}.json"
@@ -273,7 +273,7 @@ def extract_gretelai(max_schemas: int = 400, min_tables: int = 6):
         p.write_text(json.dumps({'tables': s['tables']}, indent=2), encoding='utf-8')
         saved += 1
 
-    print(f'  OK   gretelai: {saved} new schemas saved ({len(schemas)} total qualifying)')
+    print(f'  OK   gretelai: {saved} new schemas saved ({len(schemas)} total qualifying, {len(domain_tables)} domains seen)')
 
 
 # ---------------------------------------------------------------------------
@@ -285,6 +285,9 @@ def main():
     print('GitHub sources:')
     for name, url in GITHUB_SOURCES:
         download_and_save(name, url)
+
+    print('\ngretelai/synthetic_text_to_sql:')
+    extract_gretelai(max_schemas=1000, min_tables=6)
 
     total = len(list(OUTPUT_DIR.glob('*.json')))
     print(f'\nDone. {total} schema files in {OUTPUT_DIR}/')
