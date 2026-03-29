@@ -31,8 +31,8 @@ echo "============================================================"
 echo ""
 echo "[1/4] Installing Python dependencies..."
 
-# Upgrade torch first, then install unsloth against the upgraded version.
-pip install --quiet --upgrade torch
+# Upgrade torch + torchvision together, then install unsloth against the upgraded version.
+pip install --quiet --upgrade torch torchvision
 pip install --quiet "unsloth @ git+https://github.com/unslothai/unsloth.git"
 
 # Install remaining training deps
