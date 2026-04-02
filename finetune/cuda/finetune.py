@@ -22,7 +22,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 MODEL_ID        = "unsloth/Qwen3.5-4B"
-ADAPTER_DIR     = "finetune/cuda/adapters-qwen3.5-4b-v5"
+ADAPTER_DIR     = "finetune/cuda/adapters-qwen3.5-4b-v6"
 MAX_SEQ_LENGTH  = 1024   # schemas fit in 1024 tokens; saves VRAM
 
 LORA = dict(
@@ -136,13 +136,13 @@ def _export(model=None, tokenizer=None):
             load_in_4bit   = True,
         )
 
-    gguf_prefix = "finetune/cuda/schemalytics-agent3-qwen3.5-4b"
+    gguf_prefix = "finetune/cuda/schemalytics-classification-agent-v2"
     print(f"Exporting GGUF (Q4_K_M) -> {gguf_prefix}-unsloth.Q4_K_M.gguf ...")
     model.save_pretrained_gguf(gguf_prefix, tokenizer, quantization_method="q4_k_m")
 
     # Ollama Modelfile — use absolute path so Ollama can find the GGUF
     gguf_abs = str(Path(gguf_prefix + "-unsloth.Q4_K_M.gguf").resolve())
-    modelfile = Path("finetune/cuda/Modelfile-qwen3.5-4b")
+    modelfile = Path("finetune/cuda/Modelfile-classification-agent")
     modelfile.write_text(
         f"FROM {gguf_abs}\n"
         "PARAMETER temperature 0\n"
