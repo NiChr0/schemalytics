@@ -40,8 +40,8 @@ LORA = dict(
 
 TRAIN = dict(
     output_dir                  = ADAPTER_DIR,
-    per_device_train_batch_size = 1,
-    gradient_accumulation_steps = 2,   # effective batch 2 — same as MLX batch_size=2
+    per_device_train_batch_size = 4,
+    gradient_accumulation_steps = 2,   # effective batch 8
     max_steps                   = 400,
     learning_rate               = 3e-5,
     lr_scheduler_type           = "cosine",
@@ -56,7 +56,7 @@ TRAIN = dict(
     save_steps                  = 400,
     load_best_model_at_end      = False,
     seed                        = 42,
-    dataloader_num_workers      = 0,   # Windows: avoid multiprocessing issues
+    dataloader_num_workers      = 4,
     report_to                   = "none",
     dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
@@ -113,6 +113,7 @@ def main(export: bool = False):
         train_dataset   = train_ds,
         eval_dataset    = eval_ds,
         args            = SFTConfig(**TRAIN),
+        packing         = True,
     )
 
     print("Starting training…")
