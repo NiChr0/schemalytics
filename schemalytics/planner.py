@@ -1126,9 +1126,9 @@ def _check_finetuned_models() -> None:
     if llm.get_provider() != "ollama":
         return
 
-    # Read the current (possibly env-overridden) model names for the availability check.
-    # We intentionally read the current globals so that if they were already patched
-    # to a non-nichr0/ value (e.g. via env override), we skip the check for that agent.
+    # Re-read env vars here rather than using the module-level globals so that
+    # overrides pointing at non-nichr0/ models (e.g. a local fine-tune) skip the
+    # availability check for that agent — no ollama pull warning needed.
     agent3  = os.environ.get("SCHEMALYTICS_AGENT3_MODEL",  "nichr0/schemalytics-classification-agent")
     agent4a = os.environ.get("SCHEMALYTICS_AGENT4A_MODEL", "nichr0/schemalytics-silver-agent")
     agent4b = os.environ.get("SCHEMALYTICS_AGENT4B_MODEL", "nichr0/schemalytics-gold-agent")
@@ -1154,7 +1154,8 @@ def _check_finetuned_models() -> None:
         print(f"Warning: could not run 'ollama list' ({exc}). Skipping model availability check.")
         return
 
-    missing = [(label, name) for label, name in to_check if name not in available]
+    available_names = {line.split()[0] for line in available.splitlines() if line.strip()}
+    missing = [(label, name) for label, name in to_check if name not in available_names]
     if not missing:
         return
 

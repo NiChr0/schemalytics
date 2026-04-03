@@ -491,14 +491,19 @@ def test_check_finetuned_models_missing_warns_and_continues(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture,
 ) -> None:
-    """Prints warning with pull command when a model is missing; patches global to base model on 'y'."""
+    """Prints warning with pull command when a model is missing; patches globals to base model on 'y'."""
     import schemalytics.planner as planner_module
+    import schemalytics.llm as llm_module
 
     monkeypatch.setattr(
         planner_module.subprocess, "run",
         lambda *a, **kw: _FakeRun(""),  # empty — nothing pulled
     )
     monkeypatch.setattr("builtins.input", lambda _: "y")
+    # Protect globals from permanent mutation across tests
+    monkeypatch.setattr(planner_module, "_AGENT3_MODEL",  planner_module._AGENT3_MODEL)
+    monkeypatch.setattr(planner_module, "_AGENT4A_MODEL", planner_module._AGENT4A_MODEL)
+    monkeypatch.setattr(planner_module, "_AGENT4B_MODEL", planner_module._AGENT4B_MODEL)
 
     planner_module._check_finetuned_models()
 
@@ -506,6 +511,10 @@ def test_check_finetuned_models_missing_warns_and_continues(
     assert "ollama pull nichr0/schemalytics-classification-agent" in captured.out
     assert "ollama pull nichr0/schemalytics-silver-agent" in captured.out
     assert "ollama pull nichr0/schemalytics-gold-agent" in captured.out
+
+    assert planner_module._AGENT3_MODEL  == llm_module.OLLAMA_DEFAULT_MODEL
+    assert planner_module._AGENT4A_MODEL == llm_module.OLLAMA_DEFAULT_MODEL
+    assert planner_module._AGENT4B_MODEL == llm_module.OLLAMA_DEFAULT_MODEL
 
 
 def test_check_finetuned_models_abort_on_n(monkeypatch: pytest.MonkeyPatch) -> None:
