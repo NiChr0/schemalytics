@@ -104,8 +104,8 @@ def main(export: bool = False):
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
 
     fn = lambda s: apply_chat_template(s, tokenizer)
-    train_ds = train_ds.map(fn, num_proc=4, load_from_cache_file=False)
-    eval_ds  = eval_ds.map(fn, num_proc=4, load_from_cache_file=False)
+    train_ds = train_ds.map(fn, num_proc=4, load_from_cache_file=False, remove_columns=train_ds.column_names)
+    eval_ds  = eval_ds.map(fn, num_proc=4, load_from_cache_file=False, remove_columns=eval_ds.column_names)
 
     trainer = SFTTrainer(
         model           = model,
