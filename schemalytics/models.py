@@ -129,3 +129,54 @@ class PipelineContext(BaseModel):
     goals: list[str]
     grain: str
     table_classifications: list[TableClassificationResult]
+
+
+# ── Semantic Layer models ──────────────────────────────────────────────────────
+
+class SemanticEntity(BaseModel):
+    """A primary or foreign key entity on a semantic model."""
+    name: str
+    type: Literal["primary", "foreign", "natural"]
+    expr: str  # column name or expression
+
+
+class SemanticDimension(BaseModel):
+    """A dimension (categorical or time) on a semantic model."""
+    name: str
+    type: Literal["categorical", "time"]
+    expr: str  # column name
+    description: str
+    time_granularity: Optional[str] = None  # day, week, month, year — only for time dimensions
+
+
+class SemanticMeasure(BaseModel):
+    """An aggregatable measure on a semantic model."""
+    name: str
+    agg: Literal["sum", "count", "count_distinct", "avg", "min", "max"]
+    expr: str  # column name or expression
+    description: str
+
+
+class SemanticModel(BaseModel):
+    """A dbt semantic model wrapping one Silver fact or dimension model."""
+    name: str
+    model: str  # dbt ref, e.g. "fct_orders"
+    description: str
+    entities: list[SemanticEntity]
+    dimensions: list[SemanticDimension]
+    measures: list[SemanticMeasure]
+
+
+class SemanticMetric(BaseModel):
+    """A named business metric derived from a semantic model's measures."""
+    name: str
+    label: str
+    description: str
+    type: Literal["simple", "ratio", "cumulative", "derived"]
+    type_params: dict  # e.g. {"measure": "total_revenue"} or {"numerator": ..., "denominator": ...}
+
+
+class SemanticLayer(BaseModel):
+    """Agent 6 output: full dbt semantic layer definition."""
+    semantic_models: list[SemanticModel]
+    metrics: list[SemanticMetric]

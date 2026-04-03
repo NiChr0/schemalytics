@@ -35,7 +35,7 @@ def generate(connection: str, output: str, name: str):
         print("\nGeneration cancelled.")
         return
 
-    modeling_plan, pipeline_ctx = result
+    modeling_plan, pipeline_ctx, semantic_layer = result
 
     # Step 3: Generate dbt project
     print("\nGenerating dbt project...")
@@ -46,6 +46,7 @@ def generate(connection: str, output: str, name: str):
         name,
         business_type=pipeline_ctx.business_type,
         context=pipeline_ctx,
+        semantic_layer=semantic_layer,
     )
 
     print("\n" + "=" * 64)

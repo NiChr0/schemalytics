@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from jinja2 import Template
-from schemalytics.models import Schema, ModelingPlan, BusinessContext, PipelineContext
+from schemalytics.models import Schema, ModelingPlan, BusinessContext, PipelineContext, SemanticLayer
 from schemalytics import templates
 
 
@@ -96,6 +96,62 @@ def _snapshot_sql(table_name: str, pk: str, updated_at: str | None, schema_name:
 
 
 
+def _write_semantic_layer(semantic_layer: SemanticLayer, base: Path) -> None:
+    """Write dbt-native semantic_models.yml from Agent 6 output."""
+    lines = ["version: 2", "", "semantic_models:"]
+    for sm in semantic_layer.semantic_models:
+        lines += [
+            f"  - name: {sm.name}",
+            f"    description: \"{sm.description}\"",
+            f"    model: ref('{sm.model}')",
+            "    entities:",
+        ]
+        for e in sm.entities:
+            lines += [
+                f"      - name: {e.name}",
+                f"        type: {e.type}",
+                f"        expr: {e.expr}",
+            ]
+        lines.append("    dimensions:")
+        for d in sm.dimensions:
+            lines += [
+                f"      - name: {d.name}",
+                f"        type: {d.type}",
+                f"        expr: {d.expr}",
+                f"        description: \"{d.description}\"",
+            ]
+            if d.type == "time" and d.time_granularity:
+                lines += [
+                    "        type_params:",
+                    f"          time_granularity: {d.time_granularity}",
+                ]
+        lines.append("    measures:")
+        for m in sm.measures:
+            lines += [
+                f"      - name: {m.name}",
+                f"        agg: {m.agg}",
+                f"        expr: {m.expr}",
+                f"        description: \"{m.description}\"",
+            ]
+        lines.append("")
+
+    if semantic_layer.metrics:
+        lines += ["metrics:"]
+        for metric in semantic_layer.metrics:
+            lines += [
+                f"  - name: {metric.name}",
+                f"    label: \"{metric.label}\"",
+                f"    description: \"{metric.description}\"",
+                f"    type: {metric.type}",
+                "    type_params:",
+            ]
+            for k, v in metric.type_params.items():
+                lines.append(f"      {k}: {v}")
+            lines.append("")
+
+    (base / "semantic_models.yml").write_text("\n".join(lines))
+
+
 def generate_dbt_project(
     schema: Schema,
     plan: ModelingPlan,
@@ -104,6 +160,7 @@ def generate_dbt_project(
     source_schema: str = "public",
     business_type: str = "generic",
     context: BusinessContext | PipelineContext | None = None,
+    semantic_layer: SemanticLayer | None = None,
 ) -> Path:
     """Generate complete dbt project structure."""
     base = Path(output_dir)
@@ -481,17 +538,8 @@ from {{{{ ref('{gold.source_fact}') }}}}
         (base / "models" / "gold" / f"{gold.name}.sql").write_text(sql)
     
     # Semantic Layer YAML
-    semantic_content = Template(templates.SEMANTIC_LAYER_TEMPLATE).render(
-        project_name=project_name,
-        timestamp=datetime.now().isoformat(),
-        business_type=business_type,
-        business_description=f"Generated dbt project for {business_type} analytics",
-        gold_models=plan.gold,
-        dimensions=plan.dimensions,
-        facts=plan.facts,
-        context_goals=context.goals if context else [],
-    )
-    (base / "semantic_layer.yml").write_text(semantic_content)
+    if semantic_layer is not None:
+        _write_semantic_layer(semantic_layer, base)
     
     # README
     readme = f"""# {project_name}
