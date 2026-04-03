@@ -58,6 +58,7 @@ TRAIN = dict(
     seed                        = 42,
     dataloader_num_workers      = 4,
     report_to                   = "none",
+    dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
 )
 
