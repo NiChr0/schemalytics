@@ -102,11 +102,11 @@ def main(export: bool = False):
     train_ds = load_jsonl("finetune/dataset/train.jsonl")
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
 
-    def formatting_func(sample):
+    def formatting_func(samples):
         return [tokenizer.apply_chat_template(
-            sample["messages"], tokenize=False,
+            msgs, tokenize=False,
             add_generation_prompt=False, enable_thinking=False,
-        )]
+        ) for msgs in samples["messages"]]
 
     trainer = SFTTrainer(
         model              = model,
