@@ -40,14 +40,14 @@ LORA = dict(
 
 TRAIN = dict(
     output_dir                  = ADAPTER_DIR,
-    per_device_train_batch_size = 4,
-    gradient_accumulation_steps = 2,   # effective batch 8
+    per_device_train_batch_size = 8,
+    gradient_accumulation_steps = 2,   # effective batch 16
     max_steps                   = 400,
     learning_rate               = 3e-5,
     lr_scheduler_type           = "cosine",
     warmup_steps                = 50,
     fp16                        = False,
-    bf16                        = True,  # RTX 3060 Ti (Ampere): bfloat16 required by Unsloth 4-bit model
+    bf16                        = True,
     logging_steps               = 10,
     eval_strategy               = "steps",
     eval_steps                  = 50,
@@ -56,8 +56,9 @@ TRAIN = dict(
     save_steps                  = 400,
     load_best_model_at_end      = False,
     seed                        = 42,
-    dataloader_num_workers      = 4,
+    dataloader_num_workers      = 0,
     report_to                   = "none",
+    dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
 )
 
@@ -87,42 +88,31 @@ def apply_chat_template(sample, tokenizer):
 def main(export: bool = False):
     from unsloth import FastLanguageModel
     from trl import SFTTrainer, SFTConfig
-    from transformers import DataCollatorForLanguageModeling
 
     print(f"Loading model: {MODEL_ID}")
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name     = MODEL_ID,
         max_seq_length = MAX_SEQ_LENGTH,
-        dtype          = None,        # auto (fp16 on RTX 3060 Ti)
+        dtype          = None,
         load_in_4bit   = True,
     )
 
     model = FastLanguageModel.get_peft_model(model, **LORA)
 
-    # Dataset — fully tokenize to input_ids/labels before training
+    # Dataset
     train_ds = load_jsonl("finetune/dataset/train.jsonl")
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
 
-    def tokenize(sample):
-        text = tokenizer.apply_chat_template(
-            sample["messages"], tokenize=False,
-            add_generation_prompt=False, enable_thinking=False,
-        )
-        enc = tokenizer(text, truncation=True, max_length=MAX_SEQ_LENGTH, padding=False)
-        enc["labels"] = enc["input_ids"].copy()
-        return enc
-
-    train_ds = train_ds.map(tokenize, remove_columns=["messages"])
-    eval_ds  = eval_ds.map(tokenize, remove_columns=["messages"])
+    fn = lambda s: apply_chat_template(s, tokenizer)
+    train_ds = train_ds.map(fn)
+    eval_ds  = eval_ds.map(fn)
 
     trainer = SFTTrainer(
-        model                 = model,
-        tokenizer             = tokenizer,
-        train_dataset         = train_ds,
-        eval_dataset          = eval_ds,
-        args                  = SFTConfig(**TRAIN),
-        packing               = False,
-        data_collator         = DataCollatorForLanguageModeling(tokenizer, mlm=False),
+        model           = model,
+        tokenizer       = tokenizer,
+        train_dataset   = train_ds,
+        eval_dataset    = eval_ds,
+        args            = SFTConfig(**TRAIN),
     )
 
     print("Starting training…")
@@ -150,7 +140,6 @@ def _export(model=None, tokenizer=None):
     print(f"Exporting GGUF (Q4_K_M) -> {gguf_prefix}-unsloth.Q4_K_M.gguf ...")
     model.save_pretrained_gguf(gguf_prefix, tokenizer, quantization_method="q4_k_m")
 
-    # Ollama Modelfile — use absolute path so Ollama can find the GGUF
     gguf_abs = str(Path(gguf_prefix + "-unsloth.Q4_K_M.gguf").resolve())
     modelfile = Path("finetune/cuda/Modelfile-classification-agent")
     modelfile.write_text(
