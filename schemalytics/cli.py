@@ -8,7 +8,7 @@ from schemalytics.planner import run_pipeline
 
 
 @click.group()
-@click.version_option(version="0.1.3")
+@click.version_option(version="0.2.0")
 def cli():
     """Schemalytics - Automated dbt project generation with an agentic pipeline."""
 
@@ -28,7 +28,7 @@ def generate(connection: str, output: str, name: str):
     schema = extract_schema(connection)
     print(f"  Found {len(schema.tables)} tables")
 
-    # Step 2: Run agent pipeline (Agents 1–5)
+    # Step 2: Run agent pipeline (Agents 1–6)
     result = run_pipeline(schema)
 
     if not result:

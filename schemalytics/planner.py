@@ -1121,8 +1121,6 @@ def _check_finetuned_models() -> None:
     Only checks model names that start with 'nichr0/' (i.e. the fine-tuned defaults,
     not user overrides pointing at local models).
     """
-    global _AGENT3_MODEL, _AGENT4A_MODEL, _AGENT4B_MODEL
-
     if llm.get_provider() != "ollama":
         return
 
@@ -1171,6 +1169,7 @@ def _check_finetuned_models() -> None:
         raise SystemExit(1)
 
     # Patch module-level constants for this run so agent calls pick up the fallback.
+    global _AGENT3_MODEL, _AGENT4A_MODEL, _AGENT4B_MODEL
     for _, name in missing:
         if name == agent3:
             _AGENT3_MODEL = llm.OLLAMA_DEFAULT_MODEL

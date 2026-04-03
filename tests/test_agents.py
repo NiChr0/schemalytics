@@ -475,6 +475,7 @@ def test_check_finetuned_models_all_present(monkeypatch: pytest.MonkeyPatch) -> 
     """No prompt or warning when all three fine-tuned models appear in ollama list."""
     import schemalytics.planner as planner_module
 
+    monkeypatch.setenv("SCHEMALYTICS_LLM_PROVIDER", "ollama")
     ollama_output = (
         "nichr0/schemalytics-classification-agent  latest  abc123  1.2 GB\n"
         "nichr0/schemalytics-silver-agent           latest  def456  1.2 GB\n"
@@ -495,6 +496,7 @@ def test_check_finetuned_models_missing_warns_and_continues(
     import schemalytics.planner as planner_module
     import schemalytics.llm as llm_module
 
+    monkeypatch.setenv("SCHEMALYTICS_LLM_PROVIDER", "ollama")
     monkeypatch.setattr(
         planner_module.subprocess, "run",
         lambda *a, **kw: _FakeRun(""),  # empty — nothing pulled
@@ -521,6 +523,7 @@ def test_check_finetuned_models_abort_on_n(monkeypatch: pytest.MonkeyPatch) -> N
     """Raises SystemExit(1) when the user answers 'n'."""
     import schemalytics.planner as planner_module
 
+    monkeypatch.setenv("SCHEMALYTICS_LLM_PROVIDER", "ollama")
     monkeypatch.setattr(
         planner_module.subprocess, "run",
         lambda *a, **kw: _FakeRun(""),
