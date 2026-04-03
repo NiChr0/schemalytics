@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import subprocess
 from datetime import datetime
 
 import re as _re
@@ -1113,10 +1114,76 @@ def generate_semantic_layer(plan: ModelingPlan, context: PipelineContext) -> Sem
     )
 
 
+def _check_finetuned_models() -> None:
+    """Check that fine-tuned Ollama models are pulled; warn and prompt if not.
+
+    Skipped when SCHEMALYTICS_LLM_PROVIDER != 'ollama'.
+    Only checks model names that start with 'nichr0/' (i.e. the fine-tuned defaults,
+    not user overrides pointing at local models).
+    """
+    global _AGENT3_MODEL, _AGENT4A_MODEL, _AGENT4B_MODEL
+
+    if llm.get_provider() != "ollama":
+        return
+
+    # Read the current (possibly env-overridden) model names for the availability check.
+    # We intentionally read the current globals so that if they were already patched
+    # to a non-nichr0/ value (e.g. via env override), we skip the check for that agent.
+    agent3  = os.environ.get("SCHEMALYTICS_AGENT3_MODEL",  "nichr0/schemalytics-classification-agent")
+    agent4a = os.environ.get("SCHEMALYTICS_AGENT4A_MODEL", "nichr0/schemalytics-silver-agent")
+    agent4b = os.environ.get("SCHEMALYTICS_AGENT4B_MODEL", "nichr0/schemalytics-gold-agent")
+
+    candidates = [
+        ("Agent 3 (classification)", agent3),
+        ("Agent 4a (silver plan)",   agent4a),
+        ("Agent 4b (gold plan)",     agent4b),
+    ]
+    to_check = [(label, name) for label, name in candidates if name.startswith("nichr0/")]
+    if not to_check:
+        return
+
+    try:
+        result = subprocess.run(
+            ["ollama", "list"], capture_output=True, text=True, timeout=10
+        )
+        if result.returncode != 0:
+            print("Warning: 'ollama list' returned an error. Skipping model availability check.")
+            return
+        available = result.stdout
+    except (FileNotFoundError, subprocess.TimeoutExpired) as exc:
+        print(f"Warning: could not run 'ollama list' ({exc}). Skipping model availability check.")
+        return
+
+    missing = [(label, name) for label, name in to_check if name not in available]
+    if not missing:
+        return
+
+    print()
+    for label, name in missing:
+        print(f"Warning: fine-tuned model '{name}' is not pulled.")
+        print(f"  → Run: ollama pull {name}")
+        print(f"  → {label} will use {llm.OLLAMA_DEFAULT_MODEL} instead (quality may be lower).")
+        print()
+
+    answer = input("Continue anyway? [y/N] ").strip().lower()
+    if answer != "y":
+        raise SystemExit(1)
+
+    # Patch module-level constants for this run so agent calls pick up the fallback.
+    for _, name in missing:
+        if name == agent3:
+            _AGENT3_MODEL = llm.OLLAMA_DEFAULT_MODEL
+        if name == agent4a:
+            _AGENT4A_MODEL = llm.OLLAMA_DEFAULT_MODEL
+        if name == agent4b:
+            _AGENT4B_MODEL = llm.OLLAMA_DEFAULT_MODEL
+
+
 # ── Main Pipeline Orchestrator ─────────────────────────────────────────────────
 
 def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext, SemanticLayer] | None:
     """Run the full six-agent pipeline. Returns (ModelingPlan, PipelineContext, SemanticLayer) or None if cancelled."""
+    _check_finetuned_models()
 
     # ── Agent 1: Industry Inference ────────────────────────────────────────────
     print(f"\nAgent 1 — Inferring industry and domain...  [{_ts()}]")
