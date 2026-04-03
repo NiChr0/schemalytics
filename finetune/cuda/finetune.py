@@ -87,6 +87,7 @@ def apply_chat_template(sample, tokenizer):
 def main(export: bool = False):
     from unsloth import FastLanguageModel
     from trl import SFTTrainer, SFTConfig
+    from transformers import DataCollatorForLanguageModeling
 
     print(f"Loading model: {MODEL_ID}")
     model, tokenizer = FastLanguageModel.from_pretrained(
@@ -121,6 +122,7 @@ def main(export: bool = False):
         eval_dataset          = eval_ds,
         args                  = SFTConfig(**TRAIN),
         packing               = False,
+        data_collator         = DataCollatorForLanguageModeling(tokenizer, mlm=False),
     )
 
     print("Starting training…")
