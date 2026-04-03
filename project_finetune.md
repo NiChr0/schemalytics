@@ -44,11 +44,12 @@ schemalytics generate -c postgresql://...
 ### Classification Agent (`nichr0/schemalytics-classification-agent`)
 
 - **Task:** Given a database schema + FK heuristics → output JSON with fact/dimension/bridge/reference role per table
-- **Dataset:** Spider benchmark schemas + enterprise schemas (gretelai, GLPI, Northwind, AdventureWorks, etc.)
-- **Training examples:** ~327 schemas labeled via Claude Sonnet
-- **Training loss:** 0.055 | **Eval loss:** 0.058
-- **Context:** 8,192 tokens | **Max output:** 2,048 tokens
-- **Branch:** `finetune_vast_ai`
+- **Dataset:** Spider benchmark schemas + enterprise schemas (GLPI, Northwind, AdventureWorks, etc.) — gretelai excluded
+- **Training examples:** 147 schemas labeled via Claude Haiku (Sonnet fallback for 33 failures)
+- **Training loss:** 0.336 | **Eval loss:** 0.115
+- **Context:** 12,288 tokens | **Max output:** 2,048 tokens
+- **Adapters:** `finetune/cuda/adapters-qwen3.5-4b-v6/checkpoint-400`
+- **Branch:** `retrain_agent_3`
 
 ### Silver Agent (`nichr0/schemalytics-silver-agent`)
 
@@ -109,5 +110,5 @@ All training ran on an RTX 3090 (24 GB VRAM) via vast.ai / RunPod.
 ## Roadmap
 
 - [ ] Per-agent model env vars (`SCHEMALYTICS_AGENT3_MODEL`, `SCHEMALYTICS_SILVER_MODEL`, `SCHEMALYTICS_GOLD_MODEL`)
-- [ ] Retrain classification agent on expanded dataset (445 schemas including gretelai complex schemas)
-- [ ] Publish updated classification agent to Ollama Hub
+- [x] Retrain classification agent on expanded dataset (147 schemas, gretelai excluded)
+- [x] Publish updated classification agent to Ollama Hub
