@@ -104,9 +104,9 @@ def main(export: bool = False):
 
     def formatting_func(sample):
         return [tokenizer.apply_chat_template(
-            s, tokenize=False,
+            sample["messages"], tokenize=False,
             add_generation_prompt=False, enable_thinking=False,
-        ) for s in sample["messages"]]
+        )]
 
     trainer = SFTTrainer(
         model              = model,
