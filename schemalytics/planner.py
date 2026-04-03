@@ -1116,7 +1116,7 @@ def generate_semantic_layer(plan: ModelingPlan, context: PipelineContext) -> Sem
 # ── Main Pipeline Orchestrator ─────────────────────────────────────────────────
 
 def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext, SemanticLayer] | None:
-    """Run the full five-agent pipeline. Returns (ModelingPlan, PipelineContext) or None if cancelled."""
+    """Run the full six-agent pipeline. Returns (ModelingPlan, PipelineContext, SemanticLayer) or None if cancelled."""
 
     # ── Agent 1: Industry Inference ────────────────────────────────────────────
     print(f"\nAgent 1 — Inferring industry and domain...  [{_ts()}]")
