@@ -1,6 +1,7 @@
 """Agentic pipeline: five focused agents for schema-to-dbt planning."""
 from __future__ import annotations
 
+import os
 from datetime import datetime
 
 import re as _re
@@ -16,6 +17,7 @@ from schemalytics.models import (
     ModelingPlan,
     PipelineContext,
     Schema,
+    SemanticLayer,
     Table,
     TableClassificationResult,
 )
@@ -24,6 +26,13 @@ from schemalytics.models import (
 def _ts() -> str:
     """Current wall-clock time as HH:MM:SS for inline progress stamps."""
     return datetime.now().strftime('%H:%M:%S')
+
+
+# ── Per-agent model selection ──────────────────────────────────────────────────
+# Fine-tuned models are the defaults. Override via env var for ablation testing.
+_AGENT3_MODEL  = os.environ.get("SCHEMALYTICS_AGENT3_MODEL",  "nichr0/schemalytics-classification-agent")
+_AGENT4A_MODEL = os.environ.get("SCHEMALYTICS_AGENT4A_MODEL", "nichr0/schemalytics-silver-agent")
+_AGENT4B_MODEL = os.environ.get("SCHEMALYTICS_AGENT4B_MODEL", "nichr0/schemalytics-gold-agent")
 
 
 # ── FK Graph Heuristics ────────────────────────────────────────────────────────
@@ -428,6 +437,7 @@ def classify_tables(
             user=user_msg,
             response_model=_ClassificationList,
             max_tokens=_AGENT3_MAX_TOKENS_PER_BATCH,
+            model=_AGENT3_MODEL,
         )
         all_classifications.extend(result.classifications)
 
@@ -888,6 +898,7 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
         user=silver_user,
         response_model=_SilverPlan,
         max_tokens=silver_max_tokens,
+        model=_AGENT4A_MODEL,
     )
     print(f"  4a Silver done  [{_ts()}]")
 
@@ -933,6 +944,7 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
         user=gold_user,
         response_model=_GoldContainer,
         max_tokens=gold_max_tokens,
+        model=_AGENT4B_MODEL,
     )
     print(f"  4b Gold done  [{_ts()}]")
 
@@ -1049,9 +1061,61 @@ def _show_plan_diff(old: ModelingPlan, new: ModelingPlan) -> None:
         print("  (no structural changes detected)")
 
 
+# ── Agent 6: Semantic Layer ────────────────────────────────────────────────────
+
+_AGENT6_SYSTEM = """\
+You are a senior analytics engineer generating a dbt-native semantic layer definition.
+
+Given a finalized modeling plan (Silver facts + dimensions + Gold aggregates) and business context,
+produce a complete semantic layer in dbt format.
+
+Rules:
+- Create one semantic_model per Silver FACT table only (not dimensions, not gold).
+- entities: include the fact's primary surrogate key as "primary", and each FK dimension key as "foreign".
+- dimensions: classify date columns as type="time" with appropriate time_granularity; all other groupable
+  columns (FK keys, categorical columns) as type="categorical".
+- measures: one measure per numeric column in the fact. Use "sum" for amounts/quantities, "count_distinct"
+  for IDs, "avg" for rates/ratios.
+- metrics: create one metric per Gold model metric. Use type="simple" for direct aggregations.
+  type_params must be {"measure": "<measure_name>"} for simple metrics.
+- All names must be snake_case. Labels should be human-readable title case.
+- Keep descriptions concise (under 12 words).
+"""
+
+_AGENT6_MAX_TOKENS = 2048
+
+
+def generate_semantic_layer(plan: ModelingPlan, context: PipelineContext) -> SemanticLayer:
+    """Agent 6 — generate dbt-native semantic layer from the finalized modeling plan."""
+    facts_block = "\n".join(
+        f"  {f.name}: grain={f.grain}  date={f.date_column}  "
+        f"keys={f.dimension_keys}  measures={f.measures + [dm.name for dm in f.derived_measures]}"
+        for f in plan.facts
+    )
+    gold_block = "\n".join(
+        f"  {g.name}: source={g.source_fact}  grain={g.grain}  "
+        f"metrics={[m.name + '(' + m.aggregation + ':' + m.column + ')' for m in g.metrics]}"
+        for g in plan.gold
+    )
+    user_msg = (
+        f"Business context: {context.industry} / {context.business_type}\n"
+        f"Goals: {', '.join(context.goals)}\n\n"
+        f"Silver facts:\n{facts_block}\n\n"
+        f"Gold models:\n{gold_block}\n\n"
+        "Generate the semantic layer. Create one semantic_model per fact. "
+        "Map Gold metrics to dbt metrics referencing the correct measure names."
+    )
+    return llm.query_structured(
+        system=_AGENT6_SYSTEM,
+        user=user_msg,
+        response_model=SemanticLayer,
+        max_tokens=_AGENT6_MAX_TOKENS,
+    )
+
+
 # ── Main Pipeline Orchestrator ─────────────────────────────────────────────────
 
-def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
+def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext, SemanticLayer] | None:
     """Run the full five-agent pipeline. Returns (ModelingPlan, PipelineContext) or None if cancelled."""
 
     # ── Agent 1: Industry Inference ────────────────────────────────────────────
@@ -1171,7 +1235,11 @@ def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
 
         if not feedback:
             print(f"\nPlan approved. Proceeding to generation...  [{_ts()}]")
-            return plan, context
+            print(f"\nAgent 6 — Generating semantic layer...  [{_ts()}]")
+            semantic_layer = generate_semantic_layer(plan, context)
+            print(f"  Done — {len(semantic_layer.semantic_models)} semantic models, "
+                  f"{len(semantic_layer.metrics)} metrics  [{_ts()}]")
+            return plan, context, semantic_layer
 
         if feedback.lower() in {"cancel", "abort", "quit", "exit", "reject"}:
             print("\nCancelled.")
