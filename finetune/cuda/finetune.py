@@ -102,11 +102,16 @@ def main(export: bool = False):
     train_ds = load_jsonl("finetune/dataset/train.jsonl")
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
 
-    def formatting_func(samples):
+    def formatting_func(sample):
+        msgs = sample["messages"]
+        # single example: msgs is list of dicts; batched: msgs is list of lists
+        if isinstance(msgs[0], dict):
+            return [tokenizer.apply_chat_template(
+                msgs, tokenize=False, add_generation_prompt=False, enable_thinking=False,
+            )]
         return [tokenizer.apply_chat_template(
-            msgs, tokenize=False,
-            add_generation_prompt=False, enable_thinking=False,
-        ) for msgs in samples["messages"]]
+            m, tokenize=False, add_generation_prompt=False, enable_thinking=False,
+        ) for m in msgs]
 
     trainer = SFTTrainer(
         model              = model,
