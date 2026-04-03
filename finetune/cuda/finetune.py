@@ -58,8 +58,6 @@ TRAIN = dict(
     seed                        = 42,
     dataloader_num_workers      = 0,
     report_to                   = "none",
-    dataset_text_field          = "text",
-    remove_unused_columns       = False,
     max_seq_length              = MAX_SEQ_LENGTH,
 )
 
@@ -100,20 +98,16 @@ def main(export: bool = False):
 
     model = FastLanguageModel.get_peft_model(model, **LORA)
 
-    # Dataset
+    # Dataset — pass messages column directly, TRL 0.23 handles chat format natively
     train_ds = load_jsonl("finetune/dataset/train.jsonl")
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
 
-    fn = lambda s: apply_chat_template(s, tokenizer)
-    train_ds = train_ds.map(fn, remove_columns=["messages"])
-    eval_ds  = eval_ds.map(fn, remove_columns=["messages"])
-
     trainer = SFTTrainer(
-        model           = model,
-        tokenizer       = tokenizer,
-        train_dataset   = train_ds,
-        eval_dataset    = eval_ds,
-        args            = SFTConfig(**TRAIN),
+        model              = model,
+        processing_class   = tokenizer,
+        train_dataset      = train_ds,
+        eval_dataset       = eval_ds,
+        args               = SFTConfig(**TRAIN),
     )
 
     print("Starting training…")
