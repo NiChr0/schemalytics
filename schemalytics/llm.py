@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 T = TypeVar("T", bound=BaseModel)
 
-OLLAMA_DEFAULT_MODEL = os.environ.get("SCHEMALYTICS_OLLAMA_MODEL", "gemma3-12b")
+OLLAMA_DEFAULT_MODEL = os.environ.get("SCHEMALYTICS_OLLAMA_MODEL", "gemma3:12b-it-qat")
 ANTHROPIC_DEFAULT_MODEL = "claude-sonnet-4-20250514"
 MAX_RETRIES = 3
 
