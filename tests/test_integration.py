@@ -75,6 +75,7 @@ def test_full_pipeline_northwind(monkeypatch: pytest.MonkeyPatch) -> None:
 
     # Semantic layer sanity
     assert len(semantic_layer.semantic_models) > 0, "Agent 6 returned no semantic models"
+    assert len(semantic_layer.metrics) >= 0  # zero is allowed for sparse schemas; non-None confirms structure
 
     # 3. Generate dbt project
     with tempfile.TemporaryDirectory() as tmpdir:
