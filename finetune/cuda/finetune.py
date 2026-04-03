@@ -58,7 +58,6 @@ TRAIN = dict(
     seed                        = 42,
     dataloader_num_workers      = 4,
     report_to                   = "none",
-    dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
 )
 
@@ -102,10 +101,6 @@ def main(export: bool = False):
     # Dataset
     train_ds = load_jsonl("finetune/dataset/train.jsonl")
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
-
-    fn = lambda s: apply_chat_template(s, tokenizer)
-    train_ds = train_ds.map(fn, num_proc=4, load_from_cache_file=False, remove_columns=train_ds.column_names)
-    eval_ds  = eval_ds.map(fn, num_proc=4, load_from_cache_file=False, remove_columns=eval_ds.column_names)
 
     trainer = SFTTrainer(
         model           = model,
