@@ -40,7 +40,7 @@ LORA = dict(
 
 TRAIN = dict(
     output_dir                  = ADAPTER_DIR,
-    per_device_train_batch_size = 8,
+    per_device_train_batch_size = 4,
     gradient_accumulation_steps = 2,   # effective batch 16
     max_steps                   = 400,
     learning_rate               = 3e-5,
