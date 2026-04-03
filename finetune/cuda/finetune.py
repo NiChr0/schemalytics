@@ -58,8 +58,6 @@ TRAIN = dict(
     seed                        = 42,
     dataloader_num_workers      = 4,
     report_to                   = "none",
-    dataset_text_field          = "text",
-    remove_unused_columns       = False,
     max_seq_length              = MAX_SEQ_LENGTH,
 )
 
@@ -100,18 +98,21 @@ def main(export: bool = False):
 
     model = FastLanguageModel.get_peft_model(model, **LORA)
 
-    # Dataset — apply chat template then drop original columns
+    # Dataset — fully tokenize to input_ids/labels before training
     train_ds = load_jsonl("finetune/dataset/train.jsonl")
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
 
-    def fmt(sample):
-        return {"text": tokenizer.apply_chat_template(
+    def tokenize(sample):
+        text = tokenizer.apply_chat_template(
             sample["messages"], tokenize=False,
             add_generation_prompt=False, enable_thinking=False,
-        )}
+        )
+        enc = tokenizer(text, truncation=True, max_length=MAX_SEQ_LENGTH, padding=False)
+        enc["labels"] = enc["input_ids"].copy()
+        return enc
 
-    train_ds = train_ds.map(fmt, remove_columns=["messages"])
-    eval_ds  = eval_ds.map(fmt, remove_columns=["messages"])
+    train_ds = train_ds.map(tokenize, remove_columns=["messages"])
+    eval_ds  = eval_ds.map(tokenize, remove_columns=["messages"])
 
     trainer = SFTTrainer(
         model                 = model,
