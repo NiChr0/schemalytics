@@ -14,6 +14,7 @@ Run from repo root:
 import json
 import os
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import anthropic
 
@@ -27,7 +28,8 @@ OUTPUT_DIR = Path("finetune/labeled_silver_class")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 MIN_TABLES = 3    # skip trivial schemas
-BATCH_SIZE = 60   # max tables per API call for large schemas
+BATCH_SIZE = 30   # max tables per API call — smaller batches prevent truncation on large schemas
+SKIP_PREFIXES = ('gretelai_',)  # synthetic mega-schemas — skip to save credits
 
 SYSTEM_PROMPT = (
     'You are a data modelling expert who classifies database tables as "fact", "dimension", "bridge", or "reference".\n\n'
@@ -155,14 +157,22 @@ def _parse_response(raw: str) -> list:
 
 def _call_api(client: anthropic.Anthropic, db_id: str, batch: list) -> list:
     user_msg = build_user_message(db_id, batch)
-    response = client.messages.create(
-        model='claude-sonnet-4-6',
-        max_tokens=3000,
-        system=SYSTEM_PROMPT + JSON_ONLY_SUFFIX,
-        messages=[{'role': 'user', 'content': user_msg}],
-    )
-    raw = next((b.text for b in response.content if hasattr(b, 'text')), '')
-    return _parse_response(raw)
+    messages = [{'role': 'user', 'content': user_msg}]
+    for model in ('claude-haiku-4-5-20251001', 'claude-sonnet-4-6'):
+        response = client.messages.create(
+            model=model,
+            max_tokens=4096,
+            system=SYSTEM_PROMPT + JSON_ONLY_SUFFIX,
+            messages=messages,
+        )
+        raw = next((b.text for b in response.content if hasattr(b, 'text')), '')
+        try:
+            return _parse_response(raw)
+        except Exception:
+            if model == 'claude-sonnet-4-6':
+                raise
+            print(f'  [fallback to Sonnet] {db_id}')
+    raise RuntimeError('unreachable')
 
 
 def label_schema(client: anthropic.Anthropic, db_id: str, tables: list) -> list:
@@ -183,6 +193,28 @@ def label_schema(client: anthropic.Anthropic, db_id: str, tables: list) -> list:
     return records
 
 
+WORKERS = 5  # concurrent API calls
+
+
+def _process_one(client: anthropic.Anthropic, path: Path, idx: int, total: int) -> tuple[str, str]:
+    """Label one schema file. Returns (stem, status_line)."""
+    out_path = OUTPUT_DIR / path.name.replace('.json', '.jsonl')
+    if out_path.exists():
+        return path.stem, 'skip'
+
+    if any(path.stem.startswith(p) for p in SKIP_PREFIXES):
+        return path.stem, 'skip'
+
+    data = json.loads(path.read_text(encoding='utf-8'))
+    tables = data.get('tables', [])
+    if len(tables) < MIN_TABLES:
+        return path.stem, f'skip_trivial:{len(tables)}'
+
+    records = label_schema(client, path.stem, tables)
+    out_path.write_text('\n'.join(json.dumps(r) for r in records) + '\n', encoding='utf-8')
+    return path.stem, f'ok:{len(tables)}:{len(records)}'
+
+
 def main():
     api_key = os.environ.get('ANTHROPIC_API_KEY')
     if not api_key:
@@ -190,41 +222,51 @@ def main():
 
     client = anthropic.Anthropic(api_key=api_key)
 
-    schema_files = []
+    seen: set[str] = set()
+    schema_files: list[Path] = []
     for d in EXTRACTED_DIRS:
-        if d.exists():
-            schema_files.extend(sorted(d.glob('*.json')))
-        else:
+        if not d.exists():
             print(f'Skipping missing dir: {d}')
-
-    print(f'Found {len(schema_files)} schema files across {len(EXTRACTED_DIRS)} dirs')
-
-    done = errors = skipped = 0
-    for i, path in enumerate(schema_files):
-        out_path = OUTPUT_DIR / path.name.replace('.json', '.jsonl')
-        if out_path.exists():
-            skipped += 1
             continue
+        for path in sorted(d.glob('*.json')):
+            if path.stem not in seen:
+                seen.add(path.stem)
+                schema_files.append(path)
 
-        data = json.loads(path.read_text(encoding='utf-8'))
-        tables = data.get('tables', [])
-        if len(tables) < MIN_TABLES:
-            print(f'  [{i+1}/{len(schema_files)}] SKIP {path.stem} ({len(tables)} tables < {MIN_TABLES})')
-            skipped += 1
-            continue
+    total = len(schema_files)
+    print(f'Found {total} unique schemas — running {WORKERS} workers in parallel')
 
-        try:
-            records = label_schema(client, path.stem, tables)
-            out_path.write_text('\n'.join(json.dumps(r) for r in records) + '\n', encoding='utf-8')
-            print(f'  [{i+1}/{len(schema_files)}] OK   {path.stem} ({len(tables)} tables, {len(records)} records)')
-            done += 1
-        except Exception as e:
-            print(f'  [{i+1}/{len(schema_files)}] ERR  {path.stem}: {e}')
-            errors += 1
+    done = skipped = 0
+    errors: list[str] = []
+    completed = 0
 
-        time.sleep(0.3)
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        futures = {
+            pool.submit(_process_one, client, path, i, total): (i, path)
+            for i, path in enumerate(schema_files)
+        }
+        for future in as_completed(futures):
+            i, path = futures[future]
+            completed += 1
+            try:
+                stem, status = future.result()
+                if status == 'skip':
+                    skipped += 1
+                elif status.startswith('skip_trivial'):
+                    n = status.split(':')[1]
+                    print(f'  [{completed}/{total}] SKIP {stem} ({n} tables < {MIN_TABLES})')
+                    skipped += 1
+                else:
+                    _, n_tables, n_records = status.split(':')
+                    print(f'  [{completed}/{total}] OK   {stem} ({n_tables} tables, {n_records} records)')
+                    done += 1
+            except Exception as e:
+                print(f'  [{completed}/{total}] ERR  {path.stem}: {e}')
+                errors.append(path.stem)
 
-    print(f'\nDone. labeled={done}  skipped={skipped}  errors={errors}')
+    print(f'\nDone. labeled={done}  skipped={skipped}  errors={len(errors)}')
+    if errors:
+        print('Failed:', errors)
 
 
 if __name__ == '__main__':

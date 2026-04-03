@@ -22,7 +22,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 MODEL_ID        = "unsloth/Qwen3.5-4B"
-ADAPTER_DIR     = "finetune/cuda/adapters-qwen3.5-4b-v5"
+ADAPTER_DIR     = "finetune/cuda/adapters-qwen3.5-4b-v6"
 MAX_SEQ_LENGTH  = 1024   # schemas fit in 1024 tokens; saves VRAM
 
 LORA = dict(
@@ -40,14 +40,14 @@ LORA = dict(
 
 TRAIN = dict(
     output_dir                  = ADAPTER_DIR,
-    per_device_train_batch_size = 1,
-    gradient_accumulation_steps = 2,   # effective batch 2 — same as MLX batch_size=2
+    per_device_train_batch_size = 2,
+    gradient_accumulation_steps = 2,   # effective batch 16
     max_steps                   = 400,
     learning_rate               = 3e-5,
     lr_scheduler_type           = "cosine",
     warmup_steps                = 50,
     fp16                        = False,
-    bf16                        = True,  # RTX 3060 Ti (Ampere): bfloat16 required by Unsloth 4-bit model
+    bf16                        = True,
     logging_steps               = 10,
     eval_strategy               = "steps",
     eval_steps                  = 50,
@@ -56,9 +56,8 @@ TRAIN = dict(
     save_steps                  = 400,
     load_best_model_at_end      = False,
     seed                        = 42,
-    dataloader_num_workers      = 0,   # Windows: avoid multiprocessing issues
+    dataloader_num_workers      = 0,
     report_to                   = "none",
-    dataset_text_field          = "text",
     max_seq_length              = MAX_SEQ_LENGTH,
 )
 
@@ -93,26 +92,34 @@ def main(export: bool = False):
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name     = MODEL_ID,
         max_seq_length = MAX_SEQ_LENGTH,
-        dtype          = None,        # auto (fp16 on RTX 3060 Ti)
+        dtype          = None,
         load_in_4bit   = True,
     )
 
     model = FastLanguageModel.get_peft_model(model, **LORA)
 
-    # Dataset
+    # Dataset — pass messages column directly, TRL 0.23 handles chat format natively
     train_ds = load_jsonl("finetune/dataset/train.jsonl")
     eval_ds  = load_jsonl("finetune/dataset/eval.jsonl")
 
-    fn = lambda s: apply_chat_template(s, tokenizer)
-    train_ds = train_ds.map(fn)
-    eval_ds  = eval_ds.map(fn)
+    def formatting_func(sample):
+        msgs = sample["messages"]
+        # single example: msgs is list of dicts; batched: msgs is list of lists
+        if isinstance(msgs[0], dict):
+            return [tokenizer.apply_chat_template(
+                msgs, tokenize=False, add_generation_prompt=False, enable_thinking=False,
+            )]
+        return [tokenizer.apply_chat_template(
+            m, tokenize=False, add_generation_prompt=False, enable_thinking=False,
+        ) for m in msgs]
 
     trainer = SFTTrainer(
-        model           = model,
-        tokenizer       = tokenizer,
-        train_dataset   = train_ds,
-        eval_dataset    = eval_ds,
-        args            = SFTConfig(**TRAIN),
+        model              = model,
+        processing_class   = tokenizer,
+        train_dataset      = train_ds,
+        eval_dataset       = eval_ds,
+        args               = SFTConfig(**TRAIN),
+        formatting_func    = formatting_func,
     )
 
     print("Starting training…")
@@ -136,13 +143,12 @@ def _export(model=None, tokenizer=None):
             load_in_4bit   = True,
         )
 
-    gguf_prefix = "finetune/cuda/schemalytics-agent3-qwen3.5-4b"
+    gguf_prefix = "finetune/cuda/schemalytics-classification-agent-v2"
     print(f"Exporting GGUF (Q4_K_M) -> {gguf_prefix}-unsloth.Q4_K_M.gguf ...")
     model.save_pretrained_gguf(gguf_prefix, tokenizer, quantization_method="q4_k_m")
 
-    # Ollama Modelfile — use absolute path so Ollama can find the GGUF
     gguf_abs = str(Path(gguf_prefix + "-unsloth.Q4_K_M.gguf").resolve())
-    modelfile = Path("finetune/cuda/Modelfile-qwen3.5-4b")
+    modelfile = Path("finetune/cuda/Modelfile-classification-agent")
     modelfile.write_text(
         f"FROM {gguf_abs}\n"
         "PARAMETER temperature 0\n"
