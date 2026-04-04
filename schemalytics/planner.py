@@ -184,6 +184,18 @@ def _compact_schema_summary(schema: Schema) -> str:
     return "\n".join(lines)
 
 
+def _agent3_schema_fmt(tables: list) -> str:
+    """Schema format matching Agent 3 training data: col→ref_table inline for FK columns."""
+    lines = []
+    for t in tables:
+        fk_map = {fk.column: fk.references_table for fk in t.foreign_keys}
+        col_parts = []
+        for c in t.columns[:12]:
+            col_parts.append(f"{c.name}→{fk_map[c.name]}" if c.name in fk_map else c.name)
+        lines.append(f"  {t.name}({', '.join(col_parts)})")
+    return "\n".join(lines)
+
+
 def _schema_summary(schema: Schema) -> str:
     """Compact schema representation for LLM prompts."""
     lines = []
@@ -379,8 +391,8 @@ Output format: keep each `reasoning` to ≤8 words.
 
 
 _AGENT3_BATCH_SIZE = 20
-# ~150 output tokens per table + small buffer; stays well within num_ctx=12288.
-_AGENT3_MAX_TOKENS_PER_BATCH = _AGENT3_BATCH_SIZE * 150 + 256
+# ~300 output tokens per table (fine-tuned model is more verbose than base) + buffer.
+_AGENT3_MAX_TOKENS_PER_BATCH = _AGENT3_BATCH_SIZE * 300 + 512
 
 
 def classify_tables(
@@ -396,18 +408,6 @@ def classify_tables(
     schema size and avoids the retry storm caused by truncated JSON.
     """
     heuristics = classify_by_fk_graph(schema)
-
-    # Shared context sent in every batch call.
-    base_context = (
-        f"Database schema:\n{_compact_schema_summary(schema)}\n\n"
-        f"Heuristic pre-classifications:\n{_heuristic_summary(heuristics)}\n\n"
-        f"Business context:\n"
-        f"  Industry: {context.industry} / {context.business_type}\n"
-        f"  Metrics:  {', '.join(context.metrics)}\n"
-        f"  Goals:    {', '.join(context.goals)}"
-    )
-    if user_feedback:
-        base_context += f"\n\nUser correction / clarification: {user_feedback}"
 
     from pydantic import BaseModel as _BaseModel
 
@@ -427,10 +427,24 @@ def classify_tables(
         if n_batches > 1:
             print(f"  [Agent 3] batch {idx}/{n_batches}: {batch_names}")
 
+        # Use schema format matching training data: col→ref_table inline.
+        # For multi-batch, send only the batch tables so output length stays predictable.
+        tables_for_batch = batch if n_batches > 1 else all_tables
+        heuristics_for_batch = (
+            [h for h in heuristics if h.table.name in {t.name for t in batch}]
+            if n_batches > 1 else heuristics
+        )
+        business_ctx = (
+            f"Business context: {context.industry} / {context.business_type}."
+            + (f" Key metrics: {', '.join(context.metrics[:5])}." if context.metrics else "")
+        )
+        if user_feedback:
+            business_ctx += f"\n\nUser correction / clarification: {user_feedback}"
+
         user_msg = (
-            base_context
-            + f"\n\nClassify ONLY these {len(batch_names)} tables "
-            f"(skip all others): {batch_names}"
+            f"Database schema:\n{_agent3_schema_fmt(tables_for_batch)}\n\n"
+            f"Heuristic pre-classifications:\n{_heuristic_summary(heuristics_for_batch)}\n\n"
+            f"{business_ctx}"
         )
 
         result = llm.query_structured(
@@ -1079,11 +1093,12 @@ Rules:
   for IDs, "avg" for rates/ratios.
 - metrics: create one metric per Gold model metric. Use type="simple" for direct aggregations.
   type_params must be {"measure": "<measure_name>"} for simple metrics.
+  IMPORTANT: the metrics list must NOT be empty if Gold models are provided.
 - All names must be snake_case. Labels should be human-readable title case.
 - Keep descriptions concise (under 12 words).
 """
 
-_AGENT6_MAX_TOKENS = 2048
+_AGENT6_MAX_TOKENS = 5000
 
 
 def generate_semantic_layer(plan: ModelingPlan, context: PipelineContext) -> SemanticLayer:
