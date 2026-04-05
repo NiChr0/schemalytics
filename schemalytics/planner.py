@@ -977,11 +977,14 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
         )
 
     fact_summary = "\n".join(_fact_summary_line(f) for f in sanitized_silver.facts)
+    fact_names = [f.name for f in sanitized_silver.facts]
     gold_user = (
-        f"Silver facts:\n{fact_summary}\n\n"
         f"Industry: {context.industry} / {context.business_type}\n\n"
-        "Generate one Gold model per fact above. Use ONLY the measures and derived_measures "
-        "columns listed for each fact. Do not invent columns or import names from the industry context."
+        f"Silver facts ({len(fact_names)} total — you MUST produce at least one Gold model for EACH):\n"
+        f"{fact_summary}\n\n"
+        f"Required facts to cover: {fact_names}\n"
+        "Use ONLY the measures and derived_measures columns listed for each fact. "
+        "Metric name must reflect the column name, not the business goal."
     )
     gold_result = llm.query_structured(
         system=_AGENT4_GOLD_SYSTEM,
