@@ -1,5 +1,5 @@
 """Data models for schema and modeling plan."""
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import Literal, Optional
 
 
@@ -162,9 +162,9 @@ class SemanticModel(BaseModel):
     name: str
     model: str  # dbt ref, e.g. "fct_orders"
     description: str
-    entities: list[SemanticEntity]
-    dimensions: list[SemanticDimension]
-    measures: list[SemanticMeasure]
+    entities: list[SemanticEntity] = []
+    dimensions: list[SemanticDimension] = []
+    measures: list[SemanticMeasure] = []
 
 
 class SemanticMetric(BaseModel):
@@ -179,4 +179,12 @@ class SemanticMetric(BaseModel):
 class SemanticLayer(BaseModel):
     """Agent 6 output: full dbt semantic layer definition."""
     semantic_models: list[SemanticModel]
-    metrics: list[SemanticMetric]
+    metrics: list[SemanticMetric] = []
+
+    @field_validator("semantic_models", mode="before")
+    @classmethod
+    def _filter_non_models(cls, v: object) -> object:
+        """Drop any non-dict items a model may accidentally append (e.g. stray strings)."""
+        if isinstance(v, list):
+            return [item for item in v if isinstance(item, dict)]
+        return v

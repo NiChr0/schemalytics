@@ -218,7 +218,9 @@ models:
       - name: {{ gold.grain }}_date
         description: "Date at {{ gold.grain }} grain"
         tests:
+{% if not gold.dimensions %}
           - unique
+{% endif %}
           - not_null
 {% endif %}
 {% for metric in gold.metrics %}
@@ -425,11 +427,12 @@ facts:
 {% endfor %}
       FROM {{ fact.name }} f
 {% for dk in fact.dimension_keys[:3] %}
-      LEFT JOIN dim_{{ dk.replace('_id', '') if dk.endswith('_id') else dk }} d_{{ loop.index }} 
+{% set dim_name = fk_to_dim_map.get(dk, 'dim_' + (dk[:-3] if dk.endswith('_id') else dk)) %}
+      LEFT JOIN {{ dim_name }} d_{{ loop.index }}
         ON f.{{ dk }} = d_{{ loop.index }}.{{ dk }}
 {% endfor %}
-      WHERE f.{{ fact.date_column }} >= CURRENT_DATE - 30
-    
+{% if fact.date_column %}      WHERE f.{{ fact.date_column }} >= CURRENT_DATE - 30{% else %}      -- TODO: add date filter (no date column on this fact){% endif %}
+
 {% endfor %}
 
 # =============================================================================
@@ -438,11 +441,12 @@ facts:
 relationships:
 {% for fact in facts %}
 {% for dk in fact.dimension_keys %}
+{% set dim_name = fk_to_dim_map.get(dk, 'dim_' + (dk[:-3] if dk.endswith('_id') else dk)) %}
   - from_table: {{ fact.name }}
-    to_table: dim_{{ dk.replace('_id', '') if dk.endswith('_id') else dk }}
+    to_table: {{ dim_name }}
     relationship_type: many-to-one
-    join_condition: "{{ fact.name }}.{{ dk }} = dim_{{ dk.replace('_id', '') if dk.endswith('_id') else dk }}.{{ dk }}"
-    description: "Multiple {{ fact.source_table }} records can reference the same {{ dk.replace('_id', '') }}"
+    join_condition: "{{ fact.name }}.{{ dk }} = {{ dim_name }}.{{ dk }}"
+    description: "Multiple {{ fact.source_table }} records can reference the same {{ dk[:-3] if dk.endswith('_id') else dk }}"
 {% endfor %}
 {% endfor %}
 
@@ -462,7 +466,7 @@ join_paths:
 # BUSINESS GLOSSARY
 # =============================================================================
 glossary:
-{% for fact in facts %}
+{% for fact in facts if fact.date_column %}
   {{ fact.date_column }}: "Primary timestamp for {{ fact.source_table }} - use for time-based filtering and grouping"
 {% endfor %}
 {% for gold in gold_models %}

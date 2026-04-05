@@ -3,7 +3,7 @@
 ## What It Is
 PostgreSQL → LLM-ready semantic layer tool. Analyzes DB schema, generates dimensional models (medallion: Bronze→Silver→Gold), and creates complete dbt projects with metadata for self-service analytics. Supports Ollama (default) and Anthropic LLMs via `instructor`.
 
-**Version**: 0.1.3 | **License**: Apache 2.0 | **Python**: ≥3.10
+**Version**: 0.2.0 | **License**: Apache 2.0 | **Python**: ≥3.10
 
 ## Key Files
 - [pyproject.toml](pyproject.toml) — build config, deps, CLI entry points
@@ -39,7 +39,7 @@ Agent 5: refine_modeling_plan()   → ModelingPlan (refinement loop)
 - Dev: `pytest>=7.0`, `pytest-cov>=4.0`, `ruff>=0.1`
 
 ## LLM Provider Config
-- Default: Ollama at localhost:11434, model `qwen3-30b-data` (MoE, 3.3B activated, 256K native ctx)
+- Default: Ollama at localhost:11434, model `gemma3:12b-it-qat` (Agents 1,2,5,6); fine-tuned `nichr0/` models for Agents 3,4a,4b
 - Anthropic: `SCHEMALYTICS_LLM_PROVIDER=anthropic` + `ANTHROPIC_API_KEY`, model `claude-sonnet-4-20250514`
 - Entry point: `llm.query_structured(system, user, response_model)` — returns typed Pydantic model
 

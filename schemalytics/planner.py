@@ -14,6 +14,7 @@ from schemalytics.models import (
     FactPlan,
     GoldPlan,
     IndustryInference,
+    MetricDefinition,
     MetricsSuggestion,
     ModelingPlan,
     PipelineContext,
@@ -582,6 +583,10 @@ Rules:
     derived_measures=[name=expression, ...]). Reference their NAME only (e.g. "line_total"),
     not the underlying expression. Expressions in `column` are rejected at validation time
     and will cause the metric to be silently dropped. Never use a FK/dimension key as a metric.
+  - CRITICAL: `column` is the raw physical column name from the fact's `measures` list, NOT a
+    business metric name. If you want metric name="total_revenue" but the fact only has column
+    "freight", write: name="total_revenue", column="freight". Never write column="total_revenue"
+    unless "total_revenue" literally appears in the fact's measures or derived_measures list.
   - `date_column` must be a date/timestamp column physically present on the source fact model
     (including any FK-joined columns that appear in the fact's SELECT). Use "" if none exists.
   - Generate at least ONE gold model for EACH fact table in the Silver plan. Do not produce
@@ -853,7 +858,25 @@ def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
                 valid_metrics.append(m)
             # else: bare column not in fact model — silently drop
         if not valid_metrics:
-            continue  # no usable metrics — drop the whole model
+            # Fallback: if the model has exactly one numeric measure available, remap all
+            # metrics to it. This handles the common case where the fine-tuned model uses
+            # a semantic name (e.g. "total_revenue") instead of the raw column (e.g. "freight").
+            source_fact_plan = next((f for f in sanitized_facts if f.name == gold.source_fact), None)
+            fact_measures = (
+                [m for m in source_fact_plan.measures]
+                + [dm.name for dm in source_fact_plan.derived_measures]
+            ) if source_fact_plan else []
+            numeric_measures = [c for c in fact_measures if c in model_cols]
+            if len(numeric_measures) == 1:
+                fallback_col = numeric_measures[0]
+                for m in gold.metrics:
+                    if not _is_sql_expression(m.column) and m.column != "*":
+                        valid_metrics.append(
+                            MetricDefinition(name=m.name, aggregation=m.aggregation,
+                                             column=fallback_col, description=m.description)
+                        )
+            if not valid_metrics:
+                continue  # no usable metrics — drop the whole model
         # RC5: enforce _ytd models have yearly grain (daily _ytd is a logical contradiction)
         fixed_grain = (
             "yearly"
@@ -1085,15 +1108,19 @@ Given a finalized modeling plan (Silver facts + dimensions + Gold aggregates) an
 produce a complete semantic layer in dbt format.
 
 Rules:
-- Create one semantic_model per Silver FACT table only (not dimensions, not gold).
+- semantic_models: create ONLY one per Silver FACT table. The count must equal the number of Silver facts
+  listed. Do NOT create semantic_models for Gold aggregates, dimensions, or bridge tables.
 - entities: include the fact's primary surrogate key as "primary", and each FK dimension key as "foreign".
 - dimensions: classify date columns as type="time" with appropriate time_granularity; all other groupable
   columns (FK keys, categorical columns) as type="categorical".
 - measures: one measure per numeric column in the fact. Use "sum" for amounts/quantities, "count_distinct"
   for IDs, "avg" for rates/ratios.
-- metrics: create one metric per Gold model metric. Use type="simple" for direct aggregations.
-  type_params must be {"measure": "<measure_name>"} for simple metrics.
-  IMPORTANT: the metrics list must NOT be empty if Gold models are provided.
+- metrics: you will receive an explicit list of required metrics. Output ALL of them — the metrics array
+  must never be empty. Use type="simple" for direct aggregations.
+  type_params must be {"measure": "<measure_name>"} where <measure_name> matches a measure in a semantic_model.
+  Example metric JSON: {"name": "total_revenue", "label": "Total Revenue",
+    "description": "Sum of revenue across all orders", "type": "simple",
+    "type_params": {"measure": "total_revenue"}}
 - All names must be snake_case. Labels should be human-readable title case.
 - Keep descriptions concise (under 12 words).
 """
@@ -1113,13 +1140,29 @@ def generate_semantic_layer(plan: ModelingPlan, context: PipelineContext) -> Sem
         f"metrics={[m.name + '(' + m.aggregation + ':' + m.column + ')' for m in g.metrics]}"
         for g in plan.gold
     )
+    # Build explicit list of required metrics so the model doesn't have to infer them.
+    required_metrics_lines = []
+    seen_metric_names: set[str] = set()
+    for g in plan.gold:
+        for m in g.metrics:
+            if m.name not in seen_metric_names:
+                seen_metric_names.add(m.name)
+                required_metrics_lines.append(
+                    f"  - name={m.name}  aggregation={m.aggregation}  column={m.column}"
+                    f"  (from semantic_model for {g.source_fact})"
+                )
+    required_metrics_block = "\n".join(required_metrics_lines) if required_metrics_lines else "  (none)"
     user_msg = (
         f"Business context: {context.industry} / {context.business_type}\n"
         f"Goals: {', '.join(context.goals)}\n\n"
         f"Silver facts:\n{facts_block}\n\n"
         f"Gold models:\n{gold_block}\n\n"
-        "Generate the semantic layer. Create one semantic_model per fact. "
-        "Map Gold metrics to dbt metrics referencing the correct measure names."
+        f"Required semantic_models ({len(plan.facts)} total, one per Silver fact): "
+        f"{', '.join(f.name for f in plan.facts)}\n\n"
+        f"Required metrics ({len(seen_metric_names)} total — output ALL of them):\n"
+        f"{required_metrics_block}\n\n"
+        f"Generate the semantic layer. Create exactly {len(plan.facts)} semantic_model(s) — "
+        "one per Silver fact listed above. Output every required metric in the metrics list."
     )
     return llm.query_structured(
         system=_AGENT6_SYSTEM,
@@ -1167,7 +1210,12 @@ def _check_finetuned_models() -> None:
         print(f"Warning: could not run 'ollama list' ({exc}). Skipping model availability check.")
         return
 
-    available_names = {line.split()[0] for line in available.splitlines() if line.strip()}
+    # Normalise: strip :latest tag so "nichr0/foo" matches "nichr0/foo:latest"
+    available_names = {
+        line.split()[0].removesuffix(":latest")
+        for line in available.splitlines()
+        if line.strip() and not line.startswith("NAME")
+    }
     missing = [(label, name) for label, name in to_check if name not in available_names]
     if not missing:
         return

@@ -537,9 +537,41 @@ from {{{{ ref('{gold.source_fact}') }}}}
 """
         (base / "models" / "gold" / f"{gold.name}.sql").write_text(sql)
     
-    # Semantic Layer YAML
+    # Build FK → dimension name map for templates (e.g. "customer_id" → "dim_customers").
+    # Keyed by FK column name; value is the dim model name. Used in semantic_layer.yml templates
+    # to generate correct relationship references instead of naive string manipulation.
+    fk_to_dim_map: dict[str, str] = {}
+    # Build: source_table → dim_name from the plan
+    src_to_dim = {d.source_table: d.name for d in plan.dimensions}
+    for fact in plan.facts:
+        src_tbl = schema_table_map.get(fact.source_table)
+        if not src_tbl:
+            continue
+        for fk in src_tbl.foreign_keys:
+            dim_name = src_to_dim.get(fk.references_table)
+            if dim_name:
+                fk_to_dim_map[fk.column] = dim_name
+
+    # Semantic Layer YAML (dbt-native MetricFlow format)
     if semantic_layer is not None:
         _write_semantic_layer(semantic_layer, base)
+
+    # Semantic Layer YAML (LLM analytics guide format — human/AI readable metadata)
+    if context is not None:
+        ctx_goals = getattr(context, "goals", [])
+        business_type = getattr(context, "business_type", business_type)
+        semantic_content = Template(templates.SEMANTIC_LAYER_TEMPLATE).render(
+            project_name=project_name,
+            timestamp=datetime.now().isoformat(),
+            business_type=business_type,
+            business_description=f"Generated dbt project for {business_type} analytics",
+            context_goals=ctx_goals,
+            gold_models=plan.gold,
+            dimensions=plan.dimensions,
+            facts=plan.facts,
+            fk_to_dim_map=fk_to_dim_map,
+        )
+        (base / "semantic_layer.yml").write_text(semantic_content)
     
     # README
     readme = f"""# {project_name}
