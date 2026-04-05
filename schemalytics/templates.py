@@ -51,9 +51,6 @@ GOLD_AGGREGATE_TEMPLATE = """-- Gold: {{ name }}
 
 select
     date_trunc('{{ grain_func }}', {{ date_column }}) as {{ grain }}_date,
-    {% for dim in dimensions %}
-    {{ dim }},
-    {% endfor %}
     {% for metric in metrics %}
     {% if metric.aggregation == 'COUNT_DISTINCT' %}
     count(distinct {{ metric.column }}) as {{ metric.name }}{% if not loop.last %},{% endif %}
@@ -64,7 +61,7 @@ select
     {% endif %}
     {% endfor %}
 from {{ ref(source_fact) }}
-group by 1{% for i in range(dimensions|length) %}, {{ i + 2 }}{% endfor %}
+group by 1
 """
 
 DBT_PROJECT_TEMPLATE = """name: '{{ project_name }}'
@@ -218,9 +215,7 @@ models:
       - name: {{ gold.grain }}_date
         description: "Date at {{ gold.grain }} grain"
         tests:
-{% if not gold.dimensions %}
           - unique
-{% endif %}
           - not_null
 {% endif %}
 {% for metric in gold.metrics %}
@@ -326,13 +321,7 @@ metrics:
     
     time_column: {{ gold.date_column }}
     dimensions:
-{% if gold.dimensions %}
-{% for dim in gold.dimensions %}
-      - {{ dim }}
-{% endfor %}
-{% else %}
       - "time ({{ gold.grain }})"
-{% endif %}
     
     common_filters:
       - "WHERE {{ gold.grain }}_date >= CURRENT_DATE - INTERVAL '30 days'"

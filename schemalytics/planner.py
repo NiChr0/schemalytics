@@ -572,8 +572,8 @@ produce a list of Gold aggregate models (agg_<grain>_<metric>).
 
 Rules:
   - `source_fact` must be a fact model name from the Silver plan (e.g. "fct_order_details").
-  - `dimensions` must be FK column names that physically exist on the source fact table
-    (e.g. "customer_id", "product_id") — never use model names like "dim_customer".
+  - `dimensions` must ALWAYS be an empty list []. Gold models aggregate to the time grain
+    only — no FK dimension breakdowns. Dimensional slicing is done at query time by consumers.
   - `date_column` must be an actual date/timestamp column on the source fact table.
   - `grain` must be one of: "daily", "monthly", "yearly", "weekly".
   - `aggregation` must be one of: SUM, COUNT, COUNT_DISTINCT, AVG, MIN, MAX.
