@@ -606,6 +606,10 @@ Rules:
     fact, purchasing metrics from the purchasing fact, manufacturing from the workorder fact.
     The `measures` and `derived_measures` lists in each fact show exactly what columns are
     available. ONLY reference columns from those lists — do not invent column names.
+  - CRITICAL: metric `name` must reflect the actual column being aggregated, NOT the business
+    goal. If column=freight, name it total_freight or avg_freight_per_order — never
+    total_revenue or customer_sales_volume. The column name is the ground truth; the business
+    context is only for domain awareness.
 """
 
 
@@ -975,7 +979,9 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
     fact_summary = "\n".join(_fact_summary_line(f) for f in sanitized_silver.facts)
     gold_user = (
         f"Silver facts:\n{fact_summary}\n\n"
-        f"Pipeline context:\n{context_block}"
+        f"Industry: {context.industry} / {context.business_type}\n\n"
+        "Generate one Gold model per fact above. Use ONLY the measures and derived_measures "
+        "columns listed for each fact. Do not invent columns or import names from the industry context."
     )
     gold_result = llm.query_structured(
         system=_AGENT4_GOLD_SYSTEM,
@@ -1154,8 +1160,7 @@ def generate_semantic_layer(plan: ModelingPlan, context: PipelineContext) -> Sem
                 )
     required_metrics_block = "\n".join(required_metrics_lines) if required_metrics_lines else "  (none)"
     user_msg = (
-        f"Business context: {context.industry} / {context.business_type}\n"
-        f"Goals: {', '.join(context.goals)}\n\n"
+        f"Business context: {context.industry} / {context.business_type}\n\n"
         f"Silver facts:\n{facts_block}\n\n"
         f"Gold models:\n{gold_block}\n\n"
         f"Required semantic_models ({len(plan.facts)} total, one per Silver fact): "
