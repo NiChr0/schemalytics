@@ -1110,9 +1110,10 @@ produce a complete semantic layer in dbt format.
 Rules:
 - semantic_models: create ONLY one per Silver FACT table. The count must equal the number of Silver facts
   listed. Do NOT create semantic_models for Gold aggregates, dimensions, or bridge tables.
-- entities: include the fact's primary surrogate key as "primary", and each FK dimension key as "foreign".
-- dimensions: classify date columns as type="time" with appropriate time_granularity; all other groupable
-  columns (FK keys, categorical columns) as type="categorical".
+- entities: include the fact's primary surrogate key as type="primary", and each FK dimension key
+  (e.g. customer_id, employee_id) as type="foreign". FK keys go ONLY in entities, never in dimensions.
+- dimensions: ONLY date/timestamp columns go here, as type="time" with appropriate time_granularity.
+  Do NOT put FK keys or categorical columns in dimensions.
 - measures: one measure per numeric column in the fact. Use "sum" for amounts/quantities, "count_distinct"
   for IDs, "avg" for rates/ratios.
 - metrics: you will receive an explicit list of required metrics. Output ALL of them — the metrics array
