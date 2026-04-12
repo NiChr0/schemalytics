@@ -50,22 +50,30 @@ The three fine-tuned models (~2.6 GB each, Qwen3.5-4B QLoRA) are the defaults fo
 pip install schemalytics
 ```
 
+> pip 21 and earlier will silently fail to find the package. If you see "No matching distribution found", run `pip install --upgrade pip` first.
+
 ### Verify
 
 ```bash
+schemalytics --version
 schemalytics --help
 ```
 
 Expected output:
 ```
+schemalytics, version 1.0.1
+
 Usage: schemalytics [OPTIONS] COMMAND [ARGS]...
 
+  Schemalytics - Automated dbt project generation with an agentic pipeline.
+
 Options:
-  --help  Show this message and exit.
+  --version  Show the version and exit.
+  --help     Show this message and exit.
 
 Commands:
-  extract   Extract schema from a PostgreSQL database to JSON
-  generate  Generate a full dbt project from a PostgreSQL database
+  extract   Extract schema from PostgreSQL database (standalone).
+  generate  Extract schema, run the agent pipeline, and generate a dbt...
 ```
 
 ---
