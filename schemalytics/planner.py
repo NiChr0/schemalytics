@@ -264,6 +264,10 @@ all sub-domains in your reasoning. This ensures all relevant metrics are capture
 
 When the schema is ambiguous or the domain is unusual, set needs_clarification=True and confidence < 3.
 Always set confidence=1 if you are genuinely uncertain after reasoning.
+
+IMPORTANT: Respond with actual string values. Do NOT output a JSON Schema definition or property
+descriptions. Output a flat JSON object with real values, for example:
+{"industry": "retail", "business_type": "ecommerce", "confidence": 3, "reasoning": "...", "needs_clarification": false}
 """
 
 
