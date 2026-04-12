@@ -23,6 +23,9 @@ class Table(BaseModel):
     primary_key: Optional[list[str]] = None
     foreign_keys: list[ForeignKey] = []
     description: Optional[str] = None
+    is_partition_child: bool = False
+    partition_parent: Optional[str] = None
+    row_count: Optional[int] = None  # approximate, from pg_stat_user_tables
 
 
 class Schema(BaseModel):
@@ -35,6 +38,19 @@ class BusinessContext(BaseModel):
     goals: list[str]  # revenue_reporting, cohort_analysis
     temporal: str = "historical"  # snapshot, historical, both
     grain: str = "transaction"  # transaction, daily, monthly
+
+
+class IndirectKey(BaseModel):
+    """A dimension key reachable via 2-hop FK traversal from the fact source table.
+
+    Rendered as a LEFT JOIN in the fact SQL so downstream Gold models can
+    group by the dimension without requiring a multi-hop JOIN at query time.
+    """
+    column_alias: str   # name in the fact SELECT (e.g. "film_id")
+    join_table: str     # intermediate table to JOIN through (e.g. "inventory")
+    join_on: str        # FK column on the source fact table (e.g. "inventory_id")
+    join_pk: str        # PK column on the intermediate table (e.g. "inventory_id")
+    source_col: str     # column on the intermediate table to bring in (e.g. "film_id")
 
 
 class DimensionPlan(BaseModel):
@@ -64,6 +80,11 @@ class FactPlan(BaseModel):
     derived_measures: list[DerivedMeasure] = []  # computed columns: expression AS name
     date_column: str
     factless: bool = False  # True when fact has no measures (factless fact table)
+    indirect_keys: list[IndirectKey] = []  # dimension keys via 2-hop FK (set by pipeline, not LLM)
+    extra_date_columns: list[str] = []  # non-primary business event dates auto-detected from source
+                                        # (e.g. order_approved_at, order_delivered_date alongside
+                                        # the primary date_column). Never set by LLM — populated by
+                                        # _sanitize_plan from the schema and injected into the fact SELECT.
 
 
 class MetricDefinition(BaseModel):
@@ -99,6 +120,13 @@ class IndustryInference(BaseModel):
     confidence: int  # 1, 2, or 3
     reasoning: str
     needs_clarification: bool
+
+    @field_validator('business_type', 'industry', mode='before')
+    @classmethod
+    def coerce_list_to_str(cls, v: object) -> str:
+        if isinstance(v, list):
+            return '/'.join(str(x) for x in v)
+        return v
 
 
 class MetricsSuggestion(BaseModel):
