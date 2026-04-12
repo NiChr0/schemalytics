@@ -1,6 +1,6 @@
 # Getting Started
 
-This guide walks through a complete first run against the Northwind sample database.
+This guide walks through a complete first run of Schemalytics against a PostgreSQL database.
 
 ---
 
@@ -9,13 +9,9 @@ This guide walks through a complete first run against the Northwind sample datab
 ```bash
 # Start Ollama (if not already running)
 ollama serve
-
-# Start the test database (optional — use your own PostgreSQL instead)
-docker run -d \
-  -p 5432:5432 \
-  -e POSTGRES_PASSWORD=postgres \
-  ghcr.io/nichr0/northwind-postgres:latest
 ```
+
+Have a PostgreSQL connection string ready — point it at any database you have access to.
 
 ---
 
@@ -23,9 +19,9 @@ docker run -d \
 
 ```bash
 schemalytics generate \
-  -c postgresql://postgres:mypassword@localhost:5432/northwind \
-  -o ./northwind_dbt \
-  -n northwind
+  -c postgresql://user:password@localhost:5432/mydb \
+  -o ./my_dbt_project \
+  -n my_project
 ```
 
 ---

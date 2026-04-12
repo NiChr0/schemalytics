@@ -34,7 +34,7 @@ pip install schemalytics
 **2. Generate semantic layer + dbt project**
 ```bash
 schemalytics generate \
-  -c postgresql://localhost/mydb \
+  -c postgresql://user:password@localhost/mydb \
   -o ./dbt_project
 ```
 

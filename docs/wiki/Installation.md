@@ -83,21 +83,6 @@ The `[dev]` extras install `pytest`, `pytest-cov`, and `ruff`.
 
 ---
 
-## Test Database (optional)
-
-For testing without a real database, use the Northwind sample database via Docker:
-
-```bash
-docker run -d \
-  -p 5432:5432 \
-  -e POSTGRES_PASSWORD=postgres \
-  ghcr.io/nichr0/northwind-postgres:latest
-```
-
-Connection string: `postgresql://postgres:mypassword@localhost:5432/northwind`
-
----
-
 ## Checklist
 
 - [ ] Python 3.10+ installed
@@ -107,6 +92,6 @@ Connection string: `postgresql://postgres:mypassword@localhost:5432/northwind`
 - [ ] `ollama list` shows `nichr0/schemalytics-classification-agent` (Agent 3)
 - [ ] `ollama list` shows `nichr0/schemalytics-silver-agent` (Agent 4a)
 - [ ] `ollama list` shows `nichr0/schemalytics-gold-agent` (Agent 4b)
-- [ ] PostgreSQL database accessible
+- [ ] PostgreSQL connection string ready
 
 Once all checked, proceed to [Getting Started](Getting-Started).
