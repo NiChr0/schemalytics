@@ -1,5 +1,5 @@
 """Extract schema from PostgreSQL using SQLAlchemy."""
-from sqlalchemy import create_engine, inspect
+from sqlalchemy import create_engine, inspect, text
 from schemalytics.models import Schema, Table, Column, ForeignKey
 
 # PostgreSQL system schemas to always exclude.
@@ -19,6 +19,39 @@ def extract_schema(connection_string: str) -> Schema:
         s for s in inspector.get_schema_names()
         if s not in _SYSTEM_SCHEMAS and not s.startswith("pg_")
     ]
+
+    # Detect PostgreSQL declarative partition children via pg_inherits.
+    # Maps child_table_name → parent_table_name for all user-schema partitions.
+    # Wrapped in try/except so non-PG databases or restricted permissions don't crash.
+    partition_children: dict[str, str] = {}
+    try:
+        with engine.connect() as _conn:
+            _rows = _conn.execute(text("""
+                SELECT c.relname AS child, p.relname AS parent
+                FROM pg_inherits
+                JOIN pg_class c ON inhrelid  = c.oid
+                JOIN pg_class p ON inhparent = p.oid
+                JOIN pg_namespace cn ON c.relnamespace = cn.oid
+                WHERE cn.nspname NOT IN ('pg_catalog', 'information_schema')
+                  AND cn.nspname NOT LIKE 'pg_%'
+            """))
+            partition_children = {row.child: row.parent for row in _rows}
+    except Exception:
+        pass
+
+    # Collect approximate row counts from pg_stat_user_tables in a single query.
+    # n_live_tup is maintained by AUTOVACUUM — fast and accurate enough for classification.
+    row_counts: dict[tuple[str, str], int] = {}
+    try:
+        with engine.connect() as _conn:
+            _rows = _conn.execute(text("""
+                SELECT schemaname, relname, n_live_tup
+                FROM pg_stat_user_tables
+            """))
+            for row in _rows:
+                row_counts[(row.schemaname, row.relname)] = int(row.n_live_tup)
+    except Exception:
+        pass
 
     tables = []
     skipped_cols: list[tuple[str, str, str]] = []
@@ -63,6 +96,9 @@ def extract_schema(connection_string: str) -> Schema:
                 columns=columns,
                 primary_key=primary_key,
                 foreign_keys=foreign_keys,
+                is_partition_child=table_name in partition_children,
+                partition_parent=partition_children.get(table_name),
+                row_count=row_counts.get((schema_name, table_name)),
             ))
 
     if skipped_cols:

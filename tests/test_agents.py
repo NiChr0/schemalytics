@@ -460,3 +460,75 @@ def test_refine_modeling_plan_passes_feedback_in_prompt(
     call_kwargs = mock_qs.call_args
     user_arg = call_kwargs[1]["user"] if call_kwargs[1] else call_kwargs[0][1]
     assert "B2B and B2C" in user_arg
+
+
+# ── _check_finetuned_models tests ─────────────────────────────────────────────
+
+class _FakeRun:
+    """Minimal stand-in for subprocess.CompletedProcess."""
+    def __init__(self, stdout: str, returncode: int = 0):
+        self.stdout = stdout
+        self.returncode = returncode
+
+
+def test_check_finetuned_models_all_present(monkeypatch: pytest.MonkeyPatch) -> None:
+    """No prompt or warning when all three fine-tuned models appear in ollama list."""
+    import schemalytics.planner as planner_module
+
+    monkeypatch.setenv("SCHEMALYTICS_LLM_PROVIDER", "ollama")
+    ollama_output = (
+        "nichr0/schemalytics-classification-agent  latest  abc123  1.2 GB\n"
+        "nichr0/schemalytics-silver-agent           latest  def456  1.2 GB\n"
+        "nichr0/schemalytics-gold-agent             latest  ghi789  1.2 GB\n"
+    )
+    monkeypatch.setattr(
+        planner_module.subprocess, "run",
+        lambda *a, **kw: _FakeRun(ollama_output),
+    )
+    planner_module._check_finetuned_models()  # must not raise
+
+
+def test_check_finetuned_models_missing_warns_and_continues(
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture,
+) -> None:
+    """Prints warning with pull command when a model is missing; patches globals to base model on 'y'."""
+    import schemalytics.planner as planner_module
+    import schemalytics.llm as llm_module
+
+    monkeypatch.setenv("SCHEMALYTICS_LLM_PROVIDER", "ollama")
+    monkeypatch.setattr(
+        planner_module.subprocess, "run",
+        lambda *a, **kw: _FakeRun(""),  # empty — nothing pulled
+    )
+    monkeypatch.setattr("builtins.input", lambda _: "y")
+    # Protect globals from permanent mutation across tests
+    monkeypatch.setattr(planner_module, "_AGENT3_MODEL",  planner_module._AGENT3_MODEL)
+    monkeypatch.setattr(planner_module, "_AGENT4A_MODEL", planner_module._AGENT4A_MODEL)
+    monkeypatch.setattr(planner_module, "_AGENT4B_MODEL", planner_module._AGENT4B_MODEL)
+
+    planner_module._check_finetuned_models()
+
+    captured = capsys.readouterr()
+    assert "ollama pull nichr0/schemalytics-classification-agent" in captured.out
+    assert "ollama pull nichr0/schemalytics-silver-agent" in captured.out
+    assert "ollama pull nichr0/schemalytics-gold-agent" in captured.out
+
+    assert planner_module._AGENT3_MODEL  == llm_module.OLLAMA_DEFAULT_MODEL
+    assert planner_module._AGENT4A_MODEL == llm_module.OLLAMA_DEFAULT_MODEL
+    assert planner_module._AGENT4B_MODEL == llm_module.OLLAMA_DEFAULT_MODEL
+
+
+def test_check_finetuned_models_abort_on_n(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Raises SystemExit(1) when the user answers 'n'."""
+    import schemalytics.planner as planner_module
+
+    monkeypatch.setenv("SCHEMALYTICS_LLM_PROVIDER", "ollama")
+    monkeypatch.setattr(
+        planner_module.subprocess, "run",
+        lambda *a, **kw: _FakeRun(""),
+    )
+    monkeypatch.setattr("builtins.input", lambda _: "n")
+
+    with pytest.raises(SystemExit):
+        planner_module._check_finetuned_models()

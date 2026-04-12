@@ -51,9 +51,6 @@ GOLD_AGGREGATE_TEMPLATE = """-- Gold: {{ name }}
 
 select
     date_trunc('{{ grain_func }}', {{ date_column }}) as {{ grain }}_date,
-    {% for dim in dimensions %}
-    {{ dim }},
-    {% endfor %}
     {% for metric in metrics %}
     {% if metric.aggregation == 'COUNT_DISTINCT' %}
     count(distinct {{ metric.column }}) as {{ metric.name }}{% if not loop.last %},{% endif %}
@@ -64,7 +61,7 @@ select
     {% endif %}
     {% endfor %}
 from {{ ref(source_fact) }}
-group by 1{% for i in range(dimensions|length) %}, {{ i + 2 }}{% endfor %}
+group by 1
 """
 
 DBT_PROJECT_TEMPLATE = """name: '{{ project_name }}'
@@ -134,7 +131,7 @@ models:
         tests:
           - unique
           - not_null
-{% for col in dim.columns[:10] %}
+{% for col in dim.columns %}
       - name: {{ col }}
         description: "{{ col.replace('_', ' ').title() }}"
 {% endfor %}
@@ -198,6 +195,10 @@ models:
 {% for dm in fact.derived_measures %}
       - name: {{ dm.name }}
         description: "Derived: {{ dm.expression }}"
+{% endfor %}
+{% for ik in fact.indirect_keys %}
+      - name: {{ ik.column_alias }}
+        description: "Dimension key via {{ ik.join_table }}.{{ ik.source_col }} (2-hop FK)"
 {% endfor %}
 {% endfor %}
 """
@@ -296,7 +297,7 @@ metrics:
         source_column: {{ metric.column }}
         data_type: "{{ 'INTEGER' if metric.aggregation == 'COUNT' else 'NUMERIC' }}"
         description: {{ metric.description }}
-        sql_formula: "{{ metric.aggregation }}({{ metric.column }})"
+        sql_formula: "{% if metric.aggregation == 'COUNT' %}COUNT(*){% else %}{{ metric.aggregation }}({{ metric.column }}){% endif %}"
         null_handling: "NULLs are excluded from aggregations"
         use_cases:
 {% if 'revenue' in metric.name.lower() %}
@@ -317,20 +318,14 @@ metrics:
 {% endif %}
         example_queries:
           - description: "Get {{ metric.name }} for last 30 days"
-            sql: "SELECT {{ gold.grain }}_date, {{ metric.name }} FROM {{ gold.name }} WHERE {{ gold.date_column }} >= CURRENT_DATE - 30 ORDER BY {{ gold.grain }}_date"
+            sql: "SELECT {{ gold.grain }}_date, {{ metric.name }} FROM {{ gold.name }} WHERE {{ gold.grain }}_date >= CURRENT_DATE - 30 ORDER BY {{ gold.grain }}_date"
           - description: "Compare {{ metric.name }} month-over-month"
             sql: "SELECT {{ gold.grain }}_date, {{ metric.name }}, LAG({{ metric.name }}) OVER (ORDER BY {{ gold.grain }}_date) as previous_period FROM {{ gold.name }}"
 {% endfor %}
     
     time_column: {{ gold.date_column }}
     dimensions:
-{% if gold.dimensions %}
-{% for dim in gold.dimensions %}
-      - {{ dim }}
-{% endfor %}
-{% else %}
       - "time ({{ gold.grain }})"
-{% endif %}
     
     common_filters:
       - "WHERE {{ gold.grain }}_date >= CURRENT_DATE - INTERVAL '30 days'"
@@ -398,18 +393,32 @@ facts:
         type: "Numeric - can be aggregated"
         typical_aggregations: [SUM, AVG, MIN, MAX, COUNT]
 {% endfor %}
-    
+{% for dm in fact.derived_measures %}
+      - name: {{ dm.name }}
+        type: "Derived - computed as: {{ dm.expression }}"
+        typical_aggregations: [SUM, AVG, MIN, MAX]
+{% endfor %}
+
     dimension_keys:
 {% for dk in fact.dimension_keys %}
       - {{ dk }}
 {% endfor %}
-    
+{% if fact.indirect_keys %}
+    indirect_keys:
+{% for ik in fact.indirect_keys %}
+      - {{ ik.column_alias }}  # via {{ ik.join_table }}.{{ ik.source_col }}
+{% endfor %}
+{% endif %}
+
     relationships:
 {% for dk in fact.dimension_keys %}
+{% set dim_ref = fk_to_dim_map.get(dk) %}
+{% if dim_ref %}
       - foreign_key: {{ dk }}
-        references: "dim_{{ dk.replace('_id', '') if dk.endswith('_id') else dk }}"
+        references: "{{ dim_ref }}"
         cardinality: "many-to-one"
-        description: "Each {{ fact.source_table }} record links to one {{ dk.replace('_id', '') }}"
+        description: "Each {{ fact.source_table }} record links to one {{ dk[:-3] if dk.endswith('_id') else dk }}"
+{% endif %}
 {% endfor %}
     
     typical_use_cases:
@@ -425,11 +434,14 @@ facts:
 {% endfor %}
       FROM {{ fact.name }} f
 {% for dk in fact.dimension_keys[:3] %}
-      LEFT JOIN dim_{{ dk.replace('_id', '') if dk.endswith('_id') else dk }} d_{{ loop.index }} 
+{% set dim_name = fk_to_dim_map.get(dk) %}
+{% if dim_name %}
+      LEFT JOIN {{ dim_name }} d_{{ loop.index }}
         ON f.{{ dk }} = d_{{ loop.index }}.{{ dk }}
+{% endif %}
 {% endfor %}
-      WHERE f.{{ fact.date_column }} >= CURRENT_DATE - 30
-    
+{% if fact.date_column %}      WHERE f.{{ fact.date_column }} >= CURRENT_DATE - 30{% else %}      -- TODO: add date filter (no date column on this fact){% endif %}
+
 {% endfor %}
 
 # =============================================================================
@@ -438,11 +450,14 @@ facts:
 relationships:
 {% for fact in facts %}
 {% for dk in fact.dimension_keys %}
+{% set dim_name = fk_to_dim_map.get(dk) %}
+{% if dim_name %}
   - from_table: {{ fact.name }}
-    to_table: dim_{{ dk.replace('_id', '') if dk.endswith('_id') else dk }}
+    to_table: {{ dim_name }}
     relationship_type: many-to-one
-    join_condition: "{{ fact.name }}.{{ dk }} = dim_{{ dk.replace('_id', '') if dk.endswith('_id') else dk }}.{{ dk }}"
-    description: "Multiple {{ fact.source_table }} records can reference the same {{ dk.replace('_id', '') }}"
+    join_condition: "{{ fact.name }}.{{ dk }} = {{ dim_name }}.{{ dk }}"
+    description: "Multiple {{ fact.source_table }} records can reference the same {{ dk[:-3] if dk.endswith('_id') else dk }}"
+{% endif %}
 {% endfor %}
 {% endfor %}
 
@@ -462,11 +477,15 @@ join_paths:
 # BUSINESS GLOSSARY
 # =============================================================================
 glossary:
-{% for fact in facts %}
+{% for fact in facts if fact.date_column %}
   {{ fact.date_column }}: "Primary timestamp for {{ fact.source_table }} - use for time-based filtering and grouping"
 {% endfor %}
+{% set ns = namespace(seen_grains=[]) %}
 {% for gold in gold_models %}
+{% if gold.grain not in ns.seen_grains %}
   {{ gold.grain }}_grain: "Data aggregated at {{ gold.grain }} level - one row per {{ gold.grain }}"
+{% set ns.seen_grains = ns.seen_grains + [gold.grain] %}
+{% endif %}
 {% endfor %}
   
 common_terms:

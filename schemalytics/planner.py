@@ -1,9 +1,15 @@
 """Agentic pipeline: five focused agents for schema-to-dbt planning."""
 from __future__ import annotations
 
+import os
+import subprocess
 from datetime import datetime
 
 import re as _re
+
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table as _RichTable
 
 from schemalytics import llm
 from schemalytics.models import (
@@ -11,7 +17,9 @@ from schemalytics.models import (
     DimensionPlan,
     FactPlan,
     GoldPlan,
+    IndirectKey,
     IndustryInference,
+    MetricDefinition,
     MetricsSuggestion,
     ModelingPlan,
     PipelineContext,
@@ -24,6 +32,16 @@ from schemalytics.models import (
 def _ts() -> str:
     """Current wall-clock time as HH:MM:SS for inline progress stamps."""
     return datetime.now().strftime('%H:%M:%S')
+
+
+console = Console()
+
+
+# ── Per-agent model selection ──────────────────────────────────────────────────
+# Fine-tuned models are the defaults. Override via env var for ablation testing.
+_AGENT3_MODEL  = os.environ.get("SCHEMALYTICS_AGENT3_MODEL",  "nichr0/schemalytics-classification-agent")
+_AGENT4A_MODEL = os.environ.get("SCHEMALYTICS_AGENT4A_MODEL", "nichr0/schemalytics-silver-agent")
+_AGENT4B_MODEL = os.environ.get("SCHEMALYTICS_AGENT4B_MODEL", "nichr0/schemalytics-gold-agent")
 
 
 # ── FK Graph Heuristics ────────────────────────────────────────────────────────
@@ -171,6 +189,33 @@ def _compact_schema_summary(schema: Schema) -> str:
     for t in schema.tables:
         cols = ", ".join(c.name for c in t.columns[:12])
         lines.append(f"  {t.name}({cols})")
+    return "\n".join(lines)
+
+
+def _fmt_row_count(n: int | None) -> str:
+    """Format a row count as a compact human-readable string."""
+    if n is None:
+        return ""
+    if n >= 1_000_000:
+        return f" [{n/1_000_000:.1f}M rows]"
+    if n >= 1_000:
+        return f" [{n/1_000:.1f}K rows]"
+    return f" [{n} rows]"
+
+
+def _agent3_schema_fmt(tables: list) -> str:
+    """Schema format matching Agent 3 training data: col→ref_table inline for FK columns.
+
+    Row counts (from pg_stat_user_tables) are appended when available so the
+    classifier can distinguish high-volume fact tables from low-cardinality dimensions.
+    """
+    lines = []
+    for t in tables:
+        fk_map = {fk.column: fk.references_table for fk in t.foreign_keys}
+        col_parts = []
+        for c in t.columns[:12]:
+            col_parts.append(f"{c.name}→{fk_map[c.name]}" if c.name in fk_map else c.name)
+        lines.append(f"  {t.name}{_fmt_row_count(t.row_count)}({', '.join(col_parts)})")
     return "\n".join(lines)
 
 
@@ -363,14 +408,20 @@ Additional examples (AdventureWorks-style schema):
     reason: records manufacturing event; has dates + quantity measures
   businessentityaddress(businessentityid→entity, addressid→address, addresstypeid→addresstype) → BRIDGE
     reason: pure association table; no numeric measures, no transaction date
+  assigned_to(patient_id→patient, dept_id→department, date_assign, date_release, room_num) → FACT
+    reason: has transaction dates (date_assign, date_release) + numeric measure (room_num); NOT a bridge despite 2 FKs
+  works_for(doctor_id→doctor, dept_id→department) → BRIDGE
+    reason: exactly 2 FK columns, no dates, no measures — pure M:M resolver
+  enrollment(student_id→student, course_id→course, enroll_date, grade) → FACT
+    reason: has event date + numeric measure (grade); association tables with dates/measures are facts
 
 Output format: keep each `reasoning` to ≤8 words.
 """
 
 
 _AGENT3_BATCH_SIZE = 20
-# ~150 output tokens per table + small buffer; stays well within num_ctx=12288.
-_AGENT3_MAX_TOKENS_PER_BATCH = _AGENT3_BATCH_SIZE * 150 + 256
+# ~300 output tokens per table (fine-tuned model is more verbose than base) + buffer.
+_AGENT3_MAX_TOKENS_PER_BATCH = _AGENT3_BATCH_SIZE * 300 + 512
 
 
 def classify_tables(
@@ -385,26 +436,20 @@ def classify_tables(
     ~20 tables at a time. This keeps output tokens predictable regardless of
     schema size and avoids the retry storm caused by truncated JSON.
     """
-    heuristics = classify_by_fk_graph(schema)
+    # Separate partition children — they inherit the parent's role automatically
+    # and must not be included in LLM batches (they'd inflate counts and confuse Agent 3).
+    partition_child_names = {t.name for t in schema.tables if t.is_partition_child}
+    regular_tables = [t for t in schema.tables if not t.is_partition_child]
 
-    # Shared context sent in every batch call.
-    base_context = (
-        f"Database schema:\n{_compact_schema_summary(schema)}\n\n"
-        f"Heuristic pre-classifications:\n{_heuristic_summary(heuristics)}\n\n"
-        f"Business context:\n"
-        f"  Industry: {context.industry} / {context.business_type}\n"
-        f"  Metrics:  {', '.join(context.metrics)}\n"
-        f"  Goals:    {', '.join(context.goals)}"
-    )
-    if user_feedback:
-        base_context += f"\n\nUser correction / clarification: {user_feedback}"
+    from schemalytics.models import Schema as _Schema
+    heuristics = classify_by_fk_graph(_Schema(tables=regular_tables))
 
     from pydantic import BaseModel as _BaseModel
 
     class _ClassificationList(_BaseModel):
         classifications: list[TableClassificationResult]
 
-    all_tables = schema.tables
+    all_tables = regular_tables
     batches = [
         all_tables[i : i + _AGENT3_BATCH_SIZE]
         for i in range(0, len(all_tables), _AGENT3_BATCH_SIZE)
@@ -415,12 +460,26 @@ def classify_tables(
     for idx, batch in enumerate(batches, start=1):
         batch_names = [t.name for t in batch]
         if n_batches > 1:
-            print(f"  [Agent 3] batch {idx}/{n_batches}: {batch_names}")
+            console.print(f"  [dim][Agent 3] batch {idx}/{n_batches}: {batch_names}[/]")
+
+        # Use schema format matching training data: col→ref_table inline.
+        # For multi-batch, send only the batch tables so output length stays predictable.
+        tables_for_batch = batch if n_batches > 1 else all_tables
+        heuristics_for_batch = (
+            [h for h in heuristics if h.table.name in {t.name for t in batch}]
+            if n_batches > 1 else heuristics
+        )
+        business_ctx = (
+            f"Business context: {context.industry} / {context.business_type}."
+            + (f" Key metrics: {', '.join(context.metrics[:5])}." if context.metrics else "")
+        )
+        if user_feedback:
+            business_ctx += f"\n\nUser correction / clarification: {user_feedback}"
 
         user_msg = (
-            base_context
-            + f"\n\nClassify ONLY these {len(batch_names)} tables "
-            f"(skip all others): {batch_names}"
+            f"Database schema:\n{_agent3_schema_fmt(tables_for_batch)}\n\n"
+            f"Heuristic pre-classifications:\n{_heuristic_summary(heuristics_for_batch)}\n\n"
+            f"{business_ctx}"
         )
 
         result = llm.query_structured(
@@ -428,12 +487,55 @@ def classify_tables(
             user=user_msg,
             response_model=_ClassificationList,
             max_tokens=_AGENT3_MAX_TOKENS_PER_BATCH,
+            model=_AGENT3_MODEL,
         )
         all_classifications.extend(result.classifications)
 
     # Normalize role to lowercase — LLMs sometimes return "Fact", "Dimension", etc.
     for c in all_classifications:
         c.role = c.role.lower()
+
+    # Hard override: a table classified as bridge or reference that has BOTH a
+    # business-event date column AND a numeric non-FK column is always a fact.
+    # This corrects Agent 3's tendency to call junction-with-events tables like
+    # assigned_to(patient_id, dept_id, date_assign, date_release, room_num) a bridge
+    # even though rules 3 & 4 explicitly say otherwise.
+    _tbl_lookup = {t.name: t for t in schema.tables}
+    for c in all_classifications:
+        if c.role in ("bridge", "reference"):
+            tbl = _tbl_lookup.get(c.table_name)
+            if tbl and _has_transaction_date(tbl):
+                fk_cols = {fk.column for fk in tbl.foreign_keys}
+                pk_cols = set(tbl.primary_key or [])
+                _numeric_tokens = ("int", "num", "decimal", "float", "money", "real", "double")
+                has_numeric = any(
+                    col.name not in fk_cols
+                    and col.name not in pk_cols
+                    and any(tok in col.data_type.lower() for tok in _numeric_tokens)
+                    for col in tbl.columns
+                )
+                if has_numeric:
+                    old_role = c.role
+                    c.role = "fact"
+                    c.confidence = 3
+                    c.reasoning = (
+                        f"Hard override (was {old_role}): has business date + numeric measure"
+                    )
+                    c.needs_clarification = False
+
+    # Auto-assign partition children the same role as their parent.
+    classified_roles = {c.table_name: c.role for c in all_classifications}
+    for t in schema.tables:
+        if t.is_partition_child and t.name not in classified_roles:
+            parent_role = classified_roles.get(t.partition_parent or "", "fact")
+            all_classifications.append(TableClassificationResult(
+                table_name=t.name,
+                role=parent_role,
+                confidence=3,
+                reasoning=f"Partition child of {t.partition_parent} — inherits parent role",
+                needs_clarification=False,
+            ))
+
     return all_classifications
 
 
@@ -448,21 +550,74 @@ def _handle_confidence(
 ) -> str | None:
     """Print result, ask user for input if confidence < 3. Returns user text or None."""
     if confidence == 3 and not needs_clarification:
-        print(f"  Detected: {result_description}")
-        print(f"  Reasoning: {reasoning}")
+        console.print(f"  [green]Detected:[/] {result_description}")
+        console.print(f"  [dim]Reasoning: {reasoning}[/]")
         return None
 
     if confidence == 1:
-        print(f"\n  Low confidence: {result_description}")
-        print(f"  Reason: {reasoning}")
+        console.print(f"\n  [red]Low confidence:[/] {result_description}")
+        console.print(f"  [dim]Reason: {reasoning}[/]")
     else:
-        print(f"\n  Moderate confidence: {result_description}")
-        print(f"  Reason: {reasoning}")
+        console.print(f"\n  [yellow]Moderate confidence:[/] {result_description}")
+        console.print(f"  [dim]Reason: {reasoning}[/]")
 
     return input(f"  {prompt_text} (press Enter to accept): ").strip() or None
 
 
 # ── Summary Gate ──────────────────────────────────────────────────────────────
+
+_ROLE_KEYWORDS: dict[str, list[str]] = {
+    "fact": ["fact", "facts"],
+    "dimension": ["dimension", "dimensions", "dim"],
+    "bridge": ["bridge", "bridges", "junction"],
+    "reference": ["reference", "lookup"],
+}
+
+
+def _parse_role_overrides(correction: str, schema: Schema) -> dict[str, str]:
+    """Extract explicit table→role overrides from a correction string.
+
+    For each table name found in the correction, scan the surrounding text for
+    role keywords. Returns a mapping of table_name → role for any tables where
+    an unambiguous role is stated.
+    """
+    known_tables = {t.name.lower(): t.name for t in schema.tables}
+    text = correction.lower()
+    overrides: dict[str, str] = {}
+
+    for table_lower, table_name in known_tables.items():
+        if table_lower not in text:
+            continue
+        for role, keywords in _ROLE_KEYWORDS.items():
+            if any(kw in text for kw in keywords):
+                overrides[table_name] = role
+                break
+
+    return overrides
+
+
+def _apply_overrides(
+    classifications: list[TableClassificationResult],
+    overrides: dict[str, str],
+    correction: str,
+) -> list[TableClassificationResult]:
+    """Hard-apply explicit user overrides on top of existing classifications."""
+    result = []
+    for cls in classifications:
+        if cls.table_name in overrides:
+            result.append(
+                TableClassificationResult(
+                    table_name=cls.table_name,
+                    role=overrides[cls.table_name],
+                    confidence=3,
+                    reasoning=f"User override: {correction}",
+                    needs_clarification=False,
+                )
+            )
+        else:
+            result.append(cls)
+    return result
+
 
 def _print_summary_gate(context: PipelineContext) -> str | None:
     """Print the consolidated summary and collect user corrections. Returns correction or None."""
@@ -471,24 +626,25 @@ def _print_summary_gate(context: PipelineContext) -> str | None:
     bridges = [c.table_name for c in context.table_classifications if c.role == "bridge"]
     refs = [c.table_name for c in context.table_classifications if c.role == "reference"]
 
-    print("\n" + "━" * 64)
-    print("INFERRED CONTEXT — please review")
-    print("━" * 64)
-    print(f"Industry:     {context.industry} ({context.business_type})")
-    print(f"Key metrics:  {', '.join(context.metrics)}")
-    print(f"Goals:        {', '.join(context.goals)}")
-    print(f"Grain:        {context.grain}")
-    print()
-    print("Table roles:")
-    print(f"  facts:       {', '.join(facts) or '(none)'}")
-    print(f"  dimensions:  {', '.join(dims) or '(none)'}")
-    print(f"  bridge:      {', '.join(bridges) or '(none)'}")
+    tbl = _RichTable(title="INFERRED CONTEXT — please review", show_header=True, header_style="bold")
+    tbl.add_column("Category", style="bold cyan", min_width=14)
+    tbl.add_column("Value")
+    tbl.add_row("Industry", context.industry)
+    tbl.add_row("Business type", context.business_type)
+    tbl.add_row("Key metrics", ", ".join(context.metrics))
+    tbl.add_row("Goals", ", ".join(context.goals))
+    tbl.add_row("Grain", context.grain)
+    tbl.add_row("Facts", ", ".join(facts) or "(none)")
+    tbl.add_row("Dimensions", ", ".join(dims) or "(none)")
+    tbl.add_row("Bridge", ", ".join(bridges) or "(none)")
     if refs:
-        print(f"  reference:   {', '.join(refs)}")
-    print()
-    correction = input("Anything wrong with the table roles? Enter corrections or press Enter to continue: ").strip()
-    print("━" * 64)
+        tbl.add_row("Reference", ", ".join(refs))
 
+    console.print()
+    console.print(tbl)
+    console.print()
+
+    correction = input("Anything wrong with the table roles? Enter corrections or press Enter to continue: ").strip()
     return correction or None
 
 
@@ -499,17 +655,15 @@ You are a senior data engineer generating the Silver layer of a medallion-archit
 
 Given a schema and pipeline context, produce a plan with:
   - bronze: list of ALL source table names (raw names only, no prefixes)
-  - dimensions: Silver dimension models (dim_<entity>, SCD type 1 or 2)
   - facts: Silver fact models (fct_<entity>)
+
+NOTE: Dimension models are derived automatically from Agent 3 classifications — do NOT output them.
 
 Rules:
   - Every source table must appear in bronze.
-  - source_table in dimensions/facts must match a table name in bronze.
-  - Dimension names: dim_<entity>. Fact names: fct_<entity>.
-  - Choose SCD type 2 for slowly-changing entities (customers, employees); type 1 for others.
+  - Fact names: fct_<entity>. source_table must match a table name in bronze.
   - STRICT: Only create fct_* from tables whose role is "fact". Never create a fact from a
     dimension, bridge, or reference table.
-  - STRICT: `columns` in every DimensionPlan MUST be an empty list []. Do not enumerate columns.
   - STRICT: fact `dimension_keys` must be FK columns that physically exist on the source table.
   - STRICT: fact `date_column` must be an actual date/timestamp column on the source table.
     If no date column exists on the table, look at its FK-referenced tables. If a parent table
@@ -548,6 +702,13 @@ Rules:
   - `source_fact` must be a fact model name from the Silver plan (e.g. "fct_order_details").
   - `dimensions` must be FK column names that physically exist on the source fact table
     (e.g. "customer_id", "product_id") — never use model names like "dim_customer".
+    Include the most analytically useful FK keys (e.g. product, customer, category) so gold
+    models can be sliced by dimension without a join at query time.
+  - CRITICAL: never include a fact's immediate parent entity key as a `dimension`. For example,
+    on fct_order_items the parent entity is "order", so "order_id" must NOT be a dimension —
+    it belongs as a COUNT_DISTINCT metric (e.g. name="order_count", column="order_id",
+    aggregation="COUNT_DISTINCT"). Only use FK columns as dimensions when they point to true
+    lookup dimensions (product, customer, category, status, etc.).
   - `date_column` must be an actual date/timestamp column on the source fact table.
   - `grain` must be one of: "daily", "monthly", "yearly", "weekly".
   - `aggregation` must be one of: SUM, COUNT, COUNT_DISTINCT, AVG, MIN, MAX.
@@ -557,16 +718,18 @@ Rules:
     derived_measures=[name=expression, ...]). Reference their NAME only (e.g. "line_total"),
     not the underlying expression. Expressions in `column` are rejected at validation time
     and will cause the metric to be silently dropped. Never use a FK/dimension key as a metric.
+  - CRITICAL: `column` is the raw physical column name from the fact's `measures` list, NOT a
+    business metric name. If you want metric name="total_revenue" but the fact only has column
+    "freight", write: name="total_revenue", column="freight". Never write column="total_revenue"
+    unless "total_revenue" literally appears in the fact's measures or derived_measures list.
   - `date_column` must be a date/timestamp column physically present on the source fact model
     (including any FK-joined columns that appear in the fact's SELECT). Use "" if none exists.
   - Generate at least ONE gold model for EACH fact table in the Silver plan. Do not produce
     gold models only from the primary sales fact — every fact (purchasing, inventory, HR,
     manufacturing) needs at least one aggregate model.
-  - Use a CONSISTENT revenue formula across all gold models. When a discount column exists
-    (e.g. unitpricediscount), always deduct it: (orderqty * unitprice) - unitpricediscount.
-    Never mix discount and non-discount formulas across models in the same project.
-  - Average Order Value (AOV) must be at ORDER level, not line-item level. Use SUM for
-    total_revenue and COUNT_DISTINCT for order_count; do not use AVG on individual line items.
+  - Use CONSISTENT formulas across all gold models in the same project. If a measure is
+    derived (e.g. from two source columns), use the same derivation everywhere — never mix
+    formula variants for the same concept across models.
   - Use BUSINESS EVENT dates as `date_column` — the date the event occurred (e.g. orderdate,
     duedate, transactiondate). Do NOT use audit timestamps (modifieddate, updated_at, created_at)
     unless no business date exists on the fact.
@@ -576,36 +739,57 @@ Rules:
     fact, purchasing metrics from the purchasing fact, manufacturing from the workorder fact.
     The `measures` and `derived_measures` lists in each fact show exactly what columns are
     available. ONLY reference columns from those lists — do not invent column names.
+  - CRITICAL: metric `name` must reflect the actual column being aggregated, NOT the business
+    goal. If column=freight, name it total_freight or avg_freight_per_order — never
+    total_revenue or customer_sales_volume. The column name is the ground truth; the business
+    context is only for domain awareness.
 """
 
 
 def _display_plan(plan: ModelingPlan) -> None:
     """Print ModelingPlan in human-readable format."""
-    print("\n" + "=" * 64)
-    print("MODELING PLAN")
-    print("=" * 64)
+    console.print()
 
-    print(f"\nBronze ({len(plan.bronze)} tables):")
-    for t in plan.bronze:
-        print(f"  {t}")
+    # Bronze panel — simple bullet list
+    bronze_lines = "\n".join(f"  • {t}" for t in plan.bronze) or "  (none)"
+    console.print(Panel(
+        bronze_lines,
+        title=f"[bold]Bronze[/] ({len(plan.bronze)} tables)",
+        border_style="dim",
+    ))
 
-    print(f"\nSilver Dimensions ({len(plan.dimensions)}):")
+    # Silver panel — dims and facts as labeled items
+    silver_lines = []
     for d in plan.dimensions:
-        print(f"  {d.name}  [SCD{d.scd_type}]  source={d.source_table}  grain={d.grain}")
-
-    print(f"\nSilver Facts ({len(plan.facts)}):")
-    for f in plan.facts:
-        print(
-            f"  {f.name}  source={f.source_table}  grain={f.grain}  "
-            f"date={f.date_column}  measures={f.measures}"
+        silver_lines.append(
+            f"  [cyan]dim[/] {d.name}  "
+            f"[dim]SCD{d.scd_type}  source={d.source_table}  grain={d.grain}[/]"
         )
+    for f in plan.facts:
+        silver_lines.append(
+            f"  [yellow]fct[/] {f.name}  "
+            f"[dim]source={f.source_table}  grain={f.grain}  "
+            f"date={f.date_column}  measures={f.measures}[/]"
+        )
+    console.print(Panel(
+        "\n".join(silver_lines) or "  (none)",
+        title=f"[bold]Silver[/] ({len(plan.dimensions)} dims, {len(plan.facts)} facts)",
+        border_style="yellow",
+    ))
 
-    print(f"\nGold ({len(plan.gold)}):")
+    # Gold panel — labeled items with grain and measures
+    gold_lines = []
     for g in plan.gold:
         metric_names = [m.name for m in g.metrics]
-        print(f"  {g.name}  [{g.grain}]  source={g.source_fact}  metrics={metric_names}")
-
-    print("=" * 64)
+        gold_lines.append(
+            f"  [gold1]{g.name}[/]  "
+            f"[dim][{g.grain}]  source={g.source_fact}  metrics={metric_names}[/]"
+        )
+    console.print(Panel(
+        "\n".join(gold_lines) or "  (none)",
+        title=f"[bold]Gold[/] ({len(plan.gold)} aggregates)",
+        border_style="gold1",
+    ))
 
 
 def _is_sql_expression(s: str) -> bool:
@@ -657,6 +841,43 @@ def _col_is_measure(col) -> bool:
     return False
 
 
+def _schema_summary_agent4a(schema: Schema, context: PipelineContext) -> str:
+    """Schema summary for Agent 4a input.
+
+    Dimensions: one compact line each (name + FK cols only) — columns are
+    auto-filled from schema by _sanitize_plan so the LLM doesn't need them.
+    Facts + others: full column listing with FK annotations.
+    Partition children: skipped — parent entry includes a partition note.
+    """
+    dim_names = {c.table_name for c in context.table_classifications if c.role == "dimension"}
+
+    # Build parent → [child names] map for partition annotation
+    partition_children_of: dict[str, list[str]] = {}
+    for t in schema.tables:
+        if t.is_partition_child and t.partition_parent:
+            partition_children_of.setdefault(t.partition_parent, []).append(t.name)
+
+    lines = []
+    for t in schema.tables:
+        if t.is_partition_child:
+            continue  # covered by parent entry below
+        fks = ", ".join(f"{fk.column}→{fk.references_table}" for fk in t.foreign_keys)
+        if t.name in dim_names:
+            line = f"  {t.name} [dim]"
+            if fks:
+                line += f": fks=[{fks}]"
+        else:
+            cols = ", ".join(c.name for c in t.columns[:15])
+            line = f"  {t.name}: columns=[{cols}]"
+            if fks:
+                line += f", fks=[{fks}]"
+        children = partition_children_of.get(t.name)
+        if children:
+            line += f" [partition parent — {len(children)} partitions; model fact from this table only]"
+        lines.append(line)
+    return "\n".join(lines)
+
+
 def _numeric_cols_hint(schema: Schema, context: PipelineContext) -> str:
     """One-liner per fact table listing only numeric measure-eligible columns.
 
@@ -676,13 +897,120 @@ def _numeric_cols_hint(schema: Schema, context: PipelineContext) -> str:
     return "Numeric columns eligible as measures (use ONLY these in `measures`):\n" + "\n".join(lines)
 
 
+# ── SCD Type Heuristic ────────────────────────────────────────────────────────
+
+# Tables whose names contain these patterns are almost always static reference
+# data — SCD Type 2 on them is unnecessary overhead.
+_SCD1_NAME_PATTERNS = {
+    "country", "city", "language", "category", "type", "status", "code",
+    "region", "zone", "territory", "currency", "unit", "state", "province",
+    "lookup", "reference",
+}
+
+# Tables whose names match these patterns are business entities that genuinely
+# change over time and warrant full SCD Type 2 history.
+_SCD2_NAME_PATTERNS = {
+    "customer", "client", "employee", "staff", "user", "account",
+    "vendor", "supplier", "contact", "person", "partner", "member",
+}
+
+
+def _infer_scd_type(table: Table) -> int:
+    """Determine the appropriate SCD type from table name and column count.
+
+    Returns 2 for business entities (customers, staff, etc.) and 1 for
+    reference/lookup tables or small tables without a compelling change story.
+    Defaults to Type 1 to avoid generating unnecessary snapshots.
+    """
+    name = table.name.lower()
+    if any(p in name for p in _SCD2_NAME_PATTERNS):
+        return 2
+    if any(p in name for p in _SCD1_NAME_PATTERNS):
+        return 1
+    if len(table.columns) <= 6:
+        return 1
+    return 1  # conservative default — avoid snapshot overhead unless justified
+
+
+# ── FK Chain Traversal ────────────────────────────────────────────────────────
+
+# Column names that represent audit/ownership provenance (who created or last
+# touched a row) rather than a meaningful business dimension FK.  These columns
+# frequently point at a staff/user table, which would cause the generator to
+# denormalise "who created this coupon" or "who approved this record" onto every
+# fact that touches that entity — not analytically useful and semantically wrong.
+_INDIRECT_KEY_COL_DENYLIST: frozenset[str] = frozenset({
+    "created_by", "updated_by", "modified_by", "last_updated_by",
+    "created_by_id", "updated_by_id", "modified_by_id",
+    "deleted_by", "deleted_by_id",
+    "approved_by", "approved_by_id",
+    "reviewed_by", "reviewed_by_id",
+    "assigned_to", "assigned_to_id",
+    "owned_by", "owned_by_id",
+})
+
+
+def _compute_indirect_keys(
+    fact: FactPlan,
+    schema_tbl_map: dict[str, Table],
+    role_map: dict[str, str],
+) -> list[IndirectKey]:
+    """Find dimension keys reachable from a fact via 2-hop FK traversal.
+
+    Traverses each FK on the source fact table. If the referenced table is NOT
+    a dimension (e.g. an inventory/junction table), checks its FKs for dimension
+    references. Those second-hop FK columns are returned as IndirectKey objects
+    so the generator can emit LEFT JOINs and include them in the fact SELECT.
+
+    Only adds keys not already present in fact.dimension_keys (no duplicates).
+    """
+    source_tbl = schema_tbl_map.get(fact.source_table)
+    if not source_tbl:
+        return []
+
+    direct_key_cols = set(fact.dimension_keys)
+    seen: set[str] = set(direct_key_cols)
+    indirect: list[IndirectKey] = []
+
+    for fk in source_tbl.foreign_keys:
+        # Traverse ALL FK targets regardless of their role — the intermediate table
+        # may itself be a dimension (e.g. inventory) but still carry transitive FK
+        # columns worth denormalising (film_id, store_id). The `seen` set prevents
+        # adding columns already present in fact.dimension_keys.
+        ref_tbl = schema_tbl_map.get(fk.references_table)
+        if not ref_tbl:
+            continue
+        for hop2_fk in ref_tbl.foreign_keys:
+            if role_map.get(hop2_fk.references_table) != "dimension":
+                continue
+            if hop2_fk.column in seen:
+                continue  # already present or already added
+            # Skip audit/provenance FK columns — they represent who touched a row,
+            # not a meaningful dimensional relationship (e.g. coupon.created_by,
+            # order.updated_by).  Denormalising them into facts produces noise.
+            if hop2_fk.column.lower() in _INDIRECT_KEY_COL_DENYLIST:
+                continue
+            seen.add(hop2_fk.column)
+            indirect.append(IndirectKey(
+                column_alias=hop2_fk.column,
+                join_table=fk.references_table,
+                join_on=fk.column,
+                join_pk=fk.references_column,
+                source_col=hop2_fk.column,
+            ))
+
+    return indirect
+
+
 def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
     """Strip hallucinated column names from the plan; only keep columns that exist in the source table."""
     col_map: dict[str, set[str]] = {t.name: {c.name for c in t.columns} for t in schema.tables}
+    table_obj_map: dict[str, Table] = {t.name: t for t in schema.tables}
 
     # Sanitize dimension column lists; auto-fill from schema when LLM left them empty.
     sanitized_dims = []
     for dim in plan.dimensions:
+        source_tbl_obj = table_obj_map.get(dim.source_table)
         cols = col_map.get(dim.source_table, set())
         valid_cols = [c for c in dim.columns if not cols or c in cols]
         if not valid_cols and cols:
@@ -695,9 +1023,13 @@ def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
         # returned by the LLM or appearing in the schema extraction result.
         seen: set[str] = set()
         deduped = [c for c in (valid_cols or dim.columns) if not (c in seen or seen.add(c))]  # type: ignore[func-returns-value]
+        # Override LLM's SCD type with deterministic heuristic — the fine-tuned
+        # model tends to return Type 2 for everything; the heuristic applies
+        # Type 2 only to genuine business entities (customers, staff, etc.).
+        scd_type = _infer_scd_type(source_tbl_obj) if source_tbl_obj else dim.scd_type
         sanitized_dims.append(
             DimensionPlan(name=dim.name, source_table=dim.source_table,
-                          scd_type=dim.scd_type, grain=dim.grain,
+                          scd_type=scd_type, grain=dim.grain,
                           columns=deduped)
         )
 
@@ -717,6 +1049,24 @@ def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
                 if c.data_type.lower() in _DATE_COLUMN_TYPES:
                     date_col = c.name
                     break
+
+        # ── 1b. extra business event dates ───────────────────────────────────
+        # Scan the source table for additional non-audit timestamp/date columns
+        # beyond the primary date_col.  These are genuine business event dates
+        # (e.g. order_approved_at, order_delivered_customer_date) that should
+        # appear in the fact SELECT so analysts can do delivery-time analytics
+        # without rejoining the source.  Audit timestamps (created_at, updated_at
+        # etc.) are excluded — they are system metadata, not event signals.
+        extra_dates: list[str] = []
+        if source_tbl:
+            for _c in source_tbl.columns:
+                if _c.data_type.lower() not in _DATE_COLUMN_TYPES:
+                    continue
+                if _c.name.lower() in _AUDIT_TIMESTAMP_NAMES:
+                    continue
+                if _c.name == date_col:
+                    continue  # already the primary date
+                extra_dates.append(_c.name)
 
         # ── 2. dimension_keys — must be FK columns only ───────────────────────
         # Non-FK numeric columns in dimension_keys are misclassifications by Agent 4.
@@ -749,11 +1099,16 @@ def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
 
         # ── 3b. derived_measures — validate expression column refs exist ───────
         valid_derived: list[DerivedMeasure] = []
+        seen_exprs: set[str] = set()
         for dm in fact.derived_measures:
             refs = _extract_expression_col_refs(dm.expression)
-            if refs.issubset(cols):
-                valid_derived.append(dm)
-            # else: drop — expression references non-existent columns
+            if not refs.issubset(cols):
+                continue  # drop — expression references non-existent columns
+            normalized = dm.expression.replace(" ", "").lower()
+            if normalized in seen_exprs:
+                continue  # drop — duplicate expression (different name, same formula)
+            seen_exprs.add(normalized)
+            valid_derived.append(dm)
 
         # ── 4. auto-fill measures when LLM returned none ──────────────────────
         # Uses name+type heuristic (_col_is_measure) instead of type alone,
@@ -776,8 +1131,13 @@ def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
                      dimension_keys=dim_keys or fact.dimension_keys,
                      measures=measures,
                      derived_measures=valid_derived,
-                     date_column=date_col or fact.date_column,
-                     factless=is_factless)
+                     # Never fall back to fact.date_column if sanitization cleared it — that column
+                     # was cleared because it doesn't exist on the source table. An empty date_col
+                     # here means the generator's Fix-C will locate a date via FK-joined parent.
+                     date_column=date_col,
+                     factless=is_factless,
+                     indirect_keys=fact.indirect_keys,  # pass through — computed outside sanitize
+                     extra_date_columns=extra_dates)
         )
 
     # Build the fact model column set — what each fact model actually SELECTs.
@@ -792,6 +1152,8 @@ def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
             | set(f.measures)
             | {dm.name for dm in f.derived_measures}
             | ({f.date_column} if f.date_column else set())
+            | {ik.column_alias for ik in f.indirect_keys}
+            | set(f.extra_date_columns)
         )
         for f in sanitized_facts
     }
@@ -828,7 +1190,25 @@ def _sanitize_plan(plan: ModelingPlan, schema: Schema) -> ModelingPlan:
                 valid_metrics.append(m)
             # else: bare column not in fact model — silently drop
         if not valid_metrics:
-            continue  # no usable metrics — drop the whole model
+            # Fallback: if the model has exactly one numeric measure available, remap all
+            # metrics to it. This handles the common case where the fine-tuned model uses
+            # a semantic name (e.g. "total_revenue") instead of the raw column (e.g. "freight").
+            source_fact_plan = next((f for f in sanitized_facts if f.name == gold.source_fact), None)
+            fact_measures = (
+                [m for m in source_fact_plan.measures]
+                + [dm.name for dm in source_fact_plan.derived_measures]
+            ) if source_fact_plan else []
+            numeric_measures = [c for c in fact_measures if c in model_cols]
+            if len(numeric_measures) == 1:
+                fallback_col = numeric_measures[0]
+                for m in gold.metrics:
+                    if not _is_sql_expression(m.column) and m.column != "*":
+                        valid_metrics.append(
+                            MetricDefinition(name=m.name, aggregation=m.aggregation,
+                                             column=fallback_col, description=m.description)
+                        )
+            if not valid_metrics:
+                continue  # no usable metrics — drop the whole model
         # RC5: enforce _ytd models have yearly grain (daily _ytd is a logical contradiction)
         fixed_grain = (
             "yearly"
@@ -850,11 +1230,16 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
     """Agent 4 — two focused LLM calls: Silver (bronze+dims+facts) then Gold aggregates."""
     from pydantic import BaseModel as _BM
 
+    # Partition children inherit parent's role — exclude them from table_roles so
+    # Agent 4a doesn't generate individual fct_payment_p2022_01, fct_payment_p2022_02, etc.
+    # They still appear in bronze (all_tables) so staging models are generated.
+    _partition_child_names = {t.name for t in schema.tables if t.is_partition_child}
     table_roles = "\n".join(
         f"  {c.table_name}: {c.role}"
         for c in context.table_classifications
+        if c.table_name not in _partition_child_names
     )
-    all_tables = [t.name for t in schema.tables]
+    all_tables = [t.name for t in schema.tables if not t.is_partition_child]
     context_block = (
         f"  Industry: {context.industry} / {context.business_type}\n"
         f"  Metrics:  {', '.join(context.metrics)}\n"
@@ -862,22 +1247,40 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
         f"  Grain:    {context.grain}"
     )
 
-    # ── Call A: Silver (bronze + dimensions + facts) ───────────────────────────
+    # ── Call A: Silver (bronze + facts only) ──────────────────────────────────
+    # Pipeline-managed fields (indirect_keys, extra_date_columns) are NEVER
+    # exposed to the LLM — they are populated by _sanitize_plan and
+    # _compute_indirect_keys after the LLM call. Exposing them would bloat the
+    # instructor JSON schema, trigger fine-tuned model repetition loops, and
+    # cause retry accumulation to overflow num_ctx on large schemas.
+    # Dimensions are auto-built from Agent 3 classifications (no LLM needed).
+    class _LLMFactPlan(_BM):
+        name: str
+        source_table: str
+        grain: str
+        dimension_keys: list[str]
+        measures: list[str]
+        derived_measures: list[DerivedMeasure] = []
+        date_column: str
+        factless: bool = False
+
     class _SilverPlan(_BM):
         bronze: list[str]
-        dimensions: list[DimensionPlan]
-        facts: list[FactPlan]
+        facts: list[_LLMFactPlan]
 
-    n_bronze = len(schema.tables)
-    n_dims = sum(1 for c in context.table_classifications if c.role == "dimension")
-    n_facts = sum(1 for c in context.table_classifications if c.role == "fact")
-    silver_max_tokens = min(6000, n_bronze * 10 + n_dims * 100 + n_facts * 150 + 512)
-    print(f"  [Agent 4a] tables={n_bronze}  dims={n_dims}  facts={n_facts}  "
-          f"max_tokens={silver_max_tokens}")
+    n_bronze = len(all_tables)
+    n_dims = sum(1 for c in context.table_classifications
+                 if c.role == "dimension" and c.table_name not in _partition_child_names)
+    n_facts = sum(1 for c in context.table_classifications
+                  if c.role == "fact" and c.table_name not in _partition_child_names)
+    # No dims in LLM output — token budget = bronze list + facts only.
+    silver_max_tokens = min(4096, n_bronze * 5 + n_facts * 400 + 512)
+    console.print(f"  [dim][Agent 4a] tables={n_bronze}  dims={n_dims}  facts={n_facts}  "
+                  f"max_tokens={silver_max_tokens}[/]")
 
     numeric_hint = _numeric_cols_hint(schema, context)
     silver_user = (
-        f"Database schema:\n{_schema_summary(schema)}\n\n"
+        f"Database schema:\n{_schema_summary_agent4a(schema, context)}\n\n"
         f"All source tables (all must appear in bronze): {all_tables}\n\n"
         f"Pipeline context:\n{context_block}\n\n"
         f"Table roles (from Agent 3):\n{table_roles}"
@@ -888,26 +1291,80 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
         user=silver_user,
         response_model=_SilverPlan,
         max_tokens=silver_max_tokens,
+        model=_AGENT4A_MODEL,
     )
-    print(f"  4a Silver done  [{_ts()}]")
+    console.print(f"  [green]✓[/] 4a Silver done  [dim][{_ts()}][/]")
+
+    # ── Auto-build DimensionPlan objects from Agent 3 classifications ──────────
+    # "dimension" and "reference" roles → DimensionPlan; scd_type via heuristic.
+    # Bridges go to bronze only (no Silver model).
+    _schema_tbl_map_early = {t.name: t for t in schema.tables}
+    _dim_role_set = {"dimension", "reference"}
+    auto_dims: list[DimensionPlan] = []
+    for _c in context.table_classifications:
+        if _c.table_name in _partition_child_names:
+            continue
+        if _c.role not in _dim_role_set:
+            continue
+        _tbl = _schema_tbl_map_early.get(_c.table_name)
+        _scd = _infer_scd_type(_tbl) if _tbl else 1
+        auto_dims.append(DimensionPlan(
+            name=f"dim_{_c.table_name}",
+            source_table=_c.table_name,
+            scd_type=_scd,
+            grain=_c.table_name,
+            columns=[],
+        ))
+
+    # Promote _LLMFactPlan → FactPlan (pipeline fields default to empty).
+    llm_facts = [
+        FactPlan(
+            name=f.name,
+            source_table=f.source_table,
+            grain=f.grain,
+            dimension_keys=f.dimension_keys,
+            measures=f.measures,
+            derived_measures=f.derived_measures,
+            date_column=f.date_column,
+            factless=f.factless,
+        )
+        for f in silver.facts
+    ]
 
     # ── Sanitize Silver first so Gold sees accurate, validated measures ────────
     # This is the pipeline contract: downstream agents only receive what upstream
     # agents have provably declared and what the schema can validate.
     interim_plan = ModelingPlan(
         bronze=silver.bronze,
-        dimensions=silver.dimensions,
-        facts=silver.facts,
+        dimensions=auto_dims,
+        facts=llm_facts,
         gold=[],
     )
     sanitized_silver = _sanitize_plan(interim_plan, schema)
 
+    # ── Compute 2-hop FK denormalization (indirect keys) ─────────────────────
+    # Done AFTER sanitization so dimension_keys are already clean.
+    # Traverses each non-dimension FK on every fact to find dimension keys
+    # reachable via an intermediate table (e.g. rental→inventory→film).
+    _role_map = {c.table_name: c.role for c in context.table_classifications}
+    _schema_tbl_map = {t.name: t for t in schema.tables}
+    _enriched_facts = []
+    for _fact in sanitized_silver.facts:
+        _iks = _compute_indirect_keys(_fact, _schema_tbl_map, _role_map)
+        _enriched_facts.append(_fact.model_copy(update={"indirect_keys": _iks}) if _iks else _fact)
+    sanitized_silver = ModelingPlan(
+        bronze=sanitized_silver.bronze,
+        dimensions=sanitized_silver.dimensions,
+        facts=_enriched_facts,
+        gold=[],
+    )
+
     # ── Call B: Gold aggregates (given sanitized silver facts as context) ─────
-    # Budget: ~500 tokens per fact (one gold model each) + small buffer.
-    # Capped at 6000 to stay within num_ctx=12288 alongside the prompt.
+    # Budget: ~1000 tokens per fact (3-4 gold models with dimension lists each) + buffer.
+    # Capped at 6000 to stay within num_ctx=12288 alongside the prompt (~500 token input).
     n_gold_facts = len(sanitized_silver.facts)
-    gold_max_tokens = min(6000, n_gold_facts * 500 + 512)
-    print(f"  4b Gold starting...  facts={n_gold_facts}  max_tokens={gold_max_tokens}  [{_ts()}]")
+    gold_max_tokens = min(6000, n_gold_facts * 1000 + 512)
+    console.print(f"  [dim][Agent 4b] facts={n_gold_facts}  max_tokens={gold_max_tokens}  [{_ts()}][/]")
     class _GoldContainer(_BM):
         gold: list[GoldPlan]
 
@@ -924,17 +1381,23 @@ def generate_modeling_plan(schema: Schema, context: PipelineContext) -> Modeling
         )
 
     fact_summary = "\n".join(_fact_summary_line(f) for f in sanitized_silver.facts)
+    fact_names = [f.name for f in sanitized_silver.facts]
     gold_user = (
-        f"Silver facts:\n{fact_summary}\n\n"
-        f"Pipeline context:\n{context_block}"
+        f"Industry: {context.industry} / {context.business_type}\n\n"
+        f"Silver facts ({len(fact_names)} total — you MUST produce at least one Gold model for EACH):\n"
+        f"{fact_summary}\n\n"
+        f"Required facts to cover: {fact_names}\n"
+        "Use ONLY the measures and derived_measures columns listed for each fact. "
+        "Metric name must reflect the column name, not the business goal."
     )
     gold_result = llm.query_structured(
         system=_AGENT4_GOLD_SYSTEM,
         user=gold_user,
         response_model=_GoldContainer,
         max_tokens=gold_max_tokens,
+        model=_AGENT4B_MODEL,
     )
-    print(f"  4b Gold done  [{_ts()}]")
+    console.print(f"  [green]✓[/] 4b Gold done  [dim][{_ts()}][/]")
 
     # Combine sanitized silver with raw gold, then sanitize gold against the
     # already-clean silver (fact_model_cols reflects sanitized facts).
@@ -979,7 +1442,7 @@ def refine_modeling_plan(
     # chars / 3 is conservative (usual ratio is /4) — gives headroom for the
     # revised plan being slightly larger than the current one.
     agent5_max_tokens = min(6000, len(plan_json) // 3 + 1024)
-    print(f"  [Agent 5] plan_json={len(plan_json):,} chars  max_tokens={agent5_max_tokens}")
+    console.print(f"  [dim][Agent 5] plan_json={len(plan_json):,} chars  max_tokens={agent5_max_tokens}[/]")
 
     user_msg = (
         f"Current plan (JSON):\n{plan_json}\n\n"
@@ -1041,23 +1504,179 @@ def _show_plan_diff(old: ModelingPlan, new: ModelingPlan) -> None:
         if old_gold[name] != new_gold[name]:
             changes.append(f"  ~ Changed {name}")
 
-    print("\nChanges:")
+    console.print("\n[bold]Changes:[/]")
     if changes:
         for c in changes:
-            print(c)
+            if c.startswith("  + "):
+                console.print(f"[green]{c}[/]")
+            elif c.startswith("  - "):
+                console.print(f"[red]{c}[/]")
+            elif c.startswith("  ~ "):
+                console.print(f"[yellow]{c}[/]")
+            else:
+                console.print(c)
     else:
-        print("  (no structural changes detected)")
+        console.print("  [dim](no structural changes detected)[/]")
+
+
+# ── Agent 6: Semantic Layer ────────────────────────────────────────────────────
+
+_AGENT6_SYSTEM = """\
+You are a senior analytics engineer generating a dbt-native semantic layer definition.
+
+Given a finalized modeling plan (Silver facts + dimensions + Gold aggregates) and business context,
+produce a complete semantic layer in dbt format.
+
+Rules:
+- semantic_models: create ONLY one per Silver FACT table. The count must equal the number of Silver facts
+  listed. Do NOT create semantic_models for Gold aggregates, dimensions, or bridge tables.
+- entities: include the fact's primary surrogate key as type="primary", and each FK dimension key
+  (e.g. customer_id, employee_id) as type="foreign". FK keys go ONLY in entities, never in dimensions.
+- dimensions: ONLY date/timestamp columns go here, as type="time" with appropriate time_granularity.
+  Do NOT put FK keys or categorical columns in dimensions.
+- measures: one measure per numeric column in the fact. Use "sum" for amounts/quantities, "count_distinct"
+  for IDs, "avg" for rates/ratios.
+- metrics: you will receive an explicit list of required metrics. Output ALL of them inside the
+  metrics[] array of the appropriate semantic_model. CRITICAL: metrics go INSIDE semantic_model.metrics[],
+  NOT as separate top-level entries in the semantic_models list. Every item in semantic_models must
+  have a "model" field — if it lacks a "model" field, it is invalid.
+  Use type="simple" for direct aggregations. type_params must be {"measure": "<measure_name>"} where
+  <measure_name> matches a measure defined in that same semantic_model.
+  Example metric JSON: {"name": "total_revenue", "label": "Total Revenue",
+    "description": "Sum of revenue across all orders", "type": "simple",
+    "type_params": {"measure": "total_revenue"}}
+- All names must be snake_case. Labels should be human-readable title case.
+- Keep descriptions concise (under 12 words).
+"""
+
+_AGENT6_MAX_TOKENS = 5000
+
+
+def generate_semantic_layer(plan: ModelingPlan, context: PipelineContext) -> SemanticLayer:
+    """Agent 6 — generate dbt-native semantic layer from the finalized modeling plan."""
+    facts_block = "\n".join(
+        f"  {f.name}: grain={f.grain}  date={f.date_column}  "
+        f"keys={f.dimension_keys}  measures={f.measures + [dm.name for dm in f.derived_measures]}"
+        for f in plan.facts
+    )
+    gold_block = "\n".join(
+        f"  {g.name}: source={g.source_fact}  grain={g.grain}  "
+        f"metrics={[m.name + '(' + m.aggregation + ':' + m.column + ')' for m in g.metrics]}"
+        for g in plan.gold
+    )
+    # Build explicit list of required metrics so the model doesn't have to infer them.
+    required_metrics_lines = []
+    seen_metric_names: set[str] = set()
+    for g in plan.gold:
+        for m in g.metrics:
+            if m.name not in seen_metric_names:
+                seen_metric_names.add(m.name)
+                required_metrics_lines.append(
+                    f"  - name={m.name}  aggregation={m.aggregation}  column={m.column}"
+                    f"  (from semantic_model for {g.source_fact})"
+                )
+    required_metrics_block = "\n".join(required_metrics_lines) if required_metrics_lines else "  (none)"
+    user_msg = (
+        f"Business context: {context.industry} / {context.business_type}\n\n"
+        f"Silver facts:\n{facts_block}\n\n"
+        f"Gold models:\n{gold_block}\n\n"
+        f"Required semantic_models ({len(plan.facts)} total, one per Silver fact): "
+        f"{', '.join(f.name for f in plan.facts)}\n\n"
+        f"Required metrics ({len(seen_metric_names)} total — output ALL of them):\n"
+        f"{required_metrics_block}\n\n"
+        f"Generate the semantic layer. Create exactly {len(plan.facts)} semantic_model(s) — "
+        "one per Silver fact listed above. For each required metric, place it inside the metrics[] "
+        "array of the semantic_model for its source fact. Do NOT add metrics as separate entries "
+        "in semantic_models — only semantic_model objects with a 'model' field are valid there."
+    )
+    return llm.query_structured(
+        system=_AGENT6_SYSTEM,
+        user=user_msg,
+        response_model=SemanticLayer,
+        max_tokens=_AGENT6_MAX_TOKENS,
+    )
+
+
+def _check_finetuned_models() -> None:
+    """Check that fine-tuned Ollama models are pulled; warn and prompt if not.
+
+    Skipped when SCHEMALYTICS_LLM_PROVIDER != 'ollama'.
+    Only checks model names that start with 'nichr0/' (i.e. the fine-tuned defaults,
+    not user overrides pointing at local models).
+    """
+    if llm.get_provider() != "ollama":
+        return
+
+    # Re-read env vars here rather than using the module-level globals so that
+    # overrides pointing at non-nichr0/ models (e.g. a local fine-tune) skip the
+    # availability check for that agent — no ollama pull warning needed.
+    agent3  = os.environ.get("SCHEMALYTICS_AGENT3_MODEL",  "nichr0/schemalytics-classification-agent")
+    agent4a = os.environ.get("SCHEMALYTICS_AGENT4A_MODEL", "nichr0/schemalytics-silver-agent")
+    agent4b = os.environ.get("SCHEMALYTICS_AGENT4B_MODEL", "nichr0/schemalytics-gold-agent")
+
+    candidates = [
+        ("Agent 3 (classification)", agent3),
+        ("Agent 4a (silver plan)",   agent4a),
+        ("Agent 4b (gold plan)",     agent4b),
+    ]
+    to_check = [(label, name) for label, name in candidates if name.startswith("nichr0/")]
+    if not to_check:
+        return
+
+    try:
+        result = subprocess.run(
+            ["ollama", "list"], capture_output=True, text=True, timeout=10
+        )
+        if result.returncode != 0:
+            console.print("[yellow]Warning:[/] 'ollama list' returned an error. Skipping model availability check.")
+            return
+        available = result.stdout
+    except (FileNotFoundError, subprocess.TimeoutExpired) as exc:
+        console.print(f"[yellow]Warning:[/] could not run 'ollama list' ({exc}). Skipping model availability check.")
+        return
+
+    # Normalise: strip :latest tag so "nichr0/foo" matches "nichr0/foo:latest"
+    available_names = {
+        line.split()[0].removesuffix(":latest")
+        for line in available.splitlines()
+        if line.strip() and not line.startswith("NAME")
+    }
+    missing = [(label, name) for label, name in to_check if name not in available_names]
+    if not missing:
+        return
+
+    console.print()
+    for label, name in missing:
+        console.print(f"[yellow]Warning:[/] fine-tuned model '[bold]{name}[/]' is not pulled.")
+        console.print(f"  [dim]→ Run: ollama pull {name}[/]")
+        console.print(f"  [dim]→ {label} will use {llm.OLLAMA_DEFAULT_MODEL} instead (quality may be lower).[/]")
+        console.print()
+
+    answer = input("Continue anyway? [y/N] ").strip().lower()
+    if answer != "y":
+        raise SystemExit(1)
+
+    # Patch module-level constants for this run so agent calls pick up the fallback.
+    global _AGENT3_MODEL, _AGENT4A_MODEL, _AGENT4B_MODEL
+    for _, name in missing:
+        if name == agent3:
+            _AGENT3_MODEL = llm.OLLAMA_DEFAULT_MODEL
+        if name == agent4a:
+            _AGENT4A_MODEL = llm.OLLAMA_DEFAULT_MODEL
+        if name == agent4b:
+            _AGENT4B_MODEL = llm.OLLAMA_DEFAULT_MODEL
 
 
 # ── Main Pipeline Orchestrator ─────────────────────────────────────────────────
 
 def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
-    """Run the full five-agent pipeline. Returns (ModelingPlan, PipelineContext) or None if cancelled."""
+    """Run the agent pipeline. Returns (ModelingPlan, PipelineContext) or None if cancelled."""
+    _check_finetuned_models()
 
     # ── Agent 1: Industry Inference ────────────────────────────────────────────
-    print(f"\nAgent 1 — Inferring industry and domain...  [{_ts()}]")
-    industry_result = infer_industry(schema)
-    print(f"  Done  [{_ts()}]")
+    with console.status("[bold blue]Agent 1 — Inferring industry and domain...[/]"):
+        industry_result = infer_industry(schema)
+    console.print(f"[green]✓[/] Agent 1 done  [dim][{_ts()}][/]")
 
     agent1_desc = f"{industry_result.industry} ({industry_result.business_type})"
     correction = _handle_confidence(
@@ -1068,14 +1687,15 @@ def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
         prompt_text="Describe your business (or press Enter to accept the inference above)",
     )
     if correction:
-        print(f"  Re-running Agent 1...  [{_ts()}]")
-        industry_result = infer_industry(schema, user_feedback=correction)
-        print(f"  Updated: {industry_result.industry} / {industry_result.business_type}  [{_ts()}]")
+        with console.status("[bold blue]Re-running Agent 1...[/]"):
+            industry_result = infer_industry(schema, user_feedback=correction)
+        console.print(f"[green]✓[/] Updated: {industry_result.industry} / {industry_result.business_type}  [dim][{_ts()}][/]")
 
     # ── Agent 2: Metrics + Goals ───────────────────────────────────────────────
-    print(f"\nAgent 2 — Suggesting metrics and goals...  [{_ts()}]")
-    metrics_result = suggest_metrics(schema, industry_result)
-    print(f"  Done  [{_ts()}]")
+    console.print()
+    with console.status("[bold blue]Agent 2 — Suggesting metrics and goals...[/]"):
+        metrics_result = suggest_metrics(schema, industry_result)
+    console.print(f"[green]✓[/] Agent 2 done  [dim][{_ts()}][/]")
 
     agent2_desc = (
         f"metrics={metrics_result.metrics[:3]}... "
@@ -1093,9 +1713,9 @@ def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
         ),
     )
     if correction:
-        print(f"  Re-running Agent 2...  [{_ts()}]")
-        metrics_result = suggest_metrics(schema, industry_result, user_feedback=correction)
-        print(f"  Updated metrics: {metrics_result.metrics[:4]}  [{_ts()}]")
+        with console.status("[bold blue]Re-running Agent 2...[/]"):
+            metrics_result = suggest_metrics(schema, industry_result, user_feedback=correction)
+        console.print(f"[green]✓[/] Updated metrics: {metrics_result.metrics[:4]}  [dim][{_ts()}][/]")
 
     # ── Build partial context for Agent 3 ─────────────────────────────────────
     partial_context = PipelineContext(
@@ -1108,27 +1728,29 @@ def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
     )
 
     # ── Agent 3: Table Classification ─────────────────────────────────────────
-    print(f"\nAgent 3 — Classifying tables...  [{_ts()}]")
-    classifications = classify_tables(schema, partial_context)
-    print(f"  Done  [{_ts()}]")
+    console.print()
+    with console.status("[bold blue]Agent 3 — Classifying tables...[/]"):
+        classifications = classify_tables(schema, partial_context)
+    console.print(f"[green]✓[/] Agent 3 done  [dim][{_ts()}][/]")
 
     # Flag only low-confidence tables
     low_conf = [c for c in classifications if c.confidence < 3]
     if low_conf:
-        print("\n  The following tables have uncertain classifications:")
+        console.print("\n  [yellow]The following tables have uncertain classifications:[/]")
         for c in low_conf:
-            print(
-                f"    {c.table_name}: {c.role} (confidence={c.confidence}) — {c.reasoning}"
+            console.print(
+                f"    [yellow]{c.table_name}[/]: {c.role} "
+                f"[dim](confidence={c.confidence}) — {c.reasoning}[/]"
             )
         correction = input(
             "  Correct any table roles in plain English (or press Enter to accept): "
         ).strip()
         if correction:
-            print(f"  Re-running Agent 3...  [{_ts()}]")
-            classifications = classify_tables(schema, partial_context, user_feedback=correction)
-            print(f"  Done  [{_ts()}]")
+            with console.status("[bold blue]Re-running Agent 3...[/]"):
+                classifications = classify_tables(schema, partial_context, user_feedback=correction)
+            console.print(f"[green]✓[/] Agent 3 done  [dim][{_ts()}][/]")
     else:
-        print("  All table classifications are high-confidence.")
+        console.print("  [green]All table classifications are high-confidence.[/]")
 
     # ── Assemble full PipelineContext ──────────────────────────────────────────
     context = PipelineContext(
@@ -1143,10 +1765,20 @@ def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
     # ── Summary Gate ──────────────────────────────────────────────────────────
     correction = _print_summary_gate(context)
     if correction:
-        # Summary gate corrections are almost always about table roles — only re-run Agent 3.
-        # Agents 1 and 2 have their own earlier confirmation steps.
-        print(f"  Applying corrections — re-running Agent 3...  [{_ts()}]")
-        classifications = classify_tables(schema, context, user_feedback=correction)
+        overrides = _parse_role_overrides(correction, schema)
+        if overrides:
+            # Explicit table→role correction: apply as hard overrides without re-running
+            # Agent 3. Re-running destabilizes other correct classifications because the
+            # LLM may swap roles for unrelated tables when given new context.
+            console.print(f"  [cyan]Applying overrides:[/] { {t: r for t, r in overrides.items()} }")
+            classifications = _apply_overrides(
+                context.table_classifications, overrides, correction
+            )
+        else:
+            # Vague/contextual correction (no explicit table names): re-run Agent 3.
+            with console.status(f"[bold blue]Applying corrections — re-running Agent 3...[/]"):
+                classifications = classify_tables(schema, context, user_feedback=correction)
+            console.print(f"[green]✓[/] Agent 3 done  [dim][{_ts()}][/]")
         context = PipelineContext(
             industry=context.industry,
             business_type=context.business_type,
@@ -1157,29 +1789,31 @@ def run_pipeline(schema: Schema) -> tuple[ModelingPlan, PipelineContext] | None:
         )
 
     # ── Agent 4: Generate Modeling Plan ───────────────────────────────────────
-    print(f"\nAgent 4 — Generating modeling plan (Silver + Gold)...  [{_ts()}]")
-    plan = generate_modeling_plan(schema, context)
+    console.print()
+    with console.status("[bold blue]Agent 4 — Generating modeling plan (Silver + Gold)...[/]"):
+        plan = generate_modeling_plan(schema, context)
+    console.print(f"[green]✓[/] Agent 4 done  [dim][{_ts()}][/]")
     _display_plan(plan)
 
     # ── Refinement loop (Agent 5) ──────────────────────────────────────────────
     while True:
-        print(
-            "\nType natural language feedback to refine the plan, "
-            "or press Enter to approve."
+        console.print(
+            "\n[dim]Type natural language feedback to refine the plan, "
+            "or press Enter to approve.[/]"
         )
         feedback = input("Feedback: ").strip()
 
         if not feedback:
-            print(f"\nPlan approved. Proceeding to generation...  [{_ts()}]")
+            console.print(f"\n[green]Plan approved.[/] Proceeding to generation...  [dim][{_ts()}][/]")
             return plan, context
 
         if feedback.lower() in {"cancel", "abort", "quit", "exit", "reject"}:
-            print("\nCancelled.")
+            console.print("\n[yellow]Cancelled.[/]")
             return None
 
-        print(f"  Agent 5 — Applying feedback...  [{_ts()}]")
         old_plan = plan
-        plan = refine_modeling_plan(plan, feedback, schema, context)
-        print(f"  Done  [{_ts()}]")
+        with console.status("[bold blue]Agent 5 — Applying feedback...[/]"):
+            plan = refine_modeling_plan(plan, feedback, schema, context)
+        console.print(f"[green]✓[/] Agent 5 done  [dim][{_ts()}][/]")
         _show_plan_diff(old_plan, plan)
         _display_plan(plan)

@@ -19,6 +19,7 @@ dependencies = [
     "pyyaml>=6.0",
     "instructor[anthropic]>=1.0.0",
     "openai>=1.0.0",
+    "rich>=13.0",
 ]
 
 [project.urls]
