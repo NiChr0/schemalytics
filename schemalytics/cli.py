@@ -12,7 +12,7 @@ console = Console()
 
 
 @click.group()
-@click.version_option(version="0.2.0")
+@click.version_option(version="1.0.0")
 def cli():
     """Schemalytics - Automated dbt project generation with an agentic pipeline."""
 

@@ -59,7 +59,7 @@ dbt run
 
 ## Key Facts
 
-- **Version:** 0.2.0
+- **Version:** 1.0.0
 - **License:** Apache 2.0
 - **Python:** 3.10+
 - **LLM:** Local Ollama (default) or Anthropic Claude (via env var)
