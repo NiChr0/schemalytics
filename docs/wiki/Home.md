@@ -60,7 +60,7 @@ dbt run
 ## Key Facts
 
 - **Version:** 1.0.0
-- **License:** Apache 2.0
+- **License:** MPL 2.0
 - **Python:** 3.10+
 - **LLM:** Local Ollama (default) or Anthropic Claude (via env var)
 - **Fine-tuned models:** `schemalytics-classification-agent` (Agent 3), `schemalytics-silver-agent` (Agent 4a), `schemalytics-gold-agent` (Agent 4b) — Qwen3.5-4B, ~2.6 GB each

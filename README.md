@@ -98,6 +98,6 @@ schemalytics extract -c postgresql://user:pass@localhost/db -o schema.json
 
 ## License
 
-Apache 2.0 • Built by [NiChr0](https://github.com/NiChr0)
+MPL 2.0 • Built by [NiChr0](https://github.com/NiChr0)
 
 > Fine-tuned models are based on Qwen3.5 (Qwen License) by Alibaba Cloud.
