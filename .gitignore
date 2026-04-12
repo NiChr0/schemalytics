@@ -31,24 +31,25 @@ schemalytics/pyvenv.cfg
 .idea/
 *.swp
 
+# macOS
+.DS_Store
+
+# Runtime logs
+logs/
+
 # Evaluation audit files (local only)
 evaluation_audit*.md
 
-# Fine-tune — large binary artifacts (do not commit)
-finetune/cuda/*.gguf
-finetune/cuda/*.bin
-finetune/cuda/merged-*/
-finetune/cuda/schemalytics-agent3-qwen3.5-4b/
+# Fine-tune pipeline (developer-only, large binary artifacts)
+finetune/
 unsloth_compiled_cache/
 
-# Fine-tune — training logs (local only)
-finetune/cuda/*.log
+# Claude Code internal tooling
+docs/superpowers/
+memory/
 
-# Virtual environments (platform-specific, too large)
-finetune/cuda/.venv/
-
-# Fine-tune — raw Spider dataset (third-party, download on demand)
-finetune/spider/
+# Pod/remote training mount
+mnt/
 
 # LLM tool-specific context files (kept local, not committed)
 CLAUDE.md
