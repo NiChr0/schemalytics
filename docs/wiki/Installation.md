@@ -26,11 +26,13 @@ Schemalytics only reads the schema — it never modifies your database.
 # Install Ollama
 curl -fsSL https://ollama.com/install.sh | sh
 
-# Pull the main pipeline model (Agents 1, 2, 4, 5)
-ollama pull qwen3-30b-data
+# Pull the general pipeline model (Agents 1, 2, 5)
+ollama pull gemma3:4b
 
-# Pull the fine-tuned classification model (Agent 3)
+# Pull the fine-tuned models (used by default for Agents 3, 4a, 4b)
 ollama pull nichr0/schemalytics-classification-agent
+ollama pull nichr0/schemalytics-silver-agent
+ollama pull nichr0/schemalytics-gold-agent
 
 # Verify Ollama is running
 curl http://localhost:11434/api/tags
@@ -38,10 +40,7 @@ curl http://localhost:11434/api/tags
 
 Ollama must be running on `localhost:11434` when you use Schemalytics.
 
-`schemalytics-classification-agent` is a 2.6 GB QLoRA fine-tuned model specialized for
-table classification (fact / dimension / bridge / reference). It is used by Agent 3 when
-`SCHEMALYTICS_OLLAMA_MODEL=schemalytics-classification-agent` is set. Without this env var,
-Agent 3 falls back to `qwen3-30b-data`.
+The three fine-tuned models (~2.6 GB each, Qwen3.5-4B QLoRA) are the defaults for Agents 3, 4a, and 4b respectively. `gemma3:4b` handles Agents 1, 2, and 5.
 
 ---
 
@@ -104,8 +103,10 @@ Connection string: `postgresql://postgres:mypassword@localhost:5432/northwind`
 - [ ] Python 3.10+ installed
 - [ ] `pip install schemalytics` complete
 - [ ] `ollama serve` running
-- [ ] `ollama list` shows `qwen3-30b-data`
-- [ ] `ollama list` shows `nichr0/schemalytics-classification-agent` (optional, for Agent 3)
+- [ ] `ollama list` shows `gemma3:4b`
+- [ ] `ollama list` shows `nichr0/schemalytics-classification-agent` (Agent 3)
+- [ ] `ollama list` shows `nichr0/schemalytics-silver-agent` (Agent 4a)
+- [ ] `ollama list` shows `nichr0/schemalytics-gold-agent` (Agent 4b)
 - [ ] PostgreSQL database accessible
 
 Once all checked, proceed to [Getting Started](Getting-Started).

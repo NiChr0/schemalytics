@@ -39,10 +39,10 @@ PostgreSQL DB  →  5-Agent AI Pipeline  →  dbt Project + Semantic Layer
 ```bash
 # 1. Install prerequisites
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull qwen3-30b-data                           # default model
-ollama pull nichr0/schemalytics-classification-agent # Agent 3 (optional)
-ollama pull nichr0/schemalytics-silver-agent         # Agent 4a (optional)
-ollama pull nichr0/schemalytics-gold-agent           # Agent 4b (optional)
+ollama pull gemma3:4b                                # default model (Agents 1, 2, 5)
+ollama pull nichr0/schemalytics-classification-agent # Agent 3 (default)
+ollama pull nichr0/schemalytics-silver-agent         # Agent 4a (default)
+ollama pull nichr0/schemalytics-gold-agent           # Agent 4b (default)
 pip install schemalytics
 
 # 2. Run

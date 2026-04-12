@@ -42,6 +42,8 @@ evaluation_audit*.md
 
 # Fine-tune pipeline (developer-only, large binary artifacts)
 finetune/
+FINETUNE_PLAN.md
+project_finetune.md
 unsloth_compiled_cache/
 
 # Claude Code internal tooling

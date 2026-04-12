@@ -95,7 +95,7 @@ All agent calls go through `llm.query_structured()`:
 ```
 SCHEMALYTICS_LLM_PROVIDER=ollama (default)
   └── instructor.from_openai(OpenAI(base_url="http://localhost:11434/v1"))
-      model: qwen3-30b-data  (Ollama OpenAI-compatible endpoint)
+      model: gemma3:4b  (Ollama OpenAI-compatible endpoint)
       num_ctx: 12288 (fixed across all calls — changing triggers model reload)
 
   Override the default model for all agents:
@@ -105,7 +105,7 @@ SCHEMALYTICS_LLM_PROVIDER=ollama (default)
       nichr0/schemalytics-classification-agent  — Agent 3 (fact/dim/bridge/reference)
       nichr0/schemalytics-silver-agent          — Agent 4a (Silver plan generation)
       nichr0/schemalytics-gold-agent            — Agent 4b (Gold plan generation)
-  See project_finetune.md for full details.
+  Per-agent override env vars: SCHEMALYTICS_AGENT3_MODEL, SCHEMALYTICS_AGENT4A_MODEL, SCHEMALYTICS_AGENT4B_MODEL
 
 SCHEMALYTICS_LLM_PROVIDER=anthropic
   └── instructor.from_anthropic(Anthropic(api_key=...))

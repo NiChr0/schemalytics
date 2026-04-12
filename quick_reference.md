@@ -79,6 +79,14 @@ After Agent 4 shows the modeling plan, you can refine it with natural language:
 "region is a dimension, not reference"
 ```
 
+### Add derived measures (computed columns)
+```
+"add line_total = quantity * unit_price as a derived measure on fct_order_details"
+"add discount_amount = unit_price * discount on fct_orders"
+```
+
+Derived measures are rendered as `expression AS name` in Silver facts and can be referenced by alias in Gold aggregates.
+
 ### Complex changes
 ```
 "split dim_customers into US and international based on country"
@@ -136,17 +144,20 @@ Three Qwen3.5-4B models are available on Ollama Hub as drop-in replacements for 
 | `nichr0/schemalytics-gold-agent` | Agent 4b | Gold layer plan (agg_*) |
 
 ```bash
-# Pull (one-time)
+# Pull (one-time — required, these are the defaults for Agents 3, 4a, 4b)
 ollama pull nichr0/schemalytics-classification-agent
 ollama pull nichr0/schemalytics-silver-agent
 ollama pull nichr0/schemalytics-gold-agent
 
-# Use a fine-tuned model (replaces default for all agents)
-SCHEMALYTICS_OLLAMA_MODEL=nichr0/schemalytics-silver-agent \
+# Per-agent override env vars
+SCHEMALYTICS_AGENT3_MODEL=nichr0/schemalytics-classification-agent \
+SCHEMALYTICS_AGENT4A_MODEL=nichr0/schemalytics-silver-agent \
+SCHEMALYTICS_AGENT4B_MODEL=nichr0/schemalytics-gold-agent \
 schemalytics generate -c postgresql://...
-```
 
-See `project_finetune.md` for training details and roadmap.
+# Override general model (Agents 1, 2, 5) — default: gemma3:4b
+SCHEMALYTICS_OLLAMA_MODEL=gemma3:4b schemalytics generate -c postgresql://...
+```
 
 ---
 

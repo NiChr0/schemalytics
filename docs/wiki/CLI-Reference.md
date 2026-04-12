@@ -27,7 +27,7 @@ schemalytics generate [OPTIONS]
 |------|-------|----------|-------------|
 | `--connection` | `-c` | Yes | PostgreSQL connection string |
 | `--output` | `-o` | Yes | Output directory for the dbt project |
-| `--name` | `-n` | No | dbt project name (default: `my_dbt_project`) |
+| `--name` | `-n` | No | dbt project name (default: `schemalytics_project`) |
 
 ### Examples
 
@@ -126,17 +126,24 @@ postgresql://user:p%40ssword@localhost/mydb
 
 ---
 
-## LLM Provider Environment Variables
+## Environment Variables
 
 ```bash
-# Ollama (default) — requires Ollama running at localhost:11434
-# Model: gemma3-data
-SCHEMALYTICS_LLM_PROVIDER=ollama   # or omit
+# LLM provider (default: ollama)
+SCHEMALYTICS_LLM_PROVIDER=ollama      # or omit — uses Ollama at localhost:11434
+SCHEMALYTICS_LLM_PROVIDER=anthropic   # use Anthropic Claude instead
 
-# Anthropic Claude — requires API key
+# Anthropic API key (required when provider=anthropic)
 # Model: claude-sonnet-4-20250514
-SCHEMALYTICS_LLM_PROVIDER=anthropic
 ANTHROPIC_API_KEY=sk-ant-...
+
+# Ollama general model — used by Agents 1, 2, 5 (default: gemma3:4b)
+SCHEMALYTICS_OLLAMA_MODEL=gemma3:4b
+
+# Per-agent model overrides — Agents 3, 4a, 4b use fine-tuned models by default
+SCHEMALYTICS_AGENT3_MODEL=nichr0/schemalytics-classification-agent
+SCHEMALYTICS_AGENT4A_MODEL=nichr0/schemalytics-silver-agent
+SCHEMALYTICS_AGENT4B_MODEL=nichr0/schemalytics-gold-agent
 ```
 
 ---

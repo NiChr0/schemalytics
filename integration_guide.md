@@ -1,6 +1,6 @@
 # Integration Guide
 
-> Technical reference for the Schemalytics pipeline. For architecture context see `AGENTS.md`. For development workflows see `dev.md`.
+> Technical reference for the Schemalytics pipeline. For architecture context see `docs/wiki/Architecture.md`. For contributing guidelines see `docs/wiki/Contributing.md`.
 
 ---
 
@@ -184,9 +184,15 @@ return result.items
 ## LLM Provider Configuration
 
 ```bash
-# Ollama (default) — model: qwen3-8b-data
+# Ollama (default) — model: gemma3:4b for Agents 1, 2, 5
 # Uses Ollama's OpenAI-compatible endpoint at localhost:11434/v1
 SCHEMALYTICS_LLM_PROVIDER=ollama   # or omit (default)
+SCHEMALYTICS_OLLAMA_MODEL=gemma3:4b  # override general model
+
+# Per-agent fine-tuned model overrides (these are the defaults)
+SCHEMALYTICS_AGENT3_MODEL=nichr0/schemalytics-classification-agent
+SCHEMALYTICS_AGENT4A_MODEL=nichr0/schemalytics-silver-agent
+SCHEMALYTICS_AGENT4B_MODEL=nichr0/schemalytics-gold-agent
 
 # Anthropic Claude — model: claude-sonnet-4-20250514
 SCHEMALYTICS_LLM_PROVIDER=anthropic
@@ -242,7 +248,7 @@ SQL is generated from Jinja2 templates. The LLM never writes raw SQL.
 
 ## Testing
 
-See `testing.md` for the full test matrix. Quick reference:
+Quick test reference:
 
 ```bash
 # Unit tests (no LLM or DB needed)

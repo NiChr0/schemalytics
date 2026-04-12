@@ -10,12 +10,15 @@ pip install -e ".[dev]"
 ```
 
 **Prerequisites:**
-- Ollama running with `gemma3-data` pulled
+- Ollama running with `gemma3:4b` pulled
 - Docker (for the Northwind test database)
 
 ```bash
-# Pull the required Ollama model
-ollama pull gemma3-data
+# Pull the required Ollama models
+ollama pull gemma3:4b
+ollama pull nichr0/schemalytics-classification-agent
+ollama pull nichr0/schemalytics-silver-agent
+ollama pull nichr0/schemalytics-gold-agent
 
 # Start the test database
 docker run -d \
@@ -83,13 +86,13 @@ schemalytics/
    - LLM / classification logic → `planner.py`
    - File output → `generators/dbt.py`
 3. Wire into `run_pipeline()` in `planner.py` in the correct pipeline order
-4. Update `AGENTS.md` if the architecture or CLI changes
+4. Update this wiki and `docs/wiki/Architecture.md` if the pipeline changes
 
 ### New CLI command
 
 1. Add a `@click.command()` function in `cli.py`
 2. Register it with `cli.add_command()`
-3. Update `AGENTS.md` CLI Commands table and this wiki
+3. Update `docs/wiki/CLI-Reference.md` and this wiki
 
 ### New Jinja2 SQL template
 
@@ -118,7 +121,7 @@ sql = Template(MY_NEW_TEMPLATE).render(model_name="my_model")
 
 ## Testing
 
-See [testing.md](../../testing.md) for the full test workflow. In summary:
+Quick test reference:
 
 ```bash
 # Level 1 — unit tests (no external deps)
@@ -168,7 +171,7 @@ return result.items
 
 ## Release Process
 
-See [release.md](../../release.md) for the full release workflow. In summary:
+Release workflow in summary:
 
 1. Run `ruff check schemalytics/` — zero errors
 2. Run end-to-end test against Northwind

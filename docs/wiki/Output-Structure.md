@@ -92,21 +92,24 @@ from {{ ref('stg_public_customers') }}
 **Naming:** `fct_<name>`
 
 ```sql
--- fct_orders.sql
+-- fct_order_details.sql
 {{ config(materialized='table') }}
 
 select
-    {{ dbt_utils.surrogate_key(['order_id']) }} as order_key,
-    o.order_id,
-    c.customer_key,
-    o.order_date,
-    o.total_amount,
-    o.discount,
-    o.tax
-from {{ ref('stg_public_orders') }} o
-left join {{ ref('dim_customers') }} c
-    on o.customer_id = c.customer_id
-    and c.is_current = true
+    {{ dbt_utils.surrogate_key(['order_id', 'product_id']) }} as order_detail_key,
+    od.order_id,
+    od.product_id,
+    od.quantity,
+    od.unit_price,
+    od.discount,
+    od.quantity * od.unit_price as line_total   -- derived measure
+from {{ ref('stg_public_order_details') }} od
+```
+
+**Derived measures** are computed columns declared during the refinement loop. They are rendered as `expression AS name` in the Silver fact SELECT and referenced by alias name in Gold models. Example refinement input:
+
+```
+"add line_total = quantity * unit_price as a derived measure on fct_order_details"
 ```
 
 ---

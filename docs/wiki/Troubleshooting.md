@@ -8,8 +8,8 @@ Run these before investigating further:
 # 1. Ollama running?
 curl http://localhost:11434/api/tags
 
-# 2. Required model available?
-ollama list | grep gemma3-data
+# 2. Required models available?
+ollama list | grep -E "gemma3|schemalytics"
 
 # 3. Can connect to PostgreSQL?
 psql <your-connection-string> -c "\dt" | head -5
@@ -43,12 +43,16 @@ ollama serve
 
 **Symptom:**
 ```
-Error: model 'gemma3-data' not found
+Error: model 'gemma3:4b' not found
 ```
 
 **Fix:**
 ```bash
-ollama pull gemma3-data
+ollama pull gemma3:4b
+# Also pull the fine-tuned models if missing (used by Agents 3, 4a, 4b):
+ollama pull nichr0/schemalytics-classification-agent
+ollama pull nichr0/schemalytics-silver-agent
+ollama pull nichr0/schemalytics-gold-agent
 ```
 
 ---

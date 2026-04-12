@@ -1,219 +1,98 @@
 # Configuration
 
-## context.yaml
+Schemalytics is configured entirely through environment variables. There is no config file — the pipeline is interactive by design.
 
-Instead of answering interactive prompts every time, you can pre-configure your business context in a YAML file and pass it with the `-x` flag:
+---
+
+## LLM Provider
 
 ```bash
+# Ollama (default) — runs locally, no API key needed
+SCHEMALYTICS_LLM_PROVIDER=ollama
+
+# Anthropic Claude — requires an API key
+SCHEMALYTICS_LLM_PROVIDER=anthropic
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+| Provider | Model | Notes |
+|----------|-------|-------|
+| `ollama` | `gemma3:4b` (default) | Local, private, free. Requires Ollama running at `localhost:11434`. |
+| `anthropic` | `claude-sonnet-4-20250514` | Cloud API. Faster for large schemas (50+ tables). |
+
+---
+
+## Ollama General Model
+
+Used by Agents 1, 2, and 5 (industry inference, metrics suggestion, plan refinement):
+
+```bash
+SCHEMALYTICS_OLLAMA_MODEL=gemma3:4b   # default
+```
+
+Override to use any Ollama model:
+
+```bash
+SCHEMALYTICS_OLLAMA_MODEL=llama3.2 schemalytics generate -c postgresql://...
+```
+
+---
+
+## Per-Agent Model Overrides
+
+Agents 3, 4a, and 4b use dedicated fine-tuned models by default. Override individually:
+
+```bash
+# Agent 3 — table classification (fact/dim/bridge/reference)
+SCHEMALYTICS_AGENT3_MODEL=nichr0/schemalytics-classification-agent   # default
+
+# Agent 4a — Silver layer plan (dim_*, fct_*)
+SCHEMALYTICS_AGENT4A_MODEL=nichr0/schemalytics-silver-agent          # default
+
+# Agent 4b — Gold layer plan (agg_*)
+SCHEMALYTICS_AGENT4B_MODEL=nichr0/schemalytics-gold-agent            # default
+```
+
+To revert an agent to the general Ollama model:
+
+```bash
+SCHEMALYTICS_AGENT3_MODEL=gemma3:4b schemalytics generate -c postgresql://...
+```
+
+---
+
+## Full Environment Variable Reference
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `SCHEMALYTICS_LLM_PROVIDER` | `ollama` | LLM backend: `ollama` or `anthropic` |
+| `SCHEMALYTICS_OLLAMA_MODEL` | `gemma3:4b` | Ollama model for Agents 1, 2, 5 |
+| `SCHEMALYTICS_AGENT3_MODEL` | `nichr0/schemalytics-classification-agent` | Model for Agent 3 (table classification) |
+| `SCHEMALYTICS_AGENT4A_MODEL` | `nichr0/schemalytics-silver-agent` | Model for Agent 4a (Silver plan) |
+| `SCHEMALYTICS_AGENT4B_MODEL` | `nichr0/schemalytics-gold-agent` | Model for Agent 4b (Gold plan) |
+| `ANTHROPIC_API_KEY` | — | Required when `SCHEMALYTICS_LLM_PROVIDER=anthropic` |
+
+---
+
+## Example: Use Anthropic for All Agents
+
+```bash
+SCHEMALYTICS_LLM_PROVIDER=anthropic \
+ANTHROPIC_API_KEY=sk-ant-... \
 schemalytics generate \
-  -c postgresql://localhost/mydb \
-  -o ./dbt_project \
-  -x context.yaml
+  -c postgresql://user:pass@localhost/mydb \
+  -o ./dbt_project
 ```
 
----
+## Example: Use Fine-Tuned Models Explicitly
 
-## File Format
-
-```yaml
-# context.yaml
-
-# Industry from the taxonomy (see Industry Templates wiki page)
-industry: "E-commerce & Retail"
-
-# Sub-type within the industry
-business_type: "B2C"
-
-# Key business entities to focus the model on
-entities:
-  - customers
-  - orders
-  - products
-  - categories
-
-# Analytical goals that drive gold layer metric selection
-goals:
-  - revenue tracking
-  - customer cohort analysis
-  - product performance
-  - cart abandonment analysis
-
-# Temporal tracking strategy
-# "historical_tracking" → SCD Type 2 for dimensions (keeps full history)
-# "current_only"        → SCD Type 1 for dimensions (overwrites)
-temporal: historical_tracking
-
-# Primary time grain for gold layer aggregates
-# Options: transaction_level, daily, weekly, monthly
-grain: transaction_level
+```bash
+SCHEMALYTICS_AGENT3_MODEL=nichr0/schemalytics-classification-agent \
+SCHEMALYTICS_AGENT4A_MODEL=nichr0/schemalytics-silver-agent \
+SCHEMALYTICS_AGENT4B_MODEL=nichr0/schemalytics-gold-agent \
+schemalytics generate \
+  -c postgresql://user:pass@localhost/mydb \
+  -o ./dbt_project
 ```
 
----
-
-## Field Reference
-
-### `industry` (string, required)
-
-The industry category. Must match one of the 14+ supported industries:
-
-- `E-commerce & Retail`
-- `SaaS & Software`
-- `Finance & Fintech`
-- `Healthcare`
-- `Media & Entertainment`
-- `Marketing & Advertising`
-- `Education`
-- `Logistics & Transportation`
-- `Hospitality & Travel`
-- `Real Estate`
-- `Manufacturing`
-- `Government & Public Sector`
-
-See [Industry Templates](Industry-Templates) for sub-types and presets.
-
----
-
-### `business_type` (string, optional)
-
-The sub-type within the industry. Examples: `B2C`, `B2B`, `marketplace`, `SaaS`, `banking`.
-
-If omitted, Schemalytics uses the first sub-type for the selected industry.
-
----
-
-### `entities` (list of strings, required)
-
-The core business entities the data model should focus on. These map directly to source tables and dimension/fact naming.
-
-Examples:
-```yaml
-# E-commerce
-entities: [customers, orders, products, inventory]
-
-# SaaS
-entities: [accounts, users, subscriptions, events]
-
-# Finance
-entities: [accounts, transactions, loans, customers]
-```
-
----
-
-### `goals` (list of strings, required)
-
-Analytical questions or reporting areas the gold layer should serve. The LLM uses these to decide which metrics and aggregations to include.
-
-Examples:
-```yaml
-# Revenue-focused
-goals:
-  - monthly revenue reporting
-  - revenue by product category
-  - customer lifetime value
-
-# Retention-focused
-goals:
-  - customer churn analysis
-  - cohort retention
-  - reactivation tracking
-```
-
----
-
-### `temporal` (string, optional)
-
-Controls how dimension history is tracked:
-
-| Value | Behavior | Use when |
-|-------|----------|----------|
-| `historical_tracking` | SCD Type 2 — adds new row on change | You need to know "what was the customer's address at order time?" |
-| `current_only` | SCD Type 1 — overwrites previous values | You only care about current state, history not needed |
-
-Default: `historical_tracking`
-
----
-
-### `grain` (string, optional)
-
-Sets the default time grain for gold layer aggregates:
-
-| Value | Gold layer output |
-|-------|-------------------|
-| `transaction_level` | No pre-aggregation; gold tables are fact-level |
-| `daily` | `agg_daily_*` tables |
-| `weekly` | `agg_weekly_*` tables |
-| `monthly` | `agg_monthly_*` tables |
-
-Default: `transaction_level`
-
-You can always change the grain per-table during the interactive refinement loop.
-
----
-
-## Example Files
-
-### Northwind (E-commerce test database)
-
-```yaml
-industry: "E-commerce & Retail"
-business_type: "B2C"
-entities:
-  - customers
-  - orders
-  - products
-  - categories
-  - suppliers
-goals:
-  - revenue tracking
-  - order analysis
-  - product performance
-temporal: historical_tracking
-grain: transaction_level
-```
-
-### SaaS product
-
-```yaml
-industry: "SaaS & Software"
-business_type: "B2B"
-entities:
-  - accounts
-  - users
-  - subscriptions
-  - features
-  - events
-goals:
-  - MRR and ARR reporting
-  - churn analysis
-  - feature adoption
-  - expansion revenue
-temporal: current_only
-grain: monthly
-```
-
-### Financial services
-
-```yaml
-industry: "Finance & Fintech"
-business_type: "payments"
-entities:
-  - merchants
-  - transactions
-  - disputes
-  - settlements
-goals:
-  - processing volume
-  - authorization rates
-  - dispute analysis
-  - settlement reconciliation
-temporal: historical_tracking
-grain: daily
-```
-
----
-
-## Notes
-
-- The context file is not required — if omitted, Schemalytics prompts interactively
-- Values in the file serve as defaults; you can still refine the plan interactively after generation
-- `context.yaml` is listed in `.gitignore` by default to avoid committing sensitive connection details alongside it
+(These are already the defaults — this form is useful if you want to be explicit in scripts.)

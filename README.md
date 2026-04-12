@@ -20,9 +20,9 @@ The tool generates a complete dbt project as the implementation layer, following
 ```bash
 # Install Ollama (default provider)
 curl -fsSL https://ollama.com/install.sh | sh
-ollama pull qwen3-30b-data                          # default model (all agents)
+ollama pull gemma3:4b                               # default model (Agents 1, 2, 5)
 
-# Optional: fine-tuned models for Agents 3, 4a, 4b (see below)
+# Fine-tuned models for Agents 3, 4a, 4b (used by default)
 ollama pull nichr0/schemalytics-classification-agent
 ollama pull nichr0/schemalytics-silver-agent
 ollama pull nichr0/schemalytics-gold-agent
@@ -55,28 +55,26 @@ schemalytics generate -c postgresql://localhost/mydb -o ./dbt_project
 
 ## Fine-Tuned Models
 
-Three Qwen3.5-4B models are available on [Ollama Hub](https://ollama.com) as drop-in replacements for the default `qwen3-30b-data` model:
+Three Qwen3.5-4B models are trained on real production schemas and used by default for their respective agents:
 
-| Model | Agent | Purpose |
-|-------|-------|---------|
-| `nichr0/schemalytics-classification-agent` | Agent 3 | Table classification (fact/dim/bridge/reference) |
-| `nichr0/schemalytics-silver-agent` | Agent 4a | Silver layer plan (dim_\*, fct_\*) |
-| `nichr0/schemalytics-gold-agent` | Agent 4b | Gold layer plan (agg_\*) |
+| Model | Agent | Purpose | Default? |
+|-------|-------|---------|----------|
+| `nichr0/schemalytics-classification-agent` | Agent 3 | Table classification (fact/dim/bridge/reference) | Yes |
+| `nichr0/schemalytics-silver-agent` | Agent 4a | Silver layer plan (dim_\*, fct_\*) | Yes |
+| `nichr0/schemalytics-gold-agent` | Agent 4b | Gold layer plan (agg_\*) | Yes |
 
 All models: `unsloth/Qwen3.5-4B` base · QLoRA · Q4\_K\_M quantized · ~2.6 GB each
 
-**Download and use:**
-```bash
-ollama pull nichr0/schemalytics-classification-agent
-ollama pull nichr0/schemalytics-silver-agent
-ollama pull nichr0/schemalytics-gold-agent
+Agents 1, 2, and 5 use the general Ollama model (`gemma3:4b` by default, overridable via `SCHEMALYTICS_OLLAMA_MODEL`).
 
-# Set the model to use (currently applies to all agents)
-SCHEMALYTICS_OLLAMA_MODEL=nichr0/schemalytics-silver-agent \
+**Per-agent model override:**
+```bash
+# Override a specific agent's model
+SCHEMALYTICS_AGENT3_MODEL=nichr0/schemalytics-classification-agent \
+SCHEMALYTICS_AGENT4A_MODEL=nichr0/schemalytics-silver-agent \
+SCHEMALYTICS_AGENT4B_MODEL=nichr0/schemalytics-gold-agent \
 schemalytics generate -c postgresql://... -o ./dbt_project
 ```
-
-> Per-agent model selection is planned but not yet implemented. See `project_finetune.md` for training details.
 
 > Attribution — all models are built on Qwen3.5 by Alibaba Cloud (Qwen License).
 
